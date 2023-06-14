@@ -13,6 +13,10 @@
 		067833C42A39D8B5000642F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C22A39D8B5000642F2 /* Main.storyboard */; };
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
 		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
+		067833D42A39E156000642F2 /* AirbnbSwiftFormatTool in Frameworks */ = {isa = PBXBuildFile; productRef = 067833D32A39E156000642F2 /* AirbnbSwiftFormatTool */; };
+		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
+		069C3D0E2A39E80E00332B84 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 069C3D0D2A39E80E00332B84 /* ArgumentParser */; };
+		069C3D102A39E80E00332B84 /* generate-manual in Frameworks */ = {isa = PBXBuildFile; productRef = 069C3D0F2A39E80E00332B84 /* generate-manual */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,7 @@
 		067833C82A39D8B6000642F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		067833CA2A39D8B6000642F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
+		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +37,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069C3D0E2A39E80E00332B84 /* ArgumentParser in Frameworks */,
+				069C3D102A39E80E00332B84 /* generate-manual in Frameworks */,
+				067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */,
+				067833D42A39E156000642F2 /* AirbnbSwiftFormatTool in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +52,7 @@
 			children = (
 				067833BB2A39D8B5000642F2 /* LoveDive */,
 				067833BA2A39D8B5000642F2 /* Products */,
+				067833D52A39E5CB000642F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +79,14 @@
 			path = LoveDive;
 			sourceTree = "<group>";
 		};
+		067833D52A39E5CB000642F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				067833D62A39E5CB000642F2 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,6 +103,11 @@
 			dependencies = (
 			);
 			name = LoveDive;
+			packageProductDependencies = (
+				067833D32A39E156000642F2 /* AirbnbSwiftFormatTool */,
+				069C3D0D2A39E80E00332B84 /* ArgumentParser */,
+				069C3D0F2A39E80E00332B84 /* generate-manual */,
+			);
 			productName = LoveDive;
 			productReference = 067833B92A39D8B5000642F2 /* LoveDive.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +136,10 @@
 				Base,
 			);
 			mainGroup = 067833B02A39D8B5000642F2;
+			packageReferences = (
+				067833D22A39E156000642F2 /* XCRemoteSwiftPackageReference "swift" */,
+				069C3D0C2A39E80E00332B84 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = 067833BA2A39D8B5000642F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -374,6 +401,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		067833D22A39E156000642F2 /* XCRemoteSwiftPackageReference "swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		069C3D0C2A39E80E00332B84 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		067833D32A39E156000642F2 /* AirbnbSwiftFormatTool */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 067833D22A39E156000642F2 /* XCRemoteSwiftPackageReference "swift" */;
+			productName = AirbnbSwiftFormatTool;
+		};
+		069C3D0D2A39E80E00332B84 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069C3D0C2A39E80E00332B84 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		069C3D0F2A39E80E00332B84 /* generate-manual */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069C3D0C2A39E80E00332B84 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = "generate-manual";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 067833B12A39D8B5000642F2 /* Project object */;
 }

@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/swift.git",
+      "state" : {
+        "revision" : "6900f5ab7ab7394ac85eb9da52b2528ee329b206",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
+      }
+    }
+  ],
+  "version" : 2
+}
