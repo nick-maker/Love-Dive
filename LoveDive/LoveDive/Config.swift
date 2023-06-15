@@ -12,3 +12,5 @@ struct Config {
   static let weatherAPI = "32014288-0b2a-11ee-92e6-0242ac130002-320142ec-0b2a-11ee-92e6-0242ac130002"
 
 }
+
+//大福漁港 (22.3348440, 120.3776006)

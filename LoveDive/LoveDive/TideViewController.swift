@@ -7,8 +7,9 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
-class TideViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class TideViewController: UIViewController, MKMapViewDelegate {
 
   var mapView: MKMapView!
   var collectionView: UICollectionView!
@@ -25,6 +26,39 @@ class TideViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
     super.viewDidLoad()
     setupMapView()
     setupCollectionView()
+    getData()
+    
+  }
+
+  func getData() {
+    let parameters = ["airTemperature", "swellDirection", "swellHeight", "swellPeriod", "waterTemperature", "waveDirection", "waveHeight", "windDirection", "windSpeed"]
+
+    let params: [String: Any] = [
+        "lat": 22.3348440,
+        "lng": 120.3776006,
+        "params": parameters.joined(separator: ","),
+    ]
+
+    let headers: HTTPHeaders = [
+      "Authorization": Config.weatherAPI
+    ]
+
+    AF.request("https://api.stormglass.io/v2/weather/point", method: .get, parameters: params, headers: headers).responseJSON { response in
+      switch response.result {
+          case .success(let value):
+              print("JSON: \(value)")
+          case .failure(let error):
+              print("Error: \(error)")
+          }
+    }
+
+  }
+
+  let regionRadius: CLLocationDistance = 1000
+  func centerMapOnLocation(location: CLLocation) {
+    let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                              latitudinalMeters: regionRadius * 10.0, longitudinalMeters: regionRadius * 10.0)
+    mapView.setRegion(coordinateRegion, animated: true)
   }
 
   func setupMapView() {
@@ -54,6 +88,9 @@ class TideViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
     }
     mapView.addAnnotations(annotations)
   }
+}
+
+extension TideViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
   func setupCollectionView() {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalHeight(1.0))
@@ -86,13 +123,6 @@ class TideViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
     ])
   }
 
-  let regionRadius: CLLocationDistance = 1000
-  func centerMapOnLocation(location: CLLocation) {
-    let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
-                                              latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
-    mapView.setRegion(coordinateRegion, animated: true)
-  }
-
   // Collection view data source methods
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return locations.count
@@ -113,5 +143,6 @@ class TideViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 120, height: 100)
   }
+
 }
 
