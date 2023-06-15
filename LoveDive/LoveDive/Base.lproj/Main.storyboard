@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="1579" y="-779"/>
         </scene>
-        <!--View Controller-->
+        <!--Tide View Controller-->
         <scene sceneID="WIK-1o-nBZ">
             <objects>
-                <viewController id="lGV-si-KEE" sceneMemberID="viewController">
+                <viewController id="lGV-si-KEE" customClass="TideViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oGo-i1-f5u">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
