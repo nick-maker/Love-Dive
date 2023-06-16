@@ -1,0 +1,1503 @@
+{
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    121.691996,
+                    25.199235
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龜吼涼亭",
+                "name": "龜吼涼亭"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.732,
+                    25.162
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "外木山",
+                "name": "外木山"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.788,
+                    25.189
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "八斗子基隆嶼",
+                "name": "八斗子基隆嶼"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.807,
+                    25.145
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "秘密花園",
+                "name": "秘密花園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.804,
+                    25.142
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "長潭",
+                "name": "長潭"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.813,
+                    25.134
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "番仔澳水晶宮",
+                "name": "番仔澳水晶宮"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.82,
+                    25.124
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "深澳灣",
+                "name": "深澳灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.828298,
+                    25.123185
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "瑞濱",
+                "name": "瑞濱"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.832,
+                    25.127
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "蝙蝠洞",
+                "name": "蝙蝠洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.905,
+                    25.123
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "南雅奇石",
+                "name": "南雅奇石"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.915,
+                    25.125
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "鼻頭角公園",
+                "name": "鼻頭角公園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.915,
+                    25.126
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "89K沈船",
+                "name": "89K沈船"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.917,
+                    25.117
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龍洞灣",
+                "name": "龍洞灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.919,
+                    25.113
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "(和美國小)",
+                "name": "龍洞4號"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.918,
+                    25.1
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龍洞南口海洋公園",
+                "name": "龍洞南口海洋公園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.917,
+                    25.094
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "潮境公園",
+                "name": "潮境公園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.92,
+                    25.074
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "美灩山",
+                "name": "美灩山"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.99,
+                    25.017
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "福連國小",
+                "name": "福連國小"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.962561,
+                    24.982374
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "石城",
+                "name": "石城"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.945107,
+                    24.847072
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龜山島",
+                "name": "龜山島"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.872556,
+                    24.584084
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "豆腐岬",
+                "name": "豆腐岬"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.47227,
+                    22.6881
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "軍艦岩",
+                "name": "軍艦岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.49847,
+                    22.687925
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "一線天",
+                "name": "一線天"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.49335,
+                    22.69115
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大峽谷",
+                "name": "大峽谷"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.473,
+                    22.676
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "中寮漁港",
+                "name": "中寮漁港"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.476939,
+                    22.678157
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "黑毛礁",
+                "name": "黑毛礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.482,
+                    22.678
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "柴口浮潛區",
+                "name": "柴口浮潛區"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.49319,
+                    22.67569
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "公館鼻",
+                "name": "公館鼻"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.496,
+                    22.677
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "將軍岩",
+                "name": "將軍岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.508,
+                    22.683
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "將軍岩",
+                "name": "將軍岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.52216,
+                    22.68553
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "三塊石",
+                "name": "三塊石"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.510972,
+                    22.663169
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "柚子湖",
+                "name": "柚子湖"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.508,
+                    22.661
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "藍洞",
+                "name": "藍洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.50956,
+                    22.65751
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "睡美人外海",
+                "name": "睡美人外海"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.507295,
+                    22.642229
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "溫泉巨塔",
+                "name": "溫泉巨塔"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.509991,
+                    22.634237
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "飛馬號沈船",
+                "name": "飛馬號沈船"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.507715,
+                    22.630911
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "滾水鼻",
+                "name": "滾水鼻"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.492,
+                    22.639
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大白沙",
+                "name": "大白沙"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.484862,
+                    22.636642
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "鋼鐵礁",
+                "name": "鋼鐵礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.476,
+                    22.641
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "雞仔礁",
+                "name": "雞仔礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.47215,
+                    22.63849
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龜灣鼻",
+                "name": "龜灣鼻"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.4716,
+                    22.6518
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "電桿礁",
+                "name": "電桿礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.471,
+                    22.652
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "六米礁",
+                "name": "六米礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.47407,
+                    22.65478
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "石朗",
+                "name": "石朗"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.472112,
+                    22.656909
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大香菇",
+                "name": "大香菇"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.472819,
+                    22.657561
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "十字架",
+                "name": "十字架"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.47419,
+                    22.657662
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "亞特蘭提斯",
+                "name": "亞特蘭提斯"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.473034,
+                    22.658378
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "小丑島",
+                "name": "小丑島"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.518,
+                    22.082
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "玉女岩",
+                "name": "玉女岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.530154,
+                    22.080141
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "朗島漁港",
+                "name": "朗島漁港"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.541011,
+                    22.080972
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "朗島秘境",
+                "name": "朗島秘境"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.558629,
+                    22.083064
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "母雞岩外礁",
+                "name": "母雞岩外礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.56,
+                    22.081
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "母雞岩",
+                "name": "母雞岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.567409,
+                    22.086413
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "雙獅岩",
+                "name": "雙獅岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.568287,
+                    22.085863
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "雙獅天井",
+                "name": "雙獅天井"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.574205,
+                    22.061638
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "情人洞",
+                "name": "情人洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.58002,
+                    22.003965
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龍門港小香菇",
+                "name": "龍門港小香菇"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.569,
+                    22.008
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "老人岩",
+                "name": "老人岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.551111,
+                    22.02
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "八代灣",
+                "name": "八代灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.5426,
+                    22.025655
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "漁人部落舊港灣",
+                "name": "漁人部落舊港灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.539,
+                    22.024
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "蘭恩文化基金會前",
+                "name": "蘭恩文化基金會前"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.533538,
+                    22.018731
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "機場外礁",
+                "name": "機場外礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.51,
+                    22.051
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "椰油斷層",
+                "name": "椰油斷層"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.508,
+                    22.057
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "開元港藍洞",
+                "name": "開元港藍洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    121.503102,
+                    22.077635
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "椰油浮潛區",
+                "name": "椰油浮潛區"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.814667,
+                    21.75911
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "七星岩",
+                "name": "七星岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.847,
+                    21.912
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "墾丁國家公園",
+                "name": "墾丁國家公園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.832,
+                    21.924
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "香蕉灣",
+                "name": "香蕉灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.824,
+                    21.931
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "風帆石",
+                "name": "風帆石"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.818753,
+                    21.930188
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "19米礁",
+                "name": "19米礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.799833,
+                    21.9303
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "凱薩岩",
+                "name": "凱薩岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.77,
+                    21.948
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大咾咕",
+                "name": "大咾咕"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.77,
+                    21.949
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "跳石",
+                "name": "跳石"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.768038,
+                    21.954353
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "南灣",
+                "name": "南灣"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.759,
+                    21.942
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "獨立礁",
+                "name": "獨立礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.754,
+                    21.935
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "小咾咕",
+                "name": "小咾咕"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.746076,
+                    21.938786
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "後壁湖餵魚區",
+                "name": "後壁湖餵魚區"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.745,
+                    21.93
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "出水口",
+                "name": "出水口"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.711,
+                    21.956
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "合界沈船",
+                "name": "合界沈船"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.7156,
+                    21.9723
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "紅柴坑",
+                "name": "紅柴坑"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.713,
+                    21.983
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龜洞",
+                "name": "龜洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.706,
+                    21.995
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "萬里桐",
+                "name": "萬里桐"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.387661,
+                    22.351093
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "中澳沙灘",
+                "name": "中澳沙灘"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.389,
+                    22.345
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龍蝦洞",
+                "name": "龍蝦洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.377134,
+                    22.333539
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "龍蝦洞鋼鐵礁",
+                "name": "龍蝦洞鋼鐵礁"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.371,
+                    22.331
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大福西",
+                "name": "大福西"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.366302,
+                    22.325056
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "秘境海灘",
+                "name": "秘境海灘"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.358109,
+                    22.318205
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "鎮海艦",
+                "name": "鎮海艦"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.355,
+                    22.332
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "烏鬼洞沈船",
+                "name": "烏鬼洞沈船"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.361,
+                    22.339
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "衫福漁港",
+                "name": "衫福漁港"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.36,
+                    22.343
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "衫福破沈船",
+                "name": "衫福破沈船"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.364,
+                    22.351
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "箱網",
+                "name": "箱網"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.372,
+                    22.354
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "美人洞",
+                "name": "美人洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    120.381,
+                    22.356
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "花瓶岩",
+                "name": "花瓶岩"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.606,
+                    23.516
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "海底郵筒",
+                "name": "海底郵筒"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.540762,
+                    23.373144
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大礁港",
+                "name": "大礁港"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.676793,
+                    23.253515
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "海中薰衣草森林",
+                "name": "海中薰衣草森林"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.490726,
+                    23.397512
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "海扇林",
+                "name": "海扇林"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.673565,
+                    23.243126
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "東吉之狼",
+                "name": "東吉之狼"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.658943,
+                    23.260176
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "東吉沉城",
+                "name": "東吉沉城"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.656798,
+                    23.263977
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "海蝕洞",
+                "name": "海蝕洞"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.639892,
+                    23.255614
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "東西吉廊道",
+                "name": "東西吉廊道"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.620106,
+                    23.244755
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "西吉 花環公園",
+                "name": "西吉 花環公園"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.61494,
+                    23.243689
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "西吉斷層",
+                "name": "西吉斷層"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.608557,
+                    23.252961
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "大峽谷",
+                "name": "大峽谷"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.441449,
+                    23.186274
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "凌雲艦",
+                "name": "凌雲艦"
+            },
+            "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    119.439238,
+                    23.197993
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "description": "月鯉灣",
+                "name": "月鯉灣"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}

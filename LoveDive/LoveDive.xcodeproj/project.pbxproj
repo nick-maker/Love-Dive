@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0601463E2A3AEA79003001EE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0601463D2A3AEA79003001EE /* Extension.swift */; };
+		0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0601463D2A3AEA79003001EE /* Extension+UIColor.swift */; };
 		060146432A3AF394003001EE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 060146422A3AF394003001EE /* Alamofire */; };
 		060146452A3AF43A003001EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146442A3AF43A003001EE /* NetworkManager.swift */; };
 		060146472A3B53EB003001EE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146462A3B53EB003001EE /* Config.swift */; };
@@ -19,10 +19,14 @@
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
 		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
 		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
+		0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC5B2A3C833E00BCC367 /* WeatherData.swift */; };
+		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
+		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
+		0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0601463D2A3AEA79003001EE /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		0601463D2A3AEA79003001EE /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		060146442A3AF43A003001EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		060146462A3B53EB003001EE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		060146482A3B57C7003001EE /* TideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideCell.swift; sourceTree = "<group>"; };
@@ -36,6 +40,10 @@
 		067833CA2A39D8B6000642F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
 		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0681DC5B2A3C833E00BCC367 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
+		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0682409D2A3C679800B69265 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,15 +82,19 @@
 				067833D02A39D9FD000642F2 /* LoveDive.entitlements */,
 				067833BC2A39D8B5000642F2 /* AppDelegate.swift */,
 				067833BE2A39D8B5000642F2 /* SceneDelegate.swift */,
-				0601463D2A3AEA79003001EE /* Extension.swift */,
+				0601463D2A3AEA79003001EE /* Extension+UIColor.swift */,
+				0682409B2A3C54FB00B69265 /* Location.swift */,
+				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
 				060146442A3AF43A003001EE /* NetworkManager.swift */,
 				060146462A3B53EB003001EE /* Config.swift */,
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
+				0682409D2A3C679800B69265 /* DetailViewController.swift */,
 				060146482A3B57C7003001EE /* TideCell.swift */,
 				067833C22A39D8B5000642F2 /* Main.storyboard */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
 				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833CA2A39D8B6000642F2 /* Info.plist */,
+				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
 			);
 			path = LoveDive;
 			sourceTree = "<group>";
@@ -105,7 +117,7 @@
 				067833B52A39D8B5000642F2 /* Sources */,
 				067833B62A39D8B5000642F2 /* Frameworks */,
 				067833B72A39D8B5000642F2 /* Resources */,
-				060146402A3AED70003001EE /* ShellScript */,
+				068240982A3C178D00B69265 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -144,8 +156,8 @@
 			);
 			mainGroup = 067833B02A39D8B5000642F2;
 			packageReferences = (
-				0601463C2A3AE14A003001EE /* XCRemoteSwiftPackageReference "swift" */,
 				060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */,
+				068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */,
 			);
 			productRefGroup = 067833BA2A39D8B5000642F2 /* Products */;
 			projectDirPath = "";
@@ -162,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */,
+				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
 				067833C42A39D8B5000642F2 /* Main.storyboard in Resources */,
 			);
@@ -170,7 +183,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		060146402A3AED70003001EE /* ShellScript */ = {
+		068240982A3C178D00B69265 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -185,7 +198,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\n\ndefaults write com.apple.dt.Xcode AutomaticallyCheckSpellingWhileTyping -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool YES\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2\ndefaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2\n\ndefaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nset -e\n\ndefaults write com.apple.dt.Xcode AutomaticallyCheckSpellingWhileTyping -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool YES\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2\ndefaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2\n\ndefaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -194,13 +207,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,
+				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
+				0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */,
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
-				0601463E2A3AEA79003001EE /* Extension.swift in Sources */,
+				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,20 +450,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0601463C2A3AE14A003001EE /* XCRemoteSwiftPackageReference "swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
 		060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
+			};
+		};
+		068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
