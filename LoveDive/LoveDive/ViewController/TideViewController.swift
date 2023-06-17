@@ -108,54 +108,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     collectionView.reloadData()
   }
 
-  //  func fetchData(withParameters parameters: [String: Any]) {
-  //    let headers: HTTPHeaders = [
-  //      "X-RapidAPI-Key": Config.diveSiteAPIKey,
-  //      "X-RapidAPI-Host": "world-scuba-diving-sites-api.p.rapidapi.com",
-  //    ]
-  //
-  //    AF.request(
-  //      "https://world-scuba-diving-sites-api.p.rapidapi.com/api/divesite/gps",
-  //      method: .get,
-  //      parameters: parameters,
-  //      headers: headers)
-  //    .responseJSON { response in
-  //      switch response.result {
-  //      case .success(let value):
-  //        if
-  //          let json = value as? [String: Any],
-  //          let diveSites = json["data"] as? [[String: Any]]
-  //        {
-  //          self.diveSites = diveSites
-  //          self.updateMapAnnotations()
-  //          print(self.diveSites)
-  //        }
-  //      case .failure(let error):
-  //        print("Error: \(error)")
-  //        // Handle the error here
-  //      }
-  //    }
-  //  }
-
-  //  func updateMapAnnotations() {
-  //    // Remove existing annotations from the map view
-  //    mapView.removeAnnotations(mapView.annotations)
-  //
-  //    // Add new annotations for the fetched dive sites
-  //    for diveSite in diveSites {
-  //      if
-  //        let latitude = diveSite["latitude"] as? Double,
-  //        let longitude = diveSite["longitude"] as? Double,
-  //        let name = diveSite["name"] as? String
-  //      {
-  //        let annotation = MKPointAnnotation()
-  //        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-  //        annotation.title = name
-  //        mapView.addAnnotation(annotation)
-  //      }
-  //    }
-  //  }
-
 }
 
 // MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -193,7 +145,6 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
     ])
-
   }
 
   // Collection view data source methods
@@ -223,9 +174,9 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     return cell
   }
 
-  func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  func collectionView(_: UICollectionView, didSelectItemAt _: IndexPath) {
     let detailViewController = DetailViewController()
-    self.navigationController?.pushViewController(detailViewController, animated: true)
+    navigationController?.pushViewController(detailViewController, animated: true)
   }
 
   func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
@@ -233,6 +184,8 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
 }
+
+// MARK: WeatherDelegate
 
 extension TideViewController: WeatherDelegate {
 
@@ -249,11 +202,13 @@ extension TideViewController: WeatherDelegate {
     mapView.setRegion(zoomRegion, animated: true)
     // Find the index of the selected annotation in the visible annotations array
     let visibleAnnotationsArray = Array(mapView.annotations(in: mapView.visibleMapRect))
-    guard let index = visibleAnnotationsArray.firstIndex(where: {
-      guard let pointAnnotation = $0 as? MKPointAnnotation else { return false }
-      networkManager.getData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude)
-      return pointAnnotation.title == annotation.title
-    }) else {
+    guard
+      let index = visibleAnnotationsArray.firstIndex(where: {
+        guard let pointAnnotation = $0 as? MKPointAnnotation else { return false }
+//        networkManager.getData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude)
+        return pointAnnotation.title == annotation.title
+      }) else
+    {
       return
     }
     // Scroll the collection view to the corresponding item
@@ -261,8 +216,8 @@ extension TideViewController: WeatherDelegate {
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
   }
 
-  func manager(didGet: [WeatherHour]) {
-    weatherData = didGet
+  func manager(didGet weatherData: [WeatherHour]) {
+    self.weatherData = weatherData
     DispatchQueue.main.async {
       self.collectionView.reloadData()
     }

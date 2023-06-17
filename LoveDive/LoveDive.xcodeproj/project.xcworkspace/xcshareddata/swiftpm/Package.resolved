@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "horizoncalendar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/HorizonCalendar.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f021fcd91800157e3ea82ad7574300783b927081"
+      }
+    },
+    {
       "identity" : "swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/swift.git",

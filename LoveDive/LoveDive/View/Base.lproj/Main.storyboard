@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="1579" y="-1455"/>
         </scene>
-        <!--View Controller-->
+        <!--Activities View Controller-->
         <scene sceneID="dPe-de-1y8">
             <objects>
-                <viewController id="kQ8-l6-jR5" sceneMemberID="viewController">
+                <viewController id="kQ8-l6-jR5" customClass="ActivitiesViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vgh-6K-DQz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

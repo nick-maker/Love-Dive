@@ -20,6 +20,11 @@
 		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
 		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
 		0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC5B2A3C833E00BCC367 /* WeatherData.swift */; };
+		0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */; };
+		0681DC642A3DD16E00BCC367 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC632A3DD16E00BCC367 /* DayView.swift */; };
+		0681DC662A3DD1B800BCC367 /* DivingDataLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */; };
+		0681DC692A3DDFAB00BCC367 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 0681DC682A3DDFAB00BCC367 /* HorizonCalendar */; };
+		0681DC6B2A3DFBE400BCC367 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
 		0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailViewController.swift */; };
@@ -41,6 +46,10 @@
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
 		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0681DC5B2A3C833E00BCC367 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
+		0681DC632A3DD16E00BCC367 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingDataLevel.swift; sourceTree = "<group>"; };
+		0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0682409D2A3C679800B69265 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */,
+				0681DC692A3DDFAB00BCC367 /* HorizonCalendar in Frameworks */,
 				060146432A3AF394003001EE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,17 +92,11 @@
 				067833D02A39D9FD000642F2 /* LoveDive.entitlements */,
 				067833BC2A39D8B5000642F2 /* AppDelegate.swift */,
 				067833BE2A39D8B5000642F2 /* SceneDelegate.swift */,
-				0601463D2A3AEA79003001EE /* Extension+UIColor.swift */,
-				0682409B2A3C54FB00B69265 /* Location.swift */,
-				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
-				060146442A3AF43A003001EE /* NetworkManager.swift */,
-				060146462A3B53EB003001EE /* Config.swift */,
-				067833C02A39D8B5000642F2 /* TideViewController.swift */,
-				0682409D2A3C679800B69265 /* DetailViewController.swift */,
-				060146482A3B57C7003001EE /* TideCell.swift */,
-				067833C22A39D8B5000642F2 /* Main.storyboard */,
+				0681DC5E2A3CA51200BCC367 /* Extension */,
+				0681DC5D2A3CA4F500BCC367 /* Model */,
+				0681DC5F2A3CA52500BCC367 /* View */,
+				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
-				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833CA2A39D8B6000642F2 /* Info.plist */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
 			);
@@ -105,6 +109,48 @@
 				067833D62A39E5CB000642F2 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0681DC5D2A3CA4F500BCC367 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				060146462A3B53EB003001EE /* Config.swift */,
+				0682409B2A3C54FB00B69265 /* Location.swift */,
+				060146442A3AF43A003001EE /* NetworkManager.swift */,
+				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
+				0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */,
+				0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0681DC5E2A3CA51200BCC367 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0601463D2A3AEA79003001EE /* Extension+UIColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0681DC5F2A3CA52500BCC367 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0681DC632A3DD16E00BCC367 /* DayView.swift */,
+				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
+				067833C22A39D8B5000642F2 /* Main.storyboard */,
+				060146482A3B57C7003001EE /* TideCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0681DC602A3CA52F00BCC367 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				067833C02A39D8B5000642F2 /* TideViewController.swift */,
+				0682409D2A3C679800B69265 /* DetailViewController.swift */,
+				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +172,7 @@
 			name = LoveDive;
 			packageProductDependencies = (
 				060146422A3AF394003001EE /* Alamofire */,
+				0681DC682A3DDFAB00BCC367 /* HorizonCalendar */,
 			);
 			productName = LoveDive;
 			productReference = 067833B92A39D8B5000642F2 /* LoveDive.app */;
@@ -158,6 +205,7 @@
 			packageReferences = (
 				060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */,
+				0681DC672A3DDFAB00BCC367 /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = 067833BA2A39D8B5000642F2 /* Products */;
 			projectDirPath = "";
@@ -208,8 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */,
+				0681DC642A3DD16E00BCC367 /* DayView.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
+				0681DC6B2A3DFBE400BCC367 /* DayLabel.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,
+				0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */,
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
@@ -217,6 +268,7 @@
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
+				0681DC662A3DD1B800BCC367 /* DivingDataLevel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +510,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		0681DC672A3DDFAB00BCC367 /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/HorizonCalendar.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/swift.git";
@@ -473,6 +533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		0681DC682A3DDFAB00BCC367 /* HorizonCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0681DC672A3DDFAB00BCC367 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			productName = HorizonCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
