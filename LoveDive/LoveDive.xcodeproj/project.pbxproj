@@ -22,12 +22,14 @@
 		0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC5B2A3C833E00BCC367 /* WeatherData.swift */; };
 		0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */; };
 		0681DC642A3DD16E00BCC367 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC632A3DD16E00BCC367 /* DayView.swift */; };
-		0681DC662A3DD1B800BCC367 /* DivingDataLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */; };
+		0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC652A3DD1B800BCC367 /* DivingLog.swift */; };
 		0681DC692A3DDFAB00BCC367 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 0681DC682A3DDFAB00BCC367 /* HorizonCalendar */; };
 		0681DC6B2A3DFBE400BCC367 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */; };
+		0681DC6D2A3EE2BF00BCC367 /* DiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */; };
+		0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
-		0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailViewController.swift */; };
+		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,11 +50,13 @@
 		0681DC5B2A3C833E00BCC367 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		0681DC632A3DD16E00BCC367 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingDataLevel.swift; sourceTree = "<group>"; };
+		0681DC652A3DD1B800BCC367 /* DivingLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingLog.swift; sourceTree = "<group>"; };
 		0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
+		0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiveCell.swift; path = LoveDive/View/DiveCell.swift; sourceTree = SOURCE_ROOT; };
+		0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActViewController.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		0682409D2A3C679800B69265 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +122,7 @@
 				0682409B2A3C54FB00B69265 /* Location.swift */,
 				060146442A3AF43A003001EE /* NetworkManager.swift */,
 				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
-				0681DC652A3DD1B800BCC367 /* DivingDataLevel.swift */,
+				0681DC652A3DD1B800BCC367 /* DivingLog.swift */,
 				0681DC6A2A3DFBE400BCC367 /* DayLabel.swift */,
 			);
 			path = Model;
@@ -139,6 +143,7 @@
 				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833C22A39D8B5000642F2 /* Main.storyboard */,
 				060146482A3B57C7003001EE /* TideCell.swift */,
+				0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,8 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
-				0682409D2A3C679800B69265 /* DetailViewController.swift */,
+				0682409D2A3C679800B69265 /* DetailTideViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
+				0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -255,8 +261,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0682409E2A3C679800B69265 /* DetailViewController.swift in Sources */,
+				0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */,
 				0681DC642A3DD16E00BCC367 /* DayView.swift in Sources */,
+				0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
 				0681DC6B2A3DFBE400BCC367 /* DayLabel.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,
@@ -264,11 +271,12 @@
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
+				0681DC6D2A3EE2BF00BCC367 /* DiveCell.swift in Sources */,
 				0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */,
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
-				0681DC662A3DD1B800BCC367 /* DivingDataLevel.swift in Sources */,
+				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +429,7 @@
 				INFOPLIST_FILE = LoveDive/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Love Dive";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -456,6 +465,7 @@
 				INFOPLIST_FILE = LoveDive/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Love Dive";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

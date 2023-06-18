@@ -175,7 +175,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt _: IndexPath) {
-    let detailViewController = DetailViewController()
+    let detailViewController = DetailTideViewController()
     navigationController?.pushViewController(detailViewController, animated: true)
   }
 

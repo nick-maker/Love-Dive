@@ -7,16 +7,20 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailTideViewController: UIViewController, UICalendarViewDelegate {
+
+  let calendarView = UICalendarView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupUI()
+    calendarView.delegate = self
+
   }
 
   func setupUI() {
-    let calendarView = UICalendarView()
+
     calendarView.calendar = .current
     calendarView.fontDesign = .rounded
     calendarView.locale = .current
@@ -31,6 +35,13 @@ class DetailViewController: UIViewController {
       calendarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
     ])
+
+
+  }
+
+  func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
+    let currentDateComponents = calendarView.visibleDateComponents
+    print(currentDateComponents)
   }
 
 }

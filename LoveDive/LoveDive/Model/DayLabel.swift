@@ -8,6 +8,8 @@
 import HorizonCalendar
 import UIKit
 
+// MARK: - DayLabel
+
 struct DayLabel: CalendarItemViewRepresentable {
 
   /// Properties that are set once when we initialize the view.
@@ -25,7 +27,7 @@ struct DayLabel: CalendarItemViewRepresentable {
 
   static func makeView(
     withInvariantViewProperties invariantViewProperties: InvariantViewProperties)
-  -> UILabel
+    -> UILabel
   {
     let label = CircleLabel()
 
@@ -41,22 +43,21 @@ struct DayLabel: CalendarItemViewRepresentable {
     view.text = "\(content.day.day)"
     if content.hasDivingData {
       view.backgroundColor = UIColor.pacificBlue
-//      view.layer.cornerRadius = view.bounds.size.width / 2
-//      view.clipsToBounds = true
     } else {
       view.backgroundColor = UIColor.clear
-//      view.layer.cornerRadius = 0
     }
   }
 
 }
 
+// MARK: - CircleLabel
+
 class CircleLabel: UILabel {
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = bounds.height / 2
-        clipsToBounds = true
-    }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layer.cornerRadius = bounds.height / 2
+    clipsToBounds = true
+  }
 
 }

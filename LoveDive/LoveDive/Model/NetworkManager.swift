@@ -12,9 +12,9 @@ import Foundation
 
 class NetworkManager {
 
-  weak var delegate: WeatherDelegate?
+  // MARK: Internal
 
-  private var cache: [String: WeatherCache] = [:]
+  weak var delegate: WeatherDelegate?
 
   func getData(lat: Double, lng: Double) {
     let key = "\(lat),\(lng)"
@@ -59,6 +59,10 @@ class NetworkManager {
         }
     }
   }
+
+  // MARK: Private
+
+  private var cache: [String: WeatherCache] = [:]
 
 }
 
