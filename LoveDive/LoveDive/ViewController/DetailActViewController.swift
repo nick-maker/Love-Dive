@@ -10,15 +10,14 @@ import UIKit
 class DetailActViewController: UIViewController {
 
   var divingLog: DivingLog!
-  
+
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupUI()
   }
 
-  func setupUI() {
-
-  }
+  func setupUI() { }
 
 }

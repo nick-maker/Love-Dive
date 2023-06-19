@@ -61,7 +61,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="0DK-co-JmO">
             <objects>
-                <tabBarController id="k7t-td-14m" sceneMemberID="viewController">
+                <tabBarController id="k7t-td-14m" customClass="TabBarController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pdE-3q-r0n">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
