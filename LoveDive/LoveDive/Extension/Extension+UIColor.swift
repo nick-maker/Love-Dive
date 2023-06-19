@@ -18,8 +18,12 @@ extension UIColor {
     UIColor(red: 0.02, green: 0.2, blue: 0.325, alpha: 1)
   }
 
-  static var lightBlue: UIColor {
+  static var grayBlue: UIColor {
     UIColor(red: 0.678, green: 0.792, blue: 0.871, alpha: 1)
+  }
+
+  static var lightBlue: UIColor {
+    UIColor(red: 0.89, green: 0.931, blue: 0.958, alpha: 1)
   }
 
 }

@@ -18,7 +18,7 @@ class ActivitiesViewController: UIViewController {
   var temps: [Temperature] = []
   var filteredDivingLogs: [DivingLog] = [] // Keep filtered diving logs
 //  let healthStore = HKHealthStore()
-  let tableView = UITableView()
+  lazy var tableView = UITableView()
   let calendarView = UICalendarView()
   var isSelected = false
   var selectedDateComponents: DateComponents?

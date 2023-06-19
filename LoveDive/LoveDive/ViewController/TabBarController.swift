@@ -12,12 +12,13 @@ import UIKit
 class TabBarController: UITabBarController {
 
   let healthKitManager = HealthKitManger()
-
-
+  let cloudKitVM = CloudKitViewModel()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     healthKitManager.delegate = self
     healthKitManager.requestHealthKitPermissions()
+    cloudKitVM.getiCloudStatus()
   }
 }
 

@@ -12,6 +12,8 @@
 		060146452A3AF43A003001EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146442A3AF43A003001EE /* NetworkManager.swift */; };
 		060146472A3B53EB003001EE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146462A3B53EB003001EE /* Config.swift */; };
 		060146492A3B57C7003001EE /* TideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146482A3B57C7003001EE /* TideCell.swift */; };
+		0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */; };
+		0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
@@ -36,6 +38,8 @@
 		060146442A3AF43A003001EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		060146462A3B53EB003001EE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		060146482A3B57C7003001EE /* TideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideCell.swift; sourceTree = "<group>"; };
+		0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitViewModel.swift; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
 				0681DC652A3DD1B800BCC367 /* DivingLog.swift */,
 				0681DC702A3F770E00BCC367 /* HealthKitManager.swift */,
+				0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				0682409D2A3C679800B69265 /* DetailTideViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
 				0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */,
+				0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
 				0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */,
 				0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
@@ -264,6 +271,7 @@
 				0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */,
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
+				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
 				0681DC6D2A3EE2BF00BCC367 /* DiveCell.swift in Sources */,
 				0681DC712A3F770E00BCC367 /* HealthKitManager.swift in Sources */,

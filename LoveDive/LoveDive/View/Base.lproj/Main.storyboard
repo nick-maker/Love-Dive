@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="573" y="-780"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="3cF-Uc-fw9">
             <objects>
-                <viewController id="0j9-IT-KTQ" sceneMemberID="viewController">
+                <viewController id="0j9-IT-KTQ" customClass="ProfileViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fle-YX-0Bq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
