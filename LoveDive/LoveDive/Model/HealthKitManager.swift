@@ -31,17 +31,23 @@ class HealthKitManger {
     let readDataTypes: Set<HKObjectType> = [depthType, temperatureType]
 
     // Request access
-    healthStore.requestAuthorization(toShare: nil, read: readDataTypes) { success, _ in
+    healthStore.requestAuthorization(toShare: nil, read: readDataTypes) { success, error in
       if success {
         // Permissions granted
         self.readDive()
       } else {
-        // Handle the error or permissions not granted
+        if let error = error {
+          print("Error requesting HealthKit authorization: \(error)")
+        } else {
+          print("HealthKit authorization not granted")
+        }
       }
     }
   }
 
-  func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
+  // MARK: Private
+
+  private func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
     var diveList: [DivingLog] = []
     var lastSessionEnd: Date? = nil
     var currentLog: DivingLog?
@@ -88,7 +94,7 @@ class HealthKitManger {
     healthStore.execute(query)
   }
 
-  func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
+  private func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
     var temps: [Temperature] = []
 
     guard let waterTempType = HKQuantityType.quantityType(forIdentifier: .waterTemperature) else { return }
@@ -114,8 +120,6 @@ class HealthKitManger {
 
     healthStore.execute(query)
   }
-
-  // MARK: Private
 
   private func readDive() {
     readUnderwaterDepths(healthStore: healthStore) { diveQuery in

@@ -205,7 +205,7 @@ extension TideViewController: WeatherDelegate {
     guard
       let index = visibleAnnotationsArray.firstIndex(where: {
         guard let pointAnnotation = $0 as? MKPointAnnotation else { return false }
-//        networkManager.getData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude)
+        networkManager.getData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude)
         return pointAnnotation.title == annotation.title
       }) else
     {

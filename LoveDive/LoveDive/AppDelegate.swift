@@ -5,14 +5,16 @@
 //  Created by Nick Liu on 2023/6/14.
 //
 
+import IQKeyboardManagerSwift
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
-    true
+    IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    return true
   }
 
   // MARK: UISceneSession Lifecycle

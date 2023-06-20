@@ -12,6 +12,7 @@
 		060146452A3AF43A003001EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146442A3AF43A003001EE /* NetworkManager.swift */; };
 		060146472A3B53EB003001EE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146462A3B53EB003001EE /* Config.swift */; };
 		060146492A3B57C7003001EE /* TideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146482A3B57C7003001EE /* TideCell.swift */; };
+		063BA8F02A41BB9A00711932 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 063BA8EF2A41BB9A00711932 /* IQKeyboardManagerSwift */; };
 		0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */; };
 		0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
@@ -69,6 +70,7 @@
 			files = (
 				067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */,
 				060146432A3AF394003001EE /* Alamofire in Frameworks */,
+				063BA8F02A41BB9A00711932 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +184,7 @@
 			name = LoveDive;
 			packageProductDependencies = (
 				060146422A3AF394003001EE /* Alamofire */,
+				063BA8EF2A41BB9A00711932 /* IQKeyboardManagerSwift */,
 			);
 			productName = LoveDive;
 			productReference = 067833B92A39D8B5000642F2 /* LoveDive.app */;
@@ -214,6 +217,7 @@
 			packageReferences = (
 				060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */,
+				063BA8EE2A41BB9A00711932 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 067833BA2A39D8B5000642F2 /* Products */;
 			projectDirPath = "";
@@ -434,6 +438,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Love Dive";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This App shares underwater depth and water temperature with HealthKit.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -451,7 +456,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -469,6 +474,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Love Dive";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This App shares underwater depth and water temperature with HealthKit.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -486,7 +492,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -522,6 +528,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		063BA8EE2A41BB9A00711932 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/swift.git";
@@ -537,6 +551,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		063BA8EF2A41BB9A00711932 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 063BA8EE2A41BB9A00711932 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

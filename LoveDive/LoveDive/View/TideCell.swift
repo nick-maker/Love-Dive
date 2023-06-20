@@ -37,7 +37,6 @@ class TideCell: UICollectionViewCell {
 
   let stackView = UIStackView()
 
-
   func setupUI() {
     // Setup location label
     locationLabel.translatesAutoresizingMaskIntoConstraints = false

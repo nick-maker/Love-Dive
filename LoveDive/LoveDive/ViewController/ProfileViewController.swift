@@ -4,7 +4,9 @@
 //
 //  Created by Nick Liu on 2023/6/19.
 //
+import CloudKit
 import UIKit
+
 class ProfileViewController: UIViewController, UISearchBarDelegate {
 
   var searchBar = UISearchBar()
@@ -30,23 +32,32 @@ class ProfileViewController: UIViewController, UISearchBarDelegate {
   }
 
   func searchBarSearchButtonClicked(_: UISearchBar) {
-    searchFriends()
-    print("THE SEARCH USERNAME IS \(searchBar.text)")
+    guard let searchEmail = searchBar.text else { return }
+    searchFriends(email: searchEmail)
   }
 
+  func searchFriends(email: String) {
+    let lookupInfo = CKUserIdentity.LookupInfo(emailAddress: email)
+    let operation = CKDiscoverUserIdentitiesOperation(userIdentityLookupInfos: [lookupInfo])
 
-  func searchFriends() {
-    cloudKitVM.searchForFriends(withName: searchBar.text ?? "") { records in
-      if let records {
-        for record in records {
-          if let username = record["username"] as? String {
-            print("Found user: \(username)")
-          }
-        }
+    operation.userIdentityDiscoveredBlock = { identity, _ in
+      // Do something with the discovered user identity
+      if let nameComponents = identity.nameComponents {
+        let name = PersonNameComponentsFormatter.localizedString(from: nameComponents, style: .default, options: [])
+        print("Discovered user: \(name)")
       }
     }
+
+    operation.discoverUserIdentitiesCompletionBlock = { error in
+      if let error {
+        // Handle the error
+        print("Error discovering user identities: \(error)")
+      } else {
+        print("Finished discovering user identities")
+      }
+    }
+
+    CKContainer.default().add(operation)
   }
-
-
 
 }

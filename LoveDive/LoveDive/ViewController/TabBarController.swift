@@ -21,9 +21,6 @@ class TabBarController: UITabBarController {
 
     cloudKitVM.getiCloudStatus()
     cloudKitVM.requestPermission()
-    cloudKitVM.fetchiCloudUserRecordID()
-
-    
   }
 }
 
