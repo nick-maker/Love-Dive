@@ -31,9 +31,11 @@ struct DivingEntry {
   let depth: Double
 }
 
+// MARK: - Temperature
+
 struct Temperature {
-    let start : Date
-    let end : Date
-    let temp: Double
+  let start: Date
+  let end: Date
+  let temp: Double
 
 }

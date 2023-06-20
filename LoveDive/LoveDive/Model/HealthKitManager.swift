@@ -41,25 +41,6 @@ class HealthKitManger {
     }
   }
 
-  private func readDive() {
-    readUnderwaterDepths(healthStore: healthStore) { diveQuery in
-      let sortedDives = diveQuery.sorted(by: { $0.date.compare($1.date) == .orderedDescending })
-      DispatchQueue.main.async {
-        self.divingLogs = sortedDives
-        self.delegate?.getDepthData(didGet: self.divingLogs)
-      }
-    }
-
-    readWaterTemps(healthStore: healthStore) {
-      tempSamples in
-      DispatchQueue.main.async {
-        self.temps = tempSamples
-        self.delegate?.getTempData(didGet: self.temps)
-      }
-      
-    }
-  }
-
   func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
     var diveList: [DivingLog] = []
     var lastSessionEnd: Date? = nil
@@ -108,28 +89,50 @@ class HealthKitManger {
   }
 
   func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
-
     var temps: [Temperature] = []
 
     guard let waterTempType = HKQuantityType.quantityType(forIdentifier: .waterTemperature) else { return }
 
     let query = HKQuantitySeriesSampleQuery(quantityType: waterTempType, predicate: nil) {
-      query, result, dates, samples, done, error  in
+      _, result, dates, _, _, _ in
 
-      guard let result = result else {
-        print ("Nil Result to temperature query")
+      guard let result else {
+        print("Nil Result to temperature query")
         completion([])
         return
       }
 
       if let sampleDate = dates {
-        temps.append(Temperature(start: sampleDate.start, end: sampleDate.end ,temp: result.doubleValue(for: HKUnit.degreeCelsius())))
+        temps
+          .append(Temperature(
+            start: sampleDate.start,
+            end: sampleDate.end ,
+            temp: result.doubleValue(for: HKUnit.degreeCelsius())))
       }
       completion(temps)
     }
 
     healthStore.execute(query)
+  }
 
+  // MARK: Private
+
+  private func readDive() {
+    readUnderwaterDepths(healthStore: healthStore) { diveQuery in
+      let sortedDives = diveQuery.sorted(by: { $0.date.compare($1.date) == .orderedDescending })
+      DispatchQueue.main.async {
+        self.divingLogs = sortedDives
+        self.delegate?.getDepthData(didGet: self.divingLogs)
+      }
+    }
+
+    readWaterTemps(healthStore: healthStore) {
+      tempSamples in
+      DispatchQueue.main.async {
+        self.temps = tempSamples
+        self.delegate?.getTempData(didGet: self.temps)
+      }
+    }
   }
 
 }

@@ -13,12 +13,17 @@ class TabBarController: UITabBarController {
 
   let healthKitManager = HealthKitManger()
   let cloudKitVM = CloudKitViewModel()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     healthKitManager.delegate = self
     healthKitManager.requestHealthKitPermissions()
+
     cloudKitVM.getiCloudStatus()
+    cloudKitVM.requestPermission()
+    cloudKitVM.fetchiCloudUserRecordID()
+
+    
   }
 }
 
@@ -33,7 +38,6 @@ extension TabBarController: HealthManagerDelegate {
     activitiesViewController.setupTableView()
     activitiesViewController.divingLogs = divingData
     activitiesViewController.filterDivingLogs(forMonth: Date())
-
   }
 
   func getTempData(didGet tempData: [Temperature]) {
@@ -41,9 +45,6 @@ extension TabBarController: HealthManagerDelegate {
     let thirdNavController = navigationControllers[2]
     guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
     activitiesViewController.temps = tempData
-    
   }
-
-
 
 }
