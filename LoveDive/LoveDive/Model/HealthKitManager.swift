@@ -36,7 +36,7 @@ class HealthKitManger {
         // Permissions granted
         self.readDive()
       } else {
-        if let error = error {
+        if let error {
           print("Error requesting HealthKit authorization: \(error)")
         } else {
           print("HealthKit authorization not granted")

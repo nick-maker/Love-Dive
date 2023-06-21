@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController, UISearchBarDelegate {
 
   var searchBar = UISearchBar()
+  var nameLabel = UILabel()
   var nameText = ""
   let cloudKitVM = CloudKitViewModel()
 
@@ -20,10 +21,14 @@ class ProfileViewController: UIViewController, UISearchBarDelegate {
 
   func setupUI() {
     searchBar.translatesAutoresizingMaskIntoConstraints = false
+    nameLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(searchBar)
+    view.addSubview(nameLabel)
     searchBar.delegate = self
 
     NSLayoutConstraint.activate([
+      nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
       searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       searchBar.centerYAnchor.constraint(equalTo: view.centerYAnchor),
       searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -45,6 +50,9 @@ class ProfileViewController: UIViewController, UISearchBarDelegate {
       if let nameComponents = identity.nameComponents {
         let name = PersonNameComponentsFormatter.localizedString(from: nameComponents, style: .default, options: [])
         print("Discovered user: \(name)")
+        DispatchQueue.main.async {
+          self.nameLabel.text = name
+        }
       }
     }
 

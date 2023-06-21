@@ -125,7 +125,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     // Create a section
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .groupPagingCentered
-    section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+//    section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
 
     // Create a layout
     let layout = UICollectionViewCompositionalLayout(section: section)
@@ -140,10 +140,10 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     view.addSubview(collectionView)
 
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: mapView.bottomAnchor),
+      collectionView.heightAnchor.constraint(equalToConstant: 100),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
     ])
   }
 

@@ -124,8 +124,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uod-h3-mW6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="jeE-zb-MHn"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3RJ-wU-MFa">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3RJ-wU-MFa">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

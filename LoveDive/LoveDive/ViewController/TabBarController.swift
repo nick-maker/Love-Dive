@@ -32,7 +32,7 @@ extension TabBarController: HealthManagerDelegate {
     guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
     let thirdNavController = navigationControllers[2]
     guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
-    activitiesViewController.setupTableView()
+    activitiesViewController.setupCollectionView()
     activitiesViewController.divingLogs = divingData
     activitiesViewController.filterDivingLogs(forMonth: Date())
   }

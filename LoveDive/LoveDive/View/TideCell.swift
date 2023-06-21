@@ -42,6 +42,7 @@ class TideCell: UICollectionViewCell {
     locationLabel.translatesAutoresizingMaskIntoConstraints = false
     locationLabel.textColor = UIColor.pacificBlue
     contentView.addSubview(locationLabel)
+    contentView.layer.cornerRadius = 20
 
     // Create image views
     let airTemptImageView = UIImageView(image: airTemptImage)

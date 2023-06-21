@@ -7,12 +7,12 @@
 
 import UIKit
 
-class DiveCell: UITableViewCell {
+class DiveCell: UICollectionViewCell {
 
   // MARK: Lifecycle
 
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     setupUI()
   }
 
@@ -29,31 +29,21 @@ class DiveCell: UITableViewCell {
 
   // MARK: Private
 
-  private var containerView = UIView()
-
   private func setupUI() {
-    contentView.addSubview(containerView)
-    contentView.backgroundColor = .lightBlue
+    contentView.layer.cornerRadius = 20
+    contentView.backgroundColor = .lightGray.withAlphaComponent(0.2)
 
-    containerView.addSubview(waterDepthLabel)
-    containerView.addSubview(waterTempLabel)
-    containerView.backgroundColor = .systemBackground
-    containerView.layer.cornerRadius = 20
-    containerView.translatesAutoresizingMaskIntoConstraints = false
+    contentView.addSubview(waterDepthLabel)
+    contentView.addSubview(waterTempLabel)
     waterDepthLabel.translatesAutoresizingMaskIntoConstraints = false
     waterTempLabel.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint.activate([
-      containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-      containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-      containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-      containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-
       waterDepthLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       waterDepthLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
       waterDepthLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
 
-      waterTempLabel.leadingAnchor.constraint(equalTo: waterTempLabel.leadingAnchor),
+      waterTempLabel.leadingAnchor.constraint(equalTo: waterDepthLabel.leadingAnchor),
       waterTempLabel.topAnchor.constraint(equalTo: waterDepthLabel.topAnchor, constant: -15),
     ])
   }

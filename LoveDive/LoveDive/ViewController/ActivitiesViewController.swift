@@ -16,12 +16,19 @@ class ActivitiesViewController: UIViewController {
 
   var divingLogs: [DivingLog] = []
   var temps: [Temperature] = []
-  var filteredDivingLogs: [DivingLog] = [] // Keep filtered diving logs
-//  let healthStore = HKHealthStore()
-  lazy var tableView = UITableView()
+  var filteredDivingLogs: [DivingLog] = []
   let calendarView = UICalendarView()
   var isSelected = false
   var selectedDateComponents: DateComponents?
+  let descriptionText = ["Duration", "Active Energy", "Distance", "Dive Count"]
+
+  lazy var collectionView: UICollectionView = {
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.reuseIdentifier)
+    collectionView.register(SummaryCell.self, forCellWithReuseIdentifier: SummaryCell.reuseIdentifier)
+    collectionView.register(DiveCell.self, forCellWithReuseIdentifier: DiveCell.reuseIdentifier)
+    return collectionView
+  }()
 
   var currentDateComponents: DateComponents? {
     didSet {
@@ -29,12 +36,20 @@ class ActivitiesViewController: UIViewController {
     }
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.navigationBar.sizeToFit() //fix initially not large title
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.lightBlue
-    setupCalendar()
+    //    view.backgroundColor = UIColor.lightBlue
+    navigationItem.title = "Activities"
+    navigationController?.navigationBar.prefersLargeTitles = true
+    setupCollectionView()
+    configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
-    setupTableView()
+
   }
 
   func filterDivingLogs(forMonth month: Date) {
@@ -49,25 +64,24 @@ class ActivitiesViewController: UIViewController {
       return monthComponent == targetMonth && yearComponent == targetYear
     }
 
-    // Reload the tableView with filteredDivingLogs.
+    // Reload the collectionView with filteredDivingLogs.
     DispatchQueue.main.async {
-      self.tableView.reloadData()
+      let sectionsToReload: IndexSet = [1, 2]
+      self.collectionView.reloadSections(sectionsToReload)
     }
   }
 
-  func setupTableView() {
-    tableView.register(DiveCell.self, forCellReuseIdentifier: DiveCell.reuseIdentifier)
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.backgroundColor = .lightBlue
-    tableView.separatorStyle = .none
-    view.addSubview(tableView)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
+  func setupCollectionView() {
+    view.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.dataSource = self
+    collectionView.delegate = self
+//    collectionView.contentInsetAdjustmentBehavior = .never
     NSLayoutConstraint.activate([
-      tableView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 12),
-      tableView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-      tableView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-      tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
     ])
   }
 
@@ -79,7 +93,6 @@ class ActivitiesViewController: UIViewController {
     let targetMonth = calendar.component(.month, from: day)
     let targetYear = calendar.component(.year, from: day)
 
-    // Filter divingLogs for the selected month and year.
     filteredDivingLogs = divingLogs.filter {
       let dayComponent = calendar.component(.day, from: $0.date)
       let monthComponent = calendar.component(.month, from: $0.date)
@@ -87,31 +100,10 @@ class ActivitiesViewController: UIViewController {
       return dayComponent == targetDay && monthComponent == targetMonth && yearComponent == targetYear
     }
 
-    // Reload the tableView with filteredDivingLogs.
     DispatchQueue.main.async {
-      self.tableView.reloadData()
+      let sectionsToReload: IndexSet = [1, 2]
+      self.collectionView.reloadSections(sectionsToReload)
     }
-  }
-
-  private func setupCalendar() {
-    calendarView.layer.cornerRadius = 20
-    calendarView.calendar = .current
-    calendarView.fontDesign = .rounded
-    calendarView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    calendarView.backgroundColor = .systemBackground
-    calendarView.delegate = self
-    let dateSelection = UICalendarSelectionSingleDate(delegate: self)
-    calendarView.selectionBehavior = dateSelection
-    view.addSubview(calendarView)
-
-    calendarView.translatesAutoresizingMaskIntoConstraints = false
-
-    NSLayoutConstraint.activate([
-      calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-      calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      calendarView.heightAnchor.constraint(equalToConstant: 400),
-    ])
   }
 
 }
@@ -163,30 +155,85 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
 
 }
 
-// MARK: UITableViewDelegate, UITableViewDataSource
+// MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
-extension ActivitiesViewController: UITableViewDelegate, UITableViewDataSource {
+extension ActivitiesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-  internal func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-    filteredDivingLogs.count
+  func numberOfSections(in _: UICollectionView) -> Int {
+    3
   }
 
-  internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard
-      let
-      cell = tableView.dequeueReusableCell(withIdentifier: DiveCell.reuseIdentifier, for: indexPath) as? DiveCell
-    else { fatalError("Cannot Down casting") }
-    let divingLog = filteredDivingLogs[indexPath.row]
-    cell.selectionStyle = .none
-    cell.waterDepthLabel.text = String(format: "%.2f m", divingLog.maxDepth)
-    cell.waterTempLabel.text = String(format: "%.1f°C", temps[indexPath.row].temp)
-    return cell
+  func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    switch section {
+    case 0:
+      return 1
+    case 1:
+      return 4
+    default:
+      return filteredDivingLogs.count
+    }
   }
 
-  func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let detailActViewController = DetailActViewController()
-    detailActViewController.divingLog = filteredDivingLogs[indexPath.row]
-    navigationController?.pushViewController(detailActViewController, animated: true)
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    switch indexPath.section {
+    case 0:
+      guard
+        let
+        cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: CalendarCell.reuseIdentifier,
+          for: indexPath) as? CalendarCell
+      else { fatalError("Cannot Down casting") }
+      cell.calendarView.delegate = self
+      let dateSelection = UICalendarSelectionSingleDate(delegate: self)
+      cell.calendarView.selectionBehavior = dateSelection
+      return cell
+
+    case 1:
+      guard
+        let
+        cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: SummaryCell.reuseIdentifier,
+          for: indexPath) as? SummaryCell
+      else { fatalError("Cannot Down casting") }
+      cell.descriptionLabel.text = descriptionText[indexPath.row]
+      //      cell.figureLabel.text = ""
+      return cell
+    default:
+      guard
+        let
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiveCell.reuseIdentifier, for: indexPath) as? DiveCell
+      else { fatalError("Cannot Down casting") }
+      let divingLog = filteredDivingLogs[indexPath.row]
+      cell.waterDepthLabel.text = String(format: "%.2f m", divingLog.maxDepth)
+      cell.waterTempLabel.text = String(format: "%.1f°C", temps[indexPath.row].temp)
+      return cell
+    }
   }
 
+  func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if indexPath.section == 2 {
+      let detailActViewController = DetailActViewController()
+      detailActViewController.divingLog = filteredDivingLogs[indexPath.row]
+      navigationController?.pushViewController(detailActViewController, animated: true)
+    }
+  }
+
+}
+
+extension ActivitiesViewController {
+
+  func configureCompositionalLayout() {
+    let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+      switch sectionIndex {
+      case 0:
+        return AppLayouts.calendarSection()
+      case 1:
+        return AppLayouts.summarySection()
+      default:
+        return AppLayouts.diveListSection()
+      }
+    }
+    layout.register(SectionDecorationView.self, forDecorationViewOfKind: "SectionBackground")
+    collectionView.setCollectionViewLayout(layout, animated: true)
+  }
 }
