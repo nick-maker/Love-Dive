@@ -25,26 +25,35 @@ class DiveCell: UICollectionViewCell {
   static let reuseIdentifier = "\(DiveCell.self)"
 
   var waterDepthLabel = UILabel()
-  var waterTempLabel = UILabel()
+  var dateLabel = UILabel()
+  var arrowImage = UIImageView()
 
   // MARK: Private
 
   private func setupUI() {
     contentView.layer.cornerRadius = 20
-    contentView.backgroundColor = .lightGray.withAlphaComponent(0.2)
+    contentView.backgroundColor = .paleGray.withAlphaComponent(0.5)
 
-    contentView.addSubview(waterDepthLabel)
-    contentView.addSubview(waterTempLabel)
-    waterDepthLabel.translatesAutoresizingMaskIntoConstraints = false
-    waterTempLabel.translatesAutoresizingMaskIntoConstraints = false
+    [waterDepthLabel, dateLabel, arrowImage].forEach { contentView.addSubview($0) }
+    [waterDepthLabel, dateLabel, arrowImage].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+
+    waterDepthLabel.font = UIFont.systemFont(ofSize: 18)
+    dateLabel.font = UIFont.systemFont(ofSize: 12)
+    dateLabel.textColor = UIColor.lightGray
+    arrowImage.image = UIImage(systemName: "chevron.right")
 
     NSLayoutConstraint.activate([
-      waterDepthLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      waterDepthLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      waterDepthLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+      waterDepthLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      waterDepthLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+      waterDepthLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
-      waterTempLabel.leadingAnchor.constraint(equalTo: waterDepthLabel.leadingAnchor),
-      waterTempLabel.topAnchor.constraint(equalTo: waterDepthLabel.topAnchor, constant: -15),
+      dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      dateLabel.topAnchor.constraint(equalTo: waterDepthLabel.bottomAnchor, constant: 2),
+      dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+
+      arrowImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+      arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
     ])
   }
 }

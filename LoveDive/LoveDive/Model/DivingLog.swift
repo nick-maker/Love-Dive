@@ -10,7 +10,8 @@ import Foundation
 // MARK: - DivingLog
 
 struct DivingLog {
-  let date: Date
+
+  let startTime: Date
   var session: [DivingEntry]
 
   var maxDepth: Double {
@@ -22,13 +23,25 @@ struct DivingLog {
     }
     return maxDepth
   }
+
+  var duration: Double {
+    guard let endTime = session.last?.time else {
+      return 0.0
+    }
+    let duration = endTime.timeIntervalSince(startTime)
+    return duration
+  }
+
 }
 
 // MARK: - DivingEntry
 
-struct DivingEntry {
+struct DivingEntry: Identifiable {
+
+  var id = UUID().uuidString //to conform identifiable
   let time: Date
   let depth: Double
+
 }
 
 // MARK: - Temperature

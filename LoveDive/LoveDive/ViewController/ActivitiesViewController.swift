@@ -7,6 +7,7 @@
 
 // import HealthKit
 import UIKit
+import SwiftUI
 
 // MARK: - ActivitiesViewController
 
@@ -16,19 +17,39 @@ class ActivitiesViewController: UIViewController {
 
   var divingLogs: [DivingLog] = []
   var temps: [Temperature] = []
-  var filteredDivingLogs: [DivingLog] = []
+  var averageTemp = 0.0
+  var filteredDuration = 0.0
+  var filteredMaxDepth = 0.0
+
   let calendarView = UICalendarView()
   var isSelected = false
   var selectedDateComponents: DateComponents?
-  let descriptionText = ["Duration", "Active Energy", "Distance", "Dive Count"]
 
   lazy var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.reuseIdentifier)
+    collectionView.register(
+      SectionHeader.self,
+      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+      withReuseIdentifier: SectionHeader.reuseIdentifier)
     collectionView.register(SummaryCell.self, forCellWithReuseIdentifier: SummaryCell.reuseIdentifier)
     collectionView.register(DiveCell.self, forCellWithReuseIdentifier: DiveCell.reuseIdentifier)
     return collectionView
   }()
+
+  var filteredDivingLogs: [DivingLog] = [] {
+    didSet {
+      filteredMaxDepth = filteredDivingLogs.max(by: { $0.maxDepth < $1.maxDepth })?.maxDepth ?? 0.0
+      filteredDuration = filteredDivingLogs.reduce(0.0) { $0 + $1.duration }
+    }
+  }
+
+  var filteredTemps: [Temperature] = [] {
+    didSet {
+      let sum = filteredTemps.reduce(0.0) { $0 + $1.temp }
+      averageTemp = sum / Double(filteredTemps.count)
+    }
+  }
 
   var currentDateComponents: DateComponents? {
     didSet {
@@ -38,18 +59,16 @@ class ActivitiesViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.navigationBar.sizeToFit() //fix initially not large title
+    navigationController?.navigationBar.sizeToFit() // fix initially not large title
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    //    view.backgroundColor = UIColor.lightBlue
     navigationItem.title = "Activities"
     navigationController?.navigationBar.prefersLargeTitles = true
     setupCollectionView()
     configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
-
   }
 
   func filterDivingLogs(forMonth month: Date) {
@@ -59,8 +78,14 @@ class ActivitiesViewController: UIViewController {
 
     // Filter divingLogs for the selected month and year.
     filteredDivingLogs = divingLogs.filter {
-      let monthComponent = calendar.component(.month, from: $0.date)
-      let yearComponent = calendar.component(.year, from: $0.date)
+      let monthComponent = calendar.component(.month, from: $0.startTime)
+      let yearComponent = calendar.component(.year, from: $0.startTime)
+      return monthComponent == targetMonth && yearComponent == targetYear
+    }
+
+    filteredTemps = temps.filter {
+      let monthComponent = calendar.component(.month, from: $0.start)
+      let yearComponent = calendar.component(.year, from: $0.start)
       return monthComponent == targetMonth && yearComponent == targetYear
     }
 
@@ -73,10 +98,10 @@ class ActivitiesViewController: UIViewController {
 
   func setupCollectionView() {
     view.addSubview(collectionView)
+    collectionView.backgroundColor = .clear
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.dataSource = self
     collectionView.delegate = self
-//    collectionView.contentInsetAdjustmentBehavior = .never
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: view.topAnchor),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -94,9 +119,16 @@ class ActivitiesViewController: UIViewController {
     let targetYear = calendar.component(.year, from: day)
 
     filteredDivingLogs = divingLogs.filter {
-      let dayComponent = calendar.component(.day, from: $0.date)
-      let monthComponent = calendar.component(.month, from: $0.date)
-      let yearComponent = calendar.component(.year, from: $0.date)
+      let dayComponent = calendar.component(.day, from: $0.startTime)
+      let monthComponent = calendar.component(.month, from: $0.startTime)
+      let yearComponent = calendar.component(.year, from: $0.startTime)
+      return dayComponent == targetDay && monthComponent == targetMonth && yearComponent == targetYear
+    }
+
+    filteredTemps = temps.filter {
+      let dayComponent = calendar.component(.day, from: $0.start)
+      let monthComponent = calendar.component(.month, from: $0.start)
+      let yearComponent = calendar.component(.year, from: $0.start)
       return dayComponent == targetDay && monthComponent == targetMonth && yearComponent == targetYear
     }
 
@@ -116,7 +148,7 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
     let calendar = Calendar.current
 
     let hasDivingData = divingLogs.contains {
-      let logDateComponents = calendar.dateComponents([.year, .month, .day], from: $0.date)
+      let logDateComponents = calendar.dateComponents([.year, .month, .day], from: $0.startTime)
       return logDateComponents.year == dateComponents.year &&
         logDateComponents.month == dateComponents.month &&
         logDateComponents.day == dateComponents.day
@@ -195,8 +227,22 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
           withReuseIdentifier: SummaryCell.reuseIdentifier,
           for: indexPath) as? SummaryCell
       else { fatalError("Cannot Down casting") }
+      let descriptionText = ["Max Depth", "Average Water Temp", "Duration", "Dive Counts"]
+      var figureText = [String]()
+
+      if filteredMaxDepth == 0 {
+        figureText = ["0 m", "-", "0 min", String(filteredDivingLogs.count)]
+      } else {
+        figureText = [
+          String(format: "%.2f m", filteredMaxDepth),
+          String(format: "%.1f°C", averageTemp),
+          filteredDuration.durationFormatter(),
+          String(filteredDivingLogs.count),
+        ]
+      }
+
       cell.descriptionLabel.text = descriptionText[indexPath.row]
-      //      cell.figureLabel.text = ""
+      cell.figureLabel.text = figureText[indexPath.row]
       return cell
     default:
       guard
@@ -204,17 +250,64 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiveCell.reuseIdentifier, for: indexPath) as? DiveCell
       else { fatalError("Cannot Down casting") }
       let divingLog = filteredDivingLogs[indexPath.row]
-      cell.waterDepthLabel.text = String(format: "%.2f m", divingLog.maxDepth)
-      cell.waterTempLabel.text = String(format: "%.1f°C", temps[indexPath.row].temp)
+      let tempLog = filteredTemps[indexPath.row]
+      let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
+
+      let attributedText = NSMutableAttributedString(string: text)
+      attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
+
+      cell.waterDepthLabel.attributedText = attributedText
+      cell.dateLabel.text = divingLog.startTime.formatted()
       return cell
+    }
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    viewForSupplementaryElementOfKind kind: String,
+    at indexPath: IndexPath)
+    -> UICollectionReusableView
+  {
+    switch kind {
+    case UICollectionView.elementKindSectionHeader:
+      guard
+        let headerView = collectionView.dequeueReusableSupplementaryView(
+          ofKind: kind,
+          withReuseIdentifier: SectionHeader.reuseIdentifier,
+          for: indexPath) as? SectionHeader else
+      {
+        fatalError("Cannot downcast to SectionHeader")
+      }
+      if indexPath.section == 1 {
+        switch filteredDivingLogs.count {
+        case 0:
+          headerView.text = "No Diving Activities".uppercased()
+        case 1:
+          headerView.text = "SUMMARY FOR 1 DIVE"
+        default:
+          headerView.text = "SUMMARY FOR \(filteredDivingLogs.count) DIVES"
+        }
+      }
+      return headerView
+    default:
+      assert(false, "Invalid element type")
     }
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.section == 2 {
-      let detailActViewController = DetailActViewController()
-      detailActViewController.divingLog = filteredDivingLogs[indexPath.row]
-      navigationController?.pushViewController(detailActViewController, animated: true)
+//      let detailActView = DetailActView(divingEntry: filteredDivingLogs[indexPath.row].session)
+//      let hostingController = UIHostingController(rootView: detailActView)
+//      navigationController?.pushViewController(hostingController, animated: true)
+
+//      let detailActViewController = DetailActViewController()
+//      detailActViewController.divingEntry = filteredDivingLogs[indexPath.row].session
+//      navigationController?.pushViewController(detailActViewController, animated: true)
+
+      let selectedData = filteredDivingLogs[indexPath.row].session
+      print(selectedData)// Assuming `session` contains the relevant data for the chart
+      let chartView = ChartView(data: selectedData)
+      navigationController?.pushViewController(UIHostingController(rootView: chartView), animated: true)
     }
   }
 

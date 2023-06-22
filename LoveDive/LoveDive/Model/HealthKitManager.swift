@@ -79,7 +79,7 @@ class HealthKitManger {
           diveList.append(log)
         }
 
-        let newLog = DivingLog(date: diveDates.start, session: [])
+        let newLog = DivingLog(startTime: diveDates.start, session: [])
         currentLog = newLog
       }
 
@@ -123,7 +123,7 @@ class HealthKitManger {
 
   private func readDive() {
     readUnderwaterDepths(healthStore: healthStore) { diveQuery in
-      let sortedDives = diveQuery.sorted(by: { $0.date.compare($1.date) == .orderedDescending })
+      let sortedDives = diveQuery.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
       DispatchQueue.main.async {
         self.divingLogs = sortedDives
         self.delegate?.getDepthData(didGet: self.divingLogs)

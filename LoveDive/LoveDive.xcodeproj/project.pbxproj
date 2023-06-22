@@ -12,6 +12,8 @@
 		060146452A3AF43A003001EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146442A3AF43A003001EE /* NetworkManager.swift */; };
 		060146472A3B53EB003001EE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146462A3B53EB003001EE /* Config.swift */; };
 		060146492A3B57C7003001EE /* TideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146482A3B57C7003001EE /* TideCell.swift */; };
+		060320512A44ACC50001FF12 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060320502A44ACC50001FF12 /* ChartView.swift */; };
+		060320532A44B52F0001FF12 /* DetailActView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060320522A44B52F0001FF12 /* DetailActView.swift */; };
 		063BA8F02A41BB9A00711932 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 063BA8EF2A41BB9A00711932 /* IQKeyboardManagerSwift */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F42A42F7F100711932 /* SectionDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F32A42F7F100711932 /* SectionDecorationView.swift */; };
@@ -36,6 +38,8 @@
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
 		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
+		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
+		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +47,8 @@
 		060146442A3AF43A003001EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		060146462A3B53EB003001EE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		060146482A3B57C7003001EE /* TideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideCell.swift; sourceTree = "<group>"; };
+		060320502A44ACC50001FF12 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		060320522A44B52F0001FF12 /* DetailActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActView.swift; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F32A42F7F100711932 /* SectionDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SectionDecorationView.swift; path = LoveDive/View/SectionDecorationView.swift; sourceTree = SOURCE_ROOT; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -69,6 +75,8 @@
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
+		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				0601463D2A3AEA79003001EE /* Extension+UIColor.swift */,
+				06AD89BA2A44554600E6C409 /* Extension+Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -159,7 +168,10 @@
 				0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */,
 				063BA8F12A42F03A00711932 /* CalendarCell.swift */,
 				063BA8F72A42FDC800711932 /* SummaryCell.swift */,
+				06AD89B62A44210400E6C409 /* SectionHeader.swift */,
 				063BA8F32A42F7F100711932 /* SectionDecorationView.swift */,
+				060320522A44B52F0001FF12 /* DetailActView.swift */,
+				060320502A44ACC50001FF12 /* ChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,9 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
+				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */,
 				0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */,
+				060320532A44B52F0001FF12 /* DetailActView.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
+				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
+				06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */,
 				063BA8F82A42FDC800711932 /* SummaryCell.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,
 				0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */,
@@ -464,7 +480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = lkangting.com.LoveDive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -500,7 +516,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = lkangting.com.LoveDive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

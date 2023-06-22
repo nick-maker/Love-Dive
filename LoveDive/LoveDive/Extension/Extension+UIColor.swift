@@ -26,4 +26,8 @@ extension UIColor {
     UIColor(red: 0.89, green: 0.931, blue: 0.958, alpha: 1)
   }
 
+  static var paleGray: UIColor {
+    UIColor(red: 224/253, green: 224/253, blue: 224/253, alpha: 1)
+  }
+
 }

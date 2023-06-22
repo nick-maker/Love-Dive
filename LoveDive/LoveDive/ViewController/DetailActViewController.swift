@@ -5,18 +5,31 @@
 //  Created by Nick Liu on 2023/6/18.
 //
 
-import UIKit
+import SwiftUI
 
 class DetailActViewController: UIViewController {
 
-  var divingLog: DivingLog!
+  var divingEntry = [DivingEntry]()
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        // Create and present the SwiftUI view
+//        let detailView = DetailView(divingLog: divingLog)
+//        let hostingController = UIHostingController(rootView: detailView)
+//        addChild(hostingController)
+//        view.addSubview(hostingController.view)
+//
+//        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+//            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//        ])
+//
+//        hostingController.didMove(toParent: self)
+//    }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = .white
-    setupUI()
-  }
-
-  func setupUI() { }
-
+    // Rest of the code
 }
