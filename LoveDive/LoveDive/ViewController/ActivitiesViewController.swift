@@ -5,9 +5,8 @@
 //  Created by Nick Liu on 2023/6/17.
 //
 
-// import HealthKit
-import UIKit
 import SwiftUI
+import UIKit
 
 // MARK: - ActivitiesViewController
 
@@ -65,6 +64,7 @@ class ActivitiesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.title = "Activities"
+    navigationItem.backButtonTitle = ""
     navigationController?.navigationBar.prefersLargeTitles = true
     setupCollectionView()
     configureCompositionalLayout()
@@ -296,18 +296,13 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.section == 2 {
-//      let detailActView = DetailActView(divingEntry: filteredDivingLogs[indexPath.row].session)
-//      let hostingController = UIHostingController(rootView: detailActView)
-//      navigationController?.pushViewController(hostingController, animated: true)
-
-//      let detailActViewController = DetailActViewController()
-//      detailActViewController.divingEntry = filteredDivingLogs[indexPath.row].session
-//      navigationController?.pushViewController(detailActViewController, animated: true)
-
       let selectedData = filteredDivingLogs[indexPath.row].session
-      print(selectedData)// Assuming `session` contains the relevant data for the chart
+      print(selectedData) // Assuming `session` contains the relevant data for the chart
       let chartView = ChartView(data: selectedData)
-      navigationController?.pushViewController(UIHostingController(rootView: chartView), animated: true)
+      let hostingController = UIHostingController(rootView: chartView)
+      hostingController.navigationItem.title = "Diving Log"
+      hostingController.navigationController?.navigationBar.backItem?.title = ""
+      navigationController?.pushViewController(hostingController, animated: true)
     }
   }
 

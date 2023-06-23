@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension UIColor {
 
@@ -28,6 +29,17 @@ extension UIColor {
 
   static var paleGray: UIColor {
     UIColor(red: 224/253, green: 224/253, blue: 224/253, alpha: 1)
+  }
+
+}
+
+extension Color {
+  static var pacificBlue: Color {
+    Color(red: 0.094, green: 0.643, blue: 0.882)
+  }
+
+  static var darkBlue: Color {
+    Color(red: 0.02, green: 0.2, blue: 0.325)
   }
 
 }

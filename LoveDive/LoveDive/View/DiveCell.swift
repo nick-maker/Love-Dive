@@ -53,7 +53,7 @@ class DiveCell: UICollectionViewCell {
       dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
       arrowImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+      arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
     ])
   }
 }

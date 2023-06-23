@@ -31,5 +31,5 @@ class DetailActViewController: UIViewController {
 //        hostingController.didMove(toParent: self)
 //    }
 
-    // Rest of the code
+  // Rest of the code
 }

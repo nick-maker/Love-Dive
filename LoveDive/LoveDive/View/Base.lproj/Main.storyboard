@@ -36,7 +36,7 @@
                         <viewLayoutGuide key="safeArea" id="Wws-de-B4q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TPD-Db-5es"/>
+                    <navigationItem key="navigationItem" style="editor" id="TPD-Db-5es"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbq-c0-kaf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
