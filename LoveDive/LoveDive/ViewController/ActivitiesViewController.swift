@@ -250,9 +250,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiveCell.reuseIdentifier, for: indexPath) as? DiveCell
       else { fatalError("Cannot Down casting") }
       let divingLog = filteredDivingLogs[indexPath.row]
-      let tempLog = filteredTemps[indexPath.row]
       let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
-
       let attributedText = NSMutableAttributedString(string: text)
       attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
 
@@ -296,12 +294,10 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.section == 2 {
-      let selectedData = filteredDivingLogs[indexPath.row].session
-      print(selectedData) // Assuming `session` contains the relevant data for the chart
-      let chartView = ChartView(data: selectedData)
+      let selectedData = filteredDivingLogs[indexPath.row]
+      let selectedTemp = filteredTemps[indexPath.row]
+      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
       let hostingController = UIHostingController(rootView: chartView)
-      hostingController.navigationItem.title = "Diving Log"
-      hostingController.navigationController?.navigationBar.backItem?.title = ""
       navigationController?.pushViewController(hostingController, animated: true)
     }
   }

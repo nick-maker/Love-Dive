@@ -16,6 +16,8 @@ struct ChartView: View {
 
   @State private var chartColor: Color = .pacificBlue.opacity(0.5)
   var data: [DivingEntry]
+  var maxDepth = 0.0
+  var temp = 0.0
 
   private var gradient: Gradient {
     var colors = [chartColor]
@@ -25,29 +27,55 @@ struct ChartView: View {
     return Gradient(colors: colors)
   }
 
-  static var dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "hh:mm:ss a"
-    return dateFormatter
+  static var timeFormatter: DateFormatter = {
+    let timeFormatter = DateFormatter()
+    timeFormatter.dateFormat = "hh:mm:ss a"
+    return timeFormatter
+  }()
+
+  static var yearFormatter: DateFormatter = {
+    let yearFormatter = DateFormatter()
+    yearFormatter.dateFormat = "MMM dd, yyyy"
+    return yearFormatter
   }()
 
   var body: some View {
-    
-    List {
-      Section {
-        VStack {
+//    NavigationView {
+      List {
+        ZStack(alignment: .topLeading) {
+          VStack(alignment: .leading) {
+            TitleFigureView(data: data, maxDepth: maxDepth, temp: temp)
 
-          HStack {
-            Text("\(data[0].time, formatter: ChartView.dateFormatter)")
-            Spacer()
-            if let lastDate = data.last?.time {
-              Text("\(lastDate, formatter: ChartView.dateFormatter)")
+            HStack {
+              Text("\(data[0].time, formatter: ChartView.timeFormatter)")
+                .font(.system(size: 14))
+              Spacer()
+              if let lastDate = data.last?.time {
+                Text("\(lastDate, formatter: ChartView.timeFormatter)")
+                  .font(.system(size: 14))
+              }
             }
+            chart
           }
-          chart
+        }
+        if data.count < 2 {
+          HStack {
+            Spacer()
+            Text("Not Enough Data for a Diagram")
+              .foregroundColor(.secondary)
+            Spacer()
+          }
         }
       }
-    }
+      .navigationBarTitle("Diving Log", displayMode: .large)
+      .navigationBarItems(
+        trailing:
+        Button(action: {
+          // Action for the right bar button item
+        }) {
+          Image(systemName: "square.and.arrow.up")
+        })
+//    }
   }
 
   // MARK: Private
@@ -70,27 +98,25 @@ struct ChartView: View {
     }
 
     return VStack {
-
       Chart(data) { divingEntry in
 
         AreaMark(
           x: .value("time", divingEntry.time),
           yStart: .value("minValue", minValue),
           yEnd: .value("depth", -divingEntry.depth))
-        .foregroundStyle(gradient)
-        .interpolationMethod(.monotone)
+          .foregroundStyle(gradient)
+          .interpolationMethod(.monotone)
 
         LineMark(
           x: .value("time", divingEntry.time),
           y: .value("depth", -divingEntry.depth))
-        .interpolationMethod(.monotone)
-        .lineStyle(.init(lineWidth: 3))
-        .foregroundStyle(Color.pacificBlue.opacity(0.7))
-
+          .interpolationMethod(.monotone)
+          .lineStyle(.init(lineWidth: 3))
+          .foregroundStyle(Color.pacificBlue.opacity(0.7))
       }
       .chartYScale(domain: minValue...0)
       .chartYAxis {
-        AxisMarks() {
+        AxisMarks {
           AxisGridLine()
           let value = $0.as(Int.self)!
           AxisValueLabel {
@@ -99,23 +125,16 @@ struct ChartView: View {
         }
       }
       .chartXAxis {
-        AxisMarks(values: .automatic())
-        { value in
+        AxisMarks(values: .automatic()) { _ in
           AxisGridLine()
           AxisTick()
           AxisValueLabel(format: .dateTime.minute().second())
             .font(.system(size: 10))
         }
       }
-      .frame (height: 250)
+      .frame(height: 200)
     }
   }
-}
-
-func formatTimeDifference(_ timeDifference: TimeInterval) -> String {
-  let minutes = Int(timeDifference / 60)
-  let seconds = Int(timeDifference.truncatingRemainder(dividingBy: 60))
-  return String(format: "%02d'%02d", minutes, seconds)
 }
 
 // MARK: - ChartView_Previews
@@ -236,5 +255,58 @@ struct ChartView_Previews: PreviewProvider {
         time: Date(timeIntervalSince1970: 1641877064),
         depth: 2.1503216349938676),
     ])
+  }
+}
+
+// MARK: - TitleFigureView
+
+struct TitleFigureView: View {
+
+  var data: [DivingEntry]
+  var maxDepth = 0.0
+  var temp = 0.0
+
+  var body: some View {
+    let duration = data.last?.time.timeIntervalSince(data.first?.time ?? Date())
+
+    VStack(alignment: .leading) {
+      Text("\(data[0].time, formatter: ChartView.yearFormatter)")
+        .font(.system(size: 30, design: .rounded))
+        .bold()
+        .foregroundColor(.pacificBlue)
+        .padding(.bottom, 4)
+      HStack {
+        VStack(alignment: .leading) {
+          Text("\(String(format: "%.2f", maxDepth)) m")
+            .bold()
+            .font(.system(size: 24, design: .rounded))
+            .padding(.bottom, 2)
+          Text("Max Depth")
+            .font(.system(size: 16, design: .rounded))
+            .foregroundColor(.secondary)
+        }
+        Spacer()
+        VStack(alignment: .leading) {
+          Text("\(duration?.durationFormatter() ?? "-")")
+            .bold()
+            .font(.system(size: 24, design: .rounded))
+            .padding(.bottom, 2)
+          Text("Duration")
+            .font(.system(size: 16, design: .rounded))
+            .foregroundColor(.secondary)
+        }
+        Spacer()
+        VStack(alignment: .leading) {
+          Text("\(String(format: "%.1f°C", temp))")
+            .bold()
+            .font(.system(size: 24, design: .rounded))
+            .padding(.bottom, 2)
+          Text("Water Temp")
+            .font(.system(size: 16, design: .rounded))
+            .foregroundColor(.secondary)
+        }
+      }
+    }
+    .padding(.bottom, 30)
   }
 }
