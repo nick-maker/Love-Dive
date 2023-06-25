@@ -37,6 +37,7 @@
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
 		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
+		069928F62A475EA70046F9C7 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069928F52A475EA70046F9C7 /* ShareView.swift */; };
 		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
+		069928F52A475EA70046F9C7 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 				06AD89B62A44210400E6C409 /* SectionHeader.swift */,
 				063BA8F32A42F7F100711932 /* SectionDecorationView.swift */,
 				060320502A44ACC50001FF12 /* ChartView.swift */,
+				069928F52A475EA70046F9C7 /* ShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
+				069928F62A475EA70046F9C7 /* ShareView.swift in Sources */,
 				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
 				0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */,
 				063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */,
@@ -467,6 +471,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This App shares underwater depth and water temperature with HealthKit.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save image.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -503,6 +508,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We use health data to help you track underwater depth and water temperature during your diving activities";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This App shares underwater depth and water temperature with HealthKit.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save image.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

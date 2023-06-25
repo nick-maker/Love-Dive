@@ -298,6 +298,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       let selectedTemp = filteredTemps[indexPath.row]
       let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
       let hostingController = UIHostingController(rootView: chartView)
+      hostingController.title = "Diving Log"
       navigationController?.pushViewController(hostingController, animated: true)
     }
   }
