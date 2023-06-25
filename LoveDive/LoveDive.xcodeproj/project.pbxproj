@@ -31,13 +31,11 @@
 		0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */; };
 		0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC652A3DD1B800BCC367 /* DivingLog.swift */; };
 		0681DC6D2A3EE2BF00BCC367 /* DiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */; };
-		0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */; };
 		0681DC712A3F770E00BCC367 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC702A3F770E00BCC367 /* HealthKitManager.swift */; };
 		0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC722A4000BD00BCC367 /* TabBarController.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
 		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
-		069928F62A475EA70046F9C7 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069928F52A475EA70046F9C7 /* ShareView.swift */; };
 		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
 /* End PBXBuildFile section */
@@ -68,13 +66,11 @@
 		0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		0681DC652A3DD1B800BCC367 /* DivingLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingLog.swift; sourceTree = "<group>"; };
 		0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiveCell.swift; path = LoveDive/View/DiveCell.swift; sourceTree = SOURCE_ROOT; };
-		0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActViewController.swift; sourceTree = "<group>"; };
 		0681DC702A3F770E00BCC367 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		0681DC722A4000BD00BCC367 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
-		069928F52A475EA70046F9C7 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,7 +167,6 @@
 				06AD89B62A44210400E6C409 /* SectionHeader.swift */,
 				063BA8F32A42F7F100711932 /* SectionDecorationView.swift */,
 				060320502A44ACC50001FF12 /* ChartView.swift */,
-				069928F52A475EA70046F9C7 /* ShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,7 +178,6 @@
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
 				0682409D2A3C679800B69265 /* DetailTideViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
-				0681DC6E2A3EF0C800BCC367 /* DetailActViewController.swift */,
 				0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
@@ -294,7 +288,6 @@
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */,
-				0681DC6F2A3EF0C800BCC367 /* DetailActViewController.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
 				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
 				06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */,
@@ -313,7 +306,6 @@
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
-				069928F62A475EA70046F9C7 /* ShareView.swift in Sources */,
 				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
 				0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */,
 				063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */,
@@ -463,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LoveDive/LoveDive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TY22MAR92C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoveDive/Info.plist;
@@ -500,7 +492,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LoveDive/LoveDive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = TY22MAR92C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoveDive/Info.plist;

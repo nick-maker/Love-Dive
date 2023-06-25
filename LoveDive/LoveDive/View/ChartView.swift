@@ -18,7 +18,6 @@ struct ChartView: View {
 
   @MainActor
   private func generateSnapshot(viewSize: CGSize) {
-    
     let renderer = ImageRenderer(content: snapshotView.frame(width: viewSize.width, alignment: .center))
     renderer.scale = UIScreen.main.scale
 
@@ -69,13 +68,13 @@ struct ChartView: View {
     .navigationBarTitle("Diving Log", displayMode: .large)
     .navigationBarItems(
       trailing:
-        ShareLink(
-          item: generatedImage ?? Image(systemName: ""),
-          preview: SharePreview("Diving Log", image: generatedImage ?? Image(systemName: ""))))
+      ShareLink(
+        item: generatedImage ?? Image(systemName: ""),
+        preview: SharePreview("Diving Log", image: generatedImage ?? Image(systemName: ""))))
   }
 
   var chartListView: some View {
-    return ZStack(alignment: .topLeading) {
+    ZStack(alignment: .topLeading) {
       VStack(alignment: .leading) {
         titleFigureView
         HStack {
@@ -101,7 +100,6 @@ struct ChartView: View {
   }
 
   var titleFigureView: some View {
-
     let duration = data.last?.time.timeIntervalSince(data.first?.time ?? Date())
 
     return VStack(alignment: .leading) {
@@ -143,7 +141,6 @@ struct ChartView: View {
       }
     }
     .padding(.bottom, 30)
-
   }
 
   var chart: some View {
@@ -170,15 +167,15 @@ struct ChartView: View {
           x: .value("time", divingEntry.time),
           yStart: .value("minValue", minValue),
           yEnd: .value("depth", -divingEntry.depth))
-        .foregroundStyle(gradient)
-        .interpolationMethod(.monotone)
+          .foregroundStyle(gradient)
+          .interpolationMethod(.monotone)
 
         LineMark(
           x: .value("time", divingEntry.time),
           y: .value("depth", -divingEntry.depth))
-        .interpolationMethod(.monotone)
-        .lineStyle(.init(lineWidth: 3))
-        .foregroundStyle(Color.pacificBlue.opacity(0.7))
+          .interpolationMethod(.monotone)
+          .lineStyle(.init(lineWidth: 3))
+          .foregroundStyle(Color.pacificBlue.opacity(0.7))
       }
       .chartYScale(domain: minValue...0)
       .chartYAxis {
@@ -203,7 +200,7 @@ struct ChartView: View {
   }
 
   var snapshotView: some View {
-    return ZStack {
+    ZStack {
       chartListView
     }
     .padding()

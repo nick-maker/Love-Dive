@@ -288,7 +288,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       }
       return headerView
     default:
-      assert(false, "Invalid element type")
+      return UICollectionReusableView()
     }
   }
 

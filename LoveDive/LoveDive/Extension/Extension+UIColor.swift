@@ -28,7 +28,7 @@ extension UIColor {
   }
 
   static var paleGray: UIColor {
-    UIColor(red: 224/253, green: 224/253, blue: 224/253, alpha: 1)
+    UIColor(red: 224 / 253, green: 224 / 253, blue: 224 / 253, alpha: 1)
   }
 
 }
@@ -43,7 +43,7 @@ extension Color {
   }
 
   static var paleGray: Color {
-    Color(red: 224/253, green: 224/253, blue: 224/253)
+    Color(red: 224 / 253, green: 224 / 253, blue: 224 / 253)
   }
 
 
