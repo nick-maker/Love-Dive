@@ -20,6 +20,8 @@
 		063BA8F82A42FDC800711932 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F72A42FDC800711932 /* SummaryCell.swift */; };
 		0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */; };
 		0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */; };
+		064F76442A497431003DC830 /* PhotosPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76432A497431003DC830 /* PhotosPickerModel.swift */; };
+		064F76472A497C13003DC830 /* MediaFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76462A497C13003DC830 /* MediaFile.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
@@ -52,6 +54,8 @@
 		063BA8F72A42FDC800711932 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
 		0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitViewModel.swift; sourceTree = "<group>"; };
+		064F76432A497431003DC830 /* PhotosPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPickerModel.swift; sourceTree = "<group>"; };
+		064F76462A497C13003DC830 /* MediaFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaFile.swift; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		064F76452A49743B003DC830 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */,
+				064F76432A497431003DC830 /* PhotosPickerModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		067833B02A39D8B5000642F2 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +126,7 @@
 				067833BC2A39D8B5000642F2 /* AppDelegate.swift */,
 				067833BE2A39D8B5000642F2 /* SceneDelegate.swift */,
 				0681DC5E2A3CA51200BCC367 /* Extension */,
+				064F76452A49743B003DC830 /* ViewModel */,
 				0681DC5D2A3CA4F500BCC367 /* Model */,
 				0681DC5F2A3CA52500BCC367 /* View */,
 				0681DC602A3CA52F00BCC367 /* ViewController */,
@@ -134,6 +148,7 @@
 		0681DC5D2A3CA4F500BCC367 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				064F76462A497C13003DC830 /* MediaFile.swift */,
 				060146462A3B53EB003001EE /* Config.swift */,
 				063BA8F52A42F91F00711932 /* AppLayouts.swift */,
 				0682409B2A3C54FB00B69265 /* Location.swift */,
@@ -141,7 +156,6 @@
 				0681DC5B2A3C833E00BCC367 /* WeatherData.swift */,
 				0681DC652A3DD1B800BCC367 /* DivingLog.swift */,
 				0681DC702A3F770E00BCC367 /* HealthKitManager.swift */,
-				0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,9 +305,11 @@
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
 				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
 				06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */,
+				064F76442A497431003DC830 /* PhotosPickerModel.swift in Sources */,
 				063BA8F82A42FDC800711932 /* SummaryCell.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,
 				0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */,
+				064F76472A497C13003DC830 /* MediaFile.swift in Sources */,
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
