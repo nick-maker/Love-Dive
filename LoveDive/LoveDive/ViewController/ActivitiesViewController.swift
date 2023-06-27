@@ -299,6 +299,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
       let hostingController = UIHostingController(rootView: chartView)
       hostingController.title = "Diving Log"
+      navigationController?.navigationBar.tintColor = .pacificBlue
       navigationController?.pushViewController(hostingController, animated: true)
     }
   }

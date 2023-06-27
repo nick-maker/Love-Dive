@@ -10,15 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Breathe View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BreatheViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.094117647060000004" green="0.64313725489999995" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="l8P-Vz-KLe"/>
                 </viewController>
@@ -35,6 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Wws-de-B4q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.094117647060000004" green="0.64313725489999995" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" style="editor" id="TPD-Db-5es"/>
                 </viewController>
@@ -51,6 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Qrr-EF-4oL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.094117647060000004" green="0.64313725489999995" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9KO-A4-amd"/>
                 </viewController>
@@ -83,7 +86,7 @@
         <!--Explore-->
         <scene sceneID="FKM-IQ-GuR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mWs-sG-Mrg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mWs-sG-Mrg" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" image="sun.haze" catalog="system" selectedImage="sun.haze.fill" id="wcO-rK-Qxe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A1l-IP-2FF">
@@ -99,11 +102,11 @@
             </objects>
             <point key="canvasLocation" x="576" y="-2157"/>
         </scene>
-        <!--Breath-->
+        <!--Breathe-->
         <scene sceneID="OS6-xA-exX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Fg-hs-5v7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Breath" image="circle.and.line.horizontal" catalog="system" selectedImage="circle.and.line.horizontal.fill" id="Sg3-os-GHY"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Fg-hs-5v7" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Breathe" image="circle.and.line.horizontal" catalog="system" selectedImage="circle.and.line.horizontal.fill" id="Sg3-os-GHY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfA-uO-8Dj">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -121,7 +124,7 @@
         <!--Activities-->
         <scene sceneID="n9y-vu-jEA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uod-h3-mW6" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uod-h3-mW6" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="jeE-zb-MHn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3RJ-wU-MFa">
@@ -146,6 +149,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="rqK-5x-ncn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.094117647060000004" green="0.64313725489999995" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="xPx-YP-Gtt"/>
                 </viewController>
@@ -156,7 +160,7 @@
         <!--Profile-->
         <scene sceneID="MsE-YB-2oc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GLm-fQ-Jnz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GLm-fQ-Jnz" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="5dR-51-sM2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hZu-Tf-ZZF">

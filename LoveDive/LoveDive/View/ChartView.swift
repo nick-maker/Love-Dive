@@ -80,6 +80,7 @@ struct ChartView: View {
           item: generatedImage ?? Image(systemName: ""),
           preview: SharePreview("Diving Log", image: generatedImage ?? Image(systemName: "")))
       })
+    .accentColor(Color.pacificBlue)
   }
 
   var chartListView: some View {
