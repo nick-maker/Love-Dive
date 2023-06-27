@@ -21,20 +21,21 @@ struct BreatheView: View {
             Circle()
               .fill(.blue.opacity(0.03))
               .padding(-40)
-
             Circle()
               .trim(from: 0, to: breatheModel.progress)
               .stroke(Color.blue.opacity(0.03), lineWidth: 80)
               .blur(radius: 15)
-
             //Mark: Shadow
             Circle()
               .stroke(Color.pacificBlue, lineWidth: 5)
               .blur(radius: 15)
               .padding(-2)
-
             Circle()
               .fill(.white)
+            if breatheModel.isStarted {
+              LottieView()
+                .scaleEffect(1.2)
+            }
             Circle()
               .trim(from: 0, to: breatheModel.progress)
               .stroke(Color.pacificBlue.opacity(0.6), lineWidth: 7)
@@ -56,10 +57,9 @@ struct BreatheView: View {
                 .rotationEffect(.init(degrees: breatheModel.progress * 360))
 
             }
-
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
-              .foregroundColor(.darkBlue)
+              .foregroundColor( breatheModel.isStarted ? .white : .darkBlue)
               .rotationEffect(.init(degrees: 90))
               .animation(.none, value: breatheModel.progress)
           }
@@ -79,7 +79,7 @@ struct BreatheView: View {
             }
           } label: {
             Image(systemName: !breatheModel.isStarted ? "circle.and.line.horizontal" : "stop.fill")
-              .font(.largeTitle.bold())
+              .font(.largeTitle)
               .foregroundColor(.pacificBlue.opacity(0.6))
               .frame(width: 80, height: 80)
               .background {
@@ -194,9 +194,6 @@ struct BreatheView: View {
         .ignoresSafeArea()
     }
     .frame(maxHeight: .infinity, alignment: .bottom)
-
-
-
   }
 
   //Mark: reusable context menu options
@@ -211,7 +208,7 @@ struct BreatheView: View {
 
 }
 
-struct Home_Previews: PreviewProvider {
+struct Breathe_Previews: PreviewProvider {
   static var previews: some View {
     BreatheContentView()
       .environmentObject(BreatheModel())
