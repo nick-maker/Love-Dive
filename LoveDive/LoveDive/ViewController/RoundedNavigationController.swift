@@ -11,10 +11,10 @@ class RoundedNavigationController: UINavigationController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.navigationBar.prefersLargeTitles = true
+    navigationBar.prefersLargeTitles = true
     if let descriptor = UIFont.systemFont(ofSize: 34, weight: .bold).fontDescriptor.withDesign(.rounded) {
       let font = UIFont(descriptor: descriptor, size: 34)
-      self.navigationBar.largeTitleTextAttributes = [.font: font]
+      navigationBar.largeTitleTextAttributes = [.font: font]
     }
   }
 }

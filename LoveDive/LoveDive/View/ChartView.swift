@@ -213,12 +213,12 @@ struct ChartView: View {
   var pictureView: some View {
     HStack {
       if !photosModel.loadedImages.isEmpty {
-          ForEach(photosModel.loadedImages) { mediafile in
-            mediafile.image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .padding()
-          }
+        ForEach(photosModel.loadedImages) { mediafile in
+          mediafile.image
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .padding()
+        }
       }
     }
   }

@@ -5,7 +5,6 @@
 //  Created by Nick Liu on 2023/6/14.
 //
 
-import Alamofire
 import MapKit
 import UIKit
 
@@ -14,68 +13,61 @@ import UIKit
 class TideViewController: UIViewController, MKMapViewDelegate {
 
   var mapView = MKMapView()
-  var diveSites: [[String: Any]] = []
-  lazy var collectionView = UICollectionView() // Must be initialized with a non-nil layout parameter
+  let containerView = UIView()
+  lazy var collectionView: UICollectionView = {
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    collectionView.register(TideCell.self, forCellWithReuseIdentifier: TideCell.reuseIdentifier)
+    return collectionView
+  }() // Must be initialized with a non-nil layout parameter
 
-  var locations = [Location]()
+  let regionRadius: CLLocationDistance = 100
 
-  let regionRadius: CLLocationDistance = 1000
-
+  let divingSiteModel = DivingSiteModel()
   let networkManager = NetworkManager()
+  let locationManager = LocationManager()
   var weatherData = [WeatherHour]()
+  var locations = [Location]()
+  var containerOriginalCenter = CGPointZero
+  var containerDownOffset = CGFloat()
+  var containerUp = CGPointZero
+  var containerDown = CGPointZero
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMapView()
     setupCollectionView()
-    setupUI()
-    decodeDivingGeoJSON()
+    configureCompositionalLayout()
+    DispatchQueue.global().async {
+      self.divingSiteModel.decodeDivingGeoJSON()
+    }
     networkManager.delegate = self
+    getCurrentLocation()
+
   }
 
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    containerDownOffset = 100
+    containerUp = containerView.center
+    print(containerView.center)
+    containerDown = CGPoint(x: containerView.center.x ,y: containerView.center.y + containerDownOffset)
+  }
 
-  func decodeDivingGeoJSON() {
-    guard let geoJSONURL = Bundle.main.url(forResource: "TaiwanDivingSite", withExtension: "geojson") else {
-      print("Failed to load GeoJSON file")
-      return
-    }
-
-    do {
-      let data = try Data(contentsOf: geoJSONURL)
-      let geoJSON = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-      guard let features = geoJSON["features"] as? [[String: Any]] else { return }
-
-      for feature in features {
-        guard
-          let geometry = feature["geometry"] as? [String: Any],
-          let properties = feature["properties"] as? [String: Any],
-          let coordinates = geometry["coordinates"] as? [Double],
-          let name = properties["name"] as? String
-        else {
-          continue
+  func getCurrentLocation() {
+    locationManager.getUserLocation { [weak self] location in
+      DispatchQueue.main.async {
+        guard let self = self else {
+          return
         }
-
-        let longitude = coordinates[0]
-        let latitude = coordinates[1]
-        let location = Location(name: name, latitude: latitude, longitude: longitude)
-        locations.append(location)
+        self.mapView.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 5)), animated: true)
+        self.mapView.showsUserLocation = true
       }
-
-    } catch {
-      print("Failed to parse GeoJSON file: \(error)")
     }
-    for location in locations {
-      let annotation = MKPointAnnotation()
-      annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-      annotation.title = location.name
-      mapView.addAnnotation(annotation)
-    }
-
-    collectionView.reloadData()
   }
 
   func setupMapView() {
     mapView = MKMapView()
+    mapView.showsCompass = true
     mapView.delegate = self
     mapView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(mapView)
@@ -84,8 +76,20 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       mapView.topAnchor.constraint(equalTo: view.topAnchor),
       mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      mapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.75),
+      mapView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
     ])
+  }
+
+  func addAnnotation() {
+    for location in locations {
+      DispatchQueue.main.async {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        annotation.title = location.name
+        self.mapView.addAnnotation(annotation)
+        self.collectionView.reloadData()
+      }
+    }
   }
 
   func centerMapOnLocation(location: CLLocation) {
@@ -114,37 +118,88 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
 extension TideViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-  func setupCollectionView() {
-    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalHeight(1.0))
-    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-    // Create a group
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(100))
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-    // Create a section
-    let section = NSCollectionLayoutSection(group: group)
-    section.orthogonalScrollingBehavior = .groupPagingCentered
-//    section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-
-    // Create a layout
-    let layout = UICollectionViewCompositionalLayout(section: section)
-    collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    collectionView.register(TideCell.self, forCellWithReuseIdentifier: TideCell.reuseIdentifier)
+  func configureCompositionalLayout() {
+    let layout = UICollectionViewCompositionalLayout(section: AppLayouts.weatherSection())
+    collectionView.setCollectionViewLayout(layout, animated: true)
   }
 
-  func setupUI() {
-    view.addSubview(collectionView)
+  func setupCollectionView() {
+
+    let handleView = UIView()
+    let handleTriggerView = UIView()
+    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+    handleTriggerView.addGestureRecognizer(panGesture)
+    handleView.backgroundColor = .paleGray
+    handleView.isUserInteractionEnabled = false
+    handleView.translatesAutoresizingMaskIntoConstraints = false
+    handleTriggerView.translatesAutoresizingMaskIntoConstraints = false
+
+    handleView.layer.cornerRadius = 2.5
+
+    view.addSubview(containerView)
+    containerView.addSubview(collectionView)
+    containerView.layer.cornerRadius = 20
+    containerView.backgroundColor = .white
+
+    containerView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    collectionView.backgroundColor = .clear
 
     NSLayoutConstraint.activate([
-      collectionView.heightAnchor.constraint(equalToConstant: 100),
+      containerView.heightAnchor.constraint(equalToConstant: 220),
+      containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20),
+
+      collectionView.heightAnchor.constraint(equalToConstant: 180),
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
+
+    handleTriggerView.addSubview(handleView)
+    containerView.addSubview(handleTriggerView)
+
+    NSLayoutConstraint.activate([
+      handleView.topAnchor.constraint(equalTo: handleTriggerView.topAnchor),
+      handleView.centerXAnchor.constraint(equalTo: handleTriggerView.centerXAnchor),
+      handleView.widthAnchor.constraint(equalToConstant: 48),
+      handleView.heightAnchor.constraint(equalToConstant: 5),
+
+      handleTriggerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+      handleTriggerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+      handleTriggerView.widthAnchor.constraint(equalToConstant: 60),
+      handleTriggerView.heightAnchor.constraint(equalToConstant: 60),
+
+    ])
+
+  }
+
+  @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+    let velocity = sender.velocity(in: view)
+    let translation = sender.translation(in: view)
+
+    if sender.state == .began {
+      containerOriginalCenter = containerView.center
+      print("Gesture began\(containerOriginalCenter)")
+    } else if sender.state == .changed {
+      let cappedTranslationY = max(-3, min(100, translation.y))
+      containerView.center = CGPoint(x: containerOriginalCenter.x, y: containerOriginalCenter.y + cappedTranslationY)
+      print("Gesture is changing")
+    } else if sender.state == .ended {
+      if velocity.y > 0 {
+         UIView.animate(withDuration: 0.5) {
+           self.containerView.center = self.containerDown
+         }
+      } else {
+         UIView.animate(withDuration: 0.5) {
+           self.containerView.center = self.containerUp
+         }
+      }
+    }
   }
 
   // Collection view data source methods
@@ -181,6 +236,11 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
     CGSize(width: 120, height: 100)
+    
+  }
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    scrollView.contentOffset.y = 0
   }
 
 }

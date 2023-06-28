@@ -4,13 +4,12 @@
 //
 //  Created by Nick Liu on 2023/6/26.
 //
-import UIKit
 import SwiftUI
-import Combine
+import UIKit
 
 class BreatheViewController: UIViewController {
 
-  private var cancellables = Set<AnyCancellable>()
+  // MARK: Internal
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,27 +30,22 @@ class BreatheViewController: UIViewController {
       hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+      hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
     ])
 
     // Add the hosting controller as a child view controller so it participates in the view controller lifecycle
-    self.addChild(hostingController)
+    addChild(hostingController)
     hostingController.didMove(toParent: self)
-
-    // Listen for changes to the `addNewTimer` property of the BreatheModel
-    breatheModel.$addNewTimer.sink { [weak self] addNewTimer in
-      self?.tabBarController?.tabBar.isHidden = addNewTimer
-    }.store(in: &cancellables)
 
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.navigationController?.navigationBar.prefersLargeTitles = true
-    self.navigationItem.title = "Breathe Timer"
+    navigationController?.navigationBar.prefersLargeTitles = true
+    navigationItem.title = "Breathe Timer"
     if let descriptor = UIFont.systemFont(ofSize: 34, weight: .bold).fontDescriptor.withDesign(.rounded) {
       let font = UIFont(descriptor: descriptor, size: 34)
-      self.navigationController?.navigationBar.largeTitleTextAttributes = [.font: font]
+      navigationController?.navigationBar.largeTitleTextAttributes = [.font: font]
     }
   }
 

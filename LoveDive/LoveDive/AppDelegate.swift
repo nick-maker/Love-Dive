@@ -6,8 +6,10 @@
 //
 
 import IQKeyboardManagerSwift
-import UIKit
 import SwiftUI
+import UIKit
+
+// MARK: - BreatheApp
 
 @main
 struct BreatheApp: App {
@@ -15,16 +17,16 @@ struct BreatheApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
   @StateObject var breatheModel: BreatheModel = .init()
   @StateObject var audioModel = AudioModel()
-  //Mark: Scene Phase
+  // Mark: Scene Phase
   @Environment(\.scenePhase) var phase
-  //Mark: Storing last time stamp
-  @State var lastActiveTimeStamp: Date = Date()
+  // Mark: Storing last time stamp
+  @State var lastActiveTimeStamp = Date()
+
   var body: some Scene {
     WindowGroup {
       BreatheContentView()
         .environmentObject(breatheModel)
         .environmentObject(audioModel)
-
     }
     .onChange(of: phase) { newValue in
       if breatheModel.isStarted {
@@ -32,7 +34,7 @@ struct BreatheApp: App {
           lastActiveTimeStamp = Date()
         }
         if newValue == .active {
-          //Mark: finding the difference
+          // Mark: finding the difference
           let currentTimeStampDiff = Date().timeIntervalSince(lastActiveTimeStamp)
           if breatheModel.totalSeconds - Int(currentTimeStampDiff) <= 0 {
             breatheModel.isStarted = false
@@ -47,6 +49,8 @@ struct BreatheApp: App {
     }
   }
 }
+
+// MARK: - AppDelegate
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

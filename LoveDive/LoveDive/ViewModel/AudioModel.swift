@@ -5,8 +5,8 @@
 //  Created by Nick Liu on 2023/6/27.
 //
 
-import Foundation
 import AVKit
+import Foundation
 
 class AudioModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
 
@@ -19,8 +19,8 @@ class AudioModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
 
     do {
-      try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-      try AVAudioSession.sharedInstance().setActive(true)
+      try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default) // play sound even when silent mode
+      try AVAudioSession.sharedInstance().setActive(true) // play sound even when interrupted
       player = try AVAudioPlayer(contentsOf: url)
       player?.delegate = self
       player?.play()
@@ -33,7 +33,7 @@ class AudioModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     player?.stop()
   }
 
-  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+  func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully flag: Bool) {
     if flag {
       startPlayer(track: "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy")
     }

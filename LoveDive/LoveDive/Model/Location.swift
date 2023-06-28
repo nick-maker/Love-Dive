@@ -8,7 +8,10 @@
 import Foundation
 
 struct Location {
+
+  let id = UUID().uuidString
   let name: String
   let latitude: Double
   let longitude: Double
+
 }

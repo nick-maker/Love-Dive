@@ -46,5 +46,4 @@ extension Color {
     Color(red: 224 / 253, green: 224 / 253, blue: 224 / 253)
   }
 
-
 }

@@ -25,15 +25,15 @@ class TideCell: UICollectionViewCell {
 
   static let reuseIdentifier = "\(TideCell.self)"
 
-  var locationLabel = UILabel()
-  var airTemptImage = UIImage(systemName: "cloud.fill")
-  var airTemptText = UILabel()
-  var waterTemptImage = UIImage(systemName: "thermometer.and.liquid.waves")
-  var waterTemptText = UILabel()
-  var waveHeightImage = UIImage(systemName: "water.waves")
-  var waveHeightText = UILabel()
-  var windSpeedImage = UIImage(systemName: "wind")
-  var windSpeedText = UILabel()
+  let locationLabel = UILabel()
+  let airTemptImage = UIImage(systemName: "cloud.fill")
+  let airTemptText = UILabel()
+  let waterTemptImage = UIImage(systemName: "thermometer.and.liquid.waves")
+  let waterTemptText = UILabel()
+  let waveHeightImage = UIImage(systemName: "water.waves")
+  let waveHeightText = UILabel()
+  let windSpeedImage = UIImage(systemName: "wind")
+  let windSpeedText = UILabel()
 
   let stackView = UIStackView()
 
