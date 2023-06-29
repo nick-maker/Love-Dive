@@ -24,7 +24,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   let divingSiteModel = DivingSiteModel()
   let networkManager = NetworkManager()
   let locationManager = LocationManager()
-  //  var weatherData = [WeatherHour]()
+  var weatherData = [WeatherHour]()
   var locations = [Location]()
   var annotations: [MKPointAnnotation] = []
   var containerOriginalCenter = CGPointZero
@@ -87,6 +87,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotation.title = location.name
       mapView.addAnnotation(annotation)
       annotations.append(annotation)
+      networkManager.getWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
   }
 
@@ -101,7 +102,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     ]
     let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     annotations = visibleAnnotations.compactMap { $0 as? MKPointAnnotation }
-
+    updateWeatherDataForVisibleAnnotations()
     // Reload the collection view data
     collectionView.reloadData()
   }
@@ -206,7 +207,6 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   // Collection view data source methods
   func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-    let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     return annotations.count
   }
 
@@ -216,21 +216,23 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
         .dequeueReusableCell(withReuseIdentifier: TideCell.reuseIdentifier, for: indexPath) as? TideCell
     else { fatalError("Cannot Down casting") }
 
-    let visibleAnnotationsArray = Array(mapView.annotations(in: mapView.visibleMapRect))
-    guard let visibleAnnotationsArrays = mapView.annotations(in: mapView.visibleMapRect).compactMap({ $0 as? MKPointAnnotation }) as? [MKPointAnnotation] else {
-      return cell
-    }
-
     let annotation = annotations[indexPath.row]
     cell.locationLabel.text = annotation.title
 
-    guard let weather = locations[indexPath.row].weather else {
-      return cell
+    let location = locations[indexPath.row]
+    if let weather = location.weather?.first {
+      cell.airTemptText.text = weather.airTemperature.average
+      cell.waterTemptText.text = weather.waterTemperature.average
+      cell.windSpeedText.text = weather.windSpeed.average
+      cell.waveHeightText.text = weather.waveHeight.average
+    } else {
+      // Handle the case when there is no weather data available for the location
+      // You can update the cell with placeholder values or handle it as per your requirement
+      cell.airTemptText.text = "N/A"
+      cell.waterTemptText.text = "N/A"
+      cell.windSpeedText.text = "N/A"
+      cell.waveHeightText.text = "N/A"
     }
-    cell.airTemptText.text = locations[indexPath.row].weather?.airTemperature.average
-    cell.waterTemptText.text = weather.waterTemperature.average
-    cell.windSpeedText.text  = weather.windSpeed.average
-    cell.waveHeightText.text = weather.waveHeight.average
 
     return cell
   }
@@ -287,17 +289,28 @@ extension TideViewController: WeatherDelegate {
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
   }
 
-  func manager(didGet weatherData: [WeatherHour]) {
-
-    for (index, weatherHour) in weatherData.enumerated() {
-      locations[index].weather = weatherHour
+  func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation) {
+    guard let annotationIndex = annotations.firstIndex(where: { $0 === annotation }) else {
+      return
     }
+    locations[annotationIndex].weather = weatherData
+    
     DispatchQueue.main.async {
       self.collectionView.reloadData()
     }
   }
 
+  func updateWeatherDataForVisibleAnnotations() {
+    
+    let visibleMapRect = mapView.visibleMapRect
+    let visibleAnnotations = mapView.annotations(in: visibleMapRect)
+    
+    for annotation in visibleAnnotations {
+      if let pointAnnotation = annotation as? MKPointAnnotation {
+        let key = "\(pointAnnotation.coordinate.latitude),\(pointAnnotation.coordinate.longitude)"
+        networkManager.getWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
+      }
+    }
+  }
+
 }
-
-
-//networkManager.getWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude)

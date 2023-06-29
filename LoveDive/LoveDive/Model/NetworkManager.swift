@@ -7,6 +7,7 @@
 
 import Alamofire
 import Foundation
+import MapKit
 
 // MARK: - NetworkManager
 
@@ -16,10 +17,10 @@ class NetworkManager {
 
   weak var delegate: WeatherDelegate?
 
-  func getWeatherData(lat: Double, lng: Double) {
+  func getWeatherData(lat: Double, lng: Double, forAnnotation annotation: MKAnnotation) {
     let key = "\(lat),\(lng)"
     if let cachedData = cache[key], Date().timeIntervalSince(cachedData.timestamp) < 3600 {
-      delegate?.manager(didGet: cachedData.weather)
+      delegate?.manager(didGet: cachedData.weather, forAnnotation: annotation)
     } else {
       let currentTime = Date()
 
@@ -52,7 +53,7 @@ class NetworkManager {
         .responseDecodable(of: WeatherData.self) { response in
           switch response.result {
           case .success(let value):
-            self.delegate?.manager(didGet: value.hours)
+            self.delegate?.manager(didGet: value.hours, forAnnotation: annotation)
           case .failure(let error):
             print("Error: \(error)")
           }
@@ -69,7 +70,6 @@ class NetworkManager {
 // MARK: - WeatherDelegate
 
 protocol WeatherDelegate: AnyObject {
-
-  func manager(didGet weatherData: [WeatherHour])
-
+    func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation)
 }
+
