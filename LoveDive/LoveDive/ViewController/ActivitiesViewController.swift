@@ -327,14 +327,16 @@ extension ActivitiesViewController {
   }
 }
 
+// MARK: HealthManagerDelegate
+
 extension ActivitiesViewController: HealthManagerDelegate {
 
   func getDepthData(didGet divingData: [DivingLog]) {
-    self.divingLogs = divingData
+    divingLogs = divingData
   }
 
   func getTempData(didGet tempData: [Temperature]) {
-    self.temps = tempData
+    temps = tempData
   }
 
 }

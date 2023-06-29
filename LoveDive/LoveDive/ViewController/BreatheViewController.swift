@@ -9,8 +9,6 @@ import UIKit
 
 class BreatheViewController: UIViewController {
 
-  // MARK: Internal
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -36,7 +34,6 @@ class BreatheViewController: UIViewController {
     // Add the hosting controller as a child view controller so it participates in the view controller lifecycle
     addChild(hostingController)
     hostingController.didMove(toParent: self)
-
   }
 
   override func viewWillAppear(_ animated: Bool) {

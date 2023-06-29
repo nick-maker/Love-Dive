@@ -26,22 +26,22 @@ class TabBarController: UITabBarController {
 
 // MARK: HealthManagerDelegate
 
-extension TabBarController: HealthManagerDelegate {
-
-  func getDepthData(didGet divingData: [DivingLog]) {
-    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
-    let thirdNavController = navigationControllers[2]
-    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
-    activitiesViewController.setupCollectionView()
-    activitiesViewController.divingLogs = divingData
-    activitiesViewController.filterDivingLogs(forMonth: Date())
-  }
-
-  func getTempData(didGet tempData: [Temperature]) {
-    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
-    let thirdNavController = navigationControllers[2]
-    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
-    activitiesViewController.temps = tempData
-  }
-
-}
+// extension TabBarController: HealthManagerDelegate {
+//
+//  func getDepthData(didGet divingData: [DivingLog]) {
+//    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
+//    let thirdNavController = navigationControllers[2]
+//    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
+//    activitiesViewController.setupCollectionView()
+//    activitiesViewController.divingLogs = divingData
+//    activitiesViewController.filterDivingLogs(forMonth: Date())
+//  }
+//
+//  func getTempData(didGet tempData: [Temperature]) {
+//    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
+//    let thirdNavController = navigationControllers[2]
+//    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
+//    activitiesViewController.temps = tempData
+//  }
+//
+// }

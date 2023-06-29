@@ -16,7 +16,7 @@ class NetworkManager {
 
   weak var delegate: WeatherDelegate?
 
-  func getData(lat: Double, lng: Double) {
+  func getWeatherData(lat: Double, lng: Double) {
     let key = "\(lat),\(lng)"
     if let cachedData = cache[key], Date().timeIntervalSince(cachedData.timestamp) < 3600 {
       delegate?.manager(didGet: cachedData.weather)

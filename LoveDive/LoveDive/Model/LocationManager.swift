@@ -5,11 +5,13 @@
 //  Created by Nick Liu on 2023/6/28.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import UIKit
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
+
+  // MARK: Internal
 
   let manager = CLLocationManager()
 
@@ -22,7 +24,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     manager.requestWhenInUseAuthorization()
     manager.delegate = self
     manager.startUpdatingLocation()
-
   }
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -32,13 +33,28 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     manager.stopUpdatingLocation()
   }
 
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    let status = manager.authorizationStatus
+    if status == .denied {
+      displayLocationServicesDeniedAlert()
+    }
+  }
+
+  func locationManager(_: CLLocationManager, didFailWithError _: Error) {
+    // Handle any errors that `CLLocationManager` returns.
+  }
+
+  // MARK: Private
+
+
   private func displayLocationServicesDeniedAlert() {
     let message = String(localized: "Turn On Location Services to Allow Love Dive to Determine Your Location")
-    let alertController = UIAlertController(title: String(localized: "Location Services Are Off"),
-                                            message: message,
-                                            preferredStyle: .alert)
+    let alertController = UIAlertController(
+      title: String(localized: "Location Services Are Off"),
+      message: message,
+      preferredStyle: .alert)
     let settingsButtonTitle = String(localized: "Setting")
-    let openSettingsAction = UIAlertAction(title: settingsButtonTitle, style: .default) { (_) in
+    let openSettingsAction = UIAlertAction(title: settingsButtonTitle, style: .default) { _ in
       if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
         // Take the user to the Settings app to change permissions.
         UIApplication.shared.open(settingsURL, options: [:]) { _ in
@@ -56,16 +72,4 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     alertController.addAction(openSettingsAction)
     errorPresentationTarget?.present(alertController, animated: true, completion: nil)
   }
-
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    let status = manager.authorizationStatus
-    if status == .denied {
-      displayLocationServicesDeniedAlert()
-    }
-  }
-
-  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    // Handle any errors that `CLLocationManager` returns.
-  }
-
 }

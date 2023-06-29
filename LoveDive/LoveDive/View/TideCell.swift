@@ -67,11 +67,11 @@ class TideCell: UICollectionViewCell {
     // Setup constraints
     NSLayoutConstraint.activate([
       locationLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      locationLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+      locationLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
 
-      stackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 8),
-      stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+      stackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
+      stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
     ])
   }
 

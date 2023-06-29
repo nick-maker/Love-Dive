@@ -12,9 +12,10 @@ import SwiftUI
 
 struct BreatheView: View {
 
+  // MARK: Internal
+
   @EnvironmentObject var breatheModel: BreatheModel
   @EnvironmentObject var audioModel: AudioModel
-  @State private var isPresentingNewTimerView = false
 
   var body: some View {
     VStack {
@@ -92,7 +93,6 @@ struct BreatheView: View {
               .shadow(color: .pacificBlue, radius: 20, x: 0, y: 0)
           }
           .padding(.bottom, 20)
-
         }
         .onTapGesture {
           //          breatheModel.progress = 0.5
@@ -101,12 +101,12 @@ struct BreatheView: View {
       }
     }
     .sheet(isPresented: $isPresentingNewTimerView) {
-            NewTimerView()
-                .environmentObject(breatheModel)
-                .environmentObject(audioModel)
-                .presentationDetents([.fraction(0.35)])
-                .presentationCornerRadius(20)
-        }
+      NewTimerView()
+        .environmentObject(breatheModel)
+        .environmentObject(audioModel)
+        .presentationDetents([.fraction(0.35)])
+        .presentationCornerRadius(20)
+    }
     .padding()
 //    .background {
 //      (Color.white)
@@ -123,13 +123,13 @@ struct BreatheView: View {
 //          }
 //          .ignoresSafeArea()
 //
-////        NewTimerView()
-////          .frame(maxHeight: .infinity, alignment: .bottom)
-////          .offset(y: breatheModel.addNewTimer ? 0 : 500)
-////        if breatheModel.addNewTimer {
-////          NewTimerView()
-////            .transition(.move(edge: .bottom))
-////        }
+    ////        NewTimerView()
+    ////          .frame(maxHeight: .infinity, alignment: .bottom)
+    ////          .offset(y: breatheModel.addNewTimer ? 0 : 500)
+    ////        if breatheModel.addNewTimer {
+    ////          NewTimerView()
+    ////            .transition(.move(edge: .bottom))
+    ////        }
 //      }
 //      .animation(.easeInOut, value: breatheModel.addNewTimer)
 //    })
@@ -221,6 +221,10 @@ struct BreatheView: View {
 //      }
 //    }
 //  }
+
+  // MARK: Private
+
+  @State private var isPresentingNewTimerView = false
 
 }
 
