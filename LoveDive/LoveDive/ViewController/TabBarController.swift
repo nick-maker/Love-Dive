@@ -16,8 +16,8 @@ class TabBarController: UITabBarController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    healthKitManager.delegate = self
-    healthKitManager.requestHealthKitPermissions()
+//    healthKitManager.delegate = self
+//    healthKitManager.requestHealthKitPermissions()
 
     cloudKitVM.getiCloudStatus()
     cloudKitVM.requestPermission()

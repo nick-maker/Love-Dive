@@ -20,6 +20,7 @@ class ActivitiesViewController: UIViewController {
   var filteredDuration = 0.0
   var filteredMaxDepth = 0.0
 
+  let healthKitManager = HealthKitManger()
   let calendarView = UICalendarView()
   var isSelected = false
   var selectedDateComponents: DateComponents?
@@ -66,6 +67,8 @@ class ActivitiesViewController: UIViewController {
     navigationItem.title = "Activities"
     navigationItem.backButtonTitle = ""
     navigationController?.navigationBar.prefersLargeTitles = true
+    healthKitManager.delegate = self
+    healthKitManager.requestHealthKitPermissions()
     setupCollectionView()
     configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
@@ -322,4 +325,16 @@ extension ActivitiesViewController {
     layout.register(SectionDecorationView.self, forDecorationViewOfKind: "SectionBackground")
     collectionView.setCollectionViewLayout(layout, animated: true)
   }
+}
+
+extension ActivitiesViewController: HealthManagerDelegate {
+
+  func getDepthData(didGet divingData: [DivingLog]) {
+    self.divingLogs = divingData
+  }
+
+  func getTempData(didGet tempData: [Temperature]) {
+    self.temps = tempData
+  }
+
 }

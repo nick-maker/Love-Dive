@@ -34,6 +34,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    locationManager.errorPresentationTarget = self
     setupMapView()
     setupCollectionView()
     configureCompositionalLayout()
@@ -42,6 +43,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     }
     networkManager.delegate = self
     getCurrentLocation()
+
 
   }
 
