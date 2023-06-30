@@ -16,7 +16,7 @@ struct ChartView: View {
   // MARK: Internal
   @StateObject var photosModel: PhotosPickerModel = .init()
   @State private var chartColor: Color = .pacificBlue.opacity(0.5)
-  @State var selectedItems: [PhotosPickerItem] = []
+//  @State var selectedItems: [PhotosPickerItem] = []
   @MainActor
   private func generateSnapshot(viewSize: CGSize) {
     let renderer = ImageRenderer(content: snapshotView.frame(width: viewSize.width, alignment: .center))
@@ -30,6 +30,7 @@ struct ChartView: View {
   var data: [DivingEntry]
   var maxDepth = 0.0
   var temp = 0.0
+  var imagePath: String?
   @State var viewSize = CGSize()
   @State var generatedImage: Image?
 
@@ -73,7 +74,13 @@ struct ChartView: View {
       HStack {
         PhotosPicker(selection: $photosModel.selectedPhoto, matching: .any(of: [.images])) {
           Image(systemName: "plus")
-        }.onChange(of: photosModel.loadedImages) { _ in
+        }
+        .onChange(of: photosModel.selectedPhoto) { newValue in
+          if let newValue = newValue {
+            photosModel.processPhoto(photo: newValue, divingDate: data.first!.time)
+          }
+        }
+        .onChange(of: photosModel.loadedImages) { _ in
           generateSnapshot(viewSize: viewSize)
         }
         ShareLink(
@@ -218,6 +225,10 @@ struct ChartView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .padding()
+        }
+      } else {
+        if let filePath = data.first?.time.description {
+          photosModel.getImageFromFileManager(filePath: filePath)
         }
       }
     }

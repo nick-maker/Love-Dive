@@ -36,12 +36,12 @@ struct LoveDive_WidgetLiveActivity: Widget {
 
           ZStack {
             Circle()
-              .stroke(Color.white.opacity(0.5), lineWidth: 5)
+              .stroke(Color.darkBlue, lineWidth: 5)
               .rotationEffect(.init(degrees: -90))
               .padding(12)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue, lineWidth: 5)
+              .stroke(Color.pacificBlue.gradient, lineWidth: 5)
               .rotationEffect(.init(degrees: -90))
               .padding(12)
           }
@@ -61,6 +61,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
       .foregroundColor(.white)
       .frame(height: 60)
       .padding(14)
+      .background(Color.black)
 
     } dynamicIsland: { context in
       DynamicIsland {
@@ -83,7 +84,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(8)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue, lineWidth: 5)
+              .stroke(Color.pacificBlue.gradient, lineWidth: 5)
               .rotationEffect(.init(degrees: -90))
               .padding(8)
           }
@@ -113,7 +114,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(2)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue, lineWidth: 3)
+              .stroke(Color.pacificBlue.gradient, lineWidth: 3)
               .rotationEffect(.init(degrees: -90))
               .padding(2)
           }

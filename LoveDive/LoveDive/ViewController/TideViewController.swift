@@ -87,7 +87,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotation.title = location.name
       mapView.addAnnotation(annotation)
       annotations.append(annotation)
-//      networkManager.getWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
+      networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
   }
 
@@ -230,10 +230,10 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     } else {
       // Handle the case when there is no weather data available for the location
       // You can update the cell with placeholder values or handle it as per your requirement
-      cell.airTemptText.text = "N/A"
-      cell.waterTemptText.text = "N/A"
-      cell.windSpeedText.text = "N/A"
-      cell.waveHeightText.text = "N/A"
+      cell.airTemptText.text = "-"
+      cell.waterTemptText.text = "-"
+      cell.windSpeedText.text = "-"
+      cell.waveHeightText.text = "-"
     }
 
     return cell
@@ -311,7 +311,7 @@ extension TideViewController: WeatherDelegate {
     for annotation in visibleAnnotations {
       if let pointAnnotation = annotation as? MKPointAnnotation {
         let key = "\(pointAnnotation.coordinate.latitude),\(pointAnnotation.coordinate.longitude)"
-//        networkManager.getWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
+        networkManager.getCurrentWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
       }
     }
   }

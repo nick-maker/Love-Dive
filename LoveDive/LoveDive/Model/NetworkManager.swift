@@ -6,7 +6,6 @@
 //
 
 import Alamofire
-import Foundation
 import MapKit
 
 // MARK: - NetworkManager
@@ -17,17 +16,20 @@ class NetworkManager {
 
   weak var delegate: WeatherDelegate?
 
-  func getWeatherData(lat: Double, lng: Double, forAnnotation annotation: MKAnnotation) {
+  func getCurrentWeatherData(lat: Double, lng: Double, forAnnotation annotation: MKAnnotation) {
     let key = "\(lat),\(lng)"
-    if let cachedData = cache[key], Date().timeIntervalSince(cachedData.timestamp) < 3600 {
-      delegate?.manager(didGet: cachedData.weather, forAnnotation: annotation)
+    if let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
+       let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
+       Date().timeIntervalSince(weatherCache.timestamp) < 3600,
+       !weatherCache.weather.isEmpty {
+          delegate?.manager(didGet: weatherCache.weather, forAnnotation: annotation)
     } else {
       let currentTime = Date()
 
       let formatter = DateFormatter()
       formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-      formatter.locale = Locale(identifier: "en_US_POSIX")
-      formatter.timeZone = TimeZone(secondsFromGMT: 0)
+      formatter.locale = .current
+      formatter.timeZone = .current
 
       let parameters = [
         "airTemperature",
@@ -54,16 +56,26 @@ class NetworkManager {
           switch response.result {
           case .success(let value):
             self.delegate?.manager(didGet: value.hours, forAnnotation: annotation)
+            // Create the WeatherCache object
+            if !value.hours.isEmpty {
+              let weatherCache = WeatherCache(timestamp: Date(), weather: value.hours)
+
+              // Encode the WeatherCache object to Data
+              if let encodedCacheData = try? JSONEncoder().encode(weatherCache) {
+                // Save the encoded Data to UserDefaults
+                UserDefaults.standard.set(encodedCacheData, forKey: key)
+              }
+            }
           case .failure(let error):
             print("Error: \(error)")
           }
         }
     }
   }
-
-  // MARK: Private
-
-  private var cache: [String: WeatherCache] = [:]
+  
+  //  // MARK: Private
+  //
+  //  private var cache: [String: WeatherCache] = [:]
 
 }
 

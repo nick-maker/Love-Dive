@@ -86,7 +86,7 @@ class BreatheModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate
     let content = UNMutableNotificationContent()
     content.title = "Love Dive"
     content.subtitle = "Finished Breathing"
-    content.sound = UNNotificationSound.default
+    content.sound = UNNotificationSound.defaultCritical
 
     let request = UNNotificationRequest(
       identifier: UUID().uuidString,

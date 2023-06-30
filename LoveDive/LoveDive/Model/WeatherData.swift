@@ -9,13 +9,13 @@ import Foundation
 
 // MARK: - WeatherData
 
-struct WeatherData: Decodable {
+struct WeatherData: Codable {
   let hours: [WeatherHour]
 }
 
 // MARK: - WeatherCache
 
-struct WeatherCache {
+struct WeatherCache: Codable {
   let timestamp: Date
   let weather: [WeatherHour]
 }
@@ -23,7 +23,7 @@ struct WeatherCache {
 // MARK: - WeatherHour
 
 // Structure for each hour of data
-struct WeatherHour: Decodable {
+struct WeatherHour: Codable {
   let time: String
   let airTemperature: TemperatureData
   let waterTemperature: TemperatureData
@@ -34,7 +34,7 @@ struct WeatherHour: Decodable {
 // MARK: - TemperatureData
 
 // Structure for temperature data
-struct TemperatureData: Decodable {
+struct TemperatureData: Codable {
   let noaa: Double?
   let sg: Double?
   let meto: Double?
@@ -50,7 +50,7 @@ struct TemperatureData: Decodable {
 // MARK: - WaveHeightData
 
 // Structure for wave height data
-struct WaveHeightData: Decodable {
+struct WaveHeightData: Codable {
   let icon: Double?
   let meteo: Double?
   let noaa: Double?
@@ -67,7 +67,7 @@ struct WaveHeightData: Decodable {
 // MARK: - WindSpeedData
 
 // Structure for wind speed data
-struct WindSpeedData: Decodable {
+struct WindSpeedData: Codable {
   let icon: Double?
   let noaa: Double?
   let sg: Double?

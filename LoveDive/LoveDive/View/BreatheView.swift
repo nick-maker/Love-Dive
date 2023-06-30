@@ -71,6 +71,7 @@ struct BreatheView: View {
           .padding(30)
           .frame(height: proxy.size.width)
           .rotationEffect(.init(degrees: -90))
+          .animation(.linear(duration: 1), value: breatheModel.progress)
           .animation(.easeInOut, value: breatheModel.progress)
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 

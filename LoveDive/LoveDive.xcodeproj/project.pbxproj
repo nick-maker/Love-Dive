@@ -61,6 +61,7 @@
 		06AFC0462A4EB90F007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
 		06AFC0482A4EC466007CB1E6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0601463D2A3AEA79003001EE /* Extension+UIColor.swift */; };
 		06AFC04C2A4EE328007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
+		06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC04D2A4F456B007CB1E6 /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
+		06AFC04D2A4F456B007CB1E6 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				067833D02A39D9FD000642F2 /* LoveDive.entitlements */,
 				067833BC2A39D8B5000642F2 /* AppDelegate.swift */,
 				067833BE2A39D8B5000642F2 /* SceneDelegate.swift */,
+				06AFC04F2A4F4579007CB1E6 /* Helper */,
 				0681DC5E2A3CA51200BCC367 /* Extension */,
 				064F76452A49743B003DC830 /* ViewModel */,
 				0681DC5D2A3CA4F500BCC367 /* Model */,
@@ -296,6 +299,14 @@
 				0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		06AFC04F2A4F4579007CB1E6 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				06AFC04D2A4F456B007CB1E6 /* FileManager.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +465,7 @@
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */,
 				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
+				06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
 				063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */,
 				0681DC6D2A3EE2BF00BCC367 /* DiveCell.swift in Sources */,
