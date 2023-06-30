@@ -8,14 +8,14 @@
 import Foundation
 
 struct Location: Identifiable, Equatable {
-  
+
   static func == (lhs: Location, rhs: Location) -> Bool {
-    return lhs.id == rhs.id
-    && lhs.name == rhs.name
-    && lhs.latitude == rhs.latitude
-    && lhs.longitude == rhs.longitude
+    lhs.id == rhs.id
+      && lhs.name == rhs.name
+      && lhs.latitude == rhs.latitude
+      && lhs.longitude == rhs.longitude
   }
-  
+
   let id = UUID().uuidString
   let name: String
   let latitude: Double

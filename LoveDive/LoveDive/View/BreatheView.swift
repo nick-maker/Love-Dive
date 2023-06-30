@@ -5,6 +5,7 @@
 //  Created by Nick Liu on 2023/6/26.
 //
 
+import ActivityKit
 import AVFoundation
 import SwiftUI
 
@@ -13,7 +14,7 @@ import SwiftUI
 struct BreatheView: View {
 
   // MARK: Internal
-
+  @State private var activity: Activity<TimerAttributes>? = nil
   @EnvironmentObject var breatheModel: BreatheModel
   @EnvironmentObject var audioModel: AudioModel
 
@@ -58,7 +59,8 @@ struct BreatheView: View {
                 })
                 .frame(width: size.width, height: size.height, alignment: .center)
                 .offset(x: size.height / 2)
-                .rotationEffect(.init(degrees: breatheModel.progress * 360))
+                .rotationEffect(.init(degrees: Double(breatheModel.progress * 360)))
+
             }
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
@@ -75,6 +77,7 @@ struct BreatheView: View {
           Button {
             if breatheModel.isStarted {
               breatheModel.stopTimer()
+              stopActivity()
               audioModel.stopPlayer()
               UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             } else {
@@ -136,14 +139,17 @@ struct BreatheView: View {
     .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
       if breatheModel.isStarted {
         breatheModel.updateTimer()
+        updateActivity()
       }
       if breatheModel.isFinished {
         audioModel.stopPlayer()
+        stopActivity()
       }
     }
     .alert("Congratulations",isPresented: $breatheModel.isFinished) {
       Button("Start New", role: .cancel) {
         breatheModel.stopTimer()
+
         breatheModel.addNewTimer = true
       }
       Button("Close", role: .destructive) {
@@ -187,6 +193,7 @@ struct BreatheView: View {
         breatheModel.startTimer()
         isPresentingNewTimerView = false
         audioModel.startPlayer(track: "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy")
+        startActivity()
       } label: {
         Text("Start")
           .font(.title3)
@@ -212,15 +219,34 @@ struct BreatheView: View {
     .frame(maxHeight: .infinity, alignment: .bottom)
   }
 
-  // Mark: reusable context menu options
-//  @ViewBuilder
-//  func contextMenuOptions(maxValue: Int, hint: String, onClick: @escaping (Int) -> Void) -> some View {
-//    ForEach(0...maxValue, id: \.self) { value in
-//      Button("\(value) \(hint)") {
-//        onClick(value)
-//      }
-//    }
-//  }
+  func startActivity() {
+    let attributes = TimerAttributes(timerName: "Breathe Timer")
+    let state = TimerAttributes.TimerStatus(endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)), progress: breatheModel.progress)
+    let content = ActivityContent<TimerAttributes.ContentState>(state: state, staleDate: nil)
+
+    activity = try? Activity<TimerAttributes>.request(attributes: attributes, content: content, pushType: .token)
+  }
+
+  func stopActivity() {
+    let state = TimerAttributes.TimerStatus(endTime: Date()...Date(), progress: breatheModel.progress)
+    let content = ActivityContent<TimerAttributes.ContentState>(state: state, staleDate: nil)
+
+    Task {
+      await activity?.end(content, dismissalPolicy: .immediate)
+    }
+  }
+
+  func updateActivity() {
+    let state = TimerAttributes.TimerStatus(endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)), progress: breatheModel.progress)
+    let content = ActivityContent<TimerAttributes.ContentState>(state: state, staleDate: nil)
+
+    // Ensure that the activity has been started before trying to update its content.
+    if activity != nil {
+      Task {
+        await activity?.update(content)
+      }
+    }
+  }
 
   // MARK: Private
 

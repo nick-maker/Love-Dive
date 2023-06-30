@@ -41,6 +41,12 @@
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
 		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
 		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
+		068034242A4DCA4B004DF9C3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064F766E2A4DC600003DC830 /* WidgetKit.framework */; };
+		068034252A4DCA4B004DF9C3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064F76702A4DC600003DC830 /* SwiftUI.framework */; };
+		068034282A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034272A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift */; };
+		0680342C2A4DCA4B004DF9C3 /* LoveDive_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680342B2A4DCA4B004DF9C3 /* LoveDive_Widget.swift */; };
+		0680342E2A4DCA4C004DF9C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0680342D2A4DCA4C004DF9C3 /* Assets.xcassets */; };
+		068034322A4DCA4C004DF9C3 /* LoveDive WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 068034232A4DCA4B004DF9C3 /* LoveDive WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC5B2A3C833E00BCC367 /* WeatherData.swift */; };
 		0681DC622A3D9F8E00BCC367 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */; };
 		0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC652A3DD1B800BCC367 /* DivingLog.swift */; };
@@ -52,7 +58,34 @@
 		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
 		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
+		06AFC0462A4EB90F007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
+		06AFC0482A4EC466007CB1E6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0601463D2A3AEA79003001EE /* Extension+UIColor.swift */; };
+		06AFC04C2A4EE328007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		068034302A4DCA4C004DF9C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 067833B12A39D8B5000642F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 068034222A4DCA4B004DF9C3;
+			remoteInfo = "LoveDive WidgetExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		068034332A4DCA4C004DF9C3 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				068034322A4DCA4C004DF9C3 /* LoveDive WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0601463D2A3AEA79003001EE /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -79,6 +112,8 @@
 		064F765F2A4ACE81003DC830 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		064F76612A4B10D4003DC830 /* DivingSiteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingSiteModel.swift; sourceTree = "<group>"; };
 		064F76632A4B42A1003DC830 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		064F766E2A4DC600003DC830 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		064F76702A4DC600003DC830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +124,12 @@
 		067833CA2A39D8B6000642F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
 		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		068034232A4DCA4B004DF9C3 /* LoveDive WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LoveDive WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		068034272A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveDive_WidgetBundle.swift; sourceTree = "<group>"; };
+		068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAttributes.swift; sourceTree = "<group>"; };
+		0680342B2A4DCA4B004DF9C3 /* LoveDive_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveDive_Widget.swift; sourceTree = "<group>"; };
+		0680342D2A4DCA4C004DF9C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0680342F2A4DCA4C004DF9C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0681DC5B2A3C833E00BCC367 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		0681DC652A3DD1B800BCC367 /* DivingLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingLog.swift; sourceTree = "<group>"; };
@@ -114,6 +155,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		068034202A4DCA4B004DF9C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				068034252A4DCA4B004DF9C3 /* SwiftUI.framework in Frameworks */,
+				068034242A4DCA4B004DF9C3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				067833BB2A39D8B5000642F2 /* LoveDive */,
+				068034262A4DCA4B004DF9C3 /* LoveDive Widget */,
 				067833BA2A39D8B5000642F2 /* Products */,
 				067833D52A39E5CB000642F2 /* Frameworks */,
 			);
@@ -141,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				067833B92A39D8B5000642F2 /* LoveDive.app */,
+				068034232A4DCA4B004DF9C3 /* LoveDive WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,8 +221,22 @@
 			isa = PBXGroup;
 			children = (
 				067833D62A39E5CB000642F2 /* Foundation.framework */,
+				064F766E2A4DC600003DC830 /* WidgetKit.framework */,
+				064F76702A4DC600003DC830 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		068034262A4DCA4B004DF9C3 /* LoveDive Widget */ = {
+			isa = PBXGroup;
+			children = (
+				068034272A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift */,
+				068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */,
+				0680342B2A4DCA4B004DF9C3 /* LoveDive_Widget.swift */,
+				0680342D2A4DCA4C004DF9C3 /* Assets.xcassets */,
+				0680342F2A4DCA4C004DF9C3 /* Info.plist */,
+			);
+			path = "LoveDive Widget";
 			sourceTree = "<group>";
 		};
 		0681DC5D2A3CA4F500BCC367 /* Model */ = {
@@ -243,10 +309,12 @@
 				067833B62A39D8B5000642F2 /* Frameworks */,
 				067833B72A39D8B5000642F2 /* Resources */,
 				068240982A3C178D00B69265 /* ShellScript */,
+				068034332A4DCA4C004DF9C3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				068034312A4DCA4C004DF9C3 /* PBXTargetDependency */,
 			);
 			name = LoveDive;
 			packageProductDependencies = (
@@ -257,6 +325,23 @@
 			productName = LoveDive;
 			productReference = 067833B92A39D8B5000642F2 /* LoveDive.app */;
 			productType = "com.apple.product-type.application";
+		};
+		068034222A4DCA4B004DF9C3 /* LoveDive WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 068034362A4DCA4C004DF9C3 /* Build configuration list for PBXNativeTarget "LoveDive WidgetExtension" */;
+			buildPhases = (
+				0680341F2A4DCA4B004DF9C3 /* Sources */,
+				068034202A4DCA4B004DF9C3 /* Frameworks */,
+				068034212A4DCA4B004DF9C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LoveDive WidgetExtension";
+			productName = "LoveDive WidgetExtension";
+			productReference = 068034232A4DCA4B004DF9C3 /* LoveDive WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -269,6 +354,9 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					067833B82A39D8B5000642F2 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					068034222A4DCA4B004DF9C3 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
@@ -293,6 +381,7 @@
 			projectRoot = "";
 			targets = (
 				067833B82A39D8B5000642F2 /* LoveDive */,
+				068034222A4DCA4B004DF9C3 /* LoveDive WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -308,6 +397,14 @@
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
 				064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */,
 				067833C42A39D8B5000642F2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		068034212A4DCA4B004DF9C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0680342E2A4DCA4C004DF9C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,13 +467,33 @@
 				064F76572A4AB862003DC830 /* AudioModel.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
+				06AFC04C2A4EE328007CB1E6 /* TimerAttributes.swift in Sources */,
 				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
 				0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */,
 				063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0680341F2A4DCA4B004DF9C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0680342C2A4DCA4B004DF9C3 /* LoveDive_Widget.swift in Sources */,
+				068034282A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift in Sources */,
+				06AFC0462A4EB90F007CB1E6 /* TimerAttributes.swift in Sources */,
+				06AFC0482A4EC466007CB1E6 /* Extension+UIColor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		068034312A4DCA4C004DF9C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 068034222A4DCA4B004DF9C3 /* LoveDive WidgetExtension */;
+			targetProxy = 068034302A4DCA4C004DF9C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		067833C22A39D8B5000642F2 /* Main.storyboard */ = {
@@ -515,6 +632,7 @@
 		067833CE2A39D8B6000642F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LoveDive/LoveDive.entitlements;
@@ -529,10 +647,10 @@
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Love Dive shares underwater depth and water temperature with HealthKit.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Love Dive would access your current location to check nearby diving sites.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save image.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -553,6 +671,7 @@
 		067833CF2A39D8B6000642F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LoveDive/LoveDive.entitlements;
@@ -567,10 +686,10 @@
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Love Dive shares underwater depth and water temperature with HealthKit.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Love Dive would access your current location to check nearby diving sites.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To save image.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -585,6 +704,62 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		068034342A4DCA4C004DF9C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TY22MAR92C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LoveDive Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "LoveDive Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		068034352A4DCA4C004DF9C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TY22MAR92C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LoveDive Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "LoveDive Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -605,6 +780,15 @@
 			buildConfigurations = (
 				067833CE2A39D8B6000642F2 /* Debug */,
 				067833CF2A39D8B6000642F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		068034362A4DCA4C004DF9C3 /* Build configuration list for PBXNativeTarget "LoveDive WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				068034342A4DCA4C004DF9C3 /* Debug */,
+				068034352A4DCA4C004DF9C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

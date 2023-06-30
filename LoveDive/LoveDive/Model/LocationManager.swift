@@ -46,7 +46,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
   // MARK: Private
 
-
   private func displayLocationServicesDeniedAlert() {
     let message = String(localized: "Turn On Location Services to Allow Love Dive to Determine Your Location")
     let alertController = UIAlertController(

@@ -87,7 +87,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotation.title = location.name
       mapView.addAnnotation(annotation)
       annotations.append(annotation)
-      networkManager.getWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
+//      networkManager.getWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
   }
 
@@ -108,6 +108,8 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   }
 
 }
+
+// MARK: DivingSiteDelegate
 
 extension TideViewController: DivingSiteDelegate {
 
@@ -207,7 +209,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   // Collection view data source methods
   func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-    return annotations.count
+    annotations.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -251,12 +253,14 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    let centerPoint = CGPoint(x: self.collectionView.center.x + scrollView.contentOffset.x,
-                              y: self.collectionView.center.y + scrollView.contentOffset.y)
+    let centerPoint = CGPoint(
+      x: collectionView.center.x + scrollView.contentOffset.x,
+      y: collectionView.center.y + scrollView.contentOffset.y)
 
     // Use the center point to determine the index path of the cell that's currently in the center
-    guard let indexPath = self.collectionView.indexPathForItem(at: centerPoint),
-          let cell = self.collectionView.cellForItem(at: indexPath) as? TideCell else { return }
+    guard
+      let indexPath = collectionView.indexPathForItem(at: centerPoint),
+      let cell = collectionView.cellForItem(at: indexPath) as? TideCell else { return }
 
     // Get the corresponding annotation title
     let annotationTitle = cell.locationLabel.text
@@ -276,7 +280,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
 extension TideViewController: WeatherDelegate {
 
-  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+  func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
     guard let annotation = view.annotation as? MKPointAnnotation else {
       return
     }
@@ -294,21 +298,20 @@ extension TideViewController: WeatherDelegate {
       return
     }
     locations[annotationIndex].weather = weatherData
-    
+
     DispatchQueue.main.async {
       self.collectionView.reloadData()
     }
   }
 
   func updateWeatherDataForVisibleAnnotations() {
-    
     let visibleMapRect = mapView.visibleMapRect
     let visibleAnnotations = mapView.annotations(in: visibleMapRect)
-    
+
     for annotation in visibleAnnotations {
       if let pointAnnotation = annotation as? MKPointAnnotation {
         let key = "\(pointAnnotation.coordinate.latitude),\(pointAnnotation.coordinate.longitude)"
-        networkManager.getWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
+//        networkManager.getWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
       }
     }
   }
