@@ -23,7 +23,8 @@ struct ChartView: View {
     renderer.scale = UIScreen.main.scale
 
     if let image = renderer.uiImage {
-      generatedImage = Image(uiImage: image)
+      let image = Image(uiImage: image)
+      generatedImage = image
     }
   }
 
@@ -58,9 +59,12 @@ struct ChartView: View {
 
   var body: some View {
     GeometryReader { proxy in
+
       List {
-        chartListView
+        content
+          .listRowSeparator(.hidden, edges: .top)
       }
+      .listStyle(.plain)
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
           viewSize = proxy.size
@@ -83,15 +87,19 @@ struct ChartView: View {
         .onChange(of: photosModel.loadedImages) { _ in
           generateSnapshot(viewSize: viewSize)
         }
-        ShareLink(
-          item: generatedImage ?? Image(systemName: ""),
-          preview: SharePreview("Diving Log", image: generatedImage ?? Image(systemName: "")))
-      })
+        if let generatedImage = generatedImage {
+          ShareLink(
+            item: generatedImage,
+            preview:
+              SharePreview("Diving Log",
+                           image: generatedImage ))
+        }
+      }
+    )
     .accentColor(Color.pacificBlue)
   }
 
   var chartListView: some View {
-    ZStack(alignment: .topLeading) {
       VStack(alignment: .leading) {
         titleFigureView
         HStack {
@@ -112,9 +120,8 @@ struct ChartView: View {
             Spacer()
           }
         }
-        pictureView
       }
-    }
+      .padding()
   }
 
   var titleFigureView: some View {
@@ -217,25 +224,39 @@ struct ChartView: View {
     }
   }
 
-  var pictureView: some View {
-    HStack {
-      if !photosModel.loadedImages.isEmpty {
-        ForEach(photosModel.loadedImages) { mediafile in
-          mediafile.image
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .padding()
-        }
-      } else {
-        if let filePath = data.first?.time.description {
-          photosModel.getImageFromFileManager(filePath: filePath)
-        }
-      }
+  @ViewBuilder
+  private var content: some View {
+    if let filePath = data.first?.time.description,
+       (photosModel.getImageFromFileManager(filePath: filePath) != nil) {
+      pictureView
+      chartListView
+    } else {
+      chartListView
     }
   }
 
+  var pictureView: some View {
+    HStack() {
+      if let filePath = data.first?.time.description,
+         let image = photosModel.getImageFromFileManager(filePath: filePath) {
+        image.resizable()
+          .aspectRatio(contentMode: .fill)
+          .aspectRatio(0.75, contentMode: .fill)
+//          .clipped()
+          .cornerRadius(20)
+      }
+    }
+    .frame(width: 340, height: 240)
+    .aspectRatio(0.75, contentMode: .fill)
+    .clipped()
+    .cornerRadius(20)
+    .padding(.horizontal)
+    //    .tabViewStyle(.page)
+  }
+
   var snapshotView: some View {
-    ZStack {
+    VStack {
+      pictureView
       chartListView
     }
     .padding()
@@ -359,6 +380,7 @@ struct ChartView: View {
           time: Date(timeIntervalSince1970: 1641877064),
           depth: 2.1503216349938676),
       ])
+
     }
   }
 }

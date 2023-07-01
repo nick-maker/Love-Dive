@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="-1455"/>
+            <point key="canvasLocation" x="1578" y="-449"/>
         </scene>
         <!--Activities View Controller-->
         <scene sceneID="dPe-de-1y8">
@@ -41,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbq-c0-kaf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="-779"/>
+            <point key="canvasLocation" x="1579" y="294"/>
         </scene>
         <!--Tide View Controller-->
         <scene sceneID="WIK-1o-nBZ">
@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XZ-P1-E3i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="-2157"/>
+            <point key="canvasLocation" x="1578" y="-1132"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0DK-co-JmO">
@@ -73,9 +73,10 @@
                         <color key="selectedImageTintColor" red="0.094117647058823528" green="0.64313725490196072" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="tbS-T8-2aY"/>
-                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="NCS-EE-ycd"/>
-                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="eUn-zf-Git"/>
+                        <segue destination="GLm-fQ-Jnz" kind="relationship" relationship="viewControllers" id="c38-lI-fZH"/>
+                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="1Lg-z8-WQ8"/>
+                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="QyO-pD-1zD"/>
+                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="pby-mT-5Vp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8z2-MW-n9e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -99,7 +100,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jm3-zu-h5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576" y="-2157"/>
+            <point key="canvasLocation" x="532" y="-1132"/>
         </scene>
         <!--Breathe-->
         <scene sceneID="OS6-xA-exX">
@@ -118,7 +119,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pP-qI-zYm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576" y="-1455"/>
+            <point key="canvasLocation" x="517" y="-449"/>
         </scene>
         <!--Activities-->
         <scene sceneID="n9y-vu-jEA">
@@ -137,12 +138,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3XJ-m0-Leg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573" y="-780"/>
+            <point key="canvasLocation" x="532" y="294"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="3cF-Uc-fw9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aBf-jO-BHX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="0j9-IT-KTQ" customClass="ProfileViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fle-YX-0Bq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -153,8 +153,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="xPx-YP-Gtt"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aBf-jO-BHX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579" y="-90"/>
+            <point key="canvasLocation" x="1651" y="-1968"/>
         </scene>
         <!--Profile-->
         <scene sceneID="MsE-YB-2oc">
@@ -173,7 +174,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYF-bf-3Ha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575" y="-91"/>
+            <point key="canvasLocation" x="517" y="-1967"/>
         </scene>
     </scenes>
     <resources>
