@@ -7,14 +7,14 @@
 
 import UIKit
 
-class TideCell: UICollectionViewCell {
+class TideCell: ShadowCollectionViewCell {
 
   // MARK: Lifecycle
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
-    contentView.backgroundColor = UIColor.lightBlue
+    contentView.backgroundColor = .dynamicColor
   }
 
   required init?(coder _: NSCoder) {
@@ -40,7 +40,6 @@ class TideCell: UICollectionViewCell {
   func setupUI() {
     // Setup location label
     locationLabel.translatesAutoresizingMaskIntoConstraints = false
-    locationLabel.textColor = UIColor.pacificBlue
     contentView.addSubview(locationLabel)
     contentView.layer.cornerRadius = 20
 
