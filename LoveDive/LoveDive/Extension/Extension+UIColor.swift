@@ -31,6 +31,14 @@ extension UIColor {
     UIColor(red: 224 / 253, green: 224 / 253, blue: 224 / 253, alpha: 1)
   }
 
+  static var dynamicColor = UIColor { traits in
+      if traits.userInterfaceStyle == .dark {
+        return UIColor(red: 0.2, green: 0.24, blue: 0.27, alpha: 0.5) // Dark mode color
+      } else {
+        return UIColor.white // Light mode color
+      }
+  }
+
 }
 
 extension Color {

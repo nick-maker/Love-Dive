@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DiveCell: UICollectionViewCell {
+class DiveCell: ShadowCollectionViewCell {
 
   // MARK: Lifecycle
 
@@ -32,7 +32,7 @@ class DiveCell: UICollectionViewCell {
 
   private func setupUI() {
     contentView.layer.cornerRadius = 20
-    contentView.backgroundColor = .paleGray.withAlphaComponent(0.5)
+    contentView.backgroundColor = .dynamicColor
 
     [waterDepthLabel, dateLabel, arrowImage].forEach { contentView.addSubview($0) }
     [waterDepthLabel, dateLabel, arrowImage].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
