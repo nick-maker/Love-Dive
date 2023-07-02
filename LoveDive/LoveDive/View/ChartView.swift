@@ -244,6 +244,7 @@ struct ChartView: View {
           showingEditSheet = false
           if let filePath = data.first?.time.description {
             photosModel.saveImageToDocumentsDirectory(image: mainView.image, filePath: filePath)
+            generateSnapshot(viewSize: viewSize)
           }
         } label: {
           Text("Confirm")
