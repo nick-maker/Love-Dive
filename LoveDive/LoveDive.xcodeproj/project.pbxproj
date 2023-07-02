@@ -62,6 +62,7 @@
 		06AFC0482A4EC466007CB1E6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0601463D2A3AEA79003001EE /* Extension+UIColor.swift */; };
 		06AFC04C2A4EE328007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
 		06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC04D2A4F456B007CB1E6 /* FileManager.swift */; };
+		06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0502A505AC8007CB1E6 /* FilteredImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		06AFC04D2A4F456B007CB1E6 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		06AFC0502A505AC8007CB1E6 /* FilteredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 		0681DC5D2A3CA4F500BCC367 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06AFC0502A505AC8007CB1E6 /* FilteredImage.swift */,
 				064F76462A497C13003DC830 /* MediaFile.swift */,
 				060146462A3B53EB003001EE /* Config.swift */,
 				063BA8F52A42F91F00711932 /* AppLayouts.swift */,
@@ -464,6 +467,7 @@
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */,
+				06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */,
 				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
 				06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,

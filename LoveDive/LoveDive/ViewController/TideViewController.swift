@@ -87,7 +87,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotation.title = location.name
       mapView.addAnnotation(annotation)
       annotations.append(annotation)
-      networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
+//      networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
   }
 
@@ -196,11 +196,11 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
       containerView.center = CGPoint(x: containerOriginalCenter.x, y: containerOriginalCenter.y + cappedTranslationY)
     } else if sender.state == .ended {
       if velocity.y > 0 {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
           self.containerView.center = self.containerDown
         }
       } else {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
           self.containerView.center = self.containerUp
         }
       }

@@ -17,6 +17,7 @@ struct BreatheView: View {
   @State private var activity: Activity<TimerAttributes>? = nil
   @EnvironmentObject var breatheModel: BreatheModel
   @EnvironmentObject var audioModel: AudioModel
+  @Environment(\.colorScheme) var colorScheme
 
   var body: some View {
     VStack {
@@ -36,7 +37,7 @@ struct BreatheView: View {
               .blur(radius: 15)
               .padding(-2)
             Circle()
-              .fill(.white)
+              .fill(colorScheme == .dark ? Color.black : Color.white)
             if breatheModel.isStarted {
               LottieView()
                 .scaleEffect(1.2)
@@ -64,14 +65,14 @@ struct BreatheView: View {
             }
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
-              .foregroundColor(breatheModel.isStarted ? .white : .darkBlue)
+              .foregroundColor(breatheModel.isStarted ? .white : colorScheme == .dark ? Color.white : .darkBlue)
               .rotationEffect(.init(degrees: 90))
               .animation(.none, value: breatheModel.progress)
           }
           .padding(30)
           .frame(height: proxy.size.width)
           .rotationEffect(.init(degrees: -90))
-          .animation(.linear(duration: 1), value: breatheModel.progress)
+//          .animation(.linear, value: breatheModel.progress)
           .animation(.easeInOut, value: breatheModel.progress)
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
@@ -214,7 +215,7 @@ struct BreatheView: View {
     .frame(maxWidth: .infinity)
     .background {
       RoundedRectangle(cornerRadius: 20, style: .continuous)
-        .fill(Color.white)
+        .fill(colorScheme == .dark ? Color.black : Color.white)
         .ignoresSafeArea()
     }
     .frame(maxHeight: .infinity, alignment: .bottom)

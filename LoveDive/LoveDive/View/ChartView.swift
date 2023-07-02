@@ -34,6 +34,8 @@ struct ChartView: View {
   var imagePath: String?
   @State var viewSize = CGSize()
   @State var generatedImage: Image?
+  @State private var showingEditSheet = false
+  @State private var imageKey: UUID = UUID()
 
   private var gradient: Gradient {
     var colors = [chartColor]
@@ -70,6 +72,7 @@ struct ChartView: View {
           viewSize = proxy.size
           generateSnapshot(viewSize: viewSize)
         }
+        showingEditSheet = false
       }
     }
     .navigationBarTitle("Diving Log", displayMode: .large)
@@ -81,12 +84,27 @@ struct ChartView: View {
         }
         .onChange(of: photosModel.selectedPhoto) { newValue in
           if let newValue = newValue {
-            photosModel.processPhoto(photo: newValue, divingDate: data.first!.time)
+            photosModel.processPhoto(photo: newValue)
+            photosModel.allImages.removeAll()
+            photosModel.mainView = nil
+
           }
         }
         .onChange(of: photosModel.loadedImages) { _ in
           generateSnapshot(viewSize: viewSize)
         }
+        .onChange(of: photosModel.imageData) { _ in
+          showingEditSheet = true
+          loadFilter()
+        }
+        .onChange(of: photosModel.value, perform: { _ in
+          photosModel.updateEffect()
+        })
+        .sheet(isPresented: $showingEditSheet) {
+          editPhotoView
+            .padding()
+        }
+
         if let generatedImage = generatedImage {
           ShareLink(
             item: generatedImage,
@@ -166,6 +184,90 @@ struct ChartView: View {
       }
     }
     .padding(.bottom, 30)
+  }
+
+  var editPhotoView: some View {
+    
+    VStack() {
+      if let mainView = photosModel.mainView {
+        ZStack {
+          Color.clear
+            .frame(height: viewSize.height * 0.65)
+          Image(uiImage: mainView.image)
+            .resizable()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(contentMode: .fit)
+            .clipped()
+            .cornerRadius(20)
+        }
+        .frame(alignment: .top)
+        .cornerRadius(20)
+        .padding(.vertical)
+        
+        Slider(value: $photosModel.value)
+          .padding()
+          .opacity(mainView.isEditable ? 1 : 0)
+          .disabled(mainView.isEditable ? false : true)
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack(spacing: 10) {
+            ForEach(photosModel.allImages) { filtered in
+              ZStack {
+                Color.paleGray.opacity(0.2)
+                  .frame(width: 100, height: 130, alignment: .bottom)
+                //                  .cornerRadius(10)
+                VStack(spacing: 0) {
+                  Image(uiImage: filtered.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                  //                    .cornerRadius(10)
+                    .onTapGesture {
+                      photosModel.value = 1
+                      photosModel.mainView = filtered
+                    }
+                  Text(filtered.filterName)
+                    .frame(width: 100, height: 30)
+                    .fontWeight(.light)
+                    .font(.footnote)
+                }
+              }
+              .cornerRadius(10)
+            }
+            
+          }
+        }
+        .frame(alignment: .bottom)
+        
+        Button {
+          showingEditSheet = false
+          if let filePath = data.first?.time.description {
+            photosModel.saveImageToDocumentsDirectory(image: mainView.image, filePath: filePath)
+          }
+        } label: {
+          Text("Confirm")
+            .font(.title3)
+            .fontWeight(.semibold)
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 100)
+            .background {
+              Capsule()
+                .fill(Color.pacificBlue)
+            }
+        }
+        .padding(.top, 20)
+        .frame(alignment: .bottom)
+        
+      }
+    }
+    .padding()
+    .accentColor(.pacificBlue)
+    .onDisappear {
+      // Reset the sheet presentation state when the sheet is dismissed
+      showingEditSheet = false
+    }
   }
 
   var chart: some View {
@@ -251,6 +353,10 @@ struct ChartView: View {
     .clipped()
     .cornerRadius(20)
     .padding(.horizontal)
+    .onChange(of: photosModel.hasSavedImage) { _ in
+      imageKey = UUID() // Invalidate and refresh the view
+        }
+    .id(imageKey) // Assign the UUID to the view ID
     //    .tabViewStyle(.page)
   }
 
@@ -260,8 +366,13 @@ struct ChartView: View {
       chartListView
     }
     .padding()
+    .padding(.top, 10)
     .background(.white)
     .cornerRadius(20)
+  }
+
+  private func loadFilter() {
+    photosModel.loadFilter()
   }
 
   struct ChartView_Previews: PreviewProvider {

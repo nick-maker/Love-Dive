@@ -12,6 +12,5 @@ struct MediaFile: Identifiable, Equatable {
   var id = UUID().uuidString
   var image: Image
   var data: Data
-//  var filePath: String?
 
 }
