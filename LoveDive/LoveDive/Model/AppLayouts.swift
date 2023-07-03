@@ -25,8 +25,8 @@ class AppLayouts {
     // PLay with some animation and scrollOffest
     section.visibleItemsInvalidationHandler = { items, offset, environment in
       if let currentIndex = items.last?.indexPath.item {
-              onVisibleItemsChanged(currentIndex)
-            }
+        onVisibleItemsChanged(currentIndex)
+      }
       items.forEach { item in
         let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
         let minScale: CGFloat = 0.8

@@ -31,9 +31,8 @@ struct LoveDive_WidgetLiveActivity: Widget {
   var body: some WidgetConfiguration {
     ActivityConfiguration(for: TimerAttributes.self) { context in
       // Lock screen/banner UI goes here
-      VStack() {
+      VStack {
         HStack(alignment: .center) {
-
           ZStack {
             Circle()
               .stroke(Color.darkBlue, lineWidth: 5)
@@ -41,7 +40,8 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(12)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, lineWidth: 5)
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 5,
+                                                              lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(12)
           }
@@ -84,7 +84,8 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(8)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, lineWidth: 5)
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 5,
+                                                              lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(8)
           }
@@ -103,7 +104,6 @@ struct LoveDive_WidgetLiveActivity: Widget {
             Spacer()
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-
         }
       } compactLeading: {
         HStack {
@@ -114,7 +114,8 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(2)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, lineWidth: 3)
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 3,
+                                                              lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(2)
           }
@@ -131,12 +132,13 @@ struct LoveDive_WidgetLiveActivity: Widget {
           Circle()
             .stroke(Color.darkBlue, lineWidth: 3)
             .rotationEffect(.init(degrees: -90))
-                    .padding(2)
+            .padding(2)
           Circle()
             .trim(from: 0, to: context.state.progress)
-            .stroke(Color.pacificBlue, lineWidth: 3)
+            .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 3,
+                                                            lineCap: .round))
             .rotationEffect(.init(degrees: -90))
-                    .padding(2)
+            .padding(2)
         }
         .frame(height: 25)
         .background(Color.black)

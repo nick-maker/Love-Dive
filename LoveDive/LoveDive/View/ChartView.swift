@@ -35,7 +35,7 @@ struct ChartView: View {
   @State var viewSize = CGSize()
   @State var generatedImage: Image?
   @State private var showingEditSheet = false
-  @State private var imageKey: UUID = UUID()
+  @State private var imageKey = UUID()
 
   private var gradient: Gradient {
     var colors = [chartColor]
@@ -83,11 +83,10 @@ struct ChartView: View {
           Image(systemName: "plus")
         }
         .onChange(of: photosModel.selectedPhoto) { newValue in
-          if let newValue = newValue {
+          if let newValue {
             photosModel.processPhoto(photo: newValue)
             photosModel.allImages.removeAll()
             photosModel.mainView = nil
-
           }
         }
         .onChange(of: photosModel.loadedImages) { _ in
@@ -105,41 +104,41 @@ struct ChartView: View {
             .padding()
         }
 
-        if let generatedImage = generatedImage {
+        if let generatedImage {
           ShareLink(
             item: generatedImage,
             preview:
-              SharePreview("Diving Log",
-                           image: generatedImage ))
+            SharePreview(
+              "Diving Log",
+              image: generatedImage))
         }
-      }
-    )
+      })
     .accentColor(Color.pacificBlue)
   }
 
   var chartListView: some View {
-      VStack(alignment: .leading) {
-        titleFigureView
-        HStack {
-          Text("\(data[0].time, formatter: ChartView.timeFormatter)")
+    VStack(alignment: .leading) {
+      titleFigureView
+      HStack {
+        Text("\(data[0].time, formatter: ChartView.timeFormatter)")
+          .font(.system(size: 14))
+        Spacer()
+        if let lastDate = data.last?.time {
+          Text("\(lastDate, formatter: ChartView.timeFormatter)")
             .font(.system(size: 14))
-          Spacer()
-          if let lastDate = data.last?.time {
-            Text("\(lastDate, formatter: ChartView.timeFormatter)")
-              .font(.system(size: 14))
-          }
-        }
-        chart
-        if data.count < 2 {
-          HStack {
-            Spacer()
-            Text("Not Enough Data for a Diagram")
-              .foregroundColor(.secondary)
-            Spacer()
-          }
         }
       }
-      .padding()
+      chart
+      if data.count < 2 {
+        HStack {
+          Spacer()
+          Text("Not Enough Data for a Diagram")
+            .foregroundColor(.secondary)
+          Spacer()
+        }
+      }
+    }
+    .padding()
   }
 
   var titleFigureView: some View {
@@ -187,8 +186,7 @@ struct ChartView: View {
   }
 
   var editPhotoView: some View {
-    
-    VStack() {
+    VStack {
       if let mainView = photosModel.mainView {
         ZStack {
           Color.clear
@@ -203,12 +201,12 @@ struct ChartView: View {
         .frame(alignment: .top)
         .cornerRadius(20)
         .padding(.vertical)
-        
+
         Slider(value: $photosModel.value)
           .padding()
           .opacity(mainView.isEditable ? 1 : 0)
           .disabled(mainView.isEditable ? false : true)
-        
+
         ScrollView(.horizontal, showsIndicators: false) {
           HStack(spacing: 10) {
             ForEach(photosModel.allImages) { filtered in
@@ -222,7 +220,7 @@ struct ChartView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipped()
-                  //                    .cornerRadius(10)
+                    //                    .cornerRadius(10)
                     .onTapGesture {
                       photosModel.value = 1
                       photosModel.mainView = filtered
@@ -235,11 +233,10 @@ struct ChartView: View {
               }
               .cornerRadius(10)
             }
-            
           }
         }
         .frame(alignment: .bottom)
-        
+
         Button {
           showingEditSheet = false
           if let filePath = data.first?.time.description {
@@ -260,7 +257,6 @@ struct ChartView: View {
         }
         .padding(.top, 20)
         .frame(alignment: .bottom)
-        
       }
     }
     .padding()
@@ -329,8 +325,10 @@ struct ChartView: View {
 
   @ViewBuilder
   private var content: some View {
-    if let filePath = data.first?.time.description,
-       (photosModel.getImageFromFileManager(filePath: filePath) != nil) {
+    if
+      let filePath = data.first?.time.description,
+      photosModel.getImageFromFileManager(filePath: filePath) != nil
+    {
       pictureView
       chartListView
     } else {
@@ -339,9 +337,11 @@ struct ChartView: View {
   }
 
   var pictureView: some View {
-    HStack() {
-      if let filePath = data.first?.time.description,
-         let image = photosModel.getImageFromFileManager(filePath: filePath) {
+    HStack {
+      if
+        let filePath = data.first?.time.description,
+        let image = photosModel.getImageFromFileManager(filePath: filePath)
+      {
         image.resizable()
           .aspectRatio(contentMode: .fill)
           .aspectRatio(0.75, contentMode: .fill)
@@ -356,7 +356,7 @@ struct ChartView: View {
     .padding(.horizontal)
     .onChange(of: photosModel.hasSavedImage) { _ in
       imageKey = UUID() // Invalidate and refresh the view
-        }
+    }
     .id(imageKey) // Assign the UUID to the view ID
     //    .tabViewStyle(.page)
   }
@@ -492,7 +492,6 @@ struct ChartView: View {
           time: Date(timeIntervalSince1970: 1641877064),
           depth: 2.1503216349938676),
       ])
-
     }
   }
 }

@@ -27,15 +27,19 @@ struct BreatheView: View {
             Circle()
               .fill(.blue.opacity(0.03))
               .padding(-40)
-            Circle()
-              .trim(from: 0, to: breatheModel.progress)
-              .stroke(Color.blue.opacity(0.03), lineWidth: 80)
-              .blur(radius: 15)
+//            Circle()
+//              .trim(from: 0, to: breatheModel.progress)
+//              .stroke(Color.blue.opacity(0.03), lineWidth: 80)
+//              .blur(radius: 15)
             // Mark: Shadow
-            Circle()
-              .stroke(Color.pacificBlue, lineWidth: 5)
-              .blur(radius: 15)
-              .padding(-2)
+//            Circle()
+//              .stroke(Color.pacificBlue.opacity(0.3), lineWidth: 25)
+//              .blur(radius: 55)
+//              .padding(-10)
+//            Circle()
+//              .stroke(Color.darkBlue, lineWidth: 15)
+//              .blur(radius: 55)
+//              .padding(-10)
             Circle()
               .fill(colorScheme == .dark ? Color.black : Color.white)
             if breatheModel.isStarted {
@@ -43,26 +47,35 @@ struct BreatheView: View {
                 .scaleEffect(1.2)
             }
             Circle()
+              .stroke(colorScheme == .dark ? Color.darkBlue : Color.pacificBlue.opacity(0.5),
+                      style: StrokeStyle(lineWidth: 15,
+                                         lineCap: .round))
+              .padding(10)
+
+            Circle()
               .trim(from: 0, to: breatheModel.progress)
-              .stroke(Color.pacificBlue.opacity(0.6), lineWidth: 7)
+//              .stroke(Color.pacificBlue.opacity(0.6), lineWidth: 7)
+              .stroke(Color.pacificBlue.gradient,
+                      style: StrokeStyle(lineWidth: 15,
+                                         lineCap: .round))
+              .padding(10)
 
             // Mark: Knob
-            GeometryReader { proxy in
-              let size = proxy.size
-
-              Circle()
-                .fill(Color.pacificBlue.opacity(0.6))
-                .frame(width: 30, height: 30)
-                .overlay(content: {
-                  Circle()
-                    .fill(.white)
-                    .padding(5)
-                })
-                .frame(width: size.width, height: size.height, alignment: .center)
-                .offset(x: size.height / 2)
-                .rotationEffect(.init(degrees: Double(breatheModel.progress * 360)))
-
-            }
+//            GeometryReader { proxy in
+//              let size = proxy.size
+//
+//              Circle()
+//                .fill(Color.pacificBlue)
+//                .frame(width: 30, height: 30)
+//                .overlay(content: {
+//                  Circle()
+//                    .fill(.white)
+//                    .padding(5)
+//                })
+//                .frame(width: size.width, height: size.height, alignment: .center)
+//                .offset(x: size.height / 2)
+//                .rotationEffect(.init(degrees: Double(breatheModel.progress * 360)))
+//            }
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
               .foregroundColor(breatheModel.isStarted ? .white : colorScheme == .dark ? Color.white : .darkBlue)
@@ -223,7 +236,9 @@ struct BreatheView: View {
 
   func startActivity() {
     let attributes = TimerAttributes(timerName: "Breathe Timer")
-    let state = TimerAttributes.TimerStatus(endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)), progress: breatheModel.progress)
+    let state = TimerAttributes.TimerStatus(
+      endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)),
+      progress: breatheModel.progress)
     let content = ActivityContent<TimerAttributes.ContentState>(state: state, staleDate: nil)
 
     activity = try? Activity<TimerAttributes>.request(attributes: attributes, content: content, pushType: .token)
@@ -239,7 +254,9 @@ struct BreatheView: View {
   }
 
   func updateActivity() {
-    let state = TimerAttributes.TimerStatus(endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)), progress: breatheModel.progress)
+    let state = TimerAttributes.TimerStatus(
+      endTime: Date()...Date().addingTimeInterval(TimeInterval(breatheModel.totalSeconds)),
+      progress: breatheModel.progress)
     let content = ActivityContent<TimerAttributes.ContentState>(state: state, staleDate: nil)
 
     // Ensure that the activity has been started before trying to update its content.

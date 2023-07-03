@@ -32,7 +32,7 @@
 		064F765C2A4ACC7E003DC830 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 064F765B2A4ACC7E003DC830 /* Lottie */; };
 		064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */; };
 		064F76602A4ACE81003DC830 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F765F2A4ACE81003DC830 /* LottieView.swift */; };
-		064F76622A4B10D4003DC830 /* DivingSiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76612A4B10D4003DC830 /* DivingSiteModel.swift */; };
+		064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76612A4B10D4003DC830 /* DivingSiteManager.swift */; };
 		064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76632A4B42A1003DC830 /* LocationManager.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
@@ -55,7 +55,6 @@
 		0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC722A4000BD00BCC367 /* TabBarController.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
-		0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409D2A3C679800B69265 /* DetailTideViewController.swift */; };
 		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
 		06AFC0462A4EB90F007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
@@ -64,6 +63,8 @@
 		06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC04D2A4F456B007CB1E6 /* FileManager.swift */; };
 		06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0502A505AC8007CB1E6 /* FilteredImage.swift */; };
 		06AFC0532A51532D007CB1E6 /* ShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0522A51532D007CB1E6 /* ShadowCell.swift */; };
+		06AFC0552A52BF00007CB1E6 /* TideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0542A52BF00007CB1E6 /* TideView.swift */; };
+		06AFC0572A52C300007CB1E6 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 06AFC0562A52C2FF007CB1E6 /* response.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,7 +114,7 @@
 		064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav"; sourceTree = "<group>"; };
 		064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "70733-simple-breathing-animation.json"; sourceTree = "<group>"; };
 		064F765F2A4ACE81003DC830 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		064F76612A4B10D4003DC830 /* DivingSiteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingSiteModel.swift; sourceTree = "<group>"; };
+		064F76612A4B10D4003DC830 /* DivingSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingSiteManager.swift; sourceTree = "<group>"; };
 		064F76632A4B42A1003DC830 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		064F766E2A4DC600003DC830 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		064F76702A4DC600003DC830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -141,12 +142,13 @@
 		0681DC722A4000BD00BCC367 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		0682409D2A3C679800B69265 /* DetailTideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTideViewController.swift; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		06AFC04D2A4F456B007CB1E6 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		06AFC0502A505AC8007CB1E6 /* FilteredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredImage.swift; sourceTree = "<group>"; };
 		06AFC0522A51532D007CB1E6 /* ShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCell.swift; sourceTree = "<group>"; };
+		06AFC0542A52BF00007CB1E6 /* TideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TideView.swift; path = LoveDive/View/TideView.swift; sourceTree = SOURCE_ROOT; };
+		06AFC0562A52C2FF007CB1E6 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
 				064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */,
+				06AFC0562A52C2FF007CB1E6 /* response.json */,
 				064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
 				067833CA2A39D8B6000642F2 /* Info.plist */,
@@ -259,7 +262,7 @@
 				0681DC652A3DD1B800BCC367 /* DivingLog.swift */,
 				0681DC702A3F770E00BCC367 /* HealthKitManager.swift */,
 				064F76632A4B42A1003DC830 /* LocationManager.swift */,
-				064F76612A4B10D4003DC830 /* DivingSiteModel.swift */,
+				064F76612A4B10D4003DC830 /* DivingSiteManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				063BA8F72A42FDC800711932 /* SummaryCell.swift */,
 				06AD89B62A44210400E6C409 /* SectionHeader.swift */,
 				063BA8F32A42F7F100711932 /* SectionDecorationView.swift */,
+				06AFC0542A52BF00007CB1E6 /* TideView.swift */,
 				060320502A44ACC50001FF12 /* ChartView.swift */,
 			);
 			path = View;
@@ -299,7 +303,6 @@
 				064F76542A49CC6E003DC830 /* RoundedNavigationController.swift */,
 				0681DC722A4000BD00BCC367 /* TabBarController.swift */,
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
-				0682409D2A3C679800B69265 /* DetailTideViewController.swift */,
 				064F76502A499937003DC830 /* BreatheViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
 				0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */,
@@ -411,6 +414,7 @@
 				067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */,
 				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */,
+				06AFC0572A52C300007CB1E6 /* response.json in Resources */,
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
 				064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */,
 				067833C42A39D8B5000642F2 /* Main.storyboard in Resources */,
@@ -455,13 +459,13 @@
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */,
-				0682409E2A3C679800B69265 /* DetailTideViewController.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
 				064F76552A49CC6E003DC830 /* RoundedNavigationController.swift in Sources */,
 				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
-				064F76622A4B10D4003DC830 /* DivingSiteModel.swift in Sources */,
+				064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */,
 				06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */,
 				064F764D2A499501003DC830 /* BreatheContentView.swift in Sources */,
+				06AFC0552A52BF00007CB1E6 /* TideView.swift in Sources */,
 				064F76442A497431003DC830 /* PhotosPickerModel.swift in Sources */,
 				063BA8F82A42FDC800711932 /* SummaryCell.swift in Sources */,
 				060146472A3B53EB003001EE /* Config.swift in Sources */,

@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - DivingSiteModel
+// MARK: - DivingSiteManager
 
-class DivingSiteModel {
+class DivingSiteManager {
 
   var locations: [Location] = []
   weak var delegate: DivingSiteDelegate?

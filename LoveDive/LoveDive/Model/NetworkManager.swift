@@ -12,16 +12,14 @@ import MapKit
 
 class NetworkManager {
 
-  // MARK: Internal
   let UTCFormatter = ISO8601DateFormatter()
   weak var delegate: WeatherDelegate?
 
   func getCurrentWeatherData(lat: Double, lng: Double, forAnnotation annotation: MKAnnotation) {
-
     let calendar = Calendar.current
     let currentTime = Date()
     let startTime = calendar.startOfDay(for: currentTime)
-    let endTime = startTime.addingTimeInterval(60 * 60 * 24) //Next Day
+    let endTime = startTime.addingTimeInterval(60 * 60 * 24) // Next Day
 
     let parameters = [
       "airTemperature",
@@ -44,11 +42,13 @@ class NetworkManager {
     ]
 
     let key = "\(lat),\(lng)"
-    if let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
-       let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
-       currentTime.timeIntervalSince(UTCFormatter.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
-       !weatherCache.weather.isEmpty {
-          delegate?.manager(didGet: weatherCache.weather, forAnnotation: annotation)
+    if
+      let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
+      let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
+      currentTime.timeIntervalSince(UTCFormatter.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
+      !weatherCache.weather.isEmpty
+    {
+      delegate?.manager(didGet: weatherCache.weather, forAnnotation: annotation)
     } else {
       AF.request("https://api.stormglass.io/v2/weather/point", method: .get, parameters: params, headers: headers)
         .responseDecodable(of: WeatherData.self) { response in
@@ -71,6 +71,24 @@ class NetworkManager {
         }
     }
   }
+
+  func decodeJSON() -> WeatherData {
+    guard let url = Bundle.main.url(forResource: "response", withExtension: "json") else {
+      print("Resources not found")
+      return WeatherData(hours: [])
+    }
+    do {
+      let data = try Data(contentsOf: url)
+      let decoder = JSONDecoder()
+      let decodedData = try decoder.decode(WeatherData.self, from: data)
+      let jsonString = String(data: data, encoding: .utf8)
+      return decodedData
+    } catch {
+      print("Error decoding JSON: \(error.localizedDescription)")
+      return WeatherData(hours: [])
+    }
+  }
+
 }
 
 // MARK: - WeatherDelegate

@@ -23,12 +23,21 @@ struct WeatherCache: Codable {
 // MARK: - WeatherHour
 
 // Structure for each hour of data
-struct WeatherHour: Codable {
+struct WeatherHour: Codable, Identifiable {
+  var id = UUID().uuidString
   let time: String
   let airTemperature: TemperatureData
   let waterTemperature: TemperatureData
   let waveHeight: WaveHeightData
   let windSpeed: WindSpeedData
+
+  enum CodingKeys: String, CodingKey {
+    case time
+    case airTemperature
+    case waterTemperature
+    case waveHeight
+    case windSpeed
+  }
 }
 
 // MARK: - TemperatureData

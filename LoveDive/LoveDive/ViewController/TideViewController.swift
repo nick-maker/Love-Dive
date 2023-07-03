@@ -6,11 +6,14 @@
 //
 
 import MapKit
+import SwiftUI
 import UIKit
 
 // MARK: - TideViewController
 
 class TideViewController: UIViewController, MKMapViewDelegate {
+
+  // MARK: Internal
 
   var mapView = MKMapView()
   let containerView = UIView()
@@ -22,7 +25,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     return collectionView
   }() // Must be initialized with a non-nil layout parameter
 
-  let divingSiteModel = DivingSiteModel()
+  let divingSiteManager = DivingSiteManager()
   let networkManager = NetworkManager()
   let locationManager = LocationManager()
   var weatherData = [WeatherHour]()
@@ -34,20 +37,17 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   var containerUp = CGPoint.zero
   var containerDown = CGPoint.zero
   var currentRegion = MKCoordinateSpan()
-  private var currentPage: Int? = nil
-  private var lastScaleFactor = CGFloat() //to determine if the scroll has ended
-
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     locationManager.errorPresentationTarget = self
-    divingSiteModel.delegate = self
+    divingSiteManager.delegate = self
     networkManager.delegate = self
 
     setupMapView()
     getCurrentLocation()
-    divingSiteModel.decodeDivingGeoJSON()
+    divingSiteManager.decodeDivingGeoJSON()
     setupCollectionView()
     configureCompositionalLayout()
   }
@@ -77,7 +77,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     locationManager.getUserLocation { [weak self] location in
       guard let self else { return }
       DispatchQueue.main.async {
-
         let center = location.coordinate
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         self.mapView.setRegion(region, animated: true)
@@ -121,6 +120,12 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
   }
 
+  // MARK: Private
+
+  private var currentPage: Int? = nil
+  private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
+
+
 }
 
 // MARK: DivingSiteDelegate
@@ -151,7 +156,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     section.orthogonalScrollingBehavior = .groupPagingCentered
 
     section.visibleItemsInvalidationHandler = { [weak self] items, offset, environment in
-      guard let self = self else { return }
+      guard let self else { return }
 
       let pageWidth: CGFloat = environment.container.contentSize.width * 0.75
 
@@ -167,7 +172,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
         let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
         item.transform = CGAffineTransform(scaleX: scale, y: scale)
 
-        if scale == 0.8 && self.lastScaleFactor > 0.999 {
+        if scale == 0.8, self.lastScaleFactor > 0.999 {
           // Scrolling has reached a stable state with the target item centered
           // Perform scrolling completion actions here
           let indexPath = IndexPath(row: currentPage, section: 0)
@@ -178,8 +183,9 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
           // Find the annotation that matches the title
           guard let annotation = self.mapView.annotations.first(where: { $0.title == annotationTitle }) else { return }
-          let region = MKCoordinateRegion(center: annotation.coordinate,
-                                          span: self.currentRegion)
+          let region = MKCoordinateRegion(
+            center: annotation.coordinate,
+            span: self.currentRegion)
           self.mapView.setRegion(region, animated: true)
           self.mapView.selectAnnotation(annotation, animated: true)
         }
@@ -302,9 +308,14 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     return cell
   }
 
-  func collectionView(_: UICollectionView, didSelectItemAt _: IndexPath) {
-    let detailViewController = DetailTideViewController()
-    navigationController?.pushViewController(detailViewController, animated: true)
+  func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    let tideView = TideView(weatherData: networkManager.decodeJSON().hours)
+    let hostingController = UIHostingController(rootView: tideView)
+    hostingController.title = annotations[indexPath.row].title
+    navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationItem.backButtonTitle = ""
+    navigationController?.pushViewController(hostingController, animated: true)
   }
 
   func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
@@ -331,36 +342,38 @@ extension TideViewController: WeatherDelegate {
     }
     selectedAnnotaion = annotation
     let indexPath = IndexPath(item: index, section: 0)
-    //if set true, would fire section.visibleItemsInvalidationHandler
+    // if set true, would fire section.visibleItemsInvalidationHandler
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-    print(annotation.title)
-    networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
+    networkManager.getCurrentWeatherData(
+      lat: annotation.coordinate.latitude,
+      lng: annotation.coordinate.longitude,
+      forAnnotation: annotation)
   }
 
   func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation) {
     guard let annotationIndex = annotations.firstIndex(where: { $0 === annotation }) else {
       return
     }
-    locations[annotationIndex].weather = weatherData.filter({ weatherHour in
+    locations[annotationIndex].weather = weatherData.filter { weatherHour in
       ISO8601DateFormatter().date(from: weatherHour.time) == Calendar.current.date(bySetting: .minute, value: 0, of: Date())
-    })
+    }
 
     DispatchQueue.main.async {
-        if let cell = self.collectionView.cellForItem(at: IndexPath(row: annotationIndex, section: 0)) as? TideCell {
-          let location = self.locations[annotationIndex]
-          if let weather = location.weather?.first {
-            cell.airTemptText.text = weather.airTemperature.average
-            cell.waterTemptText.text = weather.waterTemperature.average
-            cell.windSpeedText.text = weather.windSpeed.average
-            cell.waveHeightText.text = weather.waveHeight.average
-          } else {
-            cell.airTemptText.text = "-"
-            cell.waterTemptText.text = "-"
-            cell.windSpeedText.text = "-"
-            cell.waveHeightText.text = "-"
-          }
+      if let cell = self.collectionView.cellForItem(at: IndexPath(row: annotationIndex, section: 0)) as? TideCell {
+        let location = self.locations[annotationIndex]
+        if let weather = location.weather?.first {
+          cell.airTemptText.text = weather.airTemperature.average
+          cell.waterTemptText.text = weather.waterTemperature.average
+          cell.windSpeedText.text = weather.windSpeed.average
+          cell.waveHeightText.text = weather.waveHeight.average
+        } else {
+          cell.airTemptText.text = "-"
+          cell.waterTemptText.text = "-"
+          cell.windSpeedText.text = "-"
+          cell.waveHeightText.text = "-"
         }
       }
+    }
   }
 
   func updateWeatherDataForVisibleAnnotations() {
@@ -370,7 +383,10 @@ extension TideViewController: WeatherDelegate {
     for annotation in visibleAnnotations {
       if let pointAnnotation = annotation as? MKPointAnnotation {
         let key = "\(pointAnnotation.coordinate.latitude),\(pointAnnotation.coordinate.longitude)"
-        networkManager.getCurrentWeatherData(lat: pointAnnotation.coordinate.latitude, lng: pointAnnotation.coordinate.longitude, forAnnotation: pointAnnotation)
+        networkManager.getCurrentWeatherData(
+          lat: pointAnnotation.coordinate.latitude,
+          lng: pointAnnotation.coordinate.longitude,
+          forAnnotation: pointAnnotation)
       }
     }
   }
