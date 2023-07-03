@@ -101,7 +101,7 @@ class ActivitiesViewController: UIViewController {
 
   func setupCollectionView() {
     view.addSubview(collectionView)
-    collectionView.backgroundColor = .clear
+    collectionView.backgroundColor = nil
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.dataSource = self
     collectionView.delegate = self

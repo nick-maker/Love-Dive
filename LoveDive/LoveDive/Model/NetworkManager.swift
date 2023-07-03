@@ -13,44 +13,43 @@ import MapKit
 class NetworkManager {
 
   // MARK: Internal
-
+  let UTCFormatter = ISO8601DateFormatter()
   weak var delegate: WeatherDelegate?
 
   func getCurrentWeatherData(lat: Double, lng: Double, forAnnotation annotation: MKAnnotation) {
+
+    let calendar = Calendar.current
+    let currentTime = Date()
+    let startTime = calendar.startOfDay(for: currentTime)
+    let endTime = startTime.addingTimeInterval(60 * 60 * 24) //Next Day
+
+    let parameters = [
+      "airTemperature",
+      "waterTemperature",
+      "waveHeight",
+      "windSpeed",
+    ]
+
+    let params: [String: Any] = [
+      "lat": lat,
+      "lng": lng,
+      "params": parameters.joined(separator: ","),
+      "start": UTCFormatter.string(from: startTime),
+      "end": UTCFormatter.string(from: endTime),
+      "source": ["icon", "meteo", "noaa", "sg"],
+    ]
+
+    let headers: HTTPHeaders = [
+      "Authorization": Config.weatherAPIKey,
+    ]
+
     let key = "\(lat),\(lng)"
     if let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
        let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
-       Date().timeIntervalSince(weatherCache.timestamp) < 3600,
+       currentTime.timeIntervalSince(UTCFormatter.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
        !weatherCache.weather.isEmpty {
           delegate?.manager(didGet: weatherCache.weather, forAnnotation: annotation)
     } else {
-      let currentTime = Date()
-
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-      formatter.locale = .current
-      formatter.timeZone = .current
-
-      let parameters = [
-        "airTemperature",
-        "waterTemperature",
-        "waveHeight",
-        "windSpeed",
-      ]
-
-      let params: [String: Any] = [
-        "lat": lat,
-        "lng": lng,
-        "params": parameters.joined(separator: ","),
-        "start": formatter.string(from: currentTime),
-        "end": formatter.string(from: currentTime),
-        "source": ["icon", "meteo", "noaa", "sg"],
-      ]
-
-      let headers: HTTPHeaders = [
-        "Authorization": Config.weatherAPIKey,
-      ]
-
       AF.request("https://api.stormglass.io/v2/weather/point", method: .get, parameters: params, headers: headers)
         .responseDecodable(of: WeatherData.self) { response in
           switch response.result {
@@ -58,7 +57,7 @@ class NetworkManager {
             self.delegate?.manager(didGet: value.hours, forAnnotation: annotation)
             // Create the WeatherCache object
             if !value.hours.isEmpty {
-              let weatherCache = WeatherCache(timestamp: Date(), weather: value.hours)
+              let weatherCache = WeatherCache(timestamp: (value.hours.first?.time)!, weather: value.hours)
 
               // Encode the WeatherCache object to Data
               if let encodedCacheData = try? JSONEncoder().encode(weatherCache) {
@@ -72,11 +71,6 @@ class NetworkManager {
         }
     }
   }
-  
-  //  // MARK: Private
-  //
-  //  private var cache: [String: WeatherCache] = [:]
-
 }
 
 // MARK: - WeatherDelegate

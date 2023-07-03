@@ -16,7 +16,7 @@ struct WeatherData: Codable {
 // MARK: - WeatherCache
 
 struct WeatherCache: Codable {
-  let timestamp: Date
+  let timestamp: String
   let weather: [WeatherHour]
 }
 

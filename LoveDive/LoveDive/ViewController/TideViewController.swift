@@ -35,7 +35,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   var containerDown = CGPoint.zero
   var currentRegion = MKCoordinateSpan()
   private var currentPage: Int? = nil
-  private var lastScaleFactor = CGFloat()
+  private var lastScaleFactor = CGFloat() //to determine if the scroll has ended
 
 
   override func viewDidLoad() {
@@ -75,10 +75,9 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   func getCurrentLocation() {
     locationManager.getUserLocation { [weak self] location in
+      guard let self else { return }
       DispatchQueue.main.async {
-        guard let self else {
-          return
-        }
+
         let center = location.coordinate
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         self.mapView.setRegion(region, animated: true)
@@ -96,7 +95,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotations.append(annotation)
       //      networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
-    //    updateWeatherDataForVisibleAnnotations()
   }
 
   func mapView(_ mapView: MKMapView, regionDidChangeAnimated _: Bool) {
@@ -112,7 +110,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     ]
     let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     annotations = visibleAnnotations.compactMap { $0 as? MKPointAnnotation }
-    //    updateWeatherDataForVisibleAnnotations()
+    updateWeatherDataForVisibleAnnotations()
     // Reload the collection view data
     collectionView.reloadData()
     guard let index = annotations.firstIndex(where: { $0 === selectedAnnotaion }) else {
@@ -192,22 +190,22 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func setupCollectionView() {
-        let handleView = UIView()
-        let handleTriggerView = UIView()
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        handleTriggerView.addGestureRecognizer(panGesture)
-        handleView.backgroundColor = UIColor { traits in
-          if traits.userInterfaceStyle == .dark {
-            return UIColor(red: 0.2, green: 0.24, blue: 0.27, alpha: 0.5) // Dark mode color
-          } else {
-            return UIColor.paleGray // Light mode color
-          }
-        }
-        handleView.isUserInteractionEnabled = false
-        handleView.translatesAutoresizingMaskIntoConstraints = false
-        handleTriggerView.translatesAutoresizingMaskIntoConstraints = false
+    let handleView = UIView()
+    let handleTriggerView = UIView()
+    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+    handleTriggerView.addGestureRecognizer(panGesture)
+    handleView.backgroundColor = UIColor { traits in
+      if traits.userInterfaceStyle == .dark {
+        return UIColor(red: 0.2, green: 0.24, blue: 0.27, alpha: 0.5) // Dark mode color
+      } else {
+        return UIColor.paleGray // Light mode color
+      }
+    }
+    handleView.isUserInteractionEnabled = false
+    handleView.translatesAutoresizingMaskIntoConstraints = false
+    handleTriggerView.translatesAutoresizingMaskIntoConstraints = false
 
-        handleView.layer.cornerRadius = 2.5
+    handleView.layer.cornerRadius = 2.5
 
     view.addSubview(containerView)
     containerView.addSubview(collectionView)
@@ -233,45 +231,45 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
       collectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
     ])
 
-        handleTriggerView.addSubview(handleView)
-        containerView.addSubview(handleTriggerView)
+    handleTriggerView.addSubview(handleView)
+    containerView.addSubview(handleTriggerView)
 
-        NSLayoutConstraint.activate([
-          handleView.topAnchor.constraint(equalTo: handleTriggerView.topAnchor),
-          handleView.centerXAnchor.constraint(equalTo: handleTriggerView.centerXAnchor),
-          handleView.widthAnchor.constraint(equalToConstant: 48),
-          handleView.heightAnchor.constraint(equalToConstant: 5),
+    NSLayoutConstraint.activate([
+      handleView.topAnchor.constraint(equalTo: handleTriggerView.topAnchor),
+      handleView.centerXAnchor.constraint(equalTo: handleTriggerView.centerXAnchor),
+      handleView.widthAnchor.constraint(equalToConstant: 48),
+      handleView.heightAnchor.constraint(equalToConstant: 5),
 
-          handleTriggerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
-          handleTriggerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-          handleTriggerView.widthAnchor.constraint(equalToConstant: 60),
-          handleTriggerView.heightAnchor.constraint(equalToConstant: 60),
+      handleTriggerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+      handleTriggerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+      handleTriggerView.widthAnchor.constraint(equalToConstant: 60),
+      handleTriggerView.heightAnchor.constraint(equalToConstant: 60),
 
-        ])
+    ])
   }
 
-    @objc
-    func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-      let velocity = sender.velocity(in: view)
-      let translation = sender.translation(in: view)
+  @objc
+  func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+    let velocity = sender.velocity(in: view)
+    let translation = sender.translation(in: view)
 
-      if sender.state == .began {
-        containerOriginalCenter = containerView.center
-      } else if sender.state == .changed {
-        let cappedTranslationY = max(-3, min(100, translation.y))
-        containerView.center = CGPoint(x: containerOriginalCenter.x, y: containerOriginalCenter.y + cappedTranslationY)
-      } else if sender.state == .ended {
-        if velocity.y > 0 {
-          UIView.animate(withDuration: 0.25) {
-            self.containerView.center = self.containerDown
-          }
-        } else {
-          UIView.animate(withDuration: 0.25) {
-            self.containerView.center = self.containerUp
-          }
+    if sender.state == .began {
+      containerOriginalCenter = containerView.center
+    } else if sender.state == .changed {
+      let cappedTranslationY = max(-3, min(100, translation.y))
+      containerView.center = CGPoint(x: containerOriginalCenter.x, y: containerOriginalCenter.y + cappedTranslationY)
+    } else if sender.state == .ended {
+      if velocity.y > 0 {
+        UIView.animate(withDuration: 0.25) {
+          self.containerView.center = self.containerDown
+        }
+      } else {
+        UIView.animate(withDuration: 0.25) {
+          self.containerView.center = self.containerUp
         }
       }
     }
+  }
 
   // Collection view data source methods
   func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
@@ -335,18 +333,34 @@ extension TideViewController: WeatherDelegate {
     let indexPath = IndexPath(item: index, section: 0)
     //if set true, would fire section.visibleItemsInvalidationHandler
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-
+    print(annotation.title)
+    networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
   }
 
   func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation) {
     guard let annotationIndex = annotations.firstIndex(where: { $0 === annotation }) else {
       return
     }
-    locations[annotationIndex].weather = weatherData
+    locations[annotationIndex].weather = weatherData.filter({ weatherHour in
+      ISO8601DateFormatter().date(from: weatherHour.time) == Calendar.current.date(bySetting: .minute, value: 0, of: Date())
+    })
 
     DispatchQueue.main.async {
-      self.collectionView.reloadData()
-    }
+        if let cell = self.collectionView.cellForItem(at: IndexPath(row: annotationIndex, section: 0)) as? TideCell {
+          let location = self.locations[annotationIndex]
+          if let weather = location.weather?.first {
+            cell.airTemptText.text = weather.airTemperature.average
+            cell.waterTemptText.text = weather.waterTemperature.average
+            cell.windSpeedText.text = weather.windSpeed.average
+            cell.waveHeightText.text = weather.waveHeight.average
+          } else {
+            cell.airTemptText.text = "-"
+            cell.waterTemptText.text = "-"
+            cell.windSpeedText.text = "-"
+            cell.waveHeightText.text = "-"
+          }
+        }
+      }
   }
 
   func updateWeatherDataForVisibleAnnotations() {

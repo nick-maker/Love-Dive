@@ -23,10 +23,10 @@ class ShadowCollectionViewCell: UICollectionViewCell {
     layer.masksToBounds = false
 
     // Apply a shadow
-    layer.shadowRadius = 20.0
+    layer.shadowRadius = 8.0
     layer.shadowOpacity = 0.10
-    layer.shadowColor = UIColor.black.cgColor
-    layer.shadowOffset = CGSize(width: 0, height: 3)
+    layer.shadowColor = UIColor.darkGray.cgColor
+    layer.shadowOffset = CGSize(width: 0, height: 1)
   }
 
   required init?(coder: NSCoder) {
