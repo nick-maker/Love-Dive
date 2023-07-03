@@ -22,11 +22,11 @@ struct BreatheView: View {
   var body: some View {
     VStack {
       GeometryReader { proxy in
-        VStack(spacing: 15) {
+        VStack(spacing: 25) {
           ZStack {
             Circle()
               .fill(.blue.opacity(0.03))
-              .padding(-40)
+              .padding(-50)
 //            Circle()
 //              .trim(from: 0, to: breatheModel.progress)
 //              .stroke(Color.blue.opacity(0.03), lineWidth: 80)
@@ -42,22 +42,27 @@ struct BreatheView: View {
 //              .padding(-10)
             Circle()
               .fill(colorScheme == .dark ? Color.black : Color.white)
+              .padding(10)
             if breatheModel.isStarted {
               LottieView()
                 .scaleEffect(1.2)
             }
             Circle()
-              .stroke(colorScheme == .dark ? Color.darkBlue : Color.pacificBlue.opacity(0.5),
-                      style: StrokeStyle(lineWidth: 15,
-                                         lineCap: .round))
+              .stroke(
+                colorScheme == .dark ? Color.darkBlue : Color.pacificBlue.opacity(0.5),
+                style: StrokeStyle(
+                  lineWidth: 15,
+                  lineCap: .round))
               .padding(10)
 
             Circle()
               .trim(from: 0, to: breatheModel.progress)
 //              .stroke(Color.pacificBlue.opacity(0.6), lineWidth: 7)
-              .stroke(Color.pacificBlue.gradient,
-                      style: StrokeStyle(lineWidth: 15,
-                                         lineCap: .round))
+              .stroke(
+                Color.pacificBlue.gradient,
+                style: StrokeStyle(
+                  lineWidth: 15,
+                  lineCap: .round))
               .padding(10)
 
             // Mark: Knob
@@ -78,7 +83,7 @@ struct BreatheView: View {
 //            }
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
-              .foregroundColor(breatheModel.isStarted ? .white : colorScheme == .dark ? Color.white : .darkBlue)
+              .foregroundColor(breatheModel.isStarted ? .white : colorScheme == .dark ? Color.white : .black)
               .rotationEffect(.init(degrees: 90))
               .animation(.none, value: breatheModel.progress)
           }

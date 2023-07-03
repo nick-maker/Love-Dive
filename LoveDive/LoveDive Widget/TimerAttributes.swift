@@ -40,8 +40,9 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(12)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 5,
-                                                              lineCap: .round))
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
+                lineWidth: 5,
+                lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(12)
           }
@@ -84,8 +85,9 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(8)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 5,
-                                                              lineCap: .round))
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
+                lineWidth: 5,
+                lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(8)
           }
@@ -114,8 +116,9 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .padding(2)
             Circle()
               .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 3,
-                                                              lineCap: .round))
+              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
+                lineWidth: 3,
+                lineCap: .round))
               .rotationEffect(.init(degrees: -90))
               .padding(2)
           }
@@ -135,8 +138,9 @@ struct LoveDive_WidgetLiveActivity: Widget {
             .padding(2)
           Circle()
             .trim(from: 0, to: context.state.progress)
-            .stroke(Color.pacificBlue.gradient, style: StrokeStyle(lineWidth: 3,
-                                                            lineCap: .round))
+            .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
+              lineWidth: 3,
+              lineCap: .round))
             .rotationEffect(.init(degrees: -90))
             .padding(2)
         }

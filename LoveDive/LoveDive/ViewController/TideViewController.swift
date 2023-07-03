@@ -309,11 +309,11 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
     let tideView = TideView(weatherData: networkManager.decodeJSON().hours)
     let hostingController = UIHostingController(rootView: tideView)
     hostingController.title = annotations[indexPath.row].title
     navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationController?.tabBarController?.tabBar.isHidden = true
     navigationItem.backButtonTitle = ""
     navigationController?.pushViewController(hostingController, animated: true)
   }

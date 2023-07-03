@@ -16,23 +16,40 @@ struct TideView: View {
   // MARK: Internal
 
   @State var weatherData: [WeatherHour]
-
-  //  let selectedAnnotaion: MKPointAnnotation?
+  var chartColor: Color = .pacificBlue.opacity(0.5)
 
   var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 4) {
-        Chart(weatherData) { weatherHour in
+    VStack {
+      Spacer()
+      ScrollView(.horizontal, showsIndicators: false) {
+        VStack {
+          Chart(weatherData) { weatherHour in
 
-          LineMark(
-            x: .value("time", weatherHour.time),
-            y: .value("waveHeight", weatherHour.waveHeight.average))
+            AreaMark(
+              x: .value("time", weatherHour.time),
+              y: .value("waveHeight", Double(weatherHour.waveHeight.average) ?? 0))
+              .foregroundStyle(gradient)
+              .interpolationMethod(.catmullRom)
+
+            LineMark(
+              x: .value("time", weatherHour.time),
+              y: .value("waveHeight", Double(weatherHour.waveHeight.average) ?? 0))
+              .lineStyle(.init(lineWidth: 5))
+              .foregroundStyle(Color.pacificBlue.gradient)
+              .interpolationMethod(.cardinal)
+          }
+          .padding(.horizontal, -25) // clip to the left
+          .ignoresSafeArea()
+          .chartYScale(domain: 0.5...1.2)
+          .chartYAxis { }
+          .chartXAxis { }
+          .frame(width: 25 * CGFloat(weatherData.count), height: 500)
         }
-        .padding(.horizontal)
+        .onAppear {
+          fetchWeatherData()
+        }
       }
-      .onAppear {
-        fetchWeatherData()
-      }
+      .ignoresSafeArea()
     }
   }
 
@@ -40,10 +57,24 @@ struct TideView: View {
 
   private let networkManager = NetworkManager()
 
+  //  let selectedAnnotaion: MKPointAnnotation?
+  private var gradient: Gradient {
+    var colors = [chartColor]
+
+    colors.append(chartColor.opacity(0))
+
+    return Gradient(colors: colors)
+  }
+
   private func fetchWeatherData() {
-      let networkManager = NetworkManager()
+    let networkManager = NetworkManager()
+    DispatchQueue.main.async {
       weatherData = networkManager.decodeJSON().hours
+      for weather in weatherData {
+        print(weather.waveHeight.average)
+      }
     }
+  }
 
 }
 
