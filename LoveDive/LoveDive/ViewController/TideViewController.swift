@@ -125,7 +125,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   private var currentPage: Int? = nil
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
 
-
 }
 
 // MARK: DivingSiteDelegate
@@ -309,7 +308,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let tideView = TideView(tideData: networkManager.decodeJSON().data)
+    let tideView = TideView(seaLevel: networkManager.decodeJSON().data)
     let hostingController = UIHostingController(rootView: tideView)
     hostingController.title = annotations[indexPath.row].title
     navigationController?.navigationBar.tintColor = .pacificBlue

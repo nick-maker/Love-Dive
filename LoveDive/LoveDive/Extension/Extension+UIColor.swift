@@ -50,8 +50,12 @@ extension Color {
     Color(red: 0.02, green: 0.2, blue: 0.325)
   }
 
+  static var deepBlue: Color {
+    Color(red: 0.2, green: 0.24, blue: 0.27).opacity(0.5)
+  }
+
   static var paleGray: Color {
     Color(red: 224 / 253, green: 224 / 253, blue: 224 / 253)
   }
-
+  
 }

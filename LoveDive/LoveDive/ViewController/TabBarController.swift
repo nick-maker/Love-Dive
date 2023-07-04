@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - TabBarController
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
   let healthKitManager = HealthKitManger()
   let cloudKitVM = CloudKitViewModel()
@@ -18,12 +18,29 @@ class TabBarController: UITabBarController {
     super.viewDidLoad()
 //    healthKitManager.delegate = self
 //    healthKitManager.requestHealthKitPermissions()
-
     cloudKitVM.getiCloudStatus()
     cloudKitVM.requestPermission()
+    self.delegate = self
   }
-}
 
+//  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//    let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController)!
+//    if selectedIndex == 3 {
+//      //      if let activityVC = self.navigationController?.viewControllers.first(where: { vc in
+//      //        vc = ActivitiesViewController {
+//      //          vc.setContentScrollView(contentOffset.zero, animated: animated)
+//      //        }
+//      //      })
+//      if let navigationController = viewController as? UINavigationController,
+//         let activityVC = navigationController.viewControllers.first(where: { $0 is ActivitiesViewController }) as? ActivitiesViewController {
+//        activityVC.setContentScrollView(.zero, animated: true)
+//      }
+//    }
+//  }
+
+
+
+}
 // MARK: HealthManagerDelegate
 
 // extension TabBarController: HealthManagerDelegate {

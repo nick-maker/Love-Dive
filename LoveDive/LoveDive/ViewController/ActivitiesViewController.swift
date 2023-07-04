@@ -308,6 +308,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
   }
 
 }
+// MARK: Compositional Layout
 
 extension ActivitiesViewController {
 
@@ -340,3 +341,20 @@ extension ActivitiesViewController: HealthManagerDelegate {
   }
 
 }
+
+//extension ActivitiesViewController: UITabBarControllerDelegate {
+//
+////  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+////          let tabBarIndex = tabBarController.selectedIndex
+////          if tabBarIndex == 0 {
+////              //do your stuff
+////          }
+////     }
+//
+//  func setContentScrollView(_ contentOffset: CGPoint, animated: Bool) {
+//    collectionView.reloadData()
+//    collectionView.layoutIfNeeded()
+//    collectionView.setContentOffset(contentOffset, animated: animated)
+//  }
+//
+//}
