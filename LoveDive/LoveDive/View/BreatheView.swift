@@ -51,7 +51,7 @@ struct BreatheView: View {
               .stroke(
                 colorScheme == .dark ? Color.darkBlue : Color.pacificBlue.opacity(0.5),
                 style: StrokeStyle(
-                  lineWidth: 15,
+                  lineWidth: 12,
                   lineCap: .round))
               .padding(10)
 
@@ -61,7 +61,7 @@ struct BreatheView: View {
               .stroke(
                 Color.pacificBlue.gradient,
                 style: StrokeStyle(
-                  lineWidth: 15,
+                  lineWidth: 12,
                   lineCap: .round))
               .padding(10)
 

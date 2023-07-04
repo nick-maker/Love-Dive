@@ -13,6 +13,7 @@
 		060146472A3B53EB003001EE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146462A3B53EB003001EE /* Config.swift */; };
 		060146492A3B57C7003001EE /* TideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146482A3B57C7003001EE /* TideCell.swift */; };
 		060320512A44ACC50001FF12 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060320502A44ACC50001FF12 /* ChartView.swift */; };
+		06356B442A544A2500C786B0 /* SeaLevel.json in Resources */ = {isa = PBXBuildFile; fileRef = 06356B432A544A2500C786B0 /* SeaLevel.json */; };
 		063BA8F02A41BB9A00711932 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 063BA8EF2A41BB9A00711932 /* IQKeyboardManagerSwift */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F42A42F7F100711932 /* SectionDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F32A42F7F100711932 /* SectionDecorationView.swift */; };
@@ -55,6 +56,7 @@
 		0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC722A4000BD00BCC367 /* TabBarController.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
+		069C4A4F2A53B31500D8D8AC /* tide.json in Resources */ = {isa = PBXBuildFile; fileRef = 069C4A4E2A53B31500D8D8AC /* tide.json */; };
 		06AD89B72A44210400E6C409 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* SectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
 		06AFC0462A4EB90F007CB1E6 /* TimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */; };
@@ -97,6 +99,7 @@
 		060146462A3B53EB003001EE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		060146482A3B57C7003001EE /* TideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideCell.swift; sourceTree = "<group>"; };
 		060320502A44ACC50001FF12 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		06356B432A544A2500C786B0 /* SeaLevel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SeaLevel.json; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F32A42F7F100711932 /* SectionDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SectionDecorationView.swift; path = LoveDive/View/SectionDecorationView.swift; sourceTree = SOURCE_ROOT; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		0681DC722A4000BD00BCC367 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		069C4A4E2A53B31500D8D8AC /* tide.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tide.json; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
 		06AFC04D2A4F456B007CB1E6 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
 				064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */,
+				069C4A4E2A53B31500D8D8AC /* tide.json */,
+				06356B432A544A2500C786B0 /* SeaLevel.json */,
 				06AFC0562A52C2FF007CB1E6 /* response.json */,
 				064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
@@ -415,9 +421,11 @@
 				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */,
 				06AFC0572A52C300007CB1E6 /* response.json in Resources */,
+				06356B442A544A2500C786B0 /* SeaLevel.json in Resources */,
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
 				064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */,
 				067833C42A39D8B5000642F2 /* Main.storyboard in Resources */,
+				069C4A4F2A53B31500D8D8AC /* tide.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,7 +759,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -779,7 +787,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

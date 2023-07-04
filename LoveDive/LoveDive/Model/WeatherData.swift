@@ -88,3 +88,35 @@ struct WindSpeedData: Codable {
     return String(format: "%.2f", average)
   }
 }
+
+// MARK: - TideData
+
+struct TideData: Codable {
+  let data: [SeaLevel]
+}
+
+// MARK: - TideHour
+
+struct TideHour: Codable, Identifiable {
+  var id = UUID().uuidString
+  var time: String
+  let type: String
+  var height: Double
+
+  enum CodingKeys: String, CodingKey {
+    case time
+    case type
+    case height
+  }
+}
+
+struct SeaLevel: Codable, Identifiable {
+  var id = UUID().uuidString
+  var sg: Double
+  var time: String
+
+  enum CodingKeys: String, CodingKey {
+    case sg
+    case time
+  }
+}

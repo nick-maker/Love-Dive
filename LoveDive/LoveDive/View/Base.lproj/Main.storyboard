@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -87,7 +88,9 @@
         <scene sceneID="FKM-IQ-GuR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mWs-sG-Mrg" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="sun.haze" catalog="system" selectedImage="sun.haze.fill" id="wcO-rK-Qxe"/>
+                    <tabBarItem key="tabBarItem" title="Explore" selectedImage="magnifyingglass" catalog="system" id="wcO-rK-Qxe">
+                        <imageReference key="image" image="magnifyingglass" catalog="system" variableValue="1"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A1l-IP-2FF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -106,7 +109,10 @@
         <scene sceneID="OS6-xA-exX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Fg-hs-5v7" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Breathe" image="circle.and.line.horizontal" catalog="system" selectedImage="circle.and.line.horizontal.fill" id="Sg3-os-GHY"/>
+                    <tabBarItem key="tabBarItem" title="Breathe" id="Sg3-os-GHY">
+                        <imageReference key="image" image="circle.and.line.horizontal" catalog="system"/>
+                        <imageReference key="selectedImage" image="circle.and.line.horizontal.fill" catalog="system"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfA-uO-8Dj">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -157,11 +163,11 @@
             </objects>
             <point key="canvasLocation" x="1651" y="-1968"/>
         </scene>
-        <!--Profile-->
+        <!--Home-->
         <scene sceneID="MsE-YB-2oc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GLm-fQ-Jnz" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="5dR-51-sM2"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="sun.haze" catalog="system" selectedImage="sun.haze.fill" id="5dR-51-sM2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hZu-Tf-ZZF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -182,8 +188,7 @@
         <image name="chart.bar.fill" catalog="system" width="128" height="90"/>
         <image name="circle.and.line.horizontal" catalog="system" width="128" height="88"/>
         <image name="circle.and.line.horizontal.fill" catalog="system" width="128" height="88"/>
-        <image name="person" catalog="system" width="128" height="121"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="sun.haze" catalog="system" width="128" height="118"/>
         <image name="sun.haze.fill" catalog="system" width="128" height="118"/>
         <namedColor name="AccentColor">

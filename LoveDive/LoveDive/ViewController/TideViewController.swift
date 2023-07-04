@@ -40,7 +40,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    navigationController?.tabBarController?.tabBar.backgroundColor = .systemBackground
     locationManager.errorPresentationTarget = self
     divingSiteManager.delegate = self
     networkManager.delegate = self
@@ -309,12 +309,15 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let tideView = TideView(weatherData: networkManager.decodeJSON().hours)
+    let tideView = TideView(tideData: networkManager.decodeJSON().data)
     let hostingController = UIHostingController(rootView: tideView)
     hostingController.title = annotations[indexPath.row].title
     navigationController?.navigationBar.tintColor = .pacificBlue
-    navigationController?.tabBarController?.tabBar.isHidden = true
+    navigationController?.tabBarController?.tabBar.backgroundColor = .clear
+    navigationController?.tabBarController?.tabBar.isTranslucent = true
     navigationItem.backButtonTitle = ""
+    navigationController?.tabBarController?.tabBar.backgroundImage = UIImage()
+    navigationController?.tabBarController?.tabBar.shadowImage = UIImage()
     navigationController?.pushViewController(hostingController, animated: true)
   }
 

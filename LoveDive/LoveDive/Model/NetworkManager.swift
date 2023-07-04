@@ -72,20 +72,20 @@ class NetworkManager {
     }
   }
 
-  func decodeJSON() -> WeatherData {
-    guard let url = Bundle.main.url(forResource: "response", withExtension: "json") else {
+  func decodeJSON() -> TideData {
+    guard let url = Bundle.main.url(forResource: "SeaLevel", withExtension: "json") else {
       print("Resources not found")
-      return WeatherData(hours: [])
+      return TideData(data: [])
     }
     do {
       let data = try Data(contentsOf: url)
       let decoder = JSONDecoder()
-      let decodedData = try decoder.decode(WeatherData.self, from: data)
+      let decodedData = try decoder.decode(TideData.self, from: data)
       let jsonString = String(data: data, encoding: .utf8)
       return decodedData
     } catch {
       print("Error decoding JSON: \(error.localizedDescription)")
-      return WeatherData(hours: [])
+      return TideData(data: [])
     }
   }
 
