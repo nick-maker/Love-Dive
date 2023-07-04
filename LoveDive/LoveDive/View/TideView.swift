@@ -8,6 +8,7 @@
 import Charts
 import MapKit
 import SwiftUI
+import UIKit
 
 // MARK: - TideView
 
@@ -47,10 +48,9 @@ struct TideView: View {
           }
           .onDisappear {
             if let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController {
-              tabBar.tabBar.isTranslucent = false
-              tabBar.tabBar.backgroundColor = nil
-              tabBar.tabBar.backgroundImage = nil
-              tabBar.tabBar.shadowImage = nil
+              tabBar.tabBar.backgroundColor = UIColor.systemBackground
+              tabBar.tabBar.backgroundImage = UIImage().withRenderingMode(.alwaysOriginal)
+              tabBar.tabBar.shadowImage = UIImage().withRenderingMode(.alwaysOriginal)
             }
           }
         }

@@ -313,7 +313,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     hostingController.title = annotations[indexPath.row].title
     navigationController?.navigationBar.tintColor = .pacificBlue
     navigationController?.tabBarController?.tabBar.backgroundColor = .clear
-    navigationController?.tabBarController?.tabBar.isTranslucent = true
+
     navigationItem.backButtonTitle = ""
     navigationController?.tabBarController?.tabBar.backgroundImage = UIImage()
     navigationController?.tabBarController?.tabBar.shadowImage = UIImage()
