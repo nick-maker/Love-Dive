@@ -20,27 +20,34 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 //    healthKitManager.requestHealthKitPermissions()
     cloudKitVM.getiCloudStatus()
     cloudKitVM.requestPermission()
-    self.delegate = self
+    delegate = self
   }
 
-//  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//    let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController)!
-//    if selectedIndex == 3 {
-//      //      if let activityVC = self.navigationController?.viewControllers.first(where: { vc in
-//      //        vc = ActivitiesViewController {
-//      //          vc.setContentScrollView(contentOffset.zero, animated: animated)
-//      //        }
-//      //      })
-//      if let navigationController = viewController as? UINavigationController,
-//         let activityVC = navigationController.viewControllers.first(where: { $0 is ActivitiesViewController }) as? ActivitiesViewController {
-//        activityVC.setContentScrollView(.zero, animated: true)
-//      }
-//    }
-//  }
+  func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    if
+      tabBarController.selectedViewController === viewController,
+      let handler = viewController as? TabBarReselectHandling
+    {
+      handler.handleReselect()
+    }
 
-
+    guard let navigationController = viewController as? UINavigationController else { return true }
+    guard
+      navigationController.viewControllers.count <= 1,
+      let handler = navigationController.viewControllers.first as? TabBarReselectHandling
+    else { return true }
+    handler.handleReselect()
+    return true
+  }
 
 }
+
+// MARK: - TabBarReselectHandling
+
+protocol TabBarReselectHandling {
+  func handleReselect()
+}
+
 // MARK: HealthManagerDelegate
 
 // extension TabBarController: HealthManagerDelegate {

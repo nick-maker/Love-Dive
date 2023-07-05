@@ -45,9 +45,20 @@ struct TideView: View {
           .onAppear {
             viewSize = proxy.size.width
             fetchWeatherData()
+            if
+              let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
+                .rootViewController as? UITabBarController
+            {
+              tabBar.tabBar.backgroundColor = UIColor.clear
+              tabBar.tabBar.backgroundImage = UIImage()
+              tabBar.tabBar.shadowImage = UIImage()
+            }
           }
           .onDisappear {
-            if let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController {
+            if
+              let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
+                .rootViewController as? UITabBarController
+            {
               tabBar.tabBar.backgroundColor = UIColor.systemBackground
               tabBar.tabBar.backgroundImage = UIImage().withRenderingMode(.alwaysOriginal)
               tabBar.tabBar.shadowImage = UIImage().withRenderingMode(.alwaysOriginal)
@@ -60,7 +71,6 @@ struct TideView: View {
   }
 
   var chart: some View {
-
     let minHeight = seaLevel.min(by: { $0.sg < $1.sg })?.sg ?? 0
     let maxHeight = seaLevel.max(by: { $1.sg > $0.sg })?.sg ?? 0
 
@@ -70,70 +80,68 @@ struct TideView: View {
         x: .value("time", tideHour.time),
         yStart: .value("minValue", minHeight * 2.5),
         yEnd: .value("seaLevel", tideHour.sg))
-      .foregroundStyle(gradient)
-      .interpolationMethod(.cardinal)
+        .foregroundStyle(gradient)
+        .interpolationMethod(.cardinal)
 
       LineMark(
         x: .value("time", tideHour.time),
         y: .value("seaLevel", tideHour.sg))
-      .lineStyle(.init(lineWidth: 3.5))
-      .foregroundStyle(Color.pacificBlue.gradient)
-      .interpolationMethod(.cardinal)
+        .lineStyle(.init(lineWidth: 3.5))
+        .foregroundStyle(Color.pacificBlue.gradient)
+        .interpolationMethod(.cardinal)
 
       if let selectedElement, selectedElement.id == tideHour.id {
-
         BarMark(
           x: .value("time", selectedElement.time),
-          yStart: .value("seaLevel", selectedElement.sg ),
-          yEnd: .value("BPM Max", maxHeight * 1.1 ),
-          width: .fixed(2)
-        )
-        .clipShape(Capsule())
-        .foregroundStyle(gradient)
-        .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
+          yStart: .value("seaLevel", selectedElement.sg),
+          yEnd: .value("BPM Max", maxHeight * 1.1),
+          width: .fixed(2))
+          .clipShape(Capsule())
+          .foregroundStyle(gradient)
+          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
 
-        .annotation(position: .top) {
-          VStack() {
-            Text(String(selectedElement.sg) + " m")
-              .font(.system(size: 16, design: .rounded))
-              .bold()
-              .foregroundColor(.pacificBlue)
+          .annotation(position: .top) {
+            VStack {
+              Text(String(selectedElement.sg) + " m")
+                .font(.system(size: 16, design: .rounded))
+                .bold()
+                .foregroundColor(.pacificBlue)
 
-            Text(dateFormatter.date(from: selectedElement.time)!.formatted())
-              .font(.footnote)
+              Text(dateFormatter.date(from: selectedElement.time)!.formatted())
+                .font(.footnote)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
           }
-          .padding(.horizontal, 10)
-          .padding(.vertical, 4)
-        }
       }
     }
     .chartOverlay { proxy in
-      GeometryReader { geometry in
+      GeometryReader { _ in
         Rectangle().fill(.clear).contentShape(Rectangle())
           .gesture(
             DragGesture()
               .onChanged { value in
                 let location = value.location
                 if let time: String = proxy.value(atX: location.x) {
-                  if let currentItem = seaLevel.first(where: { tideHour in
-                    tideHour.time == time
-                  }) {
-                    self.selectedElement = currentItem
-                    self.plotWidth = proxy.plotAreaSize.width
+                  if
+                    let currentItem = seaLevel.first(where: { tideHour in
+                      tideHour.time == time
+                    })
+                  {
+                    selectedElement = currentItem
+                    plotWidth = proxy.plotAreaSize.width
                   }
                 }
               }
-              .onEnded { value in
-                self.selectedElement = nil
-              }
-          )
+              .onEnded { _ in
+                selectedElement = nil
+              })
       }
     }
     .chartXAxis { }
     .chartYAxis { }
     .chartYScale(domain: minHeight * 2...maxHeight * 1.6)
     .accentColor(.pacificBlue)
-
   }
 
   // MARK: Private

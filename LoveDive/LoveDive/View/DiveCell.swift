@@ -7,13 +7,16 @@
 
 import UIKit
 
-class DiveCell: ShadowCollectionViewCell {
+// MARK: - DiveCell
+
+class DiveCell: ShadowCollectionViewCell, UIGestureRecognizerDelegate {
 
   // MARK: Lifecycle
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
+    setupGesture()
   }
 
   required init?(coder _: NSCoder) {
@@ -24,9 +27,45 @@ class DiveCell: ShadowCollectionViewCell {
 
   static let reuseIdentifier = "\(DiveCell.self)"
 
+  weak var delegate: DiveCellDelegate?
+  var isGestureCancelled = false
+
   var waterDepthLabel = UILabel()
   var dateLabel = UILabel()
   var arrowImage = UIImageView()
+
+  func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
+    true
+  }
+
+  @objc
+  func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+    switch sender.state {
+    case .began:
+      transform = .identity
+      UIView.animate(withDuration: 0.25) {
+        self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        self.contentView.backgroundColor = .tapColor
+      }
+      isGestureCancelled = false
+    case .cancelled, .changed:
+      UIView.animate(withDuration: 0.25) {
+        self.transform = .identity
+        self.contentView.backgroundColor = .dynamicColor
+      }
+      isGestureCancelled = true
+    case .ended:
+      UIView.animate(withDuration: 0.25) {
+        self.transform = .identity
+        self.contentView.backgroundColor = .dynamicColor
+      }
+      if !isGestureCancelled {
+        delegate?.cellLongPressEnded(self)
+      }
+    default:
+      break
+    }
+  }
 
   // MARK: Private
 
@@ -56,4 +95,19 @@ class DiveCell: ShadowCollectionViewCell {
       arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
     ])
   }
+
+  private func setupGesture() {
+    let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+    pressGesture.minimumPressDuration = 0.08
+    pressGesture.allowableMovement = 5
+    pressGesture.delegate = self
+    contentView.addGestureRecognizer(pressGesture)
+  }
+
+}
+
+// MARK: - DiveCellDelegate
+
+protocol DiveCellDelegate: AnyObject {
+  func cellLongPressEnded(_ cell: DiveCell)
 }

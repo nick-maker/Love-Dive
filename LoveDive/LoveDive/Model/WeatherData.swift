@@ -110,6 +110,8 @@ struct TideHour: Codable, Identifiable {
   }
 }
 
+// MARK: - SeaLevel
+
 struct SeaLevel: Codable, Identifiable {
   var id = UUID().uuidString
   var sg: Double

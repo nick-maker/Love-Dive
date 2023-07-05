@@ -19,6 +19,14 @@ extension UIColor {
     }
   }
 
+  static var tapColor = UIColor { traits in
+    if traits.userInterfaceStyle == .dark {
+      return UIColor.darkGray
+    } else {
+      return UIColor.paleGray.withAlphaComponent(0.7)
+    }
+  }
+
   static var pacificBlue: UIColor {
     UIColor(red: 0.094, green: 0.643, blue: 0.882, alpha: 1)
   }
@@ -57,5 +65,5 @@ extension Color {
   static var paleGray: Color {
     Color(red: 224 / 253, green: 224 / 253, blue: 224 / 253)
   }
-  
+
 }

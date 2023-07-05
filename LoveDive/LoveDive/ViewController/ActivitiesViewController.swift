@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - ActivitiesViewController
 
-class ActivitiesViewController: UIViewController {
+class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   // MARK: Internal
 
@@ -259,6 +259,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
 
       cell.waterDepthLabel.attributedText = attributedText
       cell.dateLabel.text = divingLog.startTime.formatted()
+      cell.delegate = self
       return cell
     }
   }
@@ -307,7 +308,13 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
     }
   }
 
+  func cellLongPressEnded(_ cell: DiveCell) {
+    guard let indexPath = collectionView.indexPath(for: cell) else { return }
+    collectionView(collectionView, didSelectItemAt: indexPath)
+  }
+
 }
+
 // MARK: Compositional Layout
 
 extension ActivitiesViewController {
@@ -323,7 +330,6 @@ extension ActivitiesViewController {
         return AppLayouts.diveListSection()
       }
     }
-    layout.register(SectionDecorationView.self, forDecorationViewOfKind: "SectionBackground")
     collectionView.setCollectionViewLayout(layout, animated: true)
   }
 }
@@ -342,19 +348,18 @@ extension ActivitiesViewController: HealthManagerDelegate {
 
 }
 
-//extension ActivitiesViewController: UITabBarControllerDelegate {
-//
-////  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-////          let tabBarIndex = tabBarController.selectedIndex
-////          if tabBarIndex == 0 {
-////              //do your stuff
-////          }
-////     }
-//
-//  func setContentScrollView(_ contentOffset: CGPoint, animated: Bool) {
-//    collectionView.reloadData()
-//    collectionView.layoutIfNeeded()
-//    collectionView.setContentOffset(contentOffset, animated: animated)
-//  }
-//
-//}
+// MARK: TabBarReselectHandling
+
+extension ActivitiesViewController: TabBarReselectHandling {
+
+  func handleReselect() {
+    if collectionView.numberOfItems(inSection: 0) > 0 {
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+    }
+//    
+//    else {
+//      collectionView.setContentOffset(CGPoint(x: 0, y: -143), animated: true)
+//    }
+  }
+
+}
