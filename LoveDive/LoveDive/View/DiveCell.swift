@@ -38,35 +38,6 @@ class DiveCell: ShadowCollectionViewCell, UIGestureRecognizerDelegate {
     true
   }
 
-  @objc
-  func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
-    switch sender.state {
-    case .began:
-      transform = .identity
-      UIView.animate(withDuration: 0.25) {
-        self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        self.contentView.backgroundColor = .tapColor
-      }
-      isGestureCancelled = false
-    case .cancelled, .changed:
-      UIView.animate(withDuration: 0.25) {
-        self.transform = .identity
-        self.contentView.backgroundColor = .dynamicColor
-      }
-      isGestureCancelled = true
-    case .ended:
-      UIView.animate(withDuration: 0.25) {
-        self.transform = .identity
-        self.contentView.backgroundColor = .dynamicColor
-      }
-      if !isGestureCancelled {
-        delegate?.cellLongPressEnded(self)
-      }
-    default:
-      break
-    }
-  }
-
   // MARK: Private
 
   private func setupUI() {
@@ -103,6 +74,36 @@ class DiveCell: ShadowCollectionViewCell, UIGestureRecognizerDelegate {
     pressGesture.delegate = self
     contentView.addGestureRecognizer(pressGesture)
   }
+
+  @objc
+  private func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+    switch sender.state {
+    case .began:
+      transform = .identity
+      UIView.animate(withDuration: 0.25) {
+        self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        self.contentView.backgroundColor = .tapColor
+      }
+      isGestureCancelled = false
+    case .cancelled, .changed:
+      UIView.animate(withDuration: 0.25) {
+        self.transform = .identity
+        self.contentView.backgroundColor = .dynamicColor
+      }
+      isGestureCancelled = true
+    case .ended:
+      UIView.animate(withDuration: 0.25) {
+        self.transform = .identity
+        self.contentView.backgroundColor = .dynamicColor
+      }
+      if !isGestureCancelled {
+        delegate?.cellLongPressEnded(self)
+      }
+    default:
+      break
+    }
+  }
+
 
 }
 

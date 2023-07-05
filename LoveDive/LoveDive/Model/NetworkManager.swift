@@ -96,4 +96,3 @@ class NetworkManager {
 protocol WeatherDelegate: AnyObject {
   func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation)
 }
-

@@ -15,12 +15,12 @@ struct Provider: TimelineProvider {
     SimpleEntry(date: Date())
   }
 
-  func getSnapshot(in _: Context, completion: @escaping (SimpleEntry) -> ()) {
+  func getSnapshot(in _: Context, completion: @escaping (SimpleEntry) -> Void) {
     let entry = SimpleEntry(date: Date())
     completion(entry)
   }
 
-  func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+  func getTimeline(in _: Context, completion: @escaping (Timeline<Entry>) -> Void) {
     var entries: [SimpleEntry] = []
 
     // Generate a timeline consisting of five entries an hour apart, starting from the current date.

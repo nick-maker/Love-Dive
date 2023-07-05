@@ -354,12 +354,9 @@ extension ActivitiesViewController: TabBarReselectHandling {
 
   func handleReselect() {
     if collectionView.numberOfItems(inSection: 0) > 0 {
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+      collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
-//    
-//    else {
-//      collectionView.setContentOffset(CGPoint(x: 0, y: -143), animated: true)
-//    }
+    // if use setContentOffset, then set to CGPoint(x: 0, y: -143)
   }
 
 }

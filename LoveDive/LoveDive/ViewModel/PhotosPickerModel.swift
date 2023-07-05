@@ -100,7 +100,7 @@ class PhotosPickerModel: ObservableObject {
       var mainView,
       let filter = mainView.filter,
       let image = UIImage(data: imageData),
-      let _ = ciImage(from: image) else { return }
+      ciImage(from: image) != nil else { return }
 
     DispatchQueue.global(qos: .userInteractive).async {
       let context = CIContext()

@@ -5,7 +5,6 @@
 //  Created by Nick Liu on 2023/6/14.
 //
 
-import IQKeyboardManagerSwift
 import SwiftUI
 import UIKit
 
@@ -55,9 +54,7 @@ struct BreatheApp: App {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    IQKeyboardManager.shared.enable = true
-    IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-    return true
+    true
   }
 
   // MARK: UISceneSession Lifecycle

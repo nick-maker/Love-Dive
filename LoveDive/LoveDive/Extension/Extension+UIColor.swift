@@ -66,4 +66,8 @@ extension Color {
     Color(red: 224 / 253, green: 224 / 253, blue: 224 / 253)
   }
 
+  static var lightBlue: Color {
+    Color(red: 0.89, green: 0.931, blue: 0.958)
+  }
+
 }

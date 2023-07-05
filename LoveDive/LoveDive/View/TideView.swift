@@ -19,6 +19,7 @@ struct TideView: View {
   @State var seaLevel: [SeaLevel]
   @State var viewSize: CGFloat = 0.0
   @State private var selectedElement: SeaLevel?
+  @State private var currentElement: SeaLevel?
   @State private var plotWidth: CGFloat = 0.0
   @Environment(\.colorScheme) var colorScheme
   let dateFormatter = ISO8601DateFormatter()
@@ -45,24 +46,11 @@ struct TideView: View {
           .onAppear {
             viewSize = proxy.size.width
             fetchWeatherData()
-            if
-              let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
-                .rootViewController as? UITabBarController
-            {
-              tabBar.tabBar.backgroundColor = UIColor.clear
-              tabBar.tabBar.backgroundImage = UIImage()
-              tabBar.tabBar.shadowImage = UIImage()
-            }
+            setTabBar()
+            getCurrentElement()
           }
           .onDisappear {
-            if
-              let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
-                .rootViewController as? UITabBarController
-            {
-              tabBar.tabBar.backgroundColor = UIColor.systemBackground
-              tabBar.tabBar.backgroundImage = UIImage().withRenderingMode(.alwaysOriginal)
-              tabBar.tabBar.shadowImage = UIImage().withRenderingMode(.alwaysOriginal)
-            }
+            deSetTabBar()
           }
         }
       }
@@ -73,6 +61,11 @@ struct TideView: View {
   var chart: some View {
     let minHeight = seaLevel.min(by: { $0.sg < $1.sg })?.sg ?? 0
     let maxHeight = seaLevel.max(by: { $1.sg > $0.sg })?.sg ?? 0
+
+    var calendar = Calendar.current
+    calendar.timeZone = TimeZone(identifier: "UTC")!
+    let hour = calendar.component(.hour, from: Date())
+    @State var positionForNewColor: CGFloat = CGFloat(hour) / 240
 
     return Chart(seaLevel) { tideHour in
 
@@ -87,8 +80,37 @@ struct TideView: View {
         x: .value("time", tideHour.time),
         y: .value("seaLevel", tideHour.sg))
         .lineStyle(.init(lineWidth: 3.5))
-        .foregroundStyle(Color.pacificBlue.gradient)
+        .foregroundStyle(
+          .linearGradient(
+            Gradient(
+              stops: [
+                .init(color: .lightBlue, location: 0),
+                .init(color: .lightBlue, location: positionForNewColor),
+                .init(color: .pacificBlue, location: positionForNewColor),
+                .init(color: .pacificBlue, location: 1),
+              ]),
+            startPoint: .leading,
+            endPoint: .trailing)
+        )
         .interpolationMethod(.cardinal)
+
+      if let currentElement, currentElement.time == tideHour.time {
+
+        PointMark(
+            x: .value("time", currentElement.time),
+            y: .value("seaLevel", currentElement.sg)
+        )
+        .symbolSize(CGSize(width: 12, height: 12))
+        .foregroundStyle(Color.pacificBlue)
+
+        PointMark(
+            x: .value("time", currentElement.time),
+            y: .value("seaLevel", currentElement.sg)
+        )
+        .symbolSize(CGSize(width: 5, height: 5))
+        .foregroundStyle(.white)
+
+      }
 
       if let selectedElement, selectedElement.id == tideHour.id {
         BarMark(
@@ -98,7 +120,7 @@ struct TideView: View {
           width: .fixed(2))
           .clipShape(Capsule())
           .foregroundStyle(gradient)
-          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
+//          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
 
           .annotation(position: .top) {
             VStack {
@@ -124,11 +146,11 @@ struct TideView: View {
                 let location = value.location
                 if let time: String = proxy.value(atX: location.x) {
                   if
-                    let currentItem = seaLevel.first(where: { tideHour in
+                    let selectItem = seaLevel.first(where: { tideHour in
                       tideHour.time == time
                     })
                   {
-                    selectedElement = currentItem
+                    selectedElement = selectItem
                     plotWidth = proxy.plotAreaSize.width
                   }
                 }
@@ -161,6 +183,38 @@ struct TideView: View {
     let networkManager = NetworkManager()
     DispatchQueue.main.async {
       seaLevel = networkManager.decodeJSON().data
+    }
+  }
+
+  private func getCurrentElement() {
+    if
+      let currentItem = seaLevel.first(where: { tideHour in
+        tideHour.time == "2023-07-04T18:00:00+00:00" //Date().ISO8601Format()
+      }) {
+      currentElement = currentItem
+      print(currentItem)
+    }
+  }
+
+  private func setTabBar() {
+    if
+      let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
+        .rootViewController as? UITabBarController
+    {
+      tabBar.tabBar.backgroundColor = UIColor.clear
+      tabBar.tabBar.backgroundImage = UIImage()
+      tabBar.tabBar.shadowImage = UIImage()
+    }
+  }
+
+  private func deSetTabBar() {
+    if
+      let tabBar = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?
+        .rootViewController as? UITabBarController
+    {
+      tabBar.tabBar.backgroundColor = UIColor.systemBackground
+      tabBar.tabBar.backgroundImage = UIImage().withRenderingMode(.alwaysOriginal)
+      tabBar.tabBar.shadowImage = UIImage().withRenderingMode(.alwaysOriginal)
     }
   }
 

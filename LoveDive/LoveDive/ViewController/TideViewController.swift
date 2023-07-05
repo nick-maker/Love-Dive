@@ -164,7 +164,6 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
       // PLay with some animation and scrollOffest
       items.forEach { item in
-        let visibleItemCount = items.count
         let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
         let minScale: CGFloat = 0.8
         let maxScale: CGFloat = 1.0
@@ -384,7 +383,6 @@ extension TideViewController: WeatherDelegate {
 
     for annotation in visibleAnnotations {
       if let pointAnnotation = annotation as? MKPointAnnotation {
-        let key = "\(pointAnnotation.coordinate.latitude),\(pointAnnotation.coordinate.longitude)"
         networkManager.getCurrentWeatherData(
           lat: pointAnnotation.coordinate.latitude,
           lng: pointAnnotation.coordinate.longitude,

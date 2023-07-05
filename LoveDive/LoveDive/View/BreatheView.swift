@@ -57,7 +57,6 @@ struct BreatheView: View {
 
             Circle()
               .trim(from: 0, to: breatheModel.progress)
-//              .stroke(Color.pacificBlue.opacity(0.6), lineWidth: 7)
               .stroke(
                 Color.pacificBlue.gradient,
                 style: StrokeStyle(
@@ -117,18 +116,25 @@ struct BreatheView: View {
           }
           .padding(.bottom, 20)
         }
-        .onTapGesture {
-          //          breatheModel.progress = 0.5
-        }
+//        .onTapGesture {
+        //          breatheModel.progress = 0.5
+//        }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
       }
     }
     .sheet(isPresented: $isPresentingNewTimerView) {
-      NewTimerView()
-        .environmentObject(breatheModel)
-        .environmentObject(audioModel)
-        .presentationDetents([.fraction(0.35)])
-        .presentationCornerRadius(20)
+      if #available(iOS 16.4, *) {
+        NewTimerView()
+          .environmentObject(breatheModel)
+          .environmentObject(audioModel)
+          .presentationDetents([.fraction(0.35)])
+          .presentationCornerRadius(20)
+      } else {
+        NewTimerView()
+          .environmentObject(breatheModel)
+          .environmentObject(audioModel)
+          .presentationDetents([.fraction(0.35)])
+      }
     }
     .padding()
 //    .background {
@@ -146,13 +152,13 @@ struct BreatheView: View {
 //          }
 //          .ignoresSafeArea()
 //
-    ////        NewTimerView()
-    ////          .frame(maxHeight: .infinity, alignment: .bottom)
-    ////          .offset(y: breatheModel.addNewTimer ? 0 : 500)
-    ////        if breatheModel.addNewTimer {
-    ////          NewTimerView()
-    ////            .transition(.move(edge: .bottom))
-    ////        }
+    //        NewTimerView()
+    //          .frame(maxHeight: .infinity, alignment: .bottom)
+    //          .offset(y: breatheModel.addNewTimer ? 0 : 500)
+    //        if breatheModel.addNewTimer {
+    //          NewTimerView()
+    //            .transition(.move(edge: .bottom))
+    //        }
 //      }
 //      .animation(.easeInOut, value: breatheModel.addNewTimer)
 //    })
