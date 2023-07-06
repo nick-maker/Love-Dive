@@ -30,8 +30,9 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   let locationManager = LocationManager()
   var weatherData = [WeatherHour]()
   var locations = [Location]()
+  var visibleLocations = [Location]()
   var annotations: [MKPointAnnotation] = []
-  var selectedAnnotaion: MKPointAnnotation?
+  var selectedAnnotation: MKPointAnnotation?
   var containerOriginalCenter = CGPoint.zero
   var containerDownOffset = CGFloat()
   var containerUp = CGPoint.zero
@@ -109,10 +110,16 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     ]
     let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     annotations = visibleAnnotations.compactMap { $0 as? MKPointAnnotation }
+    visibleLocations = locations.filter { location in
+            let locationCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            return visibleMapRect.contains(MKMapPoint(locationCoordinate))
+        }
+
     updateWeatherDataForVisibleAnnotations()
     // Reload the collection view data
     collectionView.reloadData()
-    guard let index = annotations.firstIndex(where: { $0 === selectedAnnotaion }) else {
+    guard let selectedLocation = selectedAnnotation?.coordinate else { return }
+    guard let index = visibleLocations.firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)"+"\(selectedLocation.longitude.description)" }) else {
       return
     }
     let indexPath = IndexPath(item: index, section: 0)
@@ -277,7 +284,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   // Collection view data source methods
   func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-    annotations.count
+    visibleLocations.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -286,18 +293,17 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
         .dequeueReusableCell(withReuseIdentifier: TideCell.reuseIdentifier, for: indexPath) as? TideCell
     else { fatalError("Cannot Down casting") }
 
-    let annotation = annotations[indexPath.row]
-    cell.locationLabel.text = annotation.title
+//    let annotation = annotations[indexPath.row]
+//    cell.locationLabel.text = annotation.title
 
     let location = locations[indexPath.row]
+    cell.locationLabel.text = location.name
     if let weather = location.weather?.first {
       cell.airTemptText.text = weather.airTemperature.average
       cell.waterTemptText.text = weather.waterTemperature.average
       cell.windSpeedText.text = weather.windSpeed.average
       cell.waveHeightText.text = weather.waveHeight.average
     } else {
-      // Handle the case when there is no weather data available for the location
-      // You can update the cell with placeholder values or handle it as per your requirement
       cell.airTemptText.text = "-"
       cell.waterTemptText.text = "-"
       cell.windSpeedText.text = "-"
@@ -307,12 +313,12 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let tideView = TideView(seaLevel: networkManager.decodeJSON().data)
+
+    let tideView = TideView(seaLevel: networkManager.decodeJSON().data, location: locations[indexPath.row])
     let hostingController = UIHostingController(rootView: tideView)
-    hostingController.title = annotations[indexPath.row].title
+//    hostingController.title = annotations[indexPath.row].title
     navigationController?.navigationBar.tintColor = .pacificBlue
     navigationController?.tabBarController?.tabBar.backgroundColor = .clear
-
     navigationItem.backButtonTitle = ""
     navigationController?.tabBarController?.tabBar.backgroundImage = UIImage()
     navigationController?.tabBarController?.tabBar.shadowImage = UIImage()
@@ -337,11 +343,12 @@ extension TideViewController: WeatherDelegate {
     guard let annotation = view.annotation as? MKPointAnnotation else {
       return
     }
-
-    guard let index = annotations.firstIndex(where: { $0 === annotation }) else {
+    print("\(annotation.coordinate.latitude.description)"+"\(annotation.coordinate.longitude.description)")
+    print(visibleLocations[0].id)
+    guard let index = visibleLocations.firstIndex(where: { $0.id == "\(annotation.coordinate.latitude.description)"+"\(annotation.coordinate.longitude.description)" }) else {
       return
     }
-    selectedAnnotaion = annotation
+    selectedAnnotation = annotation
     let indexPath = IndexPath(item: index, section: 0)
     // if set true, would fire section.visibleItemsInvalidationHandler
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)

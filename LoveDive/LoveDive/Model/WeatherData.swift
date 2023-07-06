@@ -113,12 +113,12 @@ struct TideHour: Codable, Identifiable {
 // MARK: - SeaLevel
 
 struct SeaLevel: Codable, Identifiable {
-  var id = UUID().uuidString
-  var sg: Double
   var time: String
+  var sg: Double
+  var id: String { "\(time)" }
 
   enum CodingKeys: String, CodingKey {
-    case sg
     case time
+    case sg
   }
 }

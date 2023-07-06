@@ -47,6 +47,16 @@ extension UIColor {
     UIColor(red: 224 / 253, green: 224 / 253, blue: 224 / 253, alpha: 1)
   }
 
+  static var dynamicTextColor: UIColor {
+    let hour = Calendar.current.component(.hour, from: Date())
+    switch hour {
+    case 16..<24:
+      return white
+    default:
+      return black
+    }
+  }
+
 }
 
 extension Color {
@@ -59,7 +69,7 @@ extension Color {
   }
 
   static var deepBlue: Color {
-    Color(red: 0.2, green: 0.24, blue: 0.27).opacity(0.5)
+    Color(red: 0.2, green: 0.24, blue: 0.27)
   }
 
   static var paleGray: Color {

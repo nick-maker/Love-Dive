@@ -40,6 +40,7 @@
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
 		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
 		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
+		067B6E492A56FEE300CE748F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B6E482A56FEE300CE748F /* Blur.swift */; };
 		068034242A4DCA4B004DF9C3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064F766E2A4DC600003DC830 /* WidgetKit.framework */; };
 		068034252A4DCA4B004DF9C3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064F76702A4DC600003DC830 /* SwiftUI.framework */; };
 		068034282A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068034272A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift */; };
@@ -65,7 +66,6 @@
 		06AFC0532A51532D007CB1E6 /* ShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0522A51532D007CB1E6 /* ShadowCell.swift */; };
 		06AFC0552A52BF00007CB1E6 /* TideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AFC0542A52BF00007CB1E6 /* TideView.swift */; };
 		06AFC0572A52C300007CB1E6 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 06AFC0562A52C2FF007CB1E6 /* response.json */; };
-		06B48D6F2A55736400D67260 /* LogoSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B48D6E2A55736400D67260 /* LogoSwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +129,7 @@
 		067833CA2A39D8B6000642F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
 		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		067B6E482A56FEE300CE748F /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		068034232A4DCA4B004DF9C3 /* LoveDive WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LoveDive WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		068034272A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveDive_WidgetBundle.swift; sourceTree = "<group>"; };
 		068034292A4DCA4B004DF9C3 /* TimerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerAttributes.swift; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		06AFC0522A51532D007CB1E6 /* ShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCell.swift; sourceTree = "<group>"; };
 		06AFC0542A52BF00007CB1E6 /* TideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TideView.swift; path = LoveDive/View/TideView.swift; sourceTree = SOURCE_ROOT; };
 		06AFC0562A52C2FF007CB1E6 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
-		06B48D6E2A55736400D67260 /* LogoSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,7 +296,7 @@
 				06AD89B62A44210400E6C409 /* SectionHeader.swift */,
 				06AFC0542A52BF00007CB1E6 /* TideView.swift */,
 				060320502A44ACC50001FF12 /* ChartView.swift */,
-				06B48D6E2A55736400D67260 /* LogoSwiftUIView.swift */,
+				067B6E482A56FEE300CE748F /* Blur.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
-				06B48D6F2A55736400D67260 /* LogoSwiftUIView.swift in Sources */,
+				067B6E492A56FEE300CE748F /* Blur.swift in Sources */,
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,

@@ -17,10 +17,13 @@ struct TideView: View {
   // MARK: Internal
 
   @State var seaLevel: [SeaLevel]
+  @State var location: Location?
   @State var viewSize: CGFloat = 0.0
   @State private var selectedElement: SeaLevel?
   @State private var currentElement: SeaLevel?
   @State private var plotWidth: CGFloat = 0.0
+  @State var scrollSpot: String = ""
+
   @Environment(\.colorScheme) var colorScheme
   let dateFormatter = ISO8601DateFormatter()
   var chartColor: Color = .pacificBlue.opacity(0.5)
@@ -34,31 +37,123 @@ struct TideView: View {
 
   var body: some View {
     GeometryReader { proxy in
-      VStack {
-        Spacer()
-        ScrollView(.horizontal, showsIndicators: false) {
-          VStack {
-            chart
+      ZStack {
+        LinearGradient(gradient: Gradient(colors: colorsForCurrentTime()), startPoint: .topLeading, endPoint: .bottomTrailing)
+        VStack {
+
+          if let location = location {
+            Text(location.name)
+            .font(.system(size: 25, weight: .semibold, design: .rounded))
+            .foregroundColor(.white)
+            .padding(.vertical, 100)
+        }
+//          Spacer(minLength: 200)
+          titleView
+            .background(Blur(radius: 50, opaque: true))
+            .background(.white.opacity(0.05))
+            .cornerRadius(20)
+          Spacer()
+          ScrollViewReader { scrollPosition in
+            ScrollView(.horizontal, showsIndicators: false) {
+              ZStack {
+                HStack(spacing: 0) {
+                  ForEach(seaLevel) { tideHour in
+                    Rectangle()
+                      .fill(.clear)
+                      .frame(maxWidth: .infinity, maxHeight: 0)
+                      .id(tideHour.time)
+                  }
+                }
+                chartView
+              }
+              .padding(.horizontal, -100)
+              .padding(.bottom, 10)
+              .frame(width: viewSize / 12 * CGFloat(seaLevel.count), height: 350)
+              .onAppear {
+                viewSize = proxy.size.width
+                fetchWeatherData()
+                setTabBar()
+                getCurrentElement()
+                scrollPosition.scrollTo(currentElement?.time, anchor: .center)
+              }
+              .onDisappear {
+                deSetTabBar()
+              }
+            }
+            .onChange(of: scrollSpot) { _ in
+              withAnimation {
+                scrollPosition.scrollTo(scrollSpot, anchor: .center)
+                scrollSpot = ""
+              }
+            }
           }
-          .padding(.horizontal, -100)
-          .padding(.bottom, 10)
-          .frame(width: viewSize / 12 * CGFloat(seaLevel.count), height: 350)
-          .onAppear {
-            viewSize = proxy.size.width
-            fetchWeatherData()
-            setTabBar()
-            getCurrentElement()
+        }
+        //Back to now button
+        VStack {
+          Spacer()
+          HStack {
+            Spacer()
+            Button(action: {
+              if let currentElement = currentElement {
+                scrollSpot = currentElement.time
+              }
+            }, label: {
+              Image(systemName: "clock.arrow.circlepath")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .offset(x: -1.5, y: 0)
+                .frame(width: 40, height: 40)
+                .padding(8)
+                .foregroundColor(.lightBlue)
+                .background(Color.darkBlue.opacity(0.7))
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.lightBlue, lineWidth: 1.5))
+                .opacity(0.8)
+            })
+            .padding(20)
           }
-          .onDisappear {
-            deSetTabBar()
-          }
+          .padding(.vertical, 80)
         }
       }
       .ignoresSafeArea()
     }
+    .ignoresSafeArea()
   }
 
-  var chart: some View {
+  var titleView: some View {
+
+    return VStack {
+        VStack {
+          VStack {
+            if let currentElement = currentElement {
+              let date = dateFormatter.date(from: currentElement.time)
+              if let date = date {
+                Text(date.formatted(date: .abbreviated, time: .omitted))
+                  .foregroundColor(.white)
+                  .font(.title)
+                  .fontDesign(.rounded)
+              }
+            }
+            Spacer()
+          }
+          .frame(width: 250, height: 20)
+          Text("0.5 m")
+            .foregroundColor(.white)
+            .font(.system(.largeTitle, design: .rounded, weight: .heavy))
+            .frame(width: 200, height: 80)
+          Text("Wave Height")
+            .foregroundColor(.white)
+            .font(.title3)
+            .fontDesign(.rounded)
+            .frame(width: 200, height: 20)
+        }
+      .frame(width: 200, height: 250, alignment: .center)
+
+    }
+
+  }
+
+  var chartView: some View {
     let minHeight = seaLevel.min(by: { $0.sg < $1.sg })?.sg ?? 0
     let maxHeight = seaLevel.max(by: { $1.sg > $0.sg })?.sg ?? 0
 
@@ -121,7 +216,6 @@ struct TideView: View {
           .clipShape(Capsule())
           .foregroundStyle(gradient)
 //          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
-
           .annotation(position: .top) {
             VStack {
               Text(String(selectedElement.sg) + " m")
@@ -169,8 +263,6 @@ struct TideView: View {
   // MARK: Private
 
   private let networkManager = NetworkManager()
-
-  //  let selectedAnnotaion: MKPointAnnotation?
   private var gradient: Gradient {
     var colors = [chartColor]
 
@@ -192,7 +284,6 @@ struct TideView: View {
         tideHour.time == "2023-07-04T18:00:00+00:00" //Date().ISO8601Format()
       }) {
       currentElement = currentItem
-      print(currentItem)
     }
   }
 
@@ -218,6 +309,24 @@ struct TideView: View {
     }
   }
 
+  private func colorsForCurrentTime() -> [Color] {
+    let hour = Calendar.current.component(.hour, from: Date())
+    switch hour {
+    case 0..<6: //Dawn
+      return [Color.darkBlue, Color.lightBlue]
+    case 6..<11:    // Morning
+      return [Color.pacificBlue, Color(red: 0.91, green: 0.98, blue: 1)]
+    case 11..<15:  // Afternoon
+      return [Color.pacificBlue, Color(red: 0.84, green: 0.95, blue: 0.88)]
+    case 16..<18:  // Sunset
+      return [Color.darkBlue.opacity(0.7), Color.orange.opacity(0.3)]
+    case 18..<24: //Evening
+      return [Color.darkBlue, Color.purple.opacity(0.17)]
+    default:
+      return [Color.darkBlue, Color.lightBlue]
+    }
+}
+
 }
 
 // MARK: - TideView_Previews
@@ -226,7 +335,7 @@ struct TideView_Previews: PreviewProvider {
   static var previews: some View {
     let networkManager = NetworkManager()
     let weatherData = networkManager.decodeJSON()
-
-    TideView(seaLevel: weatherData.data)
+    let location = Location(name: "小大福漁港", latitude: 22.3348440, longitude: 120.3776006)
+    TideView(seaLevel: weatherData.data, location: location)
   }
 }
