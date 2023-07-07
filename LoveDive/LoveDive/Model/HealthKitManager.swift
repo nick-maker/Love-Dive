@@ -85,7 +85,7 @@ class HealthKitManger {
 
       lastSessionEnd = diveDates.end
 
-      let entry = DivingEntry(time: diveDates.start, depth: result.doubleValue(for: HKUnit.meter()))
+      let entry = DivingEntry(time: diveDates.start, depth: result.doubleValue(for: HKUnit.meter()), animate: false)
       currentLog?.session.append(entry)
 
       completion(diveList)

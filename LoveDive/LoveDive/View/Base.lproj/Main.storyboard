@@ -75,14 +75,15 @@
                         <color key="selectedImageTintColor" red="0.094117647058823528" green="0.64313725490196072" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="1Lg-z8-WQ8"/>
-                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="QyO-pD-1zD"/>
-                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="pby-mT-5Vp"/>
+                        <segue destination="GLm-fQ-Jnz" kind="relationship" relationship="viewControllers" id="bjb-kl-5zp"/>
+                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="G3F-9S-5Z5"/>
+                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="Ffe-Mr-AU0"/>
+                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="Pa1-fZ-IoB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8z2-MW-n9e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1410" y="-90"/>
+            <point key="canvasLocation" x="-989" y="-78"/>
         </scene>
         <!--Explore-->
         <scene sceneID="FKM-IQ-GuR">
@@ -92,6 +93,7 @@
                         <imageReference key="image" image="magnifyingglass" catalog="system" variableValue="1"/>
                     </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="FEL-xm-ypz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A1l-IP-2FF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -114,6 +116,7 @@
                         <imageReference key="selectedImage" image="circle.and.line.horizontal.fill" catalog="system"/>
                     </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="5Sl-MA-x8o"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QfA-uO-8Dj">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -133,6 +136,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uod-h3-mW6" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activities" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="jeE-zb-MHn"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="df7-0S-DL9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3RJ-wU-MFa">
                         <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -169,6 +173,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GLm-fQ-Jnz" customClass="RoundedNavigationController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="sun.haze" catalog="system" selectedImage="sun.haze.fill" id="5dR-51-sM2"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="TyW-YI-d5d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hZu-Tf-ZZF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

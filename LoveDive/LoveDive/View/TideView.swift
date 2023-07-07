@@ -20,6 +20,7 @@ struct TideView: View {
   @State var weatherData: [WeatherHour]
   @State var location: Location?
   @State var viewSize: CGFloat = 0.0
+  @State var viewHeight: CGFloat = 0.0
   @State private var selectedElement: SeaLevel?
   @State private var currentElement: SeaLevel?
   @State private var plotWidth: CGFloat = 0.0
@@ -43,24 +44,31 @@ struct TideView: View {
   }()
 
   var body: some View {
-    
     GeometryReader { proxy in
       ZStack {
         LinearGradient(gradient: Gradient(colors: colorsForCurrentTime()), startPoint: .topLeading, endPoint: .bottomTrailing)
+        VStack {
+          Spacer()
+          Rectangle()
+            .fill(.clear)
+            .background(Blur(radius: 50, opaque: true))
+            .background(.white.opacity(0.05))
+            .frame(height: 100, alignment: .bottom)
+            .cornerRadius(30)
+        }
         VStack {
           if let location {
             Text(location.name)
               .font(.system(size: 25, weight: .semibold, design: .rounded))
               .foregroundColor(.white)
-              .padding(.vertical, 100)
+              .padding(.vertical, viewHeight / 10)
           }
-//          Spacer(minLength: 200)
           titleView
             .background(Blur(radius: 50, opaque: true))
-//            .background(.ultraThinMaterial)
             .background(.white.opacity(0.05))
             .cornerRadius(20)
-          Spacer()
+            .padding(.top, -10)
+
           ScrollViewReader { scrollPosition in
             ScrollView(.horizontal, showsIndicators: false) {
               ZStack {
@@ -76,18 +84,20 @@ struct TideView: View {
               }
               .padding(.horizontal, -100)
               .padding(.bottom, 10)
-              .frame(width: viewSize / 12 * CGFloat(seaLevel.count), height: 350)
+              .frame(width: viewSize / 12 * CGFloat(seaLevel.count))
               .onAppear {
                 viewSize = proxy.size.width
+                viewHeight = proxy.size.height
                 fetchSeaLevelData()
                 setTabBar()
-
-                scrollPosition.scrollTo(currentElement?.time, anchor: .center)
               }
               .onDisappear {
                 deSetTabBar()
               }
             }
+            .onChange(of: currentElement, perform: { _ in
+              scrollPosition.scrollTo(currentElement?.time, anchor: .center)
+            })
             .onChange(of: scrollSpot) { _ in
               withAnimation {
                 scrollPosition.scrollTo(scrollSpot, anchor: .center)
@@ -119,8 +129,9 @@ struct TideView: View {
                 .opacity(0.8)
             })
             .padding(20)
+
           }
-          .padding(.vertical, 80)
+          .padding(.vertical, viewHeight / 6)
         }
       }
       .onChange(of: seaLevelModel.seaLevel, perform: { newValue in
@@ -152,10 +163,10 @@ struct TideView: View {
         }
         .padding(.top, -30)
         .frame(width: 250, height: 10)
-        Text((weatherData.first?.waveHeight.average ?? "-") + " m")
+        Text((weatherData.first?.waveHeight.average ?? "0") + " m")
           .foregroundColor(.white)
-          .font(.system(size: 50, weight: .bold, design: .rounded))
-          .frame(width: 200, height: 80)
+          .font(.system(size: 40, weight: .bold, design: .rounded))
+          .frame(width: 160, height: 80)
           .padding(.top, -10)
         Text("Wave Height")
           .foregroundColor(.white)
@@ -163,7 +174,7 @@ struct TideView: View {
           .fontDesign(.rounded)
           .frame(width: 200, height: 20)
       }
-      .frame(width: 200, height: 250, alignment: .center)
+      .frame(width: viewSize / 2, height: viewHeight / 3.2, alignment: .center)
     }
   }
 
@@ -326,18 +337,22 @@ struct TideView: View {
   private func colorsForCurrentTime() -> [Color] {
     let hour = Calendar.current.component(.hour, from: Date())
     switch hour {
-    case 0..<6: // Dawn
+    case 4..<6: // Dawn
       return [Color.darkBlue, Color.lightBlue]
     case 6..<11: // Morning
       return [Color.pacificBlue, Color(red: 0.91, green: 0.98, blue: 1)]
     case 11..<15: // Afternoon
       return [Color.pacificBlue, Color(red: 0.84, green: 0.95, blue: 0.88)]
-    case 16..<18: // Sunset
-      return [Color.darkBlue.opacity(0.7), Color.orange.opacity(0.3)]
-    case 18..<24: // Evening
-      return [Color.darkBlue, Color.purple.opacity(0.17)]
+    case 15..<17: // Sunset
+      return [Color(red: 0.33, green: 0.38, blue: 0.55), Color(red: 1, green: 0.83, blue: 0.67)]
+    case 17..<19:
+      return [Color(red: 0.17, green: 0.26, blue: 0.44), Color(red: 0.33, green: 0.38, blue: 0.55)]
+    case 19..<21:
+      return [Color(red: 0.17, green: 0.26, blue: 0.44), Color(red: 0.18, green: 0.19, blue: 0.31)]
+    case 21..<24: // Evening
+      return [Color(red: 0.05, green: 0.05, blue: 0.13), Color(red: 0.17, green: 0.26, blue: 0.44)]
     default:
-      return [Color.darkBlue, Color.lightBlue]
+      return [Color(red: 0.17, green: 0.26, blue: 0.44), Color.black ]
     }
   }
 

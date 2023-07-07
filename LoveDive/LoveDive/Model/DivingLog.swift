@@ -41,6 +41,7 @@ struct DivingEntry: Identifiable {
   var id = UUID().uuidString // to conform identifiable
   let time: Date
   let depth: Double
+  var animate: Bool
 
 }
 

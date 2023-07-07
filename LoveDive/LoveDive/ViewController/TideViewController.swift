@@ -25,21 +25,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     return collectionView
   }() // Must be initialized with a non-nil layout parameter
 
-  private let divingSiteManager = DivingSiteManager()
-  private let networkManager = NetworkManager()
-  private let seaLevelModel = SeaLevelModel()
-  private let locationManager = LocationManager()
-  private var weatherData = [WeatherHour]()
-  private var locations = [Location]()
-  private var visibleLocations = [Location]()
-  private var annotations: [MKPointAnnotation] = []
-  private var selectedAnnotation: MKPointAnnotation?
-  private var containerOriginalCenter = CGPoint.zero
-  private var containerDownOffset = CGFloat()
-  private var containerUp = CGPoint.zero
-  private var containerDown = CGPoint.zero
-  private var currentRegion = MKCoordinateSpan()
-
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.tabBarController?.tabBar.backgroundColor = .systemBackground
@@ -124,20 +109,35 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     // Reload the collection view data
     DispatchQueue.main.async {
       self.collectionView.reloadData()
-    }
-    guard let selectedLocation = selectedAnnotation?.coordinate else { return }
-    guard
-      let index = visibleLocations
-        .firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)," + "\(selectedLocation.longitude.description)" })
-    else {
-      return
-    }
-    let indexPath = IndexPath(item: index, section: 0)
+      guard let selectedLocation = self.selectedAnnotation?.coordinate else { return }
+      guard
+        let index = self.visibleLocations
+          .firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)," + "\(selectedLocation.longitude.description)" })
+      else {
+        return
+      }
+      let indexPath = IndexPath(item: index, section: 0)
 
-    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+      self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    }
   }
 
   // MARK: Private
+
+  private let divingSiteManager = DivingSiteManager()
+  private let networkManager = NetworkManager()
+  private let seaLevelModel = SeaLevelModel()
+  private let locationManager = LocationManager()
+  private var weatherData = [WeatherHour]()
+  private var locations = [Location]()
+  private var visibleLocations = [Location]()
+  private var annotations: [MKPointAnnotation] = []
+  private var selectedAnnotation: MKPointAnnotation?
+  private var containerOriginalCenter = CGPoint.zero
+  private var containerDownOffset = CGFloat()
+  private var containerUp = CGPoint.zero
+  private var containerDown = CGPoint.zero
+  private var currentRegion = MKCoordinateSpan()
 
 //  private var currentPage: Int? = nil
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
@@ -397,13 +397,11 @@ extension TideViewController: CurrentDelegate {
   }
 
   func updateWeatherDataForVisibleAnnotations() {
-
     for location in visibleLocations {
       networkManager.getCurrentWeatherData(
         lat: location.latitude,
         lng: location.longitude)
     }
-    
   }
 
 }
