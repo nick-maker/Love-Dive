@@ -23,7 +23,8 @@ struct WeatherCache: Codable {
 // MARK: - WeatherHour
 
 // Structure for each hour of data
-struct WeatherHour: Codable, Identifiable {
+struct WeatherHour: Codable, Identifiable, Equatable {
+
   var id = UUID().uuidString
   let time: String
   let airTemperature: TemperatureData
@@ -43,7 +44,7 @@ struct WeatherHour: Codable, Identifiable {
 // MARK: - TemperatureData
 
 // Structure for temperature data
-struct TemperatureData: Codable {
+struct TemperatureData: Codable, Equatable {
   let noaa: Double?
   let sg: Double?
   let meto: Double?
@@ -59,7 +60,7 @@ struct TemperatureData: Codable {
 // MARK: - WaveHeightData
 
 // Structure for wave height data
-struct WaveHeightData: Codable {
+struct WaveHeightData: Codable, Equatable {
   let icon: Double?
   let meteo: Double?
   let noaa: Double?
@@ -76,7 +77,7 @@ struct WaveHeightData: Codable {
 // MARK: - WindSpeedData
 
 // Structure for wind speed data
-struct WindSpeedData: Codable {
+struct WindSpeedData: Codable, Equatable {
   let icon: Double?
   let noaa: Double?
   let sg: Double?
@@ -95,24 +96,29 @@ struct TideData: Codable {
   let data: [SeaLevel]
 }
 
-// MARK: - TideHour
+// MARK: - TideCache
 
-struct TideHour: Codable, Identifiable {
-  var id = UUID().uuidString
-  var time: String
-  let type: String
-  var height: Double
-
-  enum CodingKeys: String, CodingKey {
-    case time
-    case type
-    case height
-  }
+struct TideCache: Codable {
+  let timestamp: String
+  let seaLevel: [SeaLevel]
 }
 
 // MARK: - SeaLevel
 
-struct SeaLevel: Codable, Identifiable {
+// struct TideHour: Codable, Identifiable {
+//  var id = UUID().uuidString
+//  var time: String
+//  let type: String
+//  var height: Double
+//
+//  enum CodingKeys: String, CodingKey {
+//    case time
+//    case type
+//    case height
+//  }
+// }
+
+struct SeaLevel: Codable, Identifiable, Equatable {
   var time: String
   var sg: Double
   var id: String { "\(time)" }

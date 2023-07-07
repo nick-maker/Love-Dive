@@ -25,26 +25,27 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     return collectionView
   }() // Must be initialized with a non-nil layout parameter
 
-  let divingSiteManager = DivingSiteManager()
-  let networkManager = NetworkManager()
-  let locationManager = LocationManager()
-  var weatherData = [WeatherHour]()
-  var locations = [Location]()
-  var visibleLocations = [Location]()
-  var annotations: [MKPointAnnotation] = []
-  var selectedAnnotation: MKPointAnnotation?
-  var containerOriginalCenter = CGPoint.zero
-  var containerDownOffset = CGFloat()
-  var containerUp = CGPoint.zero
-  var containerDown = CGPoint.zero
-  var currentRegion = MKCoordinateSpan()
+  private let divingSiteManager = DivingSiteManager()
+  private let networkManager = NetworkManager()
+  private let seaLevelModel = SeaLevelModel()
+  private let locationManager = LocationManager()
+  private var weatherData = [WeatherHour]()
+  private var locations = [Location]()
+  private var visibleLocations = [Location]()
+  private var annotations: [MKPointAnnotation] = []
+  private var selectedAnnotation: MKPointAnnotation?
+  private var containerOriginalCenter = CGPoint.zero
+  private var containerDownOffset = CGFloat()
+  private var containerUp = CGPoint.zero
+  private var containerDown = CGPoint.zero
+  private var currentRegion = MKCoordinateSpan()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.tabBarController?.tabBar.backgroundColor = .systemBackground
     locationManager.errorPresentationTarget = self
     divingSiteManager.delegate = self
-    networkManager.delegate = self
+    networkManager.currentDelegate = self
 
     setupMapView()
     getCurrentLocation()
@@ -111,15 +112,24 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     annotations = visibleAnnotations.compactMap { $0 as? MKPointAnnotation }
     visibleLocations = locations.filter { location in
-            let locationCoordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            return visibleMapRect.contains(MKMapPoint(locationCoordinate))
+      for annotation in annotations {
+        if location.id == "\(annotation.coordinate.latitude.description)," + "\(annotation.coordinate.longitude.description)" {
+          return true
         }
+      }
+      return false
+    }
 
     updateWeatherDataForVisibleAnnotations()
     // Reload the collection view data
-    collectionView.reloadData()
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
+    }
     guard let selectedLocation = selectedAnnotation?.coordinate else { return }
-    guard let index = visibleLocations.firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)"+"\(selectedLocation.longitude.description)" }) else {
+    guard
+      let index = visibleLocations
+        .firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)," + "\(selectedLocation.longitude.description)" })
+    else {
       return
     }
     let indexPath = IndexPath(item: index, section: 0)
@@ -129,7 +139,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   // MARK: Private
 
-  private var currentPage: Int? = nil
+//  private var currentPage: Int? = nil
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
 
 }
@@ -296,7 +306,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 //    let annotation = annotations[indexPath.row]
 //    cell.locationLabel.text = annotation.title
 
-    let location = locations[indexPath.row]
+    let location = visibleLocations[indexPath.row]
     cell.locationLabel.text = location.name
     if let weather = location.weather?.first {
       cell.airTemptText.text = weather.airTemperature.average
@@ -313,11 +323,10 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-    let tideView = TideView(seaLevel: networkManager.decodeJSON().data, location: locations[indexPath.row])
+    let location = visibleLocations[indexPath.row]
+    let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)
     let hostingController = UIHostingController(rootView: tideView)
-//    hostingController.title = annotations[indexPath.row].title
-    navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationController?.navigationBar.tintColor = .white
     navigationController?.tabBarController?.tabBar.backgroundColor = .clear
     navigationItem.backButtonTitle = ""
     navigationController?.tabBarController?.tabBar.backgroundImage = UIImage()
@@ -335,40 +344,43 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
 }
 
-// MARK: WeatherDelegate
+// MARK: CurrentDelegate
 
-extension TideViewController: WeatherDelegate {
+extension TideViewController: CurrentDelegate {
 
   func mapView(_: MKMapView, didSelect view: MKAnnotationView) {
     guard let annotation = view.annotation as? MKPointAnnotation else {
       return
     }
-    print("\(annotation.coordinate.latitude.description)"+"\(annotation.coordinate.longitude.description)")
-    print(visibleLocations[0].id)
-    guard let index = visibleLocations.firstIndex(where: { $0.id == "\(annotation.coordinate.latitude.description)"+"\(annotation.coordinate.longitude.description)" }) else {
+    guard
+      let index = visibleLocations
+        .firstIndex(where: {
+          $0.id == "\(annotation.coordinate.latitude.description)," + "\(annotation.coordinate.longitude.description)"
+        }) else
+    {
       return
     }
     selectedAnnotation = annotation
     let indexPath = IndexPath(item: index, section: 0)
     // if set true, would fire section.visibleItemsInvalidationHandler
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-    networkManager.getCurrentWeatherData(
-      lat: annotation.coordinate.latitude,
-      lng: annotation.coordinate.longitude,
-      forAnnotation: annotation)
+//    networkManager.getCurrentWeatherData(
+//      lat: annotation.coordinate.latitude,
+//      lng: annotation.coordinate.longitude,
+//      forAnnotation: annotation)
   }
 
-  func manager(didGet weatherData: [WeatherHour], forAnnotation annotation: MKAnnotation) {
-    guard let annotationIndex = annotations.firstIndex(where: { $0 === annotation }) else {
+  func manager(didGet weatherData: [WeatherHour], forKey: String) {
+    guard let index = visibleLocations.firstIndex(where: { "currentWeather" + $0.id == forKey }) else {
       return
     }
-    locations[annotationIndex].weather = weatherData.filter { weatherHour in
+    visibleLocations[index].weather = weatherData.filter { weatherHour in
       ISO8601DateFormatter().date(from: weatherHour.time) == Calendar.current.date(bySetting: .minute, value: 0, of: Date())
     }
 
     DispatchQueue.main.async {
-      if let cell = self.collectionView.cellForItem(at: IndexPath(row: annotationIndex, section: 0)) as? TideCell {
-        let location = self.locations[annotationIndex]
+      if let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? TideCell {
+        let location = self.visibleLocations[index]
         if let weather = location.weather?.first {
           cell.airTemptText.text = weather.airTemperature.average
           cell.waterTemptText.text = weather.waterTemperature.average
@@ -385,17 +397,13 @@ extension TideViewController: WeatherDelegate {
   }
 
   func updateWeatherDataForVisibleAnnotations() {
-    let visibleMapRect = mapView.visibleMapRect
-    let visibleAnnotations = mapView.annotations(in: visibleMapRect)
 
-    for annotation in visibleAnnotations {
-      if let pointAnnotation = annotation as? MKPointAnnotation {
-        networkManager.getCurrentWeatherData(
-          lat: pointAnnotation.coordinate.latitude,
-          lng: pointAnnotation.coordinate.longitude,
-          forAnnotation: pointAnnotation)
-      }
+    for location in visibleLocations {
+      networkManager.getCurrentWeatherData(
+        lat: location.latitude,
+        lng: location.longitude)
     }
+    
   }
 
 }

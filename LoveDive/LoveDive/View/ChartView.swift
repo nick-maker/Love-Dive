@@ -448,8 +448,15 @@ struct ChartView: View {
 
   var snapshotView: some View {
     VStack {
-      pictureView
-      chartListView
+      if
+        let filePath = data.first?.time.description,
+        photosModel.getImageFromFileManager(filePath: filePath) != nil
+      {
+        pictureView
+        chartListView
+      } else {
+        chartListView
+      }
     }
     .padding()
     .padding(.top, 10)
@@ -483,7 +490,6 @@ struct ChartView: View {
     }
   }
 
-//  @State var selectedItems: [PhotosPickerItem] = []
   @MainActor
   private func generateSnapshot(viewSize: CGSize) {
     let renderer = ImageRenderer(content: snapshotView.frame(width: viewSize.width, alignment: .center))
