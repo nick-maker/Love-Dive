@@ -24,9 +24,9 @@ struct BreatheView: View {
       GeometryReader { proxy in
         VStack(spacing: 25) {
           ZStack {
-            Circle()
-              .fill(.blue.opacity(0.03))
-              .padding(-50)
+//            Circle()
+//              .fill(.blue.opacity(0.03))
+//              .padding(-50)
 //            Circle()
 //              .trim(from: 0, to: breatheModel.progress)
 //              .stroke(Color.blue.opacity(0.03), lineWidth: 80)
@@ -40,12 +40,12 @@ struct BreatheView: View {
 //              .stroke(Color.darkBlue, lineWidth: 15)
 //              .blur(radius: 55)
 //              .padding(-10)
-            Circle()
-              .fill(colorScheme == .dark ? Color.black : Color.white)
-              .padding(10)
+//            Circle()
+//              .fill(colorScheme == .dark ? Color.black : Color.white)
+//              .padding(10)
             if breatheModel.isStarted {
               LottieView()
-                .scaleEffect(1.2)
+//                .scaleEffect(0.8)
             }
             Circle()
               .stroke(
@@ -104,17 +104,20 @@ struct BreatheView: View {
               isPresentingNewTimerView = true
             }
           } label: {
-            Image(systemName: !breatheModel.isStarted ? "circle.and.line.horizontal" : "stop.fill")
-              .font(.largeTitle)
-              .foregroundColor(.pacificBlue.opacity(0.6))
+//            Image(systemName: !breatheModel.isStarted ? "circle.and.line.horizontal" : "stop.fill")
+            Text(!breatheModel.isStarted ? "Start" : "Stop")
+              .font(.title2)
+              .fontDesign(.rounded)
+              .bold()
+              .foregroundColor(!breatheModel.isStarted ? .white : Color.pacificBlue)
               .frame(width: 80, height: 80)
               .background {
                 Circle()
-                  .fill(.blue.opacity(0.03))
+                  .fill(!breatheModel.isStarted ? Color.pacificBlue : Color.lightBlue)
               }
-              .shadow(color: .pacificBlue, radius: 20, x: 0, y: 0)
+//              .shadow(color: .pacificBlue, radius: 20, x: 0, y: 0)
           }
-          .padding(.bottom, 20)
+          .padding(.bottom, 50)
         }
 //        .onTapGesture {
         //          breatheModel.progress = 0.5
@@ -175,8 +178,8 @@ struct BreatheView: View {
     .alert("Congratulations",isPresented: $breatheModel.isFinished) {
       Button("Start New", role: .cancel) {
         breatheModel.stopTimer()
-
         breatheModel.addNewTimer = true
+        isPresentingNewTimerView = true
       }
       Button("Close", role: .destructive) {
         breatheModel.stopTimer()
@@ -288,7 +291,7 @@ struct BreatheView: View {
 
 struct Breathe_Previews: PreviewProvider {
   static var previews: some View {
-    BreatheContentView()
+    BreatheView()
       .environmentObject(BreatheModel())
       .environmentObject(AudioModel())
   }

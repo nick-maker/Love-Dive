@@ -25,6 +25,7 @@ struct TideView: View {
   @State private var currentElement: SeaLevel?
   @State private var plotWidth: CGFloat = 0.0
   @State var scrollSpot = ""
+  @State private var tabBarHeight: CGFloat = 0.0
 
   let dateFormatter = ISO8601DateFormatter()
   var chartColor: Color = .pacificBlue.opacity(0.5)
@@ -49,11 +50,11 @@ struct TideView: View {
         LinearGradient(gradient: Gradient(colors: colorsForCurrentTime()), startPoint: .topLeading, endPoint: .bottomTrailing)
         VStack {
           Spacer()
-          Rectangle()
+          Rectangle() //TabBar
             .fill(.clear)
             .background(Blur(radius: 50, opaque: true))
             .background(.white.opacity(0.05))
-            .frame(height: 100, alignment: .bottom)
+            .frame(height: tabBarHeight + 15, alignment: .bottom)
             .cornerRadius(30)
         }
         VStack {
@@ -82,8 +83,7 @@ struct TideView: View {
                 }
                 chartView
               }
-              .padding(.horizontal, -100)
-              .padding(.bottom, 10)
+              .padding(.horizontal, -50)
               .frame(width: viewSize / 12 * CGFloat(seaLevel.count))
               .onAppear {
                 viewSize = proxy.size.width
@@ -193,38 +193,38 @@ struct TideView: View {
         x: .value("time", tideHour.time),
         yStart: .value("minValue", minHeight * 2.5),
         yEnd: .value("seaLevel", tideHour.sg))
-        .foregroundStyle(gradient)
-        .interpolationMethod(.cardinal)
+      .foregroundStyle(gradient.opacity(0.7))
+      .interpolationMethod(.cardinal)
 
       LineMark(
         x: .value("time", tideHour.time),
         y: .value("seaLevel", tideHour.sg))
-        .lineStyle(.init(lineWidth: 3.5))
-        .foregroundStyle(
-          .linearGradient(
-            Gradient(
-              stops: [
-                .init(color: .lightBlue, location: 0),
-                .init(color: .lightBlue, location: positionForNewColor),
-                .init(color: .pacificBlue, location: positionForNewColor),
-                .init(color: .pacificBlue, location: 1),
-              ]),
-            startPoint: .leading,
-            endPoint: .trailing))
-        .interpolationMethod(.cardinal)
+      .lineStyle(.init(lineWidth: 3.5))
+      .foregroundStyle(
+        .linearGradient(
+          Gradient(
+            stops: [
+              .init(color: .lightBlue, location: 0),
+              .init(color: .lightBlue, location: positionForNewColor),
+              .init(color: .pacificBlue, location: positionForNewColor),
+              .init(color: .pacificBlue, location: 1),
+            ]),
+          startPoint: .leading,
+          endPoint: .trailing))
+      .interpolationMethod(.cardinal)
 
       if let currentElement, currentElement.time == tideHour.time {
         PointMark(
           x: .value("time", currentElement.time),
           y: .value("seaLevel", currentElement.sg))
-          .symbolSize(CGSize(width: 12, height: 12))
-          .foregroundStyle(Color.pacificBlue)
+        .symbolSize(CGSize(width: 12, height: 12))
+        .foregroundStyle(Color.pacificBlue)
 
         PointMark(
           x: .value("time", currentElement.time),
           y: .value("seaLevel", currentElement.sg))
-          .symbolSize(CGSize(width: 5, height: 5))
-          .foregroundStyle(.white)
+        .symbolSize(CGSize(width: 5, height: 5))
+        .foregroundStyle(.white)
       }
 
       if let selectedElement, selectedElement.id == tideHour.id {
@@ -233,23 +233,23 @@ struct TideView: View {
           yStart: .value("seaLevel", selectedElement.sg),
           yEnd: .value("BPM Max", maxHeight * 1.1),
           width: .fixed(2))
-          .clipShape(Capsule())
-          .foregroundStyle(gradient)
-//          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
-          .annotation(position: .top) {
-            VStack {
-              Text(String(format: "%.2f", selectedElement.sg) + " m")
-                .font(.system(size: 16, design: .rounded))
-                .bold()
-                .foregroundColor(.pacificBlue)
+        .clipShape(Capsule())
+        .foregroundStyle(gradient)
+        //          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
+        .annotation(position: .top) {
+          VStack {
+            Text(String(format: "%.2f", selectedElement.sg) + " m")
+              .font(.system(size: 16, design: .rounded))
+              .bold()
+              .foregroundColor(.pacificBlue)
 
-              Text(timeFormatter.string(from: dateFormatter.date(from: selectedElement.time)!))
-                .font(.footnote)
-                .foregroundColor(.white)
-            }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
+            Text(timeFormatter.string(from: dateFormatter.date(from: selectedElement.time)!))
+              .font(.footnote)
+              .foregroundColor(.white)
           }
+          .padding(.horizontal, 10)
+          .padding(.vertical, 4)
+        }
       }
     }
     .chartOverlay { proxy in
@@ -320,6 +320,7 @@ struct TideView: View {
       tabBar.tabBar.backgroundColor = UIColor.clear
       tabBar.tabBar.backgroundImage = UIImage()
       tabBar.tabBar.shadowImage = UIImage()
+      tabBarHeight = tabBar.tabBar.frame.size.height
     }
   }
 

@@ -18,7 +18,7 @@ struct TimerAttributes: ActivityAttributes {
   public struct ContentState: Codable, Hashable {
     // Dynamic stateful properties about your activity go here!
     var endTime: ClosedRange<Date>
-    var progress: Double
+    var progress: CGFloat
   }
 
   // Fixed non-changing properties about your activity go here!
@@ -157,7 +157,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
 
 struct LoveDive_WidgetLiveActivity_Previews: PreviewProvider {
   static let attributes = TimerAttributes(timerName: "Me")
-  static let contentState = TimerAttributes.ContentState(endTime: Date()...Date().addingTimeInterval(15 * 60), progress: 0.75)
+  static let contentState = TimerAttributes.ContentState(endTime: Date()...Date().addingTimeInterval(15 * 60), progress: 1)
 
   static var previews: some View {
     attributes

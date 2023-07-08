@@ -104,7 +104,6 @@ class DiveCell: ShadowCollectionViewCell, UIGestureRecognizerDelegate {
     }
   }
 
-
 }
 
 // MARK: - DiveCellDelegate

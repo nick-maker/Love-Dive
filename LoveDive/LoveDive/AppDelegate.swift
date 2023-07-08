@@ -23,7 +23,7 @@ struct BreatheApp: App {
 
   var body: some Scene {
     WindowGroup {
-      BreatheContentView()
+      BreatheView()
         .environmentObject(breatheModel)
         .environmentObject(audioModel)
     }
