@@ -14,7 +14,7 @@ class TideCell: ShadowCollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
-    contentView.backgroundColor = .dynamicColor
+    contentView.backgroundColor = .dynamicColor2
   }
 
   required init?(coder _: NSCoder) {

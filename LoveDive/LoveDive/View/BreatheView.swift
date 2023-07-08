@@ -113,7 +113,7 @@ struct BreatheView: View {
               .frame(width: 80, height: 80)
               .background {
                 Circle()
-                  .fill(!breatheModel.isStarted ? Color.pacificBlue : Color.lightBlue)
+                  .fill(!breatheModel.isStarted ? Color.pacificBlue : Color.pacificBlue.opacity(0.3))
               }
 //              .shadow(color: .pacificBlue, radius: 20, x: 0, y: 0)
           }
@@ -242,7 +242,7 @@ struct BreatheView: View {
     .frame(maxWidth: .infinity)
     .background {
       RoundedRectangle(cornerRadius: 20, style: .continuous)
-        .fill(colorScheme == .dark ? Color.black : Color.white)
+        .fill(colorScheme == .dark ? Color(red: 0.06, green: 0.06, blue: 0.06) : Color.white)
         .ignoresSafeArea()
     }
     .frame(maxHeight: .infinity, alignment: .bottom)

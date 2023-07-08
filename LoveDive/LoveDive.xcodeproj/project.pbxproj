@@ -32,6 +32,8 @@
 		064F76602A4ACE81003DC830 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F765F2A4ACE81003DC830 /* LottieView.swift */; };
 		064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76612A4B10D4003DC830 /* DivingSiteManager.swift */; };
 		064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76632A4B42A1003DC830 /* LocationManager.swift */; };
+		0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7782A596F5E00194930 /* LaunchViewController.swift */; };
+		0673D77F2A59747E00194930 /* Logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673D77E2A59747E00194930 /* Logo.json */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
@@ -119,6 +121,8 @@
 		064F76632A4B42A1003DC830 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		064F766E2A4DC600003DC830 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		064F76702A4DC600003DC830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0673D7782A596F5E00194930 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		0673D77E2A59747E00194930 /* Logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Logo.json; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				0681DC5F2A3CA52500BCC367 /* View */,
 				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
+				0673D77E2A59747E00194930 /* Logo.json */,
 				064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */,
 				069C4A4E2A53B31500D8D8AC /* tide.json */,
 				06356B432A544A2500C786B0 /* SeaLevel.json */,
@@ -289,6 +294,7 @@
 			children = (
 				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833C22A39D8B5000642F2 /* Main.storyboard */,
+				0673D7782A596F5E00194930 /* LaunchViewController.swift */,
 				064F764E2A499550003DC830 /* BreatheView.swift */,
 				064F765F2A4ACE81003DC830 /* LottieView.swift */,
 				060146482A3B57C7003001EE /* TideCell.swift */,
@@ -420,6 +426,7 @@
 				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */,
 				06AFC0572A52C300007CB1E6 /* response.json in Resources */,
+				0673D77F2A59747E00194930 /* Logo.json in Resources */,
 				06356B442A544A2500C786B0 /* SeaLevel.json in Resources */,
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
 				064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */,
@@ -496,6 +503,7 @@
 				0681DC5C2A3C833E00BCC367 /* WeatherData.swift in Sources */,
 				064F764F2A499550003DC830 /* BreatheView.swift in Sources */,
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
+				0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */,
 				064F76572A4AB862003DC830 /* AudioModel.swift in Sources */,
 				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
