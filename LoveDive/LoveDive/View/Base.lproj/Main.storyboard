@@ -77,10 +77,10 @@
                         <color key="selectedImageTintColor" red="0.094117647058823528" green="0.64313725490196072" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="GLm-fQ-Jnz" kind="relationship" relationship="viewControllers" id="bjb-kl-5zp"/>
-                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="G3F-9S-5Z5"/>
-                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="Ffe-Mr-AU0"/>
-                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="Pa1-fZ-IoB"/>
+                        <segue destination="GLm-fQ-Jnz" kind="relationship" relationship="viewControllers" id="GIB-tl-oA1"/>
+                        <segue destination="mWs-sG-Mrg" kind="relationship" relationship="viewControllers" id="oB3-ZY-gDO"/>
+                        <segue destination="6Fg-hs-5v7" kind="relationship" relationship="viewControllers" id="lTz-qe-9Bs"/>
+                        <segue destination="Uod-h3-mW6" kind="relationship" relationship="viewControllers" id="ceC-9M-e5l"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8z2-MW-n9e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="532" y="294"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="3cF-Uc-fw9">
             <objects>
-                <viewController id="0j9-IT-KTQ" customClass="ProfileViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0j9-IT-KTQ" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fle-YX-0Bq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -35,6 +35,13 @@ class CalendarCell: UICollectionViewCell {
     calendarView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
     calendarView.backgroundColor = .systemBackground
 
+    let fromDateComponents = DateComponents(calendar: .current, year: 2022, month: 9, day: 7)
+    let toDateComponents = DateComponents(calendar: .current, year: 2099, month: 9, day: 29)
+    guard let fromDate = fromDateComponents.date, let toDate = toDateComponents.date else {
+        return
+    }
+    let calendarViewDateRange = DateInterval(start: fromDate, end: toDate)
+    calendarView.availableDateRange = calendarViewDateRange
     contentView.addSubview(calendarView)
 
     calendarView.translatesAutoresizingMaskIntoConstraints = false

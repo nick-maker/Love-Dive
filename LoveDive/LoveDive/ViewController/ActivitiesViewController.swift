@@ -23,6 +23,7 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
   let healthKitManager = HealthKitManger()
   let calendarView = UICalendarView()
   var isSelected = false
+  var isGoToday = false
   var selectedDateComponents: DateComponents?
 
   lazy var collectionView: UICollectionView = {
@@ -53,7 +54,11 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   var currentDateComponents: DateComponents? {
     didSet {
-      filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
+      if selectedDateComponents?.month == currentDateComponents?.month {
+        filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
+      } else {
+        filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
+      }
     }
   }
 
@@ -64,14 +69,31 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "Activities"
-    navigationItem.backButtonTitle = ""
-    navigationController?.navigationBar.prefersLargeTitles = true
+    setupNavigation()
     healthKitManager.delegate = self
     healthKitManager.requestHealthKitPermissions()
     setupCollectionView()
     configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
+  }
+
+  func setupNavigation() {
+    navigationItem.title = "Activities"
+    navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationItem.backButtonTitle = ""
+    navigationController?.navigationBar.prefersLargeTitles = true
+    let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToday))
+    navigationItem.rightBarButtonItem = todayButton
+    goToday()
+  }
+
+  @objc func goToday() {
+    isGoToday = true
+    let todayDate = Date()
+    let todayDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: todayDate)
+    selectedDateComponents = todayDateComponent
+    filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
+    collectionView.reloadData()
   }
 
   func filterDivingLogs(forMonth month: Date) {
@@ -176,6 +198,7 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
       filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
     } else {
       isSelected = true
+      selectedDateComponents = dateComponents
       filterDivingLogs(forDay: dateComponents?.date ?? Date())
     }
   }
@@ -186,6 +209,7 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
 
   func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom _: DateComponents) {
     currentDateComponents = calendarView.visibleDateComponents
+    isGoToday = false //要解決cellforitemat的時候行事曆回到今天的問題
   }
 
 }
@@ -221,7 +245,10 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       cell.calendarView.delegate = self
       let dateSelection = UICalendarSelectionSingleDate(delegate: self)
       cell.calendarView.selectionBehavior = dateSelection
-      return cell
+      if isSelected && currentDateComponents?.month == selectedDateComponents?.month || isGoToday {
+        dateSelection.selectedDate = selectedDateComponents //fix dequeueReusableCell will clear the selection
+      }
+        return cell
 
     case 1:
       guard

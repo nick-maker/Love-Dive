@@ -34,6 +34,7 @@
 		064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76632A4B42A1003DC830 /* LocationManager.swift */; };
 		0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7782A596F5E00194930 /* LaunchViewController.swift */; };
 		0673D77F2A59747E00194930 /* Logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673D77E2A59747E00194930 /* Logo.json */; };
+		0673D7822A5A8C9A00194930 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7812A5A8C9A00194930 /* HomeViewController.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
@@ -123,6 +124,7 @@
 		064F76702A4DC600003DC830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		0673D7782A596F5E00194930 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		0673D77E2A59747E00194930 /* Logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Logo.json; sourceTree = "<group>"; };
+		0673D7812A5A8C9A00194930 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +195,16 @@
 				064F76562A4AB862003DC830 /* AudioModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0673D7802A5A8BF500194930 /* Secondary */ = {
+			isa = PBXGroup;
+			children = (
+				064F76542A49CC6E003DC830 /* RoundedNavigationController.swift */,
+				0673D7782A596F5E00194930 /* LaunchViewController.swift */,
+				0681DC722A4000BD00BCC367 /* TabBarController.swift */,
+			);
+			path = Secondary;
 			sourceTree = "<group>";
 		};
 		067833B02A39D8B5000642F2 = {
@@ -294,7 +306,6 @@
 			children = (
 				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833C22A39D8B5000642F2 /* Main.storyboard */,
-				0673D7782A596F5E00194930 /* LaunchViewController.swift */,
 				064F764E2A499550003DC830 /* BreatheView.swift */,
 				064F765F2A4ACE81003DC830 /* LottieView.swift */,
 				060146482A3B57C7003001EE /* TideCell.swift */,
@@ -313,8 +324,8 @@
 		0681DC602A3CA52F00BCC367 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				064F76542A49CC6E003DC830 /* RoundedNavigationController.swift */,
-				0681DC722A4000BD00BCC367 /* TabBarController.swift */,
+				0673D7802A5A8BF500194930 /* Secondary */,
+				0673D7812A5A8C9A00194930 /* HomeViewController.swift */,
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
 				064F76502A499937003DC830 /* BreatheViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
@@ -475,6 +486,7 @@
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */,
 				067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */,
+				0673D7822A5A8C9A00194930 /* HomeViewController.swift in Sources */,
 				064F76552A49CC6E003DC830 /* RoundedNavigationController.swift in Sources */,
 				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
 				067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */,
