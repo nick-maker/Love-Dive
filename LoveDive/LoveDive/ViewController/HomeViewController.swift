@@ -11,6 +11,16 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    setupNavigation()
   }
+
+  func setupNavigation() {
+    navigationItem.title = "Home"
+    navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationItem.backButtonTitle = ""
+    navigationController?.navigationBar.prefersLargeTitles = true
+  }
+
+
+
 }
