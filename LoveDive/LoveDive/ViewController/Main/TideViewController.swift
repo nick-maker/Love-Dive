@@ -40,6 +40,19 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     configureCompositionalLayout()
   }
 
+  private let saveKey = "Favorites"
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    updateFavorites()
+  }
+
+  func updateFavorites() {
+    let favorites = Set(UserDefaults.standard.stringArray(forKey: saveKey) ?? [])
+    self.favorites.favorites = favorites
+    collectionView.reloadData()
+  }
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     containerDownOffset = 140
@@ -76,7 +89,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       guard let self else { return }
       DispatchQueue.main.async {
         let center = location.coordinate
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         self.mapView.setRegion(region, animated: true)
         self.mapView.showsUserLocation = true
       }
@@ -307,7 +320,6 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     let location = visibleLocations[indexPath.row]
 
-//    cell.favoriteButton.isSelected = favoriteState[location.id] ?? false
     cell.favoriteButton.isSelected = favorites.contains(location)
     cell.favoriteButton.tintColor = favorites.contains(location) ? .systemRed : .lightGray
     cell.locationLabel.text = location.name
@@ -348,10 +360,6 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)
     let hostingController = UIHostingController(rootView: tideView)
     navigationController?.navigationBar.tintColor = .white
-    navigationController?.tabBarController?.tabBar.backgroundColor = .clear
-    navigationItem.backButtonTitle = ""
-    navigationController?.tabBarController?.tabBar.backgroundImage = UIImage()
-    navigationController?.tabBarController?.tabBar.shadowImage = UIImage()
     navigationController?.pushViewController(hostingController, animated: true)
   }
 

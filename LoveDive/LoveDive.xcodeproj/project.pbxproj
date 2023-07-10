@@ -22,6 +22,8 @@
 		0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */; };
 		064948512A5BD17B0094DB5A /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948502A5BD17B0094DB5A /* Favorites.swift */; };
 		064948542A5BE1C10094DB5A /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948532A5BE1C10094DB5A /* EmptyCell.swift */; };
+		064948562A5C61CB0094DB5A /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948552A5C61CB0094DB5A /* ToastViewController.swift */; };
+		064948582A5C62250094DB5A /* ToastPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948572A5C62240094DB5A /* ToastPresentationController.swift */; };
 		064F76442A497431003DC830 /* PhotosPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76432A497431003DC830 /* PhotosPickerModel.swift */; };
 		064F76472A497C13003DC830 /* MediaFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76462A497C13003DC830 /* MediaFile.swift */; };
 		064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76482A4993FC003DC830 /* BreatheModel.swift */; };
@@ -114,6 +116,8 @@
 		0644D9E62A40943800F1A3A0 /* CloudKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitViewModel.swift; sourceTree = "<group>"; };
 		064948502A5BD17B0094DB5A /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		064948532A5BE1C10094DB5A /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		064948552A5C61CB0094DB5A /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
+		064948572A5C62240094DB5A /* ToastPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPresentationController.swift; sourceTree = "<group>"; };
 		064F76432A497431003DC830 /* PhotosPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPickerModel.swift; sourceTree = "<group>"; };
 		064F76462A497C13003DC830 /* MediaFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaFile.swift; sourceTree = "<group>"; };
 		064F76482A4993FC003DC830 /* BreatheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheModel.swift; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				0673D7812A5A8C9A00194930 /* HomeViewController.swift */,
+				064948552A5C61CB0094DB5A /* ToastViewController.swift */,
+				064948572A5C62240094DB5A /* ToastPresentationController.swift */,
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
 				064F76502A499937003DC830 /* BreatheViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
@@ -586,6 +592,7 @@
 				0682409C2A3C54FB00B69265 /* Location.swift in Sources */,
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */,
+				064948562A5C61CB0094DB5A /* ToastViewController.swift in Sources */,
 				06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */,
 				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
 				06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */,
@@ -604,6 +611,7 @@
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
 				06AFC04C2A4EE328007CB1E6 /* TimerAttributes.swift in Sources */,
 				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
+				064948582A5C62250094DB5A /* ToastPresentationController.swift in Sources */,
 				0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */,
 				063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */,
 				064948542A5BE1C10094DB5A /* EmptyCell.swift in Sources */,

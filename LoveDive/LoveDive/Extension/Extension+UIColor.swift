@@ -27,6 +27,14 @@ extension UIColor {
     }
   }
 
+  static var dynamicColor3 = UIColor { traits in
+    if traits.userInterfaceStyle == .dark {
+      return UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1)
+    } else {
+      return UIColor.black // Light mode color
+    }
+  }
+
   static var tapColor = UIColor { traits in
     if traits.userInterfaceStyle == .dark {
       return UIColor.darkGray

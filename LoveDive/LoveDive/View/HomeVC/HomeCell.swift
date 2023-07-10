@@ -44,13 +44,13 @@ class HomeCell: ShadowCollectionViewCell {
 
     contentView.addSubview(mapSnapshot)
     contentView.addSubview(locationLabel)
-    mapSnapshot.addSubview(favoriteButton)
+    contentView.addSubview(favoriteButton)
     contentView.layer.cornerRadius = 20
 
     // Setup constraints
     NSLayoutConstraint.activate([
-      favoriteButton.topAnchor.constraint(equalTo: mapSnapshot.topAnchor, constant: 16),
-      favoriteButton.trailingAnchor.constraint(equalTo: mapSnapshot.trailingAnchor, constant: -16),
+      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
       mapSnapshot.topAnchor.constraint(equalTo: contentView.topAnchor),
       mapSnapshot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -110,13 +110,16 @@ class HomeCell: ShadowCollectionViewCell {
   // MARK: Private
 
   private var location: (lat: Double, lng: Double)?
-  private var favoriteButton: UIButton = {
+
+  var favoriteButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .semibold, scale: .small)
-    let heartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
-    button.setImage(heartImage, for: .normal)
-    button.tintColor = .systemRed
+    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .small)
+    let emptyHeartImage = UIImage(systemName: "heart", withConfiguration: config)
+    let filledHeartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
+    button.setImage(emptyHeartImage, for: .normal)
+    button.setImage(filledHeartImage, for: .selected)
+    button.tintColor = .lightGray
     return button
   }()
 

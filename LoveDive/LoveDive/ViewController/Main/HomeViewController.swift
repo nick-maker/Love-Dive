@@ -7,13 +7,14 @@
 
 import MapKit
 import UIKit
+import SwiftUI
 
 // MARK: - HomeViewController
 
 class HomeViewController: UIViewController {
-
+  
   // MARK: Internal
-
+  
   lazy var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.register(HomeCell.self, forCellWithReuseIdentifier: HomeCell.reuseIdentifier)
@@ -24,7 +25,7 @@ class HomeViewController: UIViewController {
       withReuseIdentifier: SectionHeader.reuseIdentifier)
     return collectionView
   }()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigation()
@@ -32,26 +33,26 @@ class HomeViewController: UIViewController {
     configureCompositionalLayout()
     getDivingSite()
   }
-
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     updateFavorites()
   }
-
+  
   func updateFavorites() {
     let favorites = Set(UserDefaults.standard.stringArray(forKey: saveKey) ?? [])
     self.favorites.favorites = favorites
     favoriteLocations = allLocations.filter(self.favorites.contains(_:))
     collectionView.reloadData()
   }
-
+  
   func setupNavigation() {
     navigationItem.title = "Home"
     navigationController?.navigationBar.tintColor = .pacificBlue
     navigationItem.backButtonTitle = ""
     navigationController?.navigationBar.prefersLargeTitles = true
   }
-
+  
   func setupCollectionView() {
     view.addSubview(collectionView)
     collectionView.backgroundColor = nil
@@ -65,7 +66,7 @@ class HomeViewController: UIViewController {
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
     ])
   }
-
+  
   func getDivingSite() {
     if
       let locationData = UserDefaults.standard.object(forKey: "AllLocation") as? Data,
@@ -75,25 +76,25 @@ class HomeViewController: UIViewController {
       favoriteLocations = locations.filter(favorites.contains(_:))
     }
   }
-
+  
   // MARK: Private
-
+  private let seaLevelModel = SeaLevelModel()
   private var favorites = Favorites()
   private let divingSiteManager = DivingSiteManager()
   private var allLocations: [Location] = []
   private var favoriteLocations: [Location] = []
   private let saveKey = "Favorites"
-
+  
 }
 
 // MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+  
   func numberOfSections(in _: UICollectionView) -> Int {
     2
   }
-
+  
   func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch section {
     case 0:
@@ -104,7 +105,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       return 0
     }
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     switch indexPath.section {
     case 0:
@@ -124,8 +125,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
               withReuseIdentifier: HomeCell.reuseIdentifier,
               for: indexPath) as? HomeCell
         else { fatalError("Cannot Down casting") }
-        cell.locationLabel.text = favoriteLocations[indexPath.row].name
-        cell.snapshot(lat: favoriteLocations[indexPath.row].latitude, lng: favoriteLocations[indexPath.row].longitude)
+        let location = favoriteLocations[indexPath.row]
+        cell.locationLabel.text = location.name
+        cell.snapshot(lat: location.latitude, lng: location.longitude)
+        cell.favoriteButton.isSelected = favorites.contains(location)
+        cell.favoriteButton.tintColor = favorites.contains(location) ? .systemRed : .lightGray
+        cell.favoriteButton.removeTarget(self, action: nil, for: .allEvents)
+        cell.favoriteButton.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
         return cell
       }
     case 1:
@@ -144,7 +150,34 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       return cell
     }
   }
-
+  
+  @objc
+  func toggleFavorite(sender: UIButton) {
+    let point = sender.convert(CGPoint.zero, to: collectionView)
+    guard let indexPath = collectionView.indexPathForItem(at: point) else {
+      return
+    }
+    let divingSite = favoriteLocations[indexPath.row]
+    if !sender.isSelected {
+      favorites.add(divingSite)
+      sender.tintColor = .systemRed
+    } else {
+      favorites.remove(divingSite)
+      sender.tintColor = .lightGray
+      presentToast(title: "\(divingSite.name) is removed from favorites")
+    }
+    sender.isSelected = !sender.isSelected
+    //    collectionView.reloadItems(at: [indexPath])
+  }
+  
+  private func presentToast(title: String) {
+    let toast = ToastViewController(title: title)
+    present(toast, animated: true)
+    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+      toast.dismiss(animated: true)
+    }
+  }
+  
   func collectionView(
     _ collectionView: UICollectionView,
     viewForSupplementaryElementOfKind kind: String,
@@ -170,7 +203,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       return UICollectionReusableView()
     }
   }
-
+  
   func configureCompositionalLayout() {
     let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
       switch sectionIndex {
@@ -184,5 +217,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     collectionView.setCollectionViewLayout(layout, animated: true)
   }
-
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let location = favoriteLocations[indexPath.row]
+    let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)
+    let hostingController = UIHostingController(rootView: tideView)
+    navigationController?.navigationBar.tintColor = .white
+    navigationController?.pushViewController(hostingController, animated: true)
+  }
+  
 }

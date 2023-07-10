@@ -39,6 +39,7 @@ class EmptyCell: UICollectionViewCell {
 
   private var exploreButton: UIButton = {
     var config = UIButton.Configuration.filled()
+    config.buttonSize = .large
     config.cornerStyle = .dynamic
     config.baseBackgroundColor = .pacificBlue
     config.baseForegroundColor = .white
@@ -51,11 +52,10 @@ class EmptyCell: UICollectionViewCell {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     messageLabel.translatesAutoresizingMaskIntoConstraints = false
     exploreButton.translatesAutoresizingMaskIntoConstraints = false
-
     exploreButton.addTarget(self, action: #selector(exploreButtonTapped), for: .touchUpInside)
 
     titleLabel.text = "No favorites yet"
-    messageLabel.text = "As you explore, tap the heart icon to save your favorite diving sites"
+    messageLabel.text = "As you explore, tap the heart icon to save your favorite diving sites."
     messageLabel.textColor = .secondaryLabel
     messageLabel.numberOfLines = 0
 
