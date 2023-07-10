@@ -10,23 +10,21 @@ import UIKit
 
 class AppLayouts {
 
-  static func weatherSection(onVisibleItemsChanged: @escaping (Int) -> Void) -> NSCollectionLayoutSection {
+  static func homeSection() -> NSCollectionLayoutSection {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
-    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
+    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -20)
 
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .absolute(130))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(240))
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
     let section = NSCollectionLayoutSection(group: group)
-    section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 10, bottom: 0, trailing: 0)
-    section.orthogonalScrollingBehavior = .groupPagingCentered
+    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 30)
+    section.orthogonalScrollingBehavior = .groupPaging
 
     // PLay with some animation and scrollOffest
     section.visibleItemsInvalidationHandler = { items, offset, environment in
-      if let currentIndex = items.last?.indexPath.item {
-        onVisibleItemsChanged(currentIndex)
-      }
+
       items.forEach { item in
         let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
         let minScale: CGFloat = 0.8
@@ -35,6 +33,14 @@ class AppLayouts {
         item.transform = CGAffineTransform(scaleX: scale, y: scale)
       }
     }
+
+    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
+    let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+      layoutSize: headerSize,
+      elementKind: UICollectionView.elementKindSectionHeader,
+      alignment: .topLeading)
+    headerElement.contentInsets = NSDirectionalEdgeInsets(top: -20, leading: -10, bottom: 0, trailing: 0)
+    section.boundarySupplementaryItems = [headerElement]
 
     return section
   }

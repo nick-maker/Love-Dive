@@ -37,9 +37,23 @@ class TideCell: ShadowCollectionViewCell {
 
   let stackView = UIStackView()
 
+  var favoriteButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .small)
+    let emptyHeartImage = UIImage(systemName: "heart", withConfiguration: config)
+    let filledHeartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
+    button.setImage(emptyHeartImage, for: .normal)
+    button.setImage(filledHeartImage, for: .selected)
+    button.tintColor = .lightGray
+    return button
+  }()
+
   func setupUI() {
     // Setup location label
     locationLabel.translatesAutoresizingMaskIntoConstraints = false
+    locationLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+
     contentView.addSubview(locationLabel)
     contentView.layer.cornerRadius = 20
 
@@ -62,6 +76,7 @@ class TideCell: ShadowCollectionViewCell {
 
     // Adding stack view to content view
     contentView.addSubview(stackView)
+    contentView.addSubview(favoriteButton)
 
     // Setup constraints
     NSLayoutConstraint.activate([
@@ -71,6 +86,9 @@ class TideCell: ShadowCollectionViewCell {
       stackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
       stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
       stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
+      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
     ])
   }
 

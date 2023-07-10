@@ -87,7 +87,8 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     goToday()
   }
 
-  @objc func goToday() {
+  @objc
+  func goToday() {
     isGoToday = true
     let todayDate = Date()
     let todayDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: todayDate)
@@ -209,7 +210,7 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
 
   func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom _: DateComponents) {
     currentDateComponents = calendarView.visibleDateComponents
-    isGoToday = false //要解決cellforitemat的時候行事曆回到今天的問題
+    isGoToday = false // 要解決cellforitemat的時候行事曆回到今天的問題
   }
 
 }
@@ -246,9 +247,9 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       let dateSelection = UICalendarSelectionSingleDate(delegate: self)
       cell.calendarView.selectionBehavior = dateSelection
       if isSelected && currentDateComponents?.month == selectedDateComponents?.month || isGoToday {
-        dateSelection.selectedDate = selectedDateComponents //fix dequeueReusableCell will clear the selection
+        dateSelection.selectedDate = selectedDateComponents // fix dequeueReusableCell will clear the selection
       }
-        return cell
+      return cell
 
     case 1:
       guard
@@ -317,6 +318,8 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
           headerView.text = "SUMMARY FOR \(filteredDivingLogs.count) DIVES"
         }
       }
+      headerView.label.font = UIFont.systemFont(ofSize: 12)
+      headerView.label.textColor = UIColor.lightGray
       return headerView
     default:
       return UICollectionReusableView()

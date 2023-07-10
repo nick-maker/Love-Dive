@@ -9,18 +9,25 @@ import UIKit
 
 // MARK: - TabBarController
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSiteDelegate {
 
-  let healthKitManager = HealthKitManger()
-  let cloudKitVM = CloudKitViewModel()
+  // MARK: Internal
+
+  func getDivingSite(didDecode divingSite: [Location]) {
+    if let encodedDivingSite = try? JSONEncoder().encode(divingSite) {
+      UserDefaults.standard.set(encodedDivingSite, forKey: "AllLocation")
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 //    healthKitManager.delegate = self
 //    healthKitManager.requestHealthKitPermissions()
-    cloudKitVM.getiCloudStatus()
-    cloudKitVM.requestPermission()
+//    cloudKitVM.getiCloudStatus()
+//    cloudKitVM.requestPermission()
     delegate = self
+    divingSiteManager.delegate = self
+    divingSiteManager.decodeDivingGeoJSON()
   }
 
   func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
@@ -39,6 +46,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     handler.handleReselect()
     return true
   }
+
+  // MARK: Private
+
+//  let healthKitManager = HealthKitManger()
+//  let cloudKitVM = CloudKitViewModel()
+  private let divingSiteManager = DivingSiteManager()
 
 }
 

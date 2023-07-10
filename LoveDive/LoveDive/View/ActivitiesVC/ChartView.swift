@@ -166,12 +166,9 @@ struct ChartView: View {
       }
       .listStyle(.plain)
       .onAppear {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-          viewSize = proxy.size
-          generateSnapshot(viewSize: viewSize)
-        }
+        viewSize = proxy.size
         showingEditSheet = false
-        chartAnimation() //somehow cause the picture to glitch
+        chartAnimation() // somehow cause the picture to glitch
       }
     }
     .navigationBarTitle("Diving Log", displayMode: .large)
@@ -508,12 +505,18 @@ struct ChartView: View {
 
   @MainActor
   private func chartAnimation() {
+    let group = DispatchGroup()
     for (index,_) in data.enumerated() {
-      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.02) {
+      group.enter()
+      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.01) {
         withAnimation(.interactiveSpring(response: 0.9, dampingFraction: 0.6, blendDuration: 0.8)) {
           data[index].animate = true
         }
+        group.leave()
       }
+    }
+    group.notify(queue: .main) {
+      generateSnapshot(viewSize: viewSize)
     }
   }
 

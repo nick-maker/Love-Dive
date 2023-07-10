@@ -16,8 +16,6 @@ class SectionHeader: UICollectionReusableView {
 
     label.translatesAutoresizingMaskIntoConstraints = false
     addSubview(label)
-    label.font = UIFont.systemFont(ofSize: 12)
-    label.textColor = UIColor.lightGray
 
     NSLayoutConstraint.activate([
       label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -35,14 +33,12 @@ class SectionHeader: UICollectionReusableView {
 
   static let reuseIdentifier = "\(SectionHeader.self)"
 
+  let label = UILabel()
+
   var text: String? {
     didSet {
       label.text = text
     }
   }
-
-  // MARK: Private
-
-  private let label = UILabel()
 
 }

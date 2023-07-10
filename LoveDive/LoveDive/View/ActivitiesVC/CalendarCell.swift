@@ -38,7 +38,7 @@ class CalendarCell: UICollectionViewCell {
     let fromDateComponents = DateComponents(calendar: .current, year: 2022, month: 9, day: 7)
     let toDateComponents = DateComponents(calendar: .current, year: 2099, month: 9, day: 29)
     guard let fromDate = fromDateComponents.date, let toDate = toDateComponents.date else {
-        return
+      return
     }
     let calendarViewDateRange = DateInterval(start: fromDate, end: toDate)
     calendarView.availableDateRange = calendarViewDateRange

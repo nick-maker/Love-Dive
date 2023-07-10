@@ -73,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" name="AccentColor"/>
-                        <color key="barTintColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                        <color key="barTintColor" systemColor="systemBackgroundColor"/>
                         <color key="selectedImageTintColor" red="0.094117647058823528" green="0.64313725490196072" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
@@ -155,7 +155,7 @@
         <!--Home View Controller-->
         <scene sceneID="3cF-Uc-fw9">
             <objects>
-                <viewController id="0j9-IT-KTQ" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController id="0j9-IT-KTQ" customClass="HomeViewController" customModule="LoveDive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fle-YX-0Bq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -219,9 +219,6 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

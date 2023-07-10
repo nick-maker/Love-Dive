@@ -29,12 +29,13 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     super.viewDidLoad()
     navigationController?.tabBarController?.tabBar.backgroundColor = .systemBackground
     locationManager.errorPresentationTarget = self
-    divingSiteManager.delegate = self
+//    divingSiteManager.delegate = self
     networkManager.currentDelegate = self
 
     setupMapView()
     getCurrentLocation()
-    divingSiteManager.decodeDivingGeoJSON()
+    getDivingSite()
+//    divingSiteManager.decodeDivingGeoJSON()
     setupCollectionView()
     configureCompositionalLayout()
   }
@@ -44,6 +45,16 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     containerDownOffset = 140
     containerUp = containerView.center
     containerDown = CGPoint(x: containerView.center.x ,y: containerView.center.y + containerDownOffset)
+  }
+
+  func getDivingSite() {
+    if
+      let locationData = UserDefaults.standard.object(forKey: "AllLocation") as? Data,
+      let locations = try? JSONDecoder().decode([Location].self, from: locationData)
+    {
+      self.locations = locations
+      createAnnotation(locations: locations)
+    }
   }
 
   func setupMapView() {
@@ -65,7 +76,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       guard let self else { return }
       DispatchQueue.main.async {
         let center = location.coordinate
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         self.mapView.setRegion(region, animated: true)
         self.mapView.showsUserLocation = true
       }
@@ -112,7 +123,8 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       guard let selectedLocation = self.selectedAnnotation?.coordinate else { return }
       guard
         let index = self.visibleLocations
-          .firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)," + "\(selectedLocation.longitude.description)" })
+          .firstIndex(where: { $0.id == "\(selectedLocation.latitude.description)," + "\(selectedLocation.longitude.description)"
+          })
       else {
         return
       }
@@ -124,7 +136,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   // MARK: Private
 
-  private let divingSiteManager = DivingSiteManager()
+//  private let divingSiteManager = DivingSiteManager()
   private let networkManager = NetworkManager()
   private let seaLevelModel = SeaLevelModel()
   private let locationManager = LocationManager()
@@ -138,20 +150,10 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   private var containerUp = CGPoint.zero
   private var containerDown = CGPoint.zero
   private var currentRegion = MKCoordinateSpan()
+  private var favorites = Favorites()
 
 //  private var currentPage: Int? = nil
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
-
-}
-
-// MARK: DivingSiteDelegate
-
-extension TideViewController: DivingSiteDelegate {
-
-  func getDivingSite(didDecode divingSite: [Location]) {
-    locations = divingSite
-    createAnnotation(locations: locations)
-  }
 
 }
 
@@ -201,7 +203,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
           let region = MKCoordinateRegion(
             center: annotation.coordinate,
             span: self.currentRegion)
-          self.mapView.setRegion(region, animated: true)
+//          self.mapView.setRegion(region, animated: true) //might cause jiggling
           self.mapView.selectAnnotation(annotation, animated: true)
         }
         self.lastScaleFactor = scale
@@ -303,10 +305,11 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
         .dequeueReusableCell(withReuseIdentifier: TideCell.reuseIdentifier, for: indexPath) as? TideCell
     else { fatalError("Cannot Down casting") }
 
-//    let annotation = annotations[indexPath.row]
-//    cell.locationLabel.text = annotation.title
-
     let location = visibleLocations[indexPath.row]
+
+//    cell.favoriteButton.isSelected = favoriteState[location.id] ?? false
+    cell.favoriteButton.isSelected = favorites.contains(location)
+    cell.favoriteButton.tintColor = favorites.contains(location) ? .systemRed : .lightGray
     cell.locationLabel.text = location.name
     if let weather = location.weather?.first {
       cell.airTemptText.text = weather.airTemperature.average
@@ -319,7 +322,25 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
       cell.windSpeedText.text = "-"
       cell.waveHeightText.text = "-"
     }
+    cell.favoriteButton.removeTarget(self, action: nil, for: .allEvents)
+    cell.favoriteButton.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
     return cell
+  }
+
+  @objc
+  func toggleFavorite(sender: UIButton) {
+    let point = sender.convert(CGPoint.zero, to: collectionView)
+    guard let indexPath = collectionView.indexPathForItem(at: point) else {
+      return
+    }
+    let divingSite = visibleLocations[indexPath.row]
+    if !sender.isSelected {
+      favorites.add(divingSite)
+    } else {
+      favorites.remove(divingSite)
+    }
+    sender.isSelected = !sender.isSelected
+    collectionView.reloadItems(at: [indexPath])
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
