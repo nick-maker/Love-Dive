@@ -40,8 +40,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     configureCompositionalLayout()
   }
 
-  private let saveKey = "Favorites"
-
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     updateFavorites()
@@ -62,7 +60,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   func getDivingSite() {
     if
-      let locationData = UserDefaults.standard.object(forKey: "AllLocation") as? Data,
+      let locationData = UserDefaults.standard.object(forKey: "allLocation") as? Data,
       let locations = try? JSONDecoder().decode([Location].self, from: locationData)
     {
       self.locations = locations
@@ -148,6 +146,8 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   }
 
   // MARK: Private
+
+  private let saveKey = "Favorites"
 
 //  private let divingSiteManager = DivingSiteManager()
   private let networkManager = NetworkManager()

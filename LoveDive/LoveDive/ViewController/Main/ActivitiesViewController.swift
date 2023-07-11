@@ -70,8 +70,9 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigation()
+    getDivingData()
     healthKitManager.delegate = self
-    healthKitManager.requestHealthKitPermissions()
+//    healthKitManager.requestHealthKitPermissions()
     setupCollectionView()
     configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
@@ -95,6 +96,19 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     selectedDateComponents = todayDateComponent
     filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
     collectionView.reloadData()
+  }
+
+  func getDivingData() {
+    if
+      let divingData = UserDefaults.standard.data(forKey: "divingData"),
+      let divingDataDecoded = try? JSONDecoder().decode([DivingLog].self, from: divingData),
+      let tempData = UserDefaults.standard.data(forKey: "tempData"),
+      let tempDataDecoded = try? JSONDecoder().decode([Temperature].self, from: tempData)
+
+    {
+      divingLogs = divingDataDecoded
+      temps = tempDataDecoded
+    }
   }
 
   func filterDivingLogs(forMonth month: Date) {
@@ -311,11 +325,11 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       if indexPath.section == 1 {
         switch filteredDivingLogs.count {
         case 0:
-          headerView.text = "No Diving Activities".uppercased()
+          headerView.label.text = "No Diving Activities".uppercased()
         case 1:
-          headerView.text = "SUMMARY FOR 1 DIVE"
+          headerView.label.text = "SUMMARY FOR 1 DIVE"
         default:
-          headerView.text = "SUMMARY FOR \(filteredDivingLogs.count) DIVES"
+          headerView.label.text = "SUMMARY FOR \(filteredDivingLogs.count) DIVES"
         }
       }
       headerView.label.font = UIFont.systemFont(ofSize: 12)

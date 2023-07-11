@@ -8,9 +8,13 @@
 import UIKit
 
 class ToastPresentationController: UIPresentationController {
+
+  // MARK: Internal
+
   override var frameOfPresentedViewInContainerView: CGRect {
-    guard let containerView = containerView,
-          let presentedView = presentedView else { return .zero }
+    guard
+      let containerView,
+      let presentedView else { return .zero }
 
     let inset: CGFloat = 32
 
@@ -21,8 +25,7 @@ class ToastPresentationController: UIPresentationController {
     let targetWidth = safeAreaFrame.width - 2 * inset
     let fittingSize = CGSize(
       width: targetWidth,
-      height: UIView.layoutFittingCompressedSize.height
-    )
+      height: UIView.layoutFittingCompressedSize.height)
     let targetHeight = presentedView.systemLayoutSizeFitting(
       fittingSize, withHorizontalFittingPriority: .required,
       verticalFittingPriority: .defaultLow).height
@@ -35,6 +38,13 @@ class ToastPresentationController: UIPresentationController {
     return frame
   }
 
+  override var presentedView: UIView? {
+    if shouldSetFrameWhenAccessingPresentedView {
+      super.presentedView?.frame = calculatedFrameOfPresentedViewInContainerView
+    }
+    return super.presentedView
+  }
+
   override func containerViewDidLayoutSubviews() {
     super.containerViewDidLayoutSubviews()
     presentedView?.frame = frameOfPresentedViewInContainerView
@@ -43,16 +53,6 @@ class ToastPresentationController: UIPresentationController {
   override func presentationTransitionWillBegin() {
     super.presentationTransitionWillBegin()
     presentedView?.layer.cornerRadius = 12
-  }
-
-  private var calculatedFrameOfPresentedViewInContainerView = CGRect.zero
-  private var shouldSetFrameWhenAccessingPresentedView = false
-
-  override var presentedView: UIView? {
-    if shouldSetFrameWhenAccessingPresentedView {
-      super.presentedView?.frame = calculatedFrameOfPresentedViewInContainerView
-    }
-    return super.presentedView
   }
 
   override func presentationTransitionDidEnd(_ completed: Bool) {
@@ -64,5 +64,10 @@ class ToastPresentationController: UIPresentationController {
     super.dismissalTransitionWillBegin()
     shouldSetFrameWhenAccessingPresentedView = false
   }
+
+  // MARK: Private
+
+  private var calculatedFrameOfPresentedViewInContainerView = CGRect.zero
+  private var shouldSetFrameWhenAccessingPresentedView = false
 
 }

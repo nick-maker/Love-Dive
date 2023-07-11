@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - ToastViewController
+
 class ToastViewController: UIViewController {
   init(title: String) {
     super.init(nibName: nil, bundle: nil)
@@ -31,13 +33,20 @@ class ToastViewController: UIViewController {
     ])
   }
 
-  required init?(coder aDecoder: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }
 
+// MARK: UIViewControllerTransitioningDelegate
+
 extension ToastViewController: UIViewControllerTransitioningDelegate {
-  func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-    return ToastPresentationController(presentedViewController: presented, presenting: presenting)
+  func presentationController(
+    forPresented presented: UIViewController,
+    presenting: UIViewController?,
+    source _: UIViewController)
+    -> UIPresentationController?
+  {
+    ToastPresentationController(presentedViewController: presented, presenting: presenting)
   }
 }

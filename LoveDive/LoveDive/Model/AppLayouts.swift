@@ -34,11 +34,11 @@ class AppLayouts {
       }
     }
 
-    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
+    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(25))
     let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize,
       elementKind: UICollectionView.elementKindSectionHeader,
-      alignment: .topLeading)
+      alignment: .top)
     headerElement.contentInsets = NSDirectionalEdgeInsets(top: -20, leading: -10, bottom: 0, trailing: 0)
     section.boundarySupplementaryItems = [headerElement]
 
@@ -74,6 +74,29 @@ class AppLayouts {
       layoutSize: headerSize,
       elementKind: UICollectionView.elementKindSectionHeader,
       alignment: .top)
+    section.boundarySupplementaryItems = [headerElement]
+
+    return section
+  }
+
+  static func homeDiveSection() -> NSCollectionLayoutSection {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(90))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+    group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
+
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0)
+
+    let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(25))
+    let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+      layoutSize: headerSize,
+      elementKind: UICollectionView.elementKindSectionHeader,
+      alignment: .top)
+    headerElement.contentInsets = NSDirectionalEdgeInsets(top: -30, leading: 10, bottom: 0, trailing: 0)
     section.boundarySupplementaryItems = [headerElement]
 
     return section

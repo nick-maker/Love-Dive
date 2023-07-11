@@ -15,16 +15,16 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSi
 
   func getDivingSite(didDecode divingSite: [Location]) {
     if let encodedDivingSite = try? JSONEncoder().encode(divingSite) {
-      UserDefaults.standard.set(encodedDivingSite, forKey: "AllLocation")
+      UserDefaults.standard.set(encodedDivingSite, forKey: "allLocation")
     }
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//    healthKitManager.delegate = self
-//    healthKitManager.requestHealthKitPermissions()
-//    cloudKitVM.getiCloudStatus()
-//    cloudKitVM.requestPermission()
+    healthKitManager.delegate = self
+    healthKitManager.requestHealthKitPermissions()
+    //    cloudKitVM.getiCloudStatus()
+    //    cloudKitVM.requestPermission()
     delegate = self
     divingSiteManager.delegate = self
     divingSiteManager.decodeDivingGeoJSON()
@@ -49,9 +49,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSi
 
   // MARK: Private
 
-//  let healthKitManager = HealthKitManger()
-//  let cloudKitVM = CloudKitViewModel()
+  private let healthKitManager = HealthKitManger()
+  //  let cloudKitVM = CloudKitViewModel()
   private let divingSiteManager = DivingSiteManager()
+  var divingLogs: [DivingLog] = []
+  var temps: [Temperature] = []
 
 }
 
@@ -63,22 +65,25 @@ protocol TabBarReselectHandling {
 
 // MARK: HealthManagerDelegate
 
-// extension TabBarController: HealthManagerDelegate {
-//
-//  func getDepthData(didGet divingData: [DivingLog]) {
-//    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
-//    let thirdNavController = navigationControllers[2]
-//    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
-//    activitiesViewController.setupCollectionView()
-//    activitiesViewController.divingLogs = divingData
-//    activitiesViewController.filterDivingLogs(forMonth: Date())
-//  }
-//
-//  func getTempData(didGet tempData: [Temperature]) {
-//    guard let navigationControllers = viewControllers as? [UINavigationController] else { return }
-//    let thirdNavController = navigationControllers[2]
-//    guard let activitiesViewController = thirdNavController.viewControllers.first as? ActivitiesViewController else { return }
-//    activitiesViewController.temps = tempData
-//  }
-//
-// }
+extension TabBarController: HealthManagerDelegate {
+  func getDepthData(didGet divingData: [DivingLog]) {
+//    let group = DispatchGroup()
+//    group.enter()
+//    divingLogs = divingData
+////    DispatchQueue.global().async {
+////      if let encodedDepthData = try? JSONEncoder().encode(divingData) {
+////        UserDefaults.standard.set(encodedDepthData, forKey: "divingData")
+////      }
+////    }
+//    group.leave()
+  }
+
+  func getTempData(didGet tempData: [Temperature]) {
+//    DispatchQueue.global().async {
+//      if let encodedTempData = try? JSONEncoder().encode(tempData) {
+//        UserDefaults.standard.set(encodedTempData, forKey: "tempData")
+//      }
+//    }
+//    temps = tempData
+  }
+}

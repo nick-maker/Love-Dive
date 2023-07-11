@@ -15,13 +15,19 @@ class SectionHeader: UICollectionReusableView {
     super.init(frame: frame)
 
     label.translatesAutoresizingMaskIntoConstraints = false
+    captionLabel.translatesAutoresizingMaskIntoConstraints = false
     addSubview(label)
+    addSubview(captionLabel)
 
     NSLayoutConstraint.activate([
       label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
       label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
       label.topAnchor.constraint(equalTo: topAnchor),
-      label.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+      captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+      captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+      captionLabel.topAnchor.constraint(equalTo: label.bottomAnchor),
+      captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
     ])
   }
 
@@ -34,11 +40,6 @@ class SectionHeader: UICollectionReusableView {
   static let reuseIdentifier = "\(SectionHeader.self)"
 
   let label = UILabel()
-
-  var text: String? {
-    didSet {
-      label.text = text
-    }
-  }
+  let captionLabel = UILabel()
 
 }

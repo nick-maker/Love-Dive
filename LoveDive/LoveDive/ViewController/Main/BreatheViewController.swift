@@ -14,6 +14,7 @@ class BreatheViewController: UIViewController {
 
     // Create an instance of BreatheModel
     let breatheModel = BreatheModel()
+    breatheModel.authorizeNotification()
     let audioModel = AudioModel()
 
     // Create an instance of BreatheView and add BreatheModel to the environment

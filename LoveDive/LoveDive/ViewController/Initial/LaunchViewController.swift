@@ -12,7 +12,6 @@ class LaunchViewController: UIViewController {
 
   // MARK: Internal
 
-
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.darkBlue

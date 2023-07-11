@@ -5,8 +5,8 @@
 //  Created by Nick Liu on 2023/7/10.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 // MARK: - Favorites
 
@@ -18,9 +18,10 @@ class Favorites: ObservableObject {
     favorites = Set(UserDefaults.standard.stringArray(forKey: saveKey) ?? [])
   }
 
+  // MARK: Internal
+
   @Published var favorites: Set<String>
 
-  // MARK: Internal
   func contains(_ divingSite: Location) -> Bool {
     favorites.contains(divingSite.id)
   }

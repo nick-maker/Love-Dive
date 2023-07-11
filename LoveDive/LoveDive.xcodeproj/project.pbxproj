@@ -300,13 +300,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		0673D7802A5A8BF500194930 /* Secondary */ = {
+		0673D7802A5A8BF500194930 /* Initial */ = {
 			isa = PBXGroup;
 			children = (
 				0673D7782A596F5E00194930 /* LaunchViewController.swift */,
 				0681DC722A4000BD00BCC367 /* TabBarController.swift */,
 			);
-			path = Secondary;
+			path = Initial;
 			sourceTree = "<group>";
 		};
 		067833B02A39D8B5000642F2 = {
@@ -413,8 +413,8 @@
 			isa = PBXGroup;
 			children = (
 				0603F4EF2A5AB5070072C0C3 /* BaseVC */,
+				0673D7802A5A8BF500194930 /* Initial */,
 				064948522A5BD79B0094DB5A /* Main */,
-				0673D7802A5A8BF500194930 /* Secondary */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

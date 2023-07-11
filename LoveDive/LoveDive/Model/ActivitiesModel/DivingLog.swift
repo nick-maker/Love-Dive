@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - DivingLog
 
-struct DivingLog {
+struct DivingLog: Codable {
 
   let startTime: Date
   var session: [DivingEntry]
@@ -36,7 +36,7 @@ struct DivingLog {
 
 // MARK: - DivingEntry
 
-struct DivingEntry: Identifiable {
+struct DivingEntry: Codable, Identifiable {
 
   var id = UUID().uuidString // to conform identifiable
   let time: Date
@@ -47,7 +47,7 @@ struct DivingEntry: Identifiable {
 
 // MARK: - Temperature
 
-struct Temperature {
+struct Temperature: Codable {
   let start: Date
   let end: Date
   let temp: Double

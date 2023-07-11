@@ -37,6 +37,18 @@ class HomeCell: ShadowCollectionViewCell {
     return image
   }()
 
+  var favoriteButton: UIButton = {
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .small)
+    let emptyHeartImage = UIImage(systemName: "heart", withConfiguration: config)
+    let filledHeartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
+    button.setImage(emptyHeartImage, for: .normal)
+    button.setImage(filledHeartImage, for: .selected)
+    button.tintColor = .lightGray
+    return button
+  }()
+
   func setupUI() {
     // Setup location label
     locationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -110,18 +122,6 @@ class HomeCell: ShadowCollectionViewCell {
   // MARK: Private
 
   private var location: (lat: Double, lng: Double)?
-
-  var favoriteButton: UIButton = {
-    let button = UIButton()
-    button.translatesAutoresizingMaskIntoConstraints = false
-    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .small)
-    let emptyHeartImage = UIImage(systemName: "heart", withConfiguration: config)
-    let filledHeartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
-    button.setImage(emptyHeartImage, for: .normal)
-    button.setImage(filledHeartImage, for: .selected)
-    button.tintColor = .lightGray
-    return button
-  }()
 
   private let cache = NSCache<NSString, UIImage>()
 

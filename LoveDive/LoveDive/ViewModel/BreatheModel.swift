@@ -11,10 +11,10 @@ class BreatheModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate
 
   // MARK: Lifecycle
 
-  override init() {
-    super.init()
-    authorizeNotification()
-  }
+//  override init() {
+//    super.init()
+//    authorizeNotification()
+//  }
 
   // MARK: Internal
 

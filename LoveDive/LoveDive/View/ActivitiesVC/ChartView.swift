@@ -156,6 +156,7 @@ struct ChartView: View {
   var imagePath: String?
   @State var viewSize = CGSize()
   @State var generatedImage: Image?
+  @State var savedImage: Image?
 
   var body: some View {
     GeometryReader { proxy in
@@ -169,6 +170,7 @@ struct ChartView: View {
         viewSize = proxy.size
         showingEditSheet = false
         chartAnimation() // somehow cause the picture to glitch
+        loadImage()
       }
     }
     .navigationBarTitle("Diving Log", displayMode: .large)
@@ -337,6 +339,7 @@ struct ChartView: View {
           showingEditSheet = false
           if let filePath = data.first?.time.description {
             photosModel.saveImageToDocumentsDirectory(image: mainView.image, filePath: filePath)
+            loadImage()
             generateSnapshot(viewSize: viewSize)
           }
         } label: {
@@ -420,17 +423,30 @@ struct ChartView: View {
   }
 
   var pictureView: some View {
-    HStack {
-      if
-        let filePath = data.first?.time.description,
-        let image = photosModel.getImageFromFileManager(filePath: filePath)
-      {
-        image.resizable()
-          .aspectRatio(contentMode: .fill)
-          .aspectRatio(0.75, contentMode: .fill)
-//          .clipped()
-          .cornerRadius(20)
-      }
+//    let filePath = data.first?.time.description
+//        var image: Image?
+//        if let filePath = filePath {
+//            image = photosModel.getImageFromFileManager(filePath: filePath)
+//        }
+
+    return HStack {
+//      if
+//        let filePath = data.first?.time.description,
+//        let image = photosModel.getImageFromFileManager(filePath: filePath)
+//      {
+//        image.resizable()
+//          .aspectRatio(contentMode: .fill)
+//          .aspectRatio(0.75, contentMode: .fill)
+////          .clipped()
+//          .cornerRadius(20)
+//      }
+      if let image = savedImage {
+                 image
+                     .resizable()
+                     .aspectRatio(contentMode: .fill)
+                     .aspectRatio(0.75, contentMode: .fill)
+                     .cornerRadius(20)
+             }
     }
     .frame(width: 340, height: 240)
     .aspectRatio(0.75, contentMode: .fill)
@@ -445,10 +461,11 @@ struct ChartView: View {
   }
 
   var snapshotView: some View {
-    VStack {
-      if
-        let filePath = data.first?.time.description,
-        photosModel.getImageFromFileManager(filePath: filePath) != nil
+
+    return VStack {
+      if let _ = savedImage
+//        let filePath = data.first?.time.description,
+//        photosModel.getImageFromFileManager(filePath: filePath) != nil
       {
         pictureView
         chartListView
@@ -477,9 +494,9 @@ struct ChartView: View {
 
   @ViewBuilder
   private var content: some View {
-    if
-      let filePath = data.first?.time.description,
-      photosModel.getImageFromFileManager(filePath: filePath) != nil
+    if let _ = savedImage
+//      let filePath = data.first?.time.description,
+//      photosModel.getImageFromFileManager(filePath: filePath) != nil
     {
       pictureView
       chartListView
@@ -501,6 +518,13 @@ struct ChartView: View {
 
   private func loadFilter() {
     photosModel.loadFilter()
+  }
+
+  private func loadImage() {
+    let filePath = data.first?.time.description
+    if let filePath = filePath {
+      savedImage = photosModel.getImageFromFileManager(filePath: filePath)
+    }
   }
 
   @MainActor
