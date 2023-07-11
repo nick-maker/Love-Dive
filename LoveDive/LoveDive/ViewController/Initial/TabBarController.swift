@@ -21,8 +21,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSi
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    healthKitManager.delegate = self
-    healthKitManager.requestHealthKitPermissions()
+//    healthKitManager.delegate = self
+//    healthKitManager.requestHealthKitPermissions()
+//    DispatchQueue.main.async {
+//    HealthKitManager.shared.requestHealthKitPermissions()
+//    }
     //    cloudKitVM.getiCloudStatus()
     //    cloudKitVM.requestPermission()
     delegate = self
@@ -49,11 +52,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSi
 
   // MARK: Private
 
-  private let healthKitManager = HealthKitManger()
+//  private let healthKitManager = HealthKitManger()
   //  let cloudKitVM = CloudKitViewModel()
   private let divingSiteManager = DivingSiteManager()
-  var divingLogs: [DivingLog] = []
-  var temps: [Temperature] = []
+//  var divingLogs: [DivingLog] = []
+//  var temps: [Temperature] = []
 
 }
 
@@ -65,25 +68,25 @@ protocol TabBarReselectHandling {
 
 // MARK: HealthManagerDelegate
 
-extension TabBarController: HealthManagerDelegate {
-  func getDepthData(didGet divingData: [DivingLog]) {
-//    let group = DispatchGroup()
-//    group.enter()
+// extension TabBarController: HealthManagerDelegate {
+//  func getDepthData(didGet divingData: [DivingLog]) {
+////    let group = DispatchGroup()
+////    group.enter()
 //    divingLogs = divingData
-////    DispatchQueue.global().async {
-////      if let encodedDepthData = try? JSONEncoder().encode(divingData) {
-////        UserDefaults.standard.set(encodedDepthData, forKey: "divingData")
-////      }
-////    }
-//    group.leave()
-  }
-
-  func getTempData(didGet tempData: [Temperature]) {
+//    DispatchQueue.global().async {
+//      if let encodedDepthData = try? JSONEncoder().encode(divingData) {
+//        UserDefaults.standard.set(encodedDepthData, forKey: "divingData")
+//      }
+//    }
+////    group.leave()
+//  }
+//
+//  func getTempData(didGet tempData: [Temperature]) {
 //    DispatchQueue.global().async {
 //      if let encodedTempData = try? JSONEncoder().encode(tempData) {
 //        UserDefaults.standard.set(encodedTempData, forKey: "tempData")
 //      }
 //    }
-//    temps = tempData
-  }
-}
+////    temps = tempData
+//  }
+// }

@@ -5,6 +5,7 @@
 //  Created by Nick Liu on 2023/6/17.
 //
 
+import Combine
 import SwiftUI
 import UIKit
 
@@ -14,25 +15,13 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   // MARK: Internal
 
-  var divingLogs: [DivingLog] = []
-  var temps: [Temperature] = []
-  var averageTemp = 0.0
-  var filteredDuration = 0.0
-  var filteredMaxDepth = 0.0
-
-  let healthKitManager = HealthKitManger()
-  let calendarView = UICalendarView()
-  var isSelected = false
-  var isGoToday = false
-  var selectedDateComponents: DateComponents?
-
   lazy var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.reuseIdentifier)
     collectionView.register(
-      SectionHeader.self,
+      BestSectionHeader.self,
       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-      withReuseIdentifier: SectionHeader.reuseIdentifier)
+      withReuseIdentifier: BestSectionHeader.reuseIdentifier)
     collectionView.register(SummaryCell.self, forCellWithReuseIdentifier: SummaryCell.reuseIdentifier)
     collectionView.register(DiveCell.self, forCellWithReuseIdentifier: DiveCell.reuseIdentifier)
     return collectionView
@@ -69,10 +58,22 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] divingLogs in
+        self?.divingLogs = divingLogs
+        self?.collectionView.reloadData()
+      }
+
+    tempsSubscription = HealthKitManager.shared.tempsPublisher
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] temps in
+        self?.temps = temps
+        self?.collectionView.reloadData()
+      }
+
     setupNavigation()
-    getDivingData()
-    healthKitManager.delegate = self
-//    healthKitManager.requestHealthKitPermissions()
     setupCollectionView()
     configureCompositionalLayout()
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
@@ -96,19 +97,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     selectedDateComponents = todayDateComponent
     filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
     collectionView.reloadData()
-  }
-
-  func getDivingData() {
-    if
-      let divingData = UserDefaults.standard.data(forKey: "divingData"),
-      let divingDataDecoded = try? JSONDecoder().decode([DivingLog].self, from: divingData),
-      let tempData = UserDefaults.standard.data(forKey: "tempData"),
-      let tempDataDecoded = try? JSONDecoder().decode([Temperature].self, from: tempData)
-
-    {
-      divingLogs = divingDataDecoded
-      temps = tempDataDecoded
-    }
   }
 
   func filterDivingLogs(forMonth month: Date) {
@@ -152,6 +140,19 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   // MARK: Private
 
+  private var divingLogs: [DivingLog] = []
+  private var temps: [Temperature] = []
+  private var averageTemp = 0.0
+  private var filteredDuration = 0.0
+  private var filteredMaxDepth = 0.0
+
+  private let calendarView = UICalendarView()
+  private var isSelected = false
+  private var isGoToday = false
+  private var selectedDateComponents: DateComponents?
+  private var divingLogsSubscription: AnyCancellable?
+  private var tempsSubscription: AnyCancellable?
+
   private func filterDivingLogs(forDay day: Date) {
     let calendar = Calendar.current
     let targetDay = calendar.component(.day, from: day)
@@ -177,6 +178,7 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
       self.collectionView.reloadSections(sectionsToReload)
     }
   }
+
 
 }
 
@@ -317,8 +319,8 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       guard
         let headerView = collectionView.dequeueReusableSupplementaryView(
           ofKind: kind,
-          withReuseIdentifier: SectionHeader.reuseIdentifier,
-          for: indexPath) as? SectionHeader else
+          withReuseIdentifier: BestSectionHeader.reuseIdentifier,
+          for: indexPath) as? BestSectionHeader else
       {
         fatalError("Cannot downcast to SectionHeader")
       }
@@ -378,21 +380,19 @@ extension ActivitiesViewController {
   }
 }
 
-// MARK: HealthManagerDelegate
-
-extension ActivitiesViewController: HealthManagerDelegate {
-
-  func getDepthData(didGet divingData: [DivingLog]) {
-    divingLogs = divingData
-  }
-
-  func getTempData(didGet tempData: [Temperature]) {
-    temps = tempData
-  }
-
-}
-
 // MARK: TabBarReselectHandling
+
+// extension ActivitiesViewController: HealthManagerDelegate {
+//
+//  func getDepthData(didGet divingData: [DivingLog]) {
+//    divingLogs = divingData
+//  }
+//
+//  func getTempData(didGet tempData: [Temperature]) {
+//    temps = tempData
+//  }
+//
+// }
 
 extension ActivitiesViewController: TabBarReselectHandling {
 

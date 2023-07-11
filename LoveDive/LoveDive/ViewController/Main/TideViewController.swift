@@ -147,7 +147,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   // MARK: Private
 
-  private let saveKey = "Favorites"
+  private let saveKey = "favorites"
 
 //  private let divingSiteManager = DivingSiteManager()
   private let networkManager = NetworkManager()

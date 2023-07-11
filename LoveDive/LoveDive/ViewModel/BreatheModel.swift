@@ -9,14 +9,10 @@ import SwiftUI
 
 class BreatheModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
 
-  // MARK: Lifecycle
-
 //  override init() {
 //    super.init()
 //    authorizeNotification()
 //  }
-
-  // MARK: Internal
 
   // Mark: Timer
   @Published var progress: CGFloat = 1

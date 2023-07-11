@@ -44,6 +44,6 @@ class Favorites: ObservableObject {
 
   // MARK: Private
 
-  private let saveKey = "Favorites"
+  private let saveKey = "favorites"
 
 }

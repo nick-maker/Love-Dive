@@ -5,13 +5,14 @@
 //  Created by Nick Liu on 2023/7/9.
 //
 
+import Combine
 import MapKit
 import SwiftUI
 import UIKit
 
 // MARK: - HomeViewController
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, DiveCellDelegate {
 
   // MARK: Internal
 
@@ -21,15 +22,41 @@ class HomeViewController: UIViewController {
     collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.reuseIdentifier)
     collectionView.register(DiveCell.self, forCellWithReuseIdentifier: DiveCell.reuseIdentifier)
     collectionView.register(
-      SectionHeader.self,
+      BestSectionHeader.self,
       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-      withReuseIdentifier: SectionHeader.reuseIdentifier)
+      withReuseIdentifier: BestSectionHeader.reuseIdentifier)
+    collectionView.register(
+      FavSectionHeader.self,
+      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+      withReuseIdentifier: FavSectionHeader.reuseIdentifier)
     return collectionView
   }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    healthKitManager.delegate = self
+
+    divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
+      .receive(on: DispatchQueue.global())
+      .sink { [weak self] divingLogs in
+        DispatchQueue.global().async {
+          self?.divingLogs = divingLogs
+          DispatchQueue.main.async {
+            self?.collectionView.reloadData()
+          }
+        }
+      }
+
+    tempsSubscription = HealthKitManager.shared.tempsPublisher
+      .receive(on: DispatchQueue.global())
+      .sink { [weak self] temps in
+        DispatchQueue.global().async {
+          self?.temps = temps
+          DispatchQueue.main.async {
+            self?.collectionView.reloadData()
+          }
+        }
+      }
+
     setupNavigation()
     setupCollectionView()
     configureCompositionalLayout()
@@ -45,7 +72,9 @@ class HomeViewController: UIViewController {
     let favorites = Set(UserDefaults.standard.stringArray(forKey: saveKey) ?? [])
     self.favorites.favorites = favorites
     favoriteLocations = allLocations.filter(self.favorites.contains(_:))
-    collectionView.reloadData()
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
+    }
   }
 
   func setupNavigation() {
@@ -80,15 +109,38 @@ class HomeViewController: UIViewController {
   }
 
   // MARK: Private
-  private let healthKitManager = HealthKitManger()
-  private var divingLogs: [DivingLog] = []
-  private var temps: [Temperature] = []
+
+  private var maxDivingLogs: [DivingLog] = []
+  private var maxTemps: [Temperature] = []
   private let seaLevelModel = SeaLevelModel()
   private var favorites = Favorites()
   private let divingSiteManager = DivingSiteManager()
   private var allLocations: [Location] = []
   private var favoriteLocations: [Location] = []
-  private let saveKey = "Favorites"
+  private let saveKey = "favorites"
+  private var divingLogsSubscription: AnyCancellable?
+  private var tempsSubscription: AnyCancellable?
+
+  //  private let healthKitManager = HealthKitManger()
+  private var divingLogs: [DivingLog] = [] {
+    didSet {
+      DispatchQueue.main.async {
+        self.maxDivingLogs = Array(self.divingLogs.sorted(by: { $0.maxDepth > $1.maxDepth }).prefix(5))
+      }
+    }
+  }
+
+  private var temps: [Temperature] = [] {
+    didSet {
+      DispatchQueue.main.async {
+        self.maxTemps = self.temps.filter { temp in
+          self.maxDivingLogs.contains { divingLog in
+            temp.start == divingLog.startTime
+          }
+        }
+      }
+    }
+  }
 
 }
 
@@ -107,7 +159,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     case 0:
       return favoriteLocations.isEmpty ? 1 : favoriteLocations.count
     case 1:
-      return 5
+      return maxDivingLogs.count
     default:
       return 0
     }
@@ -128,9 +180,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       } else {
         guard
           let
-          cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: HomeCell.reuseIdentifier,
-            for: indexPath) as? HomeCell
+            cell = collectionView.dequeueReusableCell(
+              withReuseIdentifier: HomeCell.reuseIdentifier,
+              for: indexPath) as? HomeCell
         else { fatalError("Cannot Down casting") }
         let location = favoriteLocations[indexPath.row]
         cell.locationLabel.text = location.name
@@ -144,11 +196,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     default:
       guard
         let
-        cell = collectionView.dequeueReusableCell(
-          withReuseIdentifier: DiveCell.reuseIdentifier,
-          for: indexPath) as? DiveCell
+          cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: DiveCell.reuseIdentifier,
+            for: indexPath) as? DiveCell
       else { fatalError("Cannot Down casting") }
-
+      let divingLog = maxDivingLogs[indexPath.row]
+      let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
+      let attributedText = NSMutableAttributedString(string: text)
+      attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
+      cell.waterDepthLabel.attributedText = attributedText
+      cell.dateLabel.text = divingLog.startTime.formatted()
+      cell.delegate = self // to enable didselect
       return cell
     }
   }
@@ -171,36 +229,52 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     sender.isSelected = !sender.isSelected
   }
 
+  func cellLongPressEnded(_ cell: DiveCell) {
+    guard let indexPath = collectionView.indexPath(for: cell) else { return }
+    collectionView(collectionView, didSelectItemAt: indexPath)
+  }
+
   func collectionView(
     _ collectionView: UICollectionView,
     viewForSupplementaryElementOfKind kind: String,
     at indexPath: IndexPath)
-    -> UICollectionReusableView
+  -> UICollectionReusableView
   {
     switch kind {
     case UICollectionView.elementKindSectionHeader:
-      guard
-        let headerView = collectionView.dequeueReusableSupplementaryView(
-          ofKind: kind,
-          withReuseIdentifier: SectionHeader.reuseIdentifier,
-          for: indexPath) as? SectionHeader else
-      {
-        fatalError("Cannot downcast to SectionHeader")
-      }
       if indexPath.section == 0 {
+        guard
+          let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: FavSectionHeader.reuseIdentifier,
+            for: indexPath) as? FavSectionHeader else
+        {
+          fatalError("Cannot downcast to SectionHeader")
+        }
         headerView.label.text = "Favorites"
         headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-      } else if indexPath.section == 1 {
+        return headerView
+      }
+      else if indexPath.section == 1 {
+        guard
+          let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: BestSectionHeader.reuseIdentifier,
+            for: indexPath) as? BestSectionHeader else
+        {
+          fatalError("Cannot downcast to SectionHeader")
+        }
         headerView.label.text = "Personal Best Dives"
         headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         headerView.captionLabel.text = "LAST 5 BEST ACTIVITIES"
         headerView.captionLabel.textColor = .secondaryLabel
         headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
+        return headerView
       }
-      return headerView
     default:
       return UICollectionReusableView()
     }
+    return UICollectionReusableView()
   }
 
   func configureCompositionalLayout() {
@@ -218,11 +292,19 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if indexPath.section == 0 && !favoriteLocations.isEmpty {
+    if indexPath.section == 0, !favoriteLocations.isEmpty {
       let location = favoriteLocations[indexPath.row]
       let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)
       let hostingController = UIHostingController(rootView: tideView)
       navigationController?.navigationBar.tintColor = .white
+      navigationController?.pushViewController(hostingController, animated: true)
+    } else if indexPath.section == 1 {
+      let selectedData = maxDivingLogs[indexPath.row]
+      let selectedTemp = maxTemps[indexPath.row]
+      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
+      let hostingController = UIHostingController(rootView: chartView)
+      hostingController.title = "Diving Log"
+      navigationController?.navigationBar.tintColor = .pacificBlue
       navigationController?.pushViewController(hostingController, animated: true)
     }
   }
@@ -235,15 +317,5 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
       toast.dismiss(animated: true)
     }
-  }
-}
-
-extension HomeViewController: HealthManagerDelegate {
-  func getDepthData(didGet divingData: [DivingLog]) {
-    divingLogs = divingData
-  }
-
-  func getTempData(didGet tempData: [Temperature]) {
-    temps = tempData
   }
 }

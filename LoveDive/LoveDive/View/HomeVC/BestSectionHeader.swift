@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SectionHeader: UICollectionReusableView {
+class BestSectionHeader: UICollectionReusableView {
 
   // MARK: Lifecycle
 
@@ -37,7 +37,7 @@ class SectionHeader: UICollectionReusableView {
 
   // MARK: Internal
 
-  static let reuseIdentifier = "\(SectionHeader.self)"
+  static let reuseIdentifier = "\(BestSectionHeader.self)"
 
   let label = UILabel()
   let captionLabel = UILabel()

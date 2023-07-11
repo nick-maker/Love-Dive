@@ -25,7 +25,7 @@ struct DivingLog: Codable {
   }
 
   var duration: Double {
-    guard let endTime = session.last?.time else {
+    guard let endTime = session.last?.start else {
       return 0.0
     }
     let duration = endTime.timeIntervalSince(startTime)
@@ -39,7 +39,7 @@ struct DivingLog: Codable {
 struct DivingEntry: Codable, Identifiable {
 
   var id = UUID().uuidString // to conform identifiable
-  let time: Date
+  let start: Date
   let depth: Double
   var animate: Bool
 
