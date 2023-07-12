@@ -85,6 +85,7 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     navigationItem.backButtonTitle = ""
     navigationController?.navigationBar.prefersLargeTitles = true
     let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToday))
+    
     navigationItem.rightBarButtonItem = todayButton
     goToday()
   }

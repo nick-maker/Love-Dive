@@ -264,12 +264,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         {
           fatalError("Cannot downcast to SectionHeader")
         }
-        headerView.label.text = "Personal Best Dives"
-        headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        headerView.captionLabel.text = "LAST 5 BEST ACTIVITIES"
-        headerView.captionLabel.textColor = .secondaryLabel
-        headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
-        return headerView
+        if maxDivingLogs.isEmpty {
+          headerView.label.text = "Personal Best Dives"
+          headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+          headerView.captionLabel.text = "YOU DON'T HAVE DIVING ACTIVITIES YET"
+          headerView.captionLabel.textColor = .secondaryLabel
+          headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
+          return headerView
+        } else {
+          headerView.label.text = "Personal Best Dives"
+          headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+          headerView.captionLabel.text = "LAST 5 BEST ACTIVITIES"
+          headerView.captionLabel.textColor = .secondaryLabel
+          headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
+          return headerView
+        }
       }
     default:
       return UICollectionReusableView()

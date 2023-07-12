@@ -151,14 +151,13 @@ class HealthKitManager {
 //      healthStore.execute(query)
 //  }
 
-
   private func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
     var diveList: [DivingLog] = []
     var lastSessionEnd: Date? = nil
     var currentLog: DivingLog?
 
     guard let underwaterDepthType = HKQuantityType.quantityType(forIdentifier: .underwaterDepth) else {
-//      completion([])
+      completion([])
       return
     }
 

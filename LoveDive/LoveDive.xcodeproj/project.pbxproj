@@ -46,7 +46,6 @@
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
 		067833C42A39D8B5000642F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C22A39D8B5000642F2 /* Main.storyboard */; };
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
-		067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */; };
 		067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 067833D62A39E5CB000642F2 /* Foundation.framework */; };
 		067B6E492A56FEE300CE748F /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B6E482A56FEE300CE748F /* Blur.swift */; };
 		067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067B6E4A2A57BA7F00CE748F /* SeaLevelModel.swift */; };
@@ -143,7 +142,6 @@
 		067833C02A39D8B5000642F2 /* TideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideViewController.swift; sourceTree = "<group>"; };
 		067833C32A39D8B5000642F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		067833C52A39D8B6000642F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		067833C82A39D8B6000642F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		067833CA2A39D8B6000642F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		067833D02A39D9FD000642F2 /* LoveDive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoveDive.entitlements; sourceTree = "<group>"; };
 		067833D62A39E5CB000642F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -401,7 +399,6 @@
 		0681DC5F2A3CA52500BCC367 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */,
 				067833C22A39D8B5000642F2 /* Main.storyboard */,
 				0603F4EE2A5AB4EF0072C0C3 /* BaseView */,
 				0603F4F32A5AB6F30072C0C3 /* HomeVC */,
@@ -523,7 +520,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				067833C92A39D8B6000642F2 /* LaunchScreen.storyboard in Resources */,
 				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */,
 				06AFC0572A52C300007CB1E6 /* response.json in Resources */,
@@ -650,14 +646,6 @@
 				067833C32A39D8B5000642F2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		067833C72A39D8B6000642F2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				067833C82A39D8B6000642F2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
