@@ -169,8 +169,8 @@ struct ChartView: View {
       .onAppear {
         viewSize = proxy.size
         showingEditSheet = false
-        chartAnimation() // somehow cause the picture to glitch
         loadImage()
+        chartAnimation()
       }
     }
     .navigationBarTitle("Diving Log", displayMode: .large)
@@ -493,7 +493,7 @@ struct ChartView: View {
 
   @ViewBuilder
   private var content: some View {
-    if let _ = savedImage
+    if savedImage != nil
 //      let filePath = data.first?.time.description,
 //      photosModel.getImageFromFileManager(filePath: filePath) != nil
     {
@@ -519,6 +519,7 @@ struct ChartView: View {
     photosModel.loadFilter()
   }
 
+  @MainActor
   private func loadImage() {
     let filePath = data.first?.start.description
     if let filePath {
@@ -529,17 +530,17 @@ struct ChartView: View {
   @MainActor
   private func chartAnimation() {
     let group = DispatchGroup()
-    for (index,_) in data.enumerated() {
+    for index in data.indices {
       group.enter()
       DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.01) {
-        withAnimation(.interactiveSpring(response: 0.9, dampingFraction: 0.6, blendDuration: 0.8)) {
+        withAnimation(.interactiveSpring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.8)) {
           data[index].animate = true
         }
         group.leave()
       }
     }
     group.notify(queue: .main) {
-      generateSnapshot(viewSize: viewSize)
+      generateSnapshot(viewSize: viewSize) // to fix the problem that when snapshot, the animation isn't completed
     }
   }
 

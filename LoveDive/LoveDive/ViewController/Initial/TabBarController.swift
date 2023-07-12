@@ -9,15 +9,7 @@ import UIKit
 
 // MARK: - TabBarController
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSiteDelegate {
-
-  // MARK: Internal
-
-  func getDivingSite(didDecode divingSite: [Location]) {
-    if let encodedDivingSite = try? JSONEncoder().encode(divingSite) {
-      UserDefaults.standard.set(encodedDivingSite, forKey: "allLocation")
-    }
-  }
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +26,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, DivingSi
   }
 
   func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    generateHapticFeedback(for: HapticFeedback.selection)
     if
       tabBarController.selectedViewController === viewController,
       let handler = viewController as? TabBarReselectHandling
@@ -66,7 +59,7 @@ protocol TabBarReselectHandling {
   func handleReselect()
 }
 
-// MARK: HealthManagerDelegate
+// MARK: - TabBarController + DivingSiteDelegate
 
 // extension TabBarController: HealthManagerDelegate {
 //  func getDepthData(didGet divingData: [DivingLog]) {
@@ -90,3 +83,13 @@ protocol TabBarReselectHandling {
 ////    temps = tempData
 //  }
 // }
+
+extension TabBarController: DivingSiteDelegate {
+
+  func getDivingSite(didDecode divingSite: [Location]) {
+    if let encodedDivingSite = try? JSONEncoder().encode(divingSite) {
+      UserDefaults.standard.set(encodedDivingSite, forKey: "allLocation")
+    }
+  }
+
+}

@@ -34,7 +34,7 @@ class PhotosPickerModel: ObservableObject {
     CIFilter.photoEffectNoir(),
   ]
 
-  let serialQueue = DispatchQueue(label: "com.yourdomain.appname.filterQueue")
+  let serialQueue = DispatchQueue(label: "com.lkangting.loveDive.filterQueue")
 
   func cgImagePropertyOrientation(from image: UIImage) -> CGImagePropertyOrientation {
     switch image.imageOrientation {

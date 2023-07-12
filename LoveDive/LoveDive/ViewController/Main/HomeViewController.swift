@@ -180,9 +180,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       } else {
         guard
           let
-            cell = collectionView.dequeueReusableCell(
-              withReuseIdentifier: HomeCell.reuseIdentifier,
-              for: indexPath) as? HomeCell
+          cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HomeCell.reuseIdentifier,
+            for: indexPath) as? HomeCell
         else { fatalError("Cannot Down casting") }
         let location = favoriteLocations[indexPath.row]
         cell.locationLabel.text = location.name
@@ -196,9 +196,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     default:
       guard
         let
-          cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: DiveCell.reuseIdentifier,
-            for: indexPath) as? DiveCell
+        cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: DiveCell.reuseIdentifier,
+          for: indexPath) as? DiveCell
       else { fatalError("Cannot Down casting") }
       let divingLog = maxDivingLogs[indexPath.row]
       let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
@@ -238,7 +238,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     _ collectionView: UICollectionView,
     viewForSupplementaryElementOfKind kind: String,
     at indexPath: IndexPath)
-  -> UICollectionReusableView
+    -> UICollectionReusableView
   {
     switch kind {
     case UICollectionView.elementKindSectionHeader:
@@ -301,6 +301,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    generateHapticFeedback(for: HapticFeedback.selection)
     if indexPath.section == 0, !favoriteLocations.isEmpty {
       let location = favoriteLocations[indexPath.row]
       let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)

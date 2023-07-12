@@ -21,6 +21,14 @@ class HealthKitManager {
 
   static let shared = HealthKitManager()
 
+  var divingLogsPublisher: AnyPublisher<[DivingLog], Never> {
+    divingLogsSubject.eraseToAnyPublisher()
+  }
+
+  var tempsPublisher: AnyPublisher<[Temperature], Never> {
+    tempsSubject.eraseToAnyPublisher()
+  }
+
   func requestHealthKitPermissions() {
     // Specify the data types you want to access
     guard
@@ -56,18 +64,10 @@ class HealthKitManager {
   private var divingLogsSubject = CurrentValueSubject<[DivingLog], Never>([])
   private var tempsSubject = CurrentValueSubject<[Temperature], Never>([])
 
-  var divingLogsPublisher: AnyPublisher<[DivingLog], Never> {
-    divingLogsSubject.eraseToAnyPublisher()
-  }
-
-  var tempsPublisher: AnyPublisher<[Temperature], Never> {
-    tempsSubject.eraseToAnyPublisher()
-  }
-
   private func readDive() {
     DispatchQueue.global().async { [weak self] in
-      guard let self = self else { return }
-      self.readUnderwaterDepths(healthStore: self.healthStore) { diveQuery in
+      guard let self else { return }
+      readUnderwaterDepths(healthStore: healthStore) { diveQuery in
         let sortedDives = diveQuery.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
         DispatchQueue.main.async {
           self.divingLogs = sortedDives
@@ -75,7 +75,7 @@ class HealthKitManager {
           //        self.delegate?.getDepthData(didGet: self.divingLogs)
         }
       }
-      self.readWaterTemps(healthStore: self.healthStore) { tempSamples in
+      readWaterTemps(healthStore: healthStore) { tempSamples in
         DispatchQueue.main.async {
           self.temps = tempSamples
           self.tempsSubject.send(self.temps)
@@ -83,7 +83,6 @@ class HealthKitManager {
         }
       }
     }
-
   }
 
 //  private func readDive() {
@@ -197,6 +196,7 @@ class HealthKitManager {
 
     healthStore.execute(query)
   }
+
 //  func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
 //
 //      var temps: [Temperature] = []

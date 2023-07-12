@@ -64,6 +64,7 @@
 		0681DC732A4000BD00BCC367 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681DC722A4000BD00BCC367 /* TabBarController.swift */; };
 		0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 068240992A3C503700B69265 /* TaiwanDivingSite.geojson */; };
 		0682409C2A3C54FB00B69265 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0682409B2A3C54FB00B69265 /* Location.swift */; };
+		0688F6982A5F0058000B5FDE /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0688F6972A5F0058000B5FDE /* Haptic.swift */; };
 		069C4A4F2A53B31500D8D8AC /* tide.json in Resources */ = {isa = PBXBuildFile; fileRef = 069C4A4E2A53B31500D8D8AC /* tide.json */; };
 		06AD89B72A44210400E6C409 /* BestSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89B62A44210400E6C409 /* BestSectionHeader.swift */; };
 		06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD89BA2A44554600E6C409 /* Extension+Double.swift */; };
@@ -162,6 +163,7 @@
 		0681DC722A4000BD00BCC367 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		068240992A3C503700B69265 /* TaiwanDivingSite.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaiwanDivingSite.geojson; sourceTree = "<group>"; };
 		0682409B2A3C54FB00B69265 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0688F6972A5F0058000B5FDE /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		069C4A4E2A53B31500D8D8AC /* tide.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tide.json; sourceTree = "<group>"; };
 		06AD89B62A44210400E6C409 /* BestSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSectionHeader.swift; sourceTree = "<group>"; };
 		06AD89BA2A44554600E6C409 /* Extension+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Double.swift"; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				06AFC04D2A4F456B007CB1E6 /* FileManager.swift */,
+				0688F6972A5F0058000B5FDE /* Haptic.swift */,
 				067B6E482A56FEE300CE748F /* Blur.swift */,
 				060146462A3B53EB003001EE /* Config.swift */,
 			);
@@ -580,6 +583,7 @@
 				067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */,
 				067B6E4D2A57FA2000CE748F /* Extension+Date.swift in Sources */,
 				064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */,
+				0688F6982A5F0058000B5FDE /* Haptic.swift in Sources */,
 				06AD89B72A44210400E6C409 /* BestSectionHeader.swift in Sources */,
 				06AFC0552A52BF00007CB1E6 /* TideView.swift in Sources */,
 				064F76442A497431003DC830 /* PhotosPickerModel.swift in Sources */,
