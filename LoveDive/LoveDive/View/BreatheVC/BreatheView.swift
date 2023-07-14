@@ -221,7 +221,7 @@ struct BreatheView: View {
       Button {
         breatheModel.startTimer()
         isPresentingNewTimerView = false
-        audioModel.startPlayer(track: "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy")
+        audioModel.startPlayer(track: "Beach Ambience")
         startActivity()
       } label: {
         Text("Start")

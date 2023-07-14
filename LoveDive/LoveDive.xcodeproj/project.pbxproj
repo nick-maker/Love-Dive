@@ -14,6 +14,7 @@
 		060146492A3B57C7003001EE /* TideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060146482A3B57C7003001EE /* TideCell.swift */; };
 		060320512A44ACC50001FF12 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060320502A44ACC50001FF12 /* ChartView.swift */; };
 		0603F4F52A5AB7CE0072C0C3 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */; };
+		060E59152A61B14B0095C61F /* Beach Ambience.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 060E59142A61B14B0095C61F /* Beach Ambience.m4a */; };
 		06356B442A544A2500C786B0 /* SeaLevel.json in Resources */ = {isa = PBXBuildFile; fileRef = 06356B432A544A2500C786B0 /* SeaLevel.json */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F52A42F91F00711932 /* AppLayouts.swift */; };
@@ -31,7 +32,6 @@
 		064F76512A499937003DC830 /* BreatheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76502A499937003DC830 /* BreatheViewController.swift */; };
 		064F76552A49CC6E003DC830 /* RoundedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76542A49CC6E003DC830 /* RoundedNavigationController.swift */; };
 		064F76572A4AB862003DC830 /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76562A4AB862003DC830 /* AudioModel.swift */; };
-		064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */; };
 		064F765C2A4ACC7E003DC830 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 064F765B2A4ACC7E003DC830 /* Lottie */; };
 		064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */; };
 		064F76602A4ACE81003DC830 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F765F2A4ACE81003DC830 /* LottieView.swift */; };
@@ -109,6 +109,7 @@
 		060146482A3B57C7003001EE /* TideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideCell.swift; sourceTree = "<group>"; };
 		060320502A44ACC50001FF12 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		060E59142A61B14B0095C61F /* Beach Ambience.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Beach Ambience.m4a"; sourceTree = "<group>"; };
 		06356B432A544A2500C786B0 /* SeaLevel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SeaLevel.json; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		064F76502A499937003DC830 /* BreatheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheViewController.swift; sourceTree = "<group>"; };
 		064F76542A49CC6E003DC830 /* RoundedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedNavigationController.swift; sourceTree = "<group>"; };
 		064F76562A4AB862003DC830 /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
-		064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav"; sourceTree = "<group>"; };
 		064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "70733-simple-breathing-animation.json"; sourceTree = "<group>"; };
 		064F765F2A4ACE81003DC830 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		064F76612A4B10D4003DC830 /* DivingSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivingSiteManager.swift; sourceTree = "<group>"; };
@@ -344,12 +344,12 @@
 				0681DC5F2A3CA52500BCC367 /* View */,
 				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
+				060E59142A61B14B0095C61F /* Beach Ambience.m4a */,
 				0673D77E2A59747E00194930 /* Logo.json */,
 				064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */,
 				069C4A4E2A53B31500D8D8AC /* tide.json */,
 				06356B432A544A2500C786B0 /* SeaLevel.json */,
 				06AFC0562A52C2FF007CB1E6 /* response.json */,
-				064F76582A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
 				067833CA2A39D8B6000642F2 /* Info.plist */,
 			);
@@ -529,9 +529,9 @@
 				0673D77F2A59747E00194930 /* Logo.json in Resources */,
 				06356B442A544A2500C786B0 /* SeaLevel.json in Resources */,
 				067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */,
-				064F76592A4AB8D2003DC830 /* Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy.wav in Resources */,
 				067833C42A39D8B5000642F2 /* Main.storyboard in Resources */,
 				069C4A4F2A53B31500D8D8AC /* tide.json in Resources */,
+				060E59152A61B14B0095C61F /* Beach Ambience.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -255,13 +255,15 @@ struct ChartView: View {
         .bold()
         .foregroundColor(.pacificBlue)
         Spacer()
-        Image(systemName: "thermometer.and.liquid.waves")
-           .symbolRenderingMode(.hierarchical)
-           .foregroundStyle(Color.pacificBlue.opacity(0.7))
-        Text("\(String(format: "%.1f°C", temp))")
-          .bold()
-          .font(.system(size: 12, design: .rounded))
-          .foregroundColor(.secondary)
+        HStack(spacing: 2) {
+          Image(systemName: "thermometer.and.liquid.waves")
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(Color.pacificBlue.opacity(0.8))
+          Text("\(String(format: "%.1f°C", temp))")
+            .bold()
+            .font(.system(size: 12, design: .rounded))
+            .foregroundColor(.secondary)
+        }
       }
       .padding(.bottom, 4)
       HStack(spacing: 30) {

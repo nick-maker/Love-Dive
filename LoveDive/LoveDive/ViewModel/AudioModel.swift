@@ -13,7 +13,7 @@ class AudioModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
   var player: AVAudioPlayer?
 
   func startPlayer(track: String) {
-    guard let url = Bundle.main.url(forResource: track, withExtension: "wav") else {
+    guard let url = Bundle.main.url(forResource: track, withExtension: "m4a") else {
       print("Resources not found: \(track)")
       return
     }
@@ -35,7 +35,7 @@ class AudioModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
 
   func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully flag: Bool) {
     if flag {
-      startPlayer(track: "Artlist Original - Tel Aviv Ambiences - Beach Ambience Waves Lapping Windy")
+      startPlayer(track: "Beach Ambience")
     }
   }
 
