@@ -36,7 +36,7 @@ struct DivingLog: Codable {
 
 // MARK: - DivingEntry
 
-struct DivingEntry: Codable, Identifiable {
+struct DivingEntry: Codable, Identifiable, Equatable {
 
   var id = UUID().uuidString // to conform identifiable
   let start: Date

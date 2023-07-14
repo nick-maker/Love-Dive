@@ -28,6 +28,7 @@ class EmptyCell: UICollectionViewCell {
 
   @objc
   func exploreButtonTapped() {
+    generateHapticFeedback(for: HapticFeedback.selection)
     onExploreButtonTapped?()
   }
 

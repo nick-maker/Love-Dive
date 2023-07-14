@@ -38,22 +38,18 @@ class HomeViewController: UIViewController, DiveCellDelegate {
     divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
       .receive(on: DispatchQueue.global())
       .sink { [weak self] divingLogs in
-        DispatchQueue.global().async {
           self?.divingLogs = divingLogs
           DispatchQueue.main.async {
             self?.collectionView.reloadData()
           }
-        }
       }
 
     tempsSubscription = HealthKitManager.shared.tempsPublisher
       .receive(on: DispatchQueue.global())
       .sink { [weak self] temps in
-        DispatchQueue.global().async {
           self?.temps = temps
           DispatchQueue.main.async {
             self?.collectionView.reloadData()
-          }
         }
       }
 
@@ -213,6 +209,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   @objc
   func toggleFavorite(sender: UIButton) {
+    generateHapticFeedback(for: HapticFeedback.selection)
     let point = sender.convert(CGPoint.zero, to: collectionView)
     guard let indexPath = collectionView.indexPathForItem(at: point) else {
       return

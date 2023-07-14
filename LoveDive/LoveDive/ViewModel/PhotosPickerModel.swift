@@ -160,14 +160,18 @@ class PhotosPickerModel: ObservableObject {
     }
   }
 
-  func getImageFromFileManager(filePath: String) -> Image? {
+  func imageExistFromFileManager(filePath: String) -> Bool {
     let fileURL = FileManager.documentDirectoryURL.appendingPathComponent(filePath)
     let path = fileURL.path
     guard FileManager.default.fileExists(atPath: path) else {
-      print("Error: Image file not found at \(path)")
-      return nil
+      return false
     }
-
+    return true
+  }
+  
+  func getImageFromFileManager(filePath: String) -> Image? {
+    let fileURL = FileManager.documentDirectoryURL.appendingPathComponent(filePath)
+    let path = fileURL.path
     if let uiImage = UIImage(contentsOfFile: path) {
       return Image(uiImage: uiImage)
     } else {
@@ -175,5 +179,5 @@ class PhotosPickerModel: ObservableObject {
       return nil
     }
   }
-
+  
 }

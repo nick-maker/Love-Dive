@@ -46,12 +46,13 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .rotationEffect(.init(degrees: -90))
               .padding(12)
           }
-          Spacer(minLength: 110)
+          Spacer(minLength: 100)
           HStack(alignment: .bottom) {
             Text("Breathe")
               .font(.callout)
               .padding(5)
             Text(timerInterval: context.state.endTime, countsDown: true)
+              .monospacedDigit() //fixed width
               .font(.largeTitle)
               .fontDesign(.rounded)
               .bold()
@@ -98,6 +99,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
             HStack {
               Spacer()
               Text(timerInterval: context.state.endTime, countsDown: true)
+                .monospacedDigit()
                 .font(.system(size: 60, weight: .bold))
                 .fontDesign(.rounded)
 //                .multilineTextAlignment(.center)
@@ -127,6 +129,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
         .frame(width: 40, height: 25)
       } compactTrailing: {
         Text(timerInterval: context.state.endTime, countsDown: true)
+          .monospacedDigit()
           .font(.footnote)
           .fontDesign(.rounded)
           .frame(width: 40, height: 25)

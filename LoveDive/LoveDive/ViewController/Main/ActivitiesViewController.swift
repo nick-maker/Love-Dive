@@ -60,17 +60,21 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     super.viewDidLoad()
 
     divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
-      .receive(on: DispatchQueue.main)
+      .receive(on: DispatchQueue.global())
       .sink { [weak self] divingLogs in
-        self?.divingLogs = divingLogs
-        self?.collectionView.reloadData()
+          self?.divingLogs = divingLogs
+          DispatchQueue.main.async {
+            self?.collectionView.reloadData()
+          }
       }
 
     tempsSubscription = HealthKitManager.shared.tempsPublisher
-      .receive(on: DispatchQueue.main)
+      .receive(on: DispatchQueue.global())
       .sink { [weak self] temps in
-        self?.temps = temps
-        self?.collectionView.reloadData()
+          self?.temps = temps
+          DispatchQueue.main.async {
+            self?.collectionView.reloadData()
+        }
       }
 
     setupNavigation()
@@ -345,6 +349,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if indexPath.section == 2 {
+      generateHapticFeedback(for: HapticFeedback.selection)
       let selectedData = filteredDivingLogs[indexPath.row]
       let selectedTemp = filteredTemps[indexPath.row]
       let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)

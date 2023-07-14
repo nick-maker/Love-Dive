@@ -26,7 +26,7 @@ class TideCell: ShadowCollectionViewCell {
   static let reuseIdentifier = "\(TideCell.self)"
 
   let locationLabel = UILabel()
-  let airTemptImage = UIImage(systemName: "cloud.fill")
+  let airTemptImage = UIImage(systemName: "cloud.sun")
   let airTemptText = UILabel()
   let waterTemptImage = UIImage(systemName: "thermometer.and.liquid.waves")
   let waterTemptText = UILabel()
@@ -56,12 +56,12 @@ class TideCell: ShadowCollectionViewCell {
 
     contentView.addSubview(locationLabel)
     contentView.layer.cornerRadius = 20
-
+    let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .small)
     // Create image views
-    let airTemptImageView = UIImageView(image: airTemptImage)
-    let waterTemptImageView = UIImageView(image: waterTemptImage)
-    let waveHeightImageView = UIImageView(image: waveHeightImage)
-    let windSpeedImageView = UIImageView(image: windSpeedImage)
+    let airTemptImageView = UIImageView(image: airTemptImage?.applyingSymbolConfiguration(config))
+    let waterTemptImageView = UIImageView(image: waterTemptImage?.applyingSymbolConfiguration(config))
+    let waveHeightImageView = UIImageView(image: waveHeightImage?.applyingSymbolConfiguration(config))
+    let windSpeedImageView = UIImageView(image: windSpeedImage?.applyingSymbolConfiguration(config))
 
     // Configure stack view
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +94,8 @@ class TideCell: ShadowCollectionViewCell {
 
   func createStackView(imageView: UIImageView, label: UILabel) -> UIStackView {
     let innerStackView = UIStackView()
+    label.font = UIFont.systemFont(ofSize: 14)
+    label.textColor = .secondaryLabel
     innerStackView.axis = .vertical
     innerStackView.alignment = .center
     innerStackView.spacing = 2

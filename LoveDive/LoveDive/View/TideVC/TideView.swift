@@ -28,7 +28,7 @@ struct TideView: View {
   @State private var tabBarHeight: CGFloat = 0.0
 
   let dateFormatter = ISO8601DateFormatter()
-  var chartColor: Color = .pacificBlue.opacity(0.5)
+  var chartColor: Color = .pacificBlue.opacity(0.3)
 
   let titleFormatter: DateFormatter = {
     let titleFormatter = DateFormatter()
@@ -141,6 +141,9 @@ struct TideView: View {
         weatherData = newValue
 
       })
+      .onChange(of: selectedElement, perform: { _ in
+        generateHapticFeedback(for: HapticFeedback.selection)
+      })
       .ignoresSafeArea()
     }
     .ignoresSafeArea()
@@ -162,7 +165,7 @@ struct TideView: View {
         }
         .padding(.top, -30)
         .frame(width: 250, height: 10)
-        Text((weatherData.first?.waveHeight.average ?? "0") + " m")
+        Text((weatherData.first?.waveHeight.average ?? "0"))
           .foregroundColor(.white)
           .font(.system(size: 40, weight: .bold, design: .rounded))
           .frame(width: 160, height: 80)
@@ -212,27 +215,13 @@ struct TideView: View {
             endPoint: .trailing))
         .interpolationMethod(.cardinal)
 
-      if let currentElement, currentElement.time == tideHour.time {
-        PointMark(
-          x: .value("time", currentElement.time),
-          y: .value("seaLevel", currentElement.sg))
-          .symbolSize(CGSize(width: 12, height: 12))
-          .foregroundStyle(Color.pacificBlue)
-
-        PointMark(
-          x: .value("time", currentElement.time),
-          y: .value("seaLevel", currentElement.sg))
-          .symbolSize(CGSize(width: 5, height: 5))
-          .foregroundStyle(.white)
-      }
-
       if let selectedElement, selectedElement.id == tideHour.id {
         BarMark(
           x: .value("time", selectedElement.time),
           yStart: .value("seaLevel", selectedElement.sg),
           yEnd: .value("BPM Max", maxHeight * 1.1),
-          width: .fixed(2))
-          .clipShape(Capsule())
+          width: .fixed(2.5))
+          .clipShape(Rectangle())
           .foregroundStyle(gradient)
           //          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
           .annotation(position: .top) {
@@ -249,6 +238,32 @@ struct TideView: View {
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
           }
+
+        PointMark(
+          x: .value("time", selectedElement.time),
+          y: .value("seaLevel", selectedElement.sg))
+          .symbolSize(CGSize(width: 10, height: 10))
+          .foregroundStyle(Color.white)
+
+        PointMark(
+          x: .value("time", selectedElement.time),
+          y: .value("seaLevel", selectedElement.sg))
+          .symbolSize(CGSize(width: 5, height: 5))
+          .foregroundStyle(Color.gray.gradient)
+      }
+
+      if let currentElement, currentElement.time == tideHour.time {
+        PointMark(
+          x: .value("time", currentElement.time),
+          y: .value("seaLevel", currentElement.sg))
+          .symbolSize(CGSize(width: 12, height: 12))
+          .foregroundStyle(Color.white)
+
+        PointMark(
+          x: .value("time", currentElement.time),
+          y: .value("seaLevel", currentElement.sg))
+          .symbolSize(CGSize(width: 6, height: 6))
+          .foregroundStyle(.red)
       }
     }
     .chartOverlay { proxy in

@@ -53,7 +53,7 @@ struct TemperatureData: Codable, Equatable {
     let values = [noaa, sg, meto].compactMap { $0 }
     guard !values.isEmpty else { return "" }
     let average = values.reduce(0, +) / Double(values.count)
-    return String(format: "%.2f", average)
+    return String(format: "%.1f°C", average)
   }
 }
 
@@ -70,7 +70,7 @@ struct WaveHeightData: Codable, Equatable {
     let values = [icon, meteo, noaa, sg].compactMap { $0 }
     guard !values.isEmpty else { return "" }
     let average = values.reduce(0, +) / Double(values.count)
-    return String(format: "%.2f", average)
+    return String(format: "%.2f m", average)
   }
 }
 
@@ -86,7 +86,7 @@ struct WindSpeedData: Codable, Equatable {
     let values = [icon, noaa, sg].compactMap { $0 }
     guard !values.isEmpty else { return "" }
     let average = values.reduce(0, +) / Double(values.count)
-    return String(format: "%.2f", average)
+    return String(format: "%.2f m/s", average)
   }
 }
 

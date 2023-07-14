@@ -126,10 +126,9 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       }
       return false
     }
-
-    updateWeatherDataForVisibleAnnotations()
     // Reload the collection view data
     DispatchQueue.main.async {
+      self.updateWeatherDataForVisibleAnnotations()
       self.collectionView.reloadData()
       guard let selectedLocation = self.selectedAnnotation?.coordinate else { return }
       guard
@@ -202,7 +201,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
         let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
         item.transform = CGAffineTransform(scaleX: scale, y: scale)
 
-        if scale == 0.8, self.lastScaleFactor > 0.999 {
+        if scale == 0.8, self.lastScaleFactor > 0.99 {
           // Scrolling has reached a stable state with the target item centered
           // Perform scrolling completion actions here
           let indexPath = IndexPath(row: currentPage, section: 0)
@@ -341,6 +340,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
   @objc
   func toggleFavorite(sender: UIButton) {
+    generateHapticFeedback(for: HapticFeedback.selection)
     let point = sender.convert(CGPoint.zero, to: collectionView)
     guard let indexPath = collectionView.indexPathForItem(at: point) else {
       return
@@ -356,10 +356,12 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    generateHapticFeedback(for: HapticFeedback.selection)
     let location = visibleLocations[indexPath.row]
     let tideView = TideView(seaLevel: seaLevelModel.seaLevel, weatherData: [], location: location)
     let hostingController = UIHostingController(rootView: tideView)
     navigationController?.navigationBar.tintColor = .white
+    navigationItem.backButtonTitle = ""
     navigationController?.pushViewController(hostingController, animated: true)
   }
 

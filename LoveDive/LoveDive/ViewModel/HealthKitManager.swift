@@ -85,71 +85,6 @@ class HealthKitManager {
     }
   }
 
-//  private func readDive() {
-//      DispatchQueue.global().async {
-//        self.readUnderwaterDepths { [weak self] divingLogs in
-//          let sortedDives = divingLogs.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
-//          DispatchQueue.main.async {
-//            self?.divingLogsSubject.send(sortedDives)
-//          }
-//        }
-//      }
-//
-//      DispatchQueue.global().async {
-//        self.readWaterTemps { [weak self] temps in
-//          DispatchQueue.main.async {
-//            self?.tempsSubject.send(temps)
-//          }
-//        }
-//      }
-//    }
-
-//  func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
-//      var diveList: [DivingLog] = []
-//      var lastDiveEnd: Date? = nil
-//      var thisDiveStart: Date?
-//
-//      let dateFormatter = DateFormatter()
-//      dateFormatter.dateFormat = "yyyy/MM/dd HH:mmZ"
-//
-//      guard let underwaterDepthType = HKObjectType.quantityType(forIdentifier: .underwaterDepth) else {
-//
-//          return
-//      }
-//
-//      let query = HKQuantitySeriesSampleQuery(quantityType: underwaterDepthType, predicate: nil) { _, result, dates, samples, done, error in
-//          guard let result = result else {
-//              completion([])
-//              return
-//          }
-//
-//          if let diveDates = dates {
-//              var diffSeconds: Double
-//              if let lastDive = lastDiveEnd {
-//                  diffSeconds = diveDates.start.timeIntervalSinceReferenceDate - lastDive.timeIntervalSinceReferenceDate
-//              } else {
-//                  diffSeconds = 99
-//              }
-//            if diffSeconds > 60 {
-//              if (diveList.isEmpty == false) {
-//                print ("Dive Summary")
-//                print ("  Start Time: ", dateFormatter.string(from: thisDiveStart!))
-//                print ("  Duration: ", Int((diveList.last!.duration+59.0)/60.0) as Any, "minutes")
-//                print ("  Max Depth: ", Int(diveList.last!.maxDepth) as Any, "meters")
-//              }
-//              thisDiveStart = diveDates.start
-//              diveList.append(DivingLog(startTime: thisDiveStart!))
-//            }
-//            lastDiveEnd = diveDates.end
-//            var currentDive = diveList.last
-//            currentDive?.session.append(DivingEntry(start: diveDates.start, end: diveDates.end depth: result.doubleValue(for: HKUnit.meter()), animate: false))
-//          }
-//          completion(diveList)
-//      }
-//
-//      healthStore.execute(query)
-//  }
-
   private func readUnderwaterDepths(healthStore: HKHealthStore, completion: @escaping ([DivingLog]) -> Void) {
     var diveList: [DivingLog] = []
     var lastSessionEnd: Date? = nil
@@ -197,29 +132,6 @@ class HealthKitManager {
     healthStore.execute(query)
   }
 
-//  func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
-//
-//      var temps: [Temperature] = []
-//
-//      guard let waterTempType = HKQuantityType.quantityType(forIdentifier: .waterTemperature) else { return }
-//
-//      let query = HKQuantitySeriesSampleQuery(quantityType: waterTempType, predicate: nil) {
-//          query, result, dates, samples, done, error  in
-//
-//          guard let result = result else {
-//              print ("Nil Result to temperature query")
-//              completion([])
-//              return
-//          }
-//
-//          if let sampleDate = dates {
-//              temps.append(Temperature(start: sampleDate.start, end: sampleDate.end ,temp: result.doubleValue(for: HKUnit.degreeCelsius())))
-//          }
-//          completion(temps)
-//      }
-//      healthStore.execute(query)
-//  }
-
   private func readWaterTemps(healthStore: HKHealthStore, completion: @escaping ([Temperature]) -> Void) {
     var temps: [Temperature] = []
 
@@ -233,7 +145,7 @@ class HealthKitManager {
         completion([])
         return
       }
-
+      
       if let sampleDate = dates {
         temps
           .append(Temperature(
@@ -248,13 +160,3 @@ class HealthKitManager {
   }
 
 }
-
-//// MARK: - HealthManagerDelegate
-//
-// protocol HealthManagerDelegate: AnyObject {
-//
-//  func getDepthData(didGet divingData: [DivingLog])
-//
-//  func getTempData(didGet tempData: [Temperature])
-//
-// }
