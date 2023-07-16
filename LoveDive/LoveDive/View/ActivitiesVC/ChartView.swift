@@ -22,7 +22,7 @@ struct ChartView: View {
 
   static var yearFormatter: DateFormatter = {
     let yearFormatter = DateFormatter()
-    yearFormatter.dateFormat = "MMM dd, yyyy"
+    yearFormatter.dateFormat = "YYYY/MM/DD"
     yearFormatter.locale = Locale.current
     return yearFormatter
   }()
@@ -37,6 +37,7 @@ struct ChartView: View {
   @Namespace var namespace
   @State var show = false
   @State var savedImage: Image?
+  @State var offset = CGSize()
 
   var chartColor: Color = .pacificBlue.opacity(0.5)
   var maxDepth = 0.0
@@ -133,7 +134,8 @@ struct ChartView: View {
         }
       }
     }
-    .padding()
+    .padding(.top)
+    .padding(.horizontal)
   }
 
   var titleFigureView: some View {
@@ -387,7 +389,18 @@ struct ChartView: View {
   var snapshotView: some View {
     VStack {
       if savedImage != nil {
-        pictureView
+        VStack {
+          Spacer()
+        }
+        .frame(width: 340, height: 240)
+        .background(
+          savedImage?
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+        )
+        .mask {
+          RoundedRectangle(cornerRadius: 20, style: .continuous)
+        }
         chartListView
       } else {
         chartListView

@@ -15,20 +15,20 @@ struct PictureDetailView: View {
   @Binding var viewSize: CGSize
 
   var body: some View {
-    ZStack {
-      ScrollView {
-        VStack {
-          cover
-        }
-        .padding(.top, viewSize.width / 4)
+
+    ScrollView {
+      VStack {
+        cover
       }
-      .background(.background)
+      .padding(.top, viewSize.width / 4)
       .onTapGesture {
         withAnimation(.easeInOut) {
           show.toggle()
         }
       }
     }
+    .background(.background)
+
   }
 
   var cover: some View {
