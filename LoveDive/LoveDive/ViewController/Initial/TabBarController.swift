@@ -11,6 +11,8 @@ import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
+  // MARK: Internal
+
   override func viewDidLoad() {
     super.viewDidLoad()
 //    healthKitManager.delegate = self

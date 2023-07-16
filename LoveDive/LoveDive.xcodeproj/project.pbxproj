@@ -15,6 +15,10 @@
 		060320512A44ACC50001FF12 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060320502A44ACC50001FF12 /* ChartView.swift */; };
 		0603F4F52A5AB7CE0072C0C3 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */; };
 		060E59152A61B14B0095C61F /* Beach Ambience.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 060E59142A61B14B0095C61F /* Beach Ambience.m4a */; };
+		060E59172A6287A60095C61F /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E59162A6287A60095C61F /* ShimmerView.swift */; };
+		060E59192A628ECD0095C61F /* MatchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E59182A628ECD0095C61F /* MatchedView.swift */; };
+		060E591D2A63D7BD0095C61F /* PictureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E591C2A63D7BD0095C61F /* PictureDetailView.swift */; };
+		060E591F2A63D9D90095C61F /* PictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E591E2A63D9D90095C61F /* PictureView.swift */; };
 		06356B442A544A2500C786B0 /* SeaLevel.json in Resources */ = {isa = PBXBuildFile; fileRef = 06356B432A544A2500C786B0 /* SeaLevel.json */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F52A42F91F00711932 /* AppLayouts.swift */; };
@@ -110,6 +114,10 @@
 		060320502A44ACC50001FF12 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		060E59142A61B14B0095C61F /* Beach Ambience.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Beach Ambience.m4a"; sourceTree = "<group>"; };
+		060E59162A6287A60095C61F /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		060E59182A628ECD0095C61F /* MatchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedView.swift; sourceTree = "<group>"; };
+		060E591C2A63D7BD0095C61F /* PictureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDetailView.swift; sourceTree = "<group>"; };
+		060E591E2A63D9D90095C61F /* PictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureView.swift; sourceTree = "<group>"; };
 		06356B432A544A2500C786B0 /* SeaLevel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SeaLevel.json; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -213,6 +221,10 @@
 				063BA8F72A42FDC800711932 /* SummaryCell.swift */,
 				0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */,
 				060320502A44ACC50001FF12 /* ChartView.swift */,
+				060E591E2A63D9D90095C61F /* PictureView.swift */,
+				060E591C2A63D7BD0095C61F /* PictureDetailView.swift */,
+				060E59182A628ECD0095C61F /* MatchedView.swift */,
+				060E59162A6287A60095C61F /* ShimmerView.swift */,
 			);
 			path = ActivitiesVC;
 			sourceTree = "<group>";
@@ -572,6 +584,7 @@
 			files = (
 				0603F4F52A5AB7CE0072C0C3 /* HomeCell.swift in Sources */,
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
+				060E59192A628ECD0095C61F /* MatchedView.swift in Sources */,
 				067B6E492A56FEE300CE748F /* Blur.swift in Sources */,
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */,
@@ -582,6 +595,7 @@
 				064948512A5BD17B0094DB5A /* Favorites.swift in Sources */,
 				067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */,
 				067B6E4D2A57FA2000CE748F /* Extension+Date.swift in Sources */,
+				060E59172A6287A60095C61F /* ShimmerView.swift in Sources */,
 				064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */,
 				0688F6982A5F0058000B5FDE /* Haptic.swift in Sources */,
 				06AD89B72A44210400E6C409 /* BestSectionHeader.swift in Sources */,
@@ -596,7 +610,9 @@
 				067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */,
 				064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */,
 				064948562A5C61CB0094DB5A /* ToastViewController.swift in Sources */,
+				060E591D2A63D7BD0095C61F /* PictureDetailView.swift in Sources */,
 				06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */,
+				060E591F2A63D9D90095C61F /* PictureView.swift in Sources */,
 				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
 				06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */,
 				065FD8612A5D84EA0090E16D /* FavSectionHeader.swift in Sources */,

@@ -145,7 +145,7 @@ class HealthKitManager {
         completion([])
         return
       }
-      
+
       if let sampleDate = dates {
         temps
           .append(Temperature(

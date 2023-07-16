@@ -168,7 +168,7 @@ class PhotosPickerModel: ObservableObject {
     }
     return true
   }
-  
+
   func getImageFromFileManager(filePath: String) -> Image? {
     let fileURL = FileManager.documentDirectoryURL.appendingPathComponent(filePath)
     let path = fileURL.path
@@ -179,5 +179,5 @@ class PhotosPickerModel: ObservableObject {
       return nil
     }
   }
-  
+
 }

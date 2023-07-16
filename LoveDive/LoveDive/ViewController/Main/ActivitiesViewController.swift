@@ -62,18 +62,18 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
       .receive(on: DispatchQueue.global())
       .sink { [weak self] divingLogs in
-          self?.divingLogs = divingLogs
-          DispatchQueue.main.async {
-            self?.collectionView.reloadData()
-          }
+        self?.divingLogs = divingLogs
+        DispatchQueue.main.async {
+          self?.collectionView.reloadData()
+        }
       }
 
     tempsSubscription = HealthKitManager.shared.tempsPublisher
       .receive(on: DispatchQueue.global())
       .sink { [weak self] temps in
-          self?.temps = temps
-          DispatchQueue.main.async {
-            self?.collectionView.reloadData()
+        self?.temps = temps
+        DispatchQueue.main.async {
+          self?.collectionView.reloadData()
         }
       }
 

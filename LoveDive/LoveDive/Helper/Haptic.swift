@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - HapticFeedback
+
 enum HapticFeedback {
 
   // MARK: - Cases
@@ -14,6 +16,8 @@ enum HapticFeedback {
   case selection
   case impact(UIImpactFeedbackGenerator.FeedbackStyle)
   case notification(UINotificationFeedbackGenerator.FeedbackType)
+
+  // MARK: Internal
 
   // MARK: - Properties
 

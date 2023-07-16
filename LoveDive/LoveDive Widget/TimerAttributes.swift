@@ -52,7 +52,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
               .font(.callout)
               .padding(5)
             Text(timerInterval: context.state.endTime, countsDown: true)
-              .monospacedDigit() //fixed width
+              .monospacedDigit() // fixed width
               .font(.largeTitle)
               .fontDesign(.rounded)
               .bold()

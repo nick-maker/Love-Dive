@@ -165,7 +165,7 @@ struct TideView: View {
         }
         .padding(.top, -30)
         .frame(width: 250, height: 10)
-        Text((weatherData.first?.waveHeight.average ?? "0"))
+        Text(weatherData.first?.waveHeight.average ?? "0")
           .foregroundColor(.white)
           .font(.system(size: 40, weight: .bold, design: .rounded))
           .frame(width: 160, height: 80)
