@@ -379,8 +379,8 @@ struct TideView: View {
 
 struct TideView_Previews: PreviewProvider {
   static var previews: some View {
-    let networkManager = NetworkManager()
-    let weatherData = networkManager.decodeJSON()
+    let seaLevelModel = SeaLevelModel()
+    let weatherData = seaLevelModel.decodeJSON()
     let location = Location(name: "小大福漁港", latitude: 22.3348440, longitude: 120.3776006)
     TideView(seaLevel: weatherData.data, weatherData: [], location: location)
   }

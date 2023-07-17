@@ -16,9 +16,11 @@
 		0603F4F52A5AB7CE0072C0C3 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */; };
 		060E59152A61B14B0095C61F /* Beach Ambience.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 060E59142A61B14B0095C61F /* Beach Ambience.m4a */; };
 		060E59172A6287A60095C61F /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E59162A6287A60095C61F /* ShimmerView.swift */; };
-		060E59192A628ECD0095C61F /* MatchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E59182A628ECD0095C61F /* MatchedView.swift */; };
 		060E591D2A63D7BD0095C61F /* PictureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E591C2A63D7BD0095C61F /* PictureDetailView.swift */; };
 		060E591F2A63D9D90095C61F /* PictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E591E2A63D9D90095C61F /* PictureView.swift */; };
+		060E59472A64E9D40095C61F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 060E59462A64E9D40095C61F /* GoogleService-Info.plist */; };
+		060E594A2A64EFD00095C61F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 060E59492A64EFD00095C61F /* FirebaseCrashlytics */; };
+		060E594C2A64EFD00095C61F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 060E594B2A64EFD00095C61F /* FirebaseFirestoreSwift */; };
 		06356B442A544A2500C786B0 /* SeaLevel.json in Resources */ = {isa = PBXBuildFile; fileRef = 06356B432A544A2500C786B0 /* SeaLevel.json */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F52A42F91F00711932 /* AppLayouts.swift */; };
@@ -115,9 +117,9 @@
 		0603F4F42A5AB6FD0072C0C3 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		060E59142A61B14B0095C61F /* Beach Ambience.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Beach Ambience.m4a"; sourceTree = "<group>"; };
 		060E59162A6287A60095C61F /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
-		060E59182A628ECD0095C61F /* MatchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedView.swift; sourceTree = "<group>"; };
 		060E591C2A63D7BD0095C61F /* PictureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDetailView.swift; sourceTree = "<group>"; };
 		060E591E2A63D9D90095C61F /* PictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureView.swift; sourceTree = "<group>"; };
+		060E59462A64E9D40095C61F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06356B432A544A2500C786B0 /* SeaLevel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SeaLevel.json; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -187,7 +189,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060E594C2A64EFD00095C61F /* FirebaseFirestoreSwift in Frameworks */,
 				067833D72A39E5CB000642F2 /* Foundation.framework in Frameworks */,
+				060E594A2A64EFD00095C61F /* FirebaseCrashlytics in Frameworks */,
 				060146432A3AF394003001EE /* Alamofire in Frameworks */,
 				064F765C2A4ACC7E003DC830 /* Lottie in Frameworks */,
 			);
@@ -220,11 +224,6 @@
 				063BA8F12A42F03A00711932 /* CalendarCell.swift */,
 				063BA8F72A42FDC800711932 /* SummaryCell.swift */,
 				0681DC6C2A3EE2BF00BCC367 /* DiveCell.swift */,
-				060320502A44ACC50001FF12 /* ChartView.swift */,
-				060E591E2A63D9D90095C61F /* PictureView.swift */,
-				060E591C2A63D7BD0095C61F /* PictureDetailView.swift */,
-				060E59182A628ECD0095C61F /* MatchedView.swift */,
-				060E59162A6287A60095C61F /* ShimmerView.swift */,
 			);
 			path = ActivitiesVC;
 			sourceTree = "<group>";
@@ -282,6 +281,17 @@
 				064948532A5BE1C10094DB5A /* EmptyCell.swift */,
 			);
 			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		060E59432A645AB90095C61F /* Chart Component */ = {
+			isa = PBXGroup;
+			children = (
+				060320502A44ACC50001FF12 /* ChartView.swift */,
+				060E591E2A63D9D90095C61F /* PictureView.swift */,
+				060E591C2A63D7BD0095C61F /* PictureDetailView.swift */,
+				060E59162A6287A60095C61F /* ShimmerView.swift */,
+			);
+			path = "Chart Component";
 			sourceTree = "<group>";
 		};
 		064948522A5BD79B0094DB5A /* Main */ = {
@@ -363,6 +373,7 @@
 				06356B432A544A2500C786B0 /* SeaLevel.json */,
 				06AFC0562A52C2FF007CB1E6 /* response.json */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
+				060E59462A64E9D40095C61F /* GoogleService-Info.plist */,
 				067833CA2A39D8B6000642F2 /* Info.plist */,
 			);
 			path = LoveDive;
@@ -419,6 +430,7 @@
 				0603F4F02A5AB5710072C0C3 /* TideVC */,
 				0603F4EC2A5AB4B20072C0C3 /* BreatheVC */,
 				0603F4ED2A5AB4D70072C0C3 /* ActivitiesVC */,
+				060E59432A645AB90095C61F /* Chart Component */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,7 +466,7 @@
 				067833B52A39D8B5000642F2 /* Sources */,
 				067833B62A39D8B5000642F2 /* Frameworks */,
 				067833B72A39D8B5000642F2 /* Resources */,
-				068240982A3C178D00B69265 /* ShellScript */,
+				068240982A3C178D00B69265 /* Run Script */,
 				068034332A4DCA4C004DF9C3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -466,6 +478,8 @@
 			packageProductDependencies = (
 				060146422A3AF394003001EE /* Alamofire */,
 				064F765B2A4ACC7E003DC830 /* Lottie */,
+				060E59492A64EFD00095C61F /* FirebaseCrashlytics */,
+				060E594B2A64EFD00095C61F /* FirebaseFirestoreSwift */,
 			);
 			productName = LoveDive;
 			productReference = 067833B92A39D8B5000642F2 /* LoveDive.app */;
@@ -519,6 +533,7 @@
 				060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				068240972A3C151300B69265 /* XCRemoteSwiftPackageReference "swift" */,
 				064F765A2A4ACC7E003DC830 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				060E59482A64EFD00095C61F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 067833BA2A39D8B5000642F2 /* Products */;
 			projectDirPath = "";
@@ -535,6 +550,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060E59472A64E9D40095C61F /* GoogleService-Info.plist in Resources */,
 				0682409A2A3C503700B69265 /* TaiwanDivingSite.geojson in Resources */,
 				064F765E2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json in Resources */,
 				06AFC0572A52C300007CB1E6 /* response.json in Resources */,
@@ -558,7 +574,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		068240982A3C178D00B69265 /* ShellScript */ = {
+		068240982A3C178D00B69265 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,14 +582,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nset -e\n\ndefaults write com.apple.dt.Xcode AutomaticallyCheckSpellingWhileTyping -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool YES\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2\ndefaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2\n\ndefaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100\n";
+			shellScript = "\"${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nset -e\n\ndefaults write com.apple.dt.Xcode AutomaticallyCheckSpellingWhileTyping -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool YES\ndefaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool YES\n\ndefaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2\ndefaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2\n\ndefaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -584,7 +603,6 @@
 			files = (
 				0603F4F52A5AB7CE0072C0C3 /* HomeCell.swift in Sources */,
 				0644D9E72A40943800F1A3A0 /* CloudKitViewModel.swift in Sources */,
-				060E59192A628ECD0095C61F /* MatchedView.swift in Sources */,
 				067B6E492A56FEE300CE748F /* Blur.swift in Sources */,
 				060320512A44ACC50001FF12 /* ChartView.swift in Sources */,
 				064F76492A4993FC003DC830 /* BreatheModel.swift in Sources */,
@@ -704,7 +722,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -794,6 +812,7 @@
 				CODE_SIGN_ENTITLEMENTS = LoveDive/LoveDive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TY22MAR92C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoveDive/Info.plist;
@@ -962,6 +981,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		060E59482A64EFD00095C61F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		064F765A2A4ACC7E003DC830 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -985,6 +1012,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		060E59492A64EFD00095C61F /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 060E59482A64EFD00095C61F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		060E594B2A64EFD00095C61F /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 060E59482A64EFD00095C61F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 		064F765B2A4ACC7E003DC830 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

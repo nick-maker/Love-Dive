@@ -107,4 +107,20 @@ class SeaLevelModel: ObservableObject {
         }
     }
   }
+
+  // For preview
+  func decodeJSON() -> TideData {
+    guard let url = Bundle.main.url(forResource: "SeaLevel", withExtension: "json") else {
+      return TideData(data: [])
+    }
+    do {
+      let data = try Data(contentsOf: url)
+      let decoder = JSONDecoder()
+      let decodedData = try decoder.decode(TideData.self, from: data)
+      let jsonString = String(data: data, encoding: .utf8)
+      return decodedData
+    } catch {
+      return TideData(data: [])
+    }
+  }
 }

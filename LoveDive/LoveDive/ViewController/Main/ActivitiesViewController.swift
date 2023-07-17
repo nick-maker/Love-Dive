@@ -184,7 +184,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     }
   }
 
-
 }
 
 // MARK: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate

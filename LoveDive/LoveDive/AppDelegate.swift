@@ -5,6 +5,7 @@
 //  Created by Nick Liu on 2023/6/14.
 //
 
+import FirebaseCore
 import SwiftUI
 import UIKit
 
@@ -54,7 +55,8 @@ struct BreatheApp: App {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    true
+    FirebaseApp.configure()
+    return true
   }
 
   // MARK: UISceneSession Lifecycle

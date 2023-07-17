@@ -7,20 +7,22 @@
 
 import SwiftUI
 
+// MARK: - PictureView
+
 struct PictureView: View {
 
   var namespace: Namespace.ID
   @Binding var show: Bool
-  @Binding var savedImage: Image?
+  var savedImage: Image
 
   var body: some View {
-
     VStack {
       Spacer()
     }
+    .aspectRatio(1, contentMode: .fill)
     .frame(width: 340, height: 240)
     .background(
-      savedImage?
+      savedImage
         .resizable()
         .aspectRatio(contentMode: .fill)
         .matchedGeometryEffect(id: "image", in: namespace))
@@ -30,13 +32,16 @@ struct PictureView: View {
         .matchedGeometryEffect(id: "mask", in: namespace)
     }
   }
+
 }
+
+// MARK: - PictureView_Previews
 
 struct PictureView_Previews: PreviewProvider {
 
   @Namespace static var namespace
 
   static var previews: some View {
-    PictureView(namespace: namespace, show: .constant(true), savedImage: .constant(Image("S__31916048")))
+    PictureView(namespace: namespace, show: .constant(true), savedImage: Image("S__31916048"))
   }
 }

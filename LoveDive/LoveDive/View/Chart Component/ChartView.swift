@@ -36,9 +36,10 @@ struct ChartView: View {
   @State private var plotWidth: CGFloat = 0.0
   @Namespace var namespace
   @State var show = false
+  @State var isExpanded = false
   @State var savedImage: Image?
-  @State var offset = CGSize()
 
+  // needed from Activities View Controller
   var chartColor: Color = .pacificBlue.opacity(0.5)
   var maxDepth = 0.0
   var temp = 0.0
@@ -50,11 +51,8 @@ struct ChartView: View {
         ScrollView {
           content
         }
-        .opacity(show ? 0 : 1)
-        if show {
-          VStack {
-            PictureDetailView(namespace: namespace, show: $show, savedImage: $savedImage, viewSize: $viewSize)
-          }
+        .overlay {
+          expandedView()
         }
       }
       .onChange(of: selectedElement, perform: { _ in
@@ -63,6 +61,8 @@ struct ChartView: View {
       .onAppear {
         viewSize = proxy.size
         showingEditSheet = false
+        show = false
+        isExpanded = false
         if checkIfImageExist() {
           showingPlaceholder = true // Show placeholder initially
           chartAnimation()
@@ -104,8 +104,7 @@ struct ChartView: View {
             image: generatedImage ??
               Image(uiImage: UIImage()))) // fix the share icon only show after generatedImage is not nil
       }
-      .opacity(show ? 0 : 1)
-    )
+      .opacity(show ? 0 : 1))
     .accentColor(Color.pacificBlue)
   }
 
@@ -378,12 +377,19 @@ struct ChartView: View {
   }
 
   var pictureView: some View {
-    PictureView(namespace: namespace, show: $show, savedImage: $savedImage)
-    .onChange(of: photosModel.hasSavedImage) { _ in
-      imageKey = UUID() // Invalidate and refresh the view
-    }
-    .id(imageKey) // Assign the UUID to the view ID
-    //    .tabViewStyle(.page)
+    PictureView(namespace: namespace, show: $show, savedImage: savedImage ?? Image(uiImage: UIImage()))
+      .onTapGesture {
+        withAnimation(.easeInOut.delay(0.08)) {
+          show.toggle()
+        }
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+          isExpanded.toggle()
+        }
+      }
+      .onChange(of: photosModel.hasSavedImage) { _ in
+        imageKey = UUID() // Invalidate and refresh the view
+      }
+      .id(imageKey) // Assign the UUID to the view ID
   }
 
   var snapshotView: some View {
@@ -396,8 +402,7 @@ struct ChartView: View {
         .background(
           savedImage?
             .resizable()
-            .aspectRatio(contentMode: .fill)
-        )
+            .aspectRatio(contentMode: .fill))
         .mask {
           RoundedRectangle(cornerRadius: 20, style: .continuous)
         }
@@ -429,24 +434,28 @@ struct ChartView: View {
     if showingPlaceholder {
       VStack {
         ZStack {
-          RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .fill(.clear)
-            .frame(width: 340, height: 240)
-          if !show {
-          ShimmerView() //not because of this matchedgeometryeffect shimmer
+          ShimmerView()
+            .opacity((savedImage != nil) ? 0 : 1)
           pictureView
-          }
-        }
-        .onTapGesture {
-          withAnimation(.easeInOut) {
-            show.toggle()
-          }
         }
         .padding(.top)
         chartListView
+          .opacity(isExpanded ? 0 : 1)
       }
     } else {
       chartListView
+    }
+  }
+
+  @ViewBuilder
+  func expandedView() -> some View {
+    if show {
+      PictureDetailView(
+        namespace: namespace,
+        show: $show,
+        isExpanded: $isExpanded,
+        savedImage: savedImage ?? Image(uiImage: UIImage()),
+        viewSize: $viewSize)
     }
   }
 

@@ -128,7 +128,11 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     }
     // Reload the collection view data
     DispatchQueue.main.async {
-      self.updateWeatherDataForVisibleAnnotations()
+//      Task {
+//        do {
+         self.updateWeatherDataForVisibleAnnotations()
+//        }
+//      }
       self.collectionView.reloadData()
       guard let selectedLocation = self.selectedAnnotation?.coordinate else { return }
       guard
