@@ -11,7 +11,7 @@ import WidgetKit
 @main
 struct LoveDive_WidgetBundle: WidgetBundle {
   var body: some Widget {
-    LoveDive_Widget()
     LoveDive_WidgetLiveActivity()
+    LoveDive_Widget()
   }
 }

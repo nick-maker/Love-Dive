@@ -23,9 +23,9 @@ class LaunchViewController: UIViewController {
     animationView.alpha = 1
 
     animationView.play { _ in
-      UIView.animate(withDuration: 0.5, animations: {
+      UIView.animate(withDuration: 0.5) {
         self.animationView.alpha = 0
-      }, completion: { _ in
+      } completion: { _ in
         self.animationView.isHidden = true
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -34,8 +34,9 @@ class LaunchViewController: UIViewController {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
           windowScene.windows.first?.rootViewController = tabBarController
           windowScene.windows.first?.makeKeyAndVisible()
+          print("launchviewcontroller ended")
         }
-      })
+      }
     }
   }
 

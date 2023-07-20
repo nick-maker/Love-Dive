@@ -106,7 +106,6 @@ class HomeViewController: UIViewController, DiveCellDelegate {
 
   // MARK: Private
 
-  private var maxDivingLogs: [DivingLog] = []
   private var maxTemps: [Temperature] = []
   private let seaLevelModel = SeaLevelModel()
   private var favorites = Favorites()
@@ -116,6 +115,15 @@ class HomeViewController: UIViewController, DiveCellDelegate {
   private let saveKey = "favorites"
   private var divingLogsSubscription: AnyCancellable?
   private var tempsSubscription: AnyCancellable?
+  private var personalBestModel = PersonalBestModel()
+
+  private var maxDivingLogs: [DivingLog] = [] {
+    didSet {
+      if maxDivingLogs.count > 0 {
+        personalBestModel.save(maxDivingLogs[0])
+      }
+    }
+  }
 
   //  private let healthKitManager = HealthKitManger()
   private var divingLogs: [DivingLog] = [] {

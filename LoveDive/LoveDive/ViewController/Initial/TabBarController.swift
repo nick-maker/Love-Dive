@@ -16,7 +16,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
 //    healthKitManager.delegate = self
-//    healthKitManager.requestHealthKitPermissions()
+//
+//    HealthKitManager.shared.requestHealthKitPermissions()
 //    DispatchQueue.main.async {
 //    HealthKitManager.shared.requestHealthKitPermissions()
 //    }

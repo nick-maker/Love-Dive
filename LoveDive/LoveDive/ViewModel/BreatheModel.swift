@@ -9,11 +9,6 @@ import SwiftUI
 
 class BreatheModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
 
-//  override init() {
-//    super.init()
-//    authorizeNotification()
-//  }
-
   // Mark: Timer
   @Published var progress: CGFloat = 1
   @Published var timerStringValue = "00:00"

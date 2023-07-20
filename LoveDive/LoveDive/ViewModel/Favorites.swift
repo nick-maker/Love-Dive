@@ -38,12 +38,12 @@ class Favorites: ObservableObject {
     save()
   }
 
-  func save() {
-    UserDefaults.standard.set(Array(favorites), forKey: saveKey)
-  }
-
   // MARK: Private
 
   private let saveKey = "favorites"
+
+  private func save() {
+    UserDefaults.standard.set(Array(favorites), forKey: saveKey)
+  }
 
 }

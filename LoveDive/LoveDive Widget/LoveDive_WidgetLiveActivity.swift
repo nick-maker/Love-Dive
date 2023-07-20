@@ -25,43 +25,41 @@ struct TimerAttributes: ActivityAttributes {
   var timerName: String
 }
 
-// MARK: - LoveDive_WidgetLiveActivity
+// MARK: - WidgetLiveActivity
 
 struct LoveDive_WidgetLiveActivity: Widget {
   var body: some WidgetConfiguration {
     ActivityConfiguration(for: TimerAttributes.self) { context in
       // Lock screen/banner UI goes here
-      VStack {
-        HStack(alignment: .center) {
-          ZStack {
-            Circle()
-              .stroke(Color.darkBlue, lineWidth: 5)
-              .rotationEffect(.init(degrees: -90))
-              .padding(12)
-            Circle()
-              .trim(from: 0, to: context.state.progress)
-              .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
-                lineWidth: 5,
-                lineCap: .round))
-              .rotationEffect(.init(degrees: -90))
-              .padding(12)
-          }
-          Spacer(minLength: 100)
-          HStack(alignment: .bottom) {
-            Text("Breathe")
-              .font(.callout)
-              .padding(5)
-            Text(timerInterval: context.state.endTime, countsDown: true)
-              .monospacedDigit() // fixed width
-              .font(.largeTitle)
-              .fontDesign(.rounded)
-              .bold()
-          }
+
+      HStack {
+        ZStack {
+          Circle()
+            .stroke(Color.darkBlue, lineWidth: 5)
+            .rotationEffect(.init(degrees: -90))
+            .padding(12)
+          Circle()
+            .trim(from: 0, to: context.state.progress)
+            .stroke(Color.pacificBlue.gradient, style: StrokeStyle(
+              lineWidth: 5,
+              lineCap: .round))
+            .rotationEffect(.init(degrees: -90))
+            .padding(12)
         }
+        Text("Breathe")
+          .font(.callout)
+          .padding(8)
+        Text(timerInterval: context.state.endTime, countsDown: true)
+          .multilineTextAlignment(.trailing)
+          .monospacedDigit() // fixed width
+          .font(.largeTitle)
+          .fontDesign(.rounded)
+          .bold()
+          .padding(.trailing, 14)
       }
       .activitySystemActionForegroundColor(Color.black)
       .foregroundColor(.white)
-      .frame(height: 60)
+      .frame(height: 65)
       .padding(14)
       .background(Color.black)
 
@@ -102,7 +100,6 @@ struct LoveDive_WidgetLiveActivity: Widget {
                 .monospacedDigit()
                 .font(.system(size: 60, weight: .bold))
                 .fontDesign(.rounded)
-//                .multilineTextAlignment(.center)
               Spacer()
             }
             Spacer()
@@ -132,6 +129,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
           .monospacedDigit()
           .font(.footnote)
           .fontDesign(.rounded)
+          .multilineTextAlignment(.trailing)
           .frame(width: 40, height: 25)
       } minimal: {
         ZStack {
@@ -147,7 +145,7 @@ struct LoveDive_WidgetLiveActivity: Widget {
             .rotationEffect(.init(degrees: -90))
             .padding(2)
         }
-        .frame(height: 25)
+        .frame(width: 25, height: 25)
         .background(Color.black)
       }
       .widgetURL(URL(string: "http://www.apple.com"))
@@ -156,11 +154,11 @@ struct LoveDive_WidgetLiveActivity: Widget {
   }
 }
 
-// MARK: - LoveDive_WidgetLiveActivity_Previews
+// MARK: - WidgetLiveActivity_Previews
 
-struct LoveDive_WidgetLiveActivity_Previews: PreviewProvider {
+struct WidgetLiveActivity_Previews: PreviewProvider {
   static let attributes = TimerAttributes(timerName: "Me")
-  static let contentState = TimerAttributes.ContentState(endTime: Date()...Date().addingTimeInterval(15 * 60), progress: 1)
+  static let contentState = TimerAttributes.ContentState(endTime: Date()...Date().addingTimeInterval(59 * 60), progress: 1)
 
   static var previews: some View {
     attributes

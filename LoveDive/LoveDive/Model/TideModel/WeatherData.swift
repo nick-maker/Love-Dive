@@ -105,19 +105,6 @@ struct TideCache: Codable {
 
 // MARK: - SeaLevel
 
-// struct TideHour: Codable, Identifiable {
-//  var id = UUID().uuidString
-//  var time: String
-//  let type: String
-//  var height: Double
-//
-//  enum CodingKeys: String, CodingKey {
-//    case time
-//    case type
-//    case height
-//  }
-// }
-
 struct SeaLevel: Codable, Identifiable, Equatable {
   var time: String
   var sg: Double

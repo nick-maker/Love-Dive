@@ -15,7 +15,9 @@ import UIKit
 struct TideView: View {
 
   // MARK: Internal
-  @StateObject var seaLevelModel: SeaLevelModel = .init()
+  @StateObject var seaLevelModel = SeaLevelModel()
+  @StateObject var weatherDataModel = WeatherDataModel()
+  @StateObject var favorites = Favorites()
   @State var seaLevel: [SeaLevel]
   @State var weatherData: [WeatherHour]
   @State var location: Location?
@@ -50,7 +52,7 @@ struct TideView: View {
         LinearGradient(gradient: Gradient(colors: colorsForCurrentTime()), startPoint: .topLeading, endPoint: .bottomTrailing)
         VStack {
           Spacer()
-          Rectangle() // TabBar
+          Rectangle() // Transparent TabBar
             .fill(.clear)
             .background(Blur(radius: 50, opaque: true))
             .background(.white.opacity(0.05))
@@ -137,7 +139,7 @@ struct TideView: View {
         seaLevel = newValue
         getCurrentElement()
       })
-      .onChange(of: seaLevelModel.weatherData, perform: { newValue in
+      .onChange(of: weatherDataModel.weatherData, perform: { newValue in
         weatherData = newValue
 
       })
@@ -147,6 +149,22 @@ struct TideView: View {
       .ignoresSafeArea()
     }
     .ignoresSafeArea()
+    .environmentObject(favorites)
+    .navigationBarItems(trailing: heartView)
+  }
+
+  var heartView: some View {
+    Button {
+      withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+        favorites.contains(location!) ? favorites.remove(location!) : favorites.add(location!)
+      }
+    } label: {
+      Image(systemName: favorites.contains(location!) ? "heart.fill" : "heart")
+        .font(.system(size: 14, weight: .medium))
+        .foregroundColor(.white)
+        .padding(8)
+        .background(.ultraThinMaterial.opacity(0.4), in: Circle())
+    }
   }
 
   var titleView: some View {
@@ -176,7 +194,7 @@ struct TideView: View {
           .fontDesign(.rounded)
           .frame(width: 200, height: 20)
       }
-      .frame(width: viewSize / 2, height: viewHeight / 3.2, alignment: .center)
+      .frame(width: viewSize / 2, height: viewHeight / 3.4, alignment: .center)
     }
   }
 
@@ -219,11 +237,10 @@ struct TideView: View {
         BarMark(
           x: .value("time", selectedElement.time),
           yStart: .value("seaLevel", selectedElement.sg),
-          yEnd: .value("BPM Max", maxHeight * 1.1),
+          yEnd: .value("BPM Max", maxHeight * 1.05),
           width: .fixed(2.5))
           .clipShape(Rectangle())
           .foregroundStyle(gradient)
-          //          .offset(x: (plotWidth / CGFloat(seaLevel.count)) / 2)
           .annotation(position: .top) {
             VStack {
               Text(String(format: "%.2f", selectedElement.sg) + " m")
@@ -311,7 +328,7 @@ struct TideView: View {
       return
     }
     seaLevelModel.getTenDaysSeaLevel(lat: location.latitude, lng: location.longitude)
-    seaLevelModel.getTenDaysWeatherData(lat: location.latitude, lng: location.longitude)
+    weatherDataModel.getTenDaysWeatherData(lat: location.latitude, lng: location.longitude)
   }
 
   private func getCurrentElement() {
@@ -380,8 +397,8 @@ struct TideView: View {
 struct TideView_Previews: PreviewProvider {
   static var previews: some View {
     let seaLevelModel = SeaLevelModel()
-    let weatherData = seaLevelModel.decodeJSON()
+    let tideData = seaLevelModel.decodeJSON()
     let location = Location(name: "小大福漁港", latitude: 22.3348440, longitude: 120.3776006)
-    TideView(seaLevel: weatherData.data, weatherData: [], location: location)
+    TideView(seaLevel: tideData.data, weatherData: [], location: location)
   }
 }

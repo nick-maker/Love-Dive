@@ -29,13 +29,10 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     super.viewDidLoad()
     navigationController?.tabBarController?.tabBar.backgroundColor = .systemBackground
     locationManager.errorPresentationTarget = self
-//    divingSiteManager.delegate = self
     networkManager.currentDelegate = self
-
     setupMapView()
     getCurrentLocation()
     getDivingSite()
-//    divingSiteManager.decodeDivingGeoJSON()
     setupCollectionView()
     configureCompositionalLayout()
   }
@@ -130,7 +127,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     DispatchQueue.main.async {
 //      Task {
 //        do {
-         self.updateWeatherDataForVisibleAnnotations()
+      self.updateWeatherDataForVisibleAnnotations()
 //        }
 //      }
       self.collectionView.reloadData()
@@ -216,10 +213,7 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
 
           // Find the annotation that matches the title
           guard let annotation = self.mapView.annotations.first(where: { $0.title == annotationTitle }) else { return }
-          let region = MKCoordinateRegion(
-            center: annotation.coordinate,
-            span: self.currentRegion)
-//          self.mapView.setRegion(region, animated: true) //might cause jiggling
+
           self.mapView.selectAnnotation(annotation, animated: true)
         }
         self.lastScaleFactor = scale

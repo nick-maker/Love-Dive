@@ -45,7 +45,6 @@ struct BreatheView: View {
 //              .padding(10)
             if breatheModel.isStarted {
               LottieView()
-//                .scaleEffect(0.8)
             }
             Circle()
               .stroke(
