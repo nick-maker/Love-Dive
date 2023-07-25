@@ -230,7 +230,7 @@ extension ActivitiesViewController: UICalendarViewDelegate, UICalendarSelectionS
 
   func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom _: DateComponents) {
     currentDateComponents = calendarView.visibleDateComponents
-    isGoToday = false // 要解決cellforitemat的時候行事曆回到今天的問題
+    isGoToday = false // 要解決cellForItemAt的時候行事曆回到今天的問題
   }
 
 }
@@ -386,18 +386,6 @@ extension ActivitiesViewController {
 }
 
 // MARK: TabBarReselectHandling
-
-// extension ActivitiesViewController: HealthManagerDelegate {
-//
-//  func getDepthData(didGet divingData: [DivingLog]) {
-//    divingLogs = divingData
-//  }
-//
-//  func getTempData(didGet tempData: [Temperature]) {
-//    temps = tempData
-//  }
-//
-// }
 
 extension ActivitiesViewController: TabBarReselectHandling {
 

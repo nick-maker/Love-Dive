@@ -31,7 +31,6 @@ class PersonalBestModel: NSObject, ObservableObject {
   var personalBest: DivingLog?
 
   func save(_ divingLog: DivingLog) {
-//    UserDefaults.standard.removeObject(forKey: saveKey)
     if
       let encodedData = try? JSONEncoder().encode(divingLog),
       let defaults

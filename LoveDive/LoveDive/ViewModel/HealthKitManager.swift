@@ -72,14 +72,12 @@ class HealthKitManager {
         DispatchQueue.main.async {
           self.divingLogs = sortedDives
           self.divingLogsSubject.send(self.divingLogs)
-          //        self.delegate?.getDepthData(didGet: self.divingLogs)
         }
       }
       readWaterTemps(healthStore: healthStore) { tempSamples in
         DispatchQueue.main.async {
           self.temps = tempSamples
           self.tempsSubject.send(self.temps)
-          //        self.delegate?.getTempData(didGet: self.temps)
         }
       }
     }

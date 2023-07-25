@@ -151,7 +151,7 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
 //  private let divingSiteManager = DivingSiteManager()
   private let networkManager = NetworkManager()
-  private let seaLevelModel = SeaLevelModel()
+  private let seaLevelModel = SeaLevelModel(networkRequest: AlamofireNetwork.shared)
   private let locationManager = LocationManager()
   private var weatherData = [WeatherHour]()
   private var locations = [Location]()
@@ -393,10 +393,6 @@ extension TideViewController: CurrentDelegate {
     let indexPath = IndexPath(item: index, section: 0)
     // if set true, would fire section.visibleItemsInvalidationHandler
     collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-//    networkManager.getCurrentWeatherData(
-//      lat: annotation.coordinate.latitude,
-//      lng: annotation.coordinate.longitude,
-//      forAnnotation: annotation)
   }
 
   func manager(didGet weatherData: [WeatherHour], forKey: String) {

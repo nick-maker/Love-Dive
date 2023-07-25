@@ -20,7 +20,6 @@ class NetworkManager {
   weak var currentDelegate: CurrentDelegate?
   let currentWeather = Firestore.firestore().collection("currentWeather")
 
-
   func getCurrentWeatherData(lat: Double, lng: Double) {
     let key = "currentWeather\(lat),\(lng)"
     // check if there is data in UserDefault

@@ -25,7 +25,6 @@
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F52A42F91F00711932 /* AppLayouts.swift */; };
 		063BA8F82A42FDC800711932 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F72A42FDC800711932 /* SummaryCell.swift */; };
-		0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */; };
 		064948512A5BD17B0094DB5A /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948502A5BD17B0094DB5A /* Favorites.swift */; };
 		064948542A5BE1C10094DB5A /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948532A5BE1C10094DB5A /* EmptyCell.swift */; };
 		064948562A5C61CB0094DB5A /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064948552A5C61CB0094DB5A /* ToastViewController.swift */; };
@@ -42,8 +41,9 @@
 		064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76612A4B10D4003DC830 /* DivingSiteManager.swift */; };
 		064F76642A4B42A1003DC830 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064F76632A4B42A1003DC830 /* LocationManager.swift */; };
 		065FD8612A5D84EA0090E16D /* FavSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FD8602A5D84EA0090E16D /* FavSectionHeader.swift */; };
-		06657F1E2A6A301D00E8A7D0 /* LoveDiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06657F1D2A6A301D00E8A7D0 /* LoveDiveTests.swift */; };
+		06657F1E2A6A301D00E8A7D0 /* SeaLevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06657F1D2A6A301D00E8A7D0 /* SeaLevelTests.swift */; };
 		06657F262A6A326000E8A7D0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 06657F252A6A326000E8A7D0 /* FirebaseFirestoreSwift */; };
+		06657F292A6ED1B400E8A7D0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 06657F282A6ED1B400E8A7D0 /* Alamofire */; };
 		0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7782A596F5E00194930 /* LaunchViewController.swift */; };
 		0673D77F2A59747E00194930 /* Logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673D77E2A59747E00194930 /* Logo.json */; };
 		0673D7822A5A8C9A00194930 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7812A5A8C9A00194930 /* HomeViewController.swift */; };
@@ -137,7 +137,6 @@
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
 		063BA8F72A42FDC800711932 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
-		0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		064948502A5BD17B0094DB5A /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		064948532A5BE1C10094DB5A /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		064948552A5C61CB0094DB5A /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +156,7 @@
 		064F76702A4DC600003DC830 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		065FD8602A5D84EA0090E16D /* FavSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavSectionHeader.swift; sourceTree = "<group>"; };
 		06657F1B2A6A301D00E8A7D0 /* LoveDiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoveDiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		06657F1D2A6A301D00E8A7D0 /* LoveDiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveDiveTests.swift; sourceTree = "<group>"; };
+		06657F1D2A6A301D00E8A7D0 /* SeaLevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaLevelTests.swift; sourceTree = "<group>"; };
 		0673D7782A596F5E00194930 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		0673D77E2A59747E00194930 /* Logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Logo.json; sourceTree = "<group>"; };
 		0673D7812A5A8C9A00194930 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06657F262A6A326000E8A7D0 /* FirebaseFirestoreSwift in Frameworks */,
+				06657F292A6ED1B400E8A7D0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +328,6 @@
 				067833C02A39D8B5000642F2 /* TideViewController.swift */,
 				064F76502A499937003DC830 /* BreatheViewController.swift */,
 				0681DC612A3D9F8E00BCC367 /* ActivitiesViewController.swift */,
-				0644D9E42A405AF200F1A3A0 /* ProfileViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -354,7 +353,7 @@
 		06657F1C2A6A301D00E8A7D0 /* LoveDiveTests */ = {
 			isa = PBXGroup;
 			children = (
-				06657F1D2A6A301D00E8A7D0 /* LoveDiveTests.swift */,
+				06657F1D2A6A301D00E8A7D0 /* SeaLevelTests.swift */,
 			);
 			path = LoveDiveTests;
 			sourceTree = "<group>";
@@ -404,10 +403,10 @@
 				0681DC602A3CA52F00BCC367 /* ViewController */,
 				067833C52A39D8B6000642F2 /* Assets.xcassets */,
 				060E59142A61B14B0095C61F /* Beach Ambience.m4a */,
+				06356B432A544A2500C786B0 /* SeaLevel.json */,
 				0673D77E2A59747E00194930 /* Logo.json */,
 				064F765D2A4ACCC7003DC830 /* 70733-simple-breathing-animation.json */,
 				069C4A4E2A53B31500D8D8AC /* tide.json */,
-				06356B432A544A2500C786B0 /* SeaLevel.json */,
 				06AFC0562A52C2FF007CB1E6 /* response.json */,
 				068240992A3C503700B69265 /* TaiwanDivingSite.geojson */,
 				060E59462A64E9D40095C61F /* GoogleService-Info.plist */,
@@ -512,6 +511,7 @@
 			name = LoveDiveTests;
 			packageProductDependencies = (
 				06657F252A6A326000E8A7D0 /* FirebaseFirestoreSwift */,
+				06657F282A6ED1B400E8A7D0 /* Alamofire */,
 			);
 			productName = LoveDiveTests;
 			productReference = 06657F1B2A6A301D00E8A7D0 /* LoveDiveTests.xctest */;
@@ -671,7 +671,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06657F1E2A6A301D00E8A7D0 /* LoveDiveTests.swift in Sources */,
+				06657F1E2A6A301D00E8A7D0 /* SeaLevelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,7 +711,6 @@
 				060E591D2A63D7BD0095C61F /* PictureDetailView.swift in Sources */,
 				06AFC0512A505AC9007CB1E6 /* FilteredImage.swift in Sources */,
 				060E591F2A63D9D90095C61F /* PictureView.swift in Sources */,
-				0644D9E52A405AF200F1A3A0 /* ProfileViewController.swift in Sources */,
 				06AFC04E2A4F456C007CB1E6 /* FileManager.swift in Sources */,
 				065FD8612A5D84EA0090E16D /* FavSectionHeader.swift in Sources */,
 				060146492A3B57C7003001EE /* TideCell.swift in Sources */,
@@ -1175,6 +1174,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 060E59482A64EFD00095C61F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		06657F282A6ED1B400E8A7D0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 060146412A3AF394003001EE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

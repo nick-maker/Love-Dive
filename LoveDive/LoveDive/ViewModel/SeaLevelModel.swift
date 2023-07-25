@@ -14,6 +14,12 @@ class SeaLevelModel: ObservableObject {
 
   @Published var seaLevel: [SeaLevel] = []
 
+  private let networkRequest: NetworkProtocol
+
+  init(networkRequest: NetworkProtocol) {
+    self.networkRequest = networkRequest
+  }
+
   let UTCFormatter = ISO8601DateFormatter()
   let calendar = Calendar.current
   let currentTime = Date()
@@ -34,7 +40,7 @@ class SeaLevelModel: ObservableObject {
           try await getFromFirebase(lat: lat, lng: lng, key: key)
         }
         catch {
-          self.getFromAPI(lat: lat, lng: lng, key: key)
+          self.getFromAPI(lat: lat, lng: lng, key: key) { _ in }
         }
       }
     }
@@ -54,7 +60,7 @@ class SeaLevelModel: ObservableObject {
     saveToUserDefault(value: data, key: key)
   }
 
-  func getFromAPI(lat: Double, lng: Double, key: String) {
+  func getFromAPI(lat: Double, lng: Double, key: String, completion: @escaping (Result<TideData, Error>) -> Void) {
     let params: [String: Any] = [
       "lat": lat,
       "lng": lng,
@@ -64,10 +70,8 @@ class SeaLevelModel: ObservableObject {
       "Authorization": Config.weatherAPIKey,
     ]
 
-    AF.request("https://api.stormglass.io/v2/tide/sea-level/point", method: .get, parameters: params, headers: headers)
-      .validate()
-      .responseDecodable(of: TideData.self) { response in
-        switch response.result {
+    networkRequest.request("https://api.stormglass.io/v2/tide/sea-level/point", method: .get, parameters: params, headers: headers) { result in
+        switch result {
         case .success(let value):
           if !value.data.isEmpty {
             self.seaLevel = value.data
@@ -78,8 +82,9 @@ class SeaLevelModel: ObservableObject {
               }
             }
           }
+          completion(Result.success(value)) //for testing
         case .failure(let error):
-          print("Error: \(error)")
+          completion(Result.failure(error))
         }
       }
   }
@@ -109,5 +114,32 @@ class SeaLevelModel: ObservableObject {
     } catch {
       return TideData(data: [])
     }
+  }
+}
+
+protocol NetworkProtocol {
+    func request(
+        _ url: URLConvertible,
+        method: HTTPMethod,
+        parameters: Parameters?,
+        headers: HTTPHeaders?,
+        completion: @escaping (Result<TideData, Error>) -> Void)
+}
+
+class AlamofireNetwork: NetworkProtocol {
+
+  static let shared = AlamofireNetwork()
+
+  func request(_ url: URLConvertible, method: HTTPMethod, parameters: Parameters?, headers: HTTPHeaders?, completion: @escaping (Result<TideData, Error>) -> Void) {
+    AF.request(url, method: method, parameters: parameters, headers: headers)
+      .validate()
+      .responseDecodable(of: TideData.self) { response in
+        switch response.result {
+        case .success(let value):
+          completion(Result.success(value))
+        case .failure(let error):
+          completion(Result.failure(error))
+        }
+      }
   }
 }

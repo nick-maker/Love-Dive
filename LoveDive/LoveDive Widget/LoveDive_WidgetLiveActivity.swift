@@ -25,7 +25,7 @@ struct TimerAttributes: ActivityAttributes {
   var timerName: String
 }
 
-// MARK: - WidgetLiveActivity
+// MARK: - LoveDive_WidgetLiveActivity
 
 struct LoveDive_WidgetLiveActivity: Widget {
   var body: some WidgetConfiguration {

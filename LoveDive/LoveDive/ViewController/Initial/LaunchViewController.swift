@@ -34,7 +34,6 @@ class LaunchViewController: UIViewController {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
           windowScene.windows.first?.rootViewController = tabBarController
           windowScene.windows.first?.makeKeyAndVisible()
-          print("launchviewcontroller ended")
         }
       }
     }

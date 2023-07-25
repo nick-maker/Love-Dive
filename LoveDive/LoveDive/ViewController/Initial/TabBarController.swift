@@ -15,14 +15,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//    healthKitManager.delegate = self
-//
-//    HealthKitManager.shared.requestHealthKitPermissions()
-//    DispatchQueue.main.async {
-//    HealthKitManager.shared.requestHealthKitPermissions()
-//    }
-    //    cloudKitVM.getiCloudStatus()
-    //    cloudKitVM.requestPermission()
     delegate = self
     divingSiteManager.delegate = self
     divingSiteManager.decodeDivingGeoJSON()
@@ -48,11 +40,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
   // MARK: Private
 
-//  private let healthKitManager = HealthKitManger()
-  //  let cloudKitVM = CloudKitViewModel()
   private let divingSiteManager = DivingSiteManager()
-//  var divingLogs: [DivingLog] = []
-//  var temps: [Temperature] = []
 
 }
 
@@ -63,29 +51,6 @@ protocol TabBarReselectHandling {
 }
 
 // MARK: - TabBarController + DivingSiteDelegate
-
-// extension TabBarController: HealthManagerDelegate {
-//  func getDepthData(didGet divingData: [DivingLog]) {
-////    let group = DispatchGroup()
-////    group.enter()
-//    divingLogs = divingData
-//    DispatchQueue.global().async {
-//      if let encodedDepthData = try? JSONEncoder().encode(divingData) {
-//        UserDefaults.standard.set(encodedDepthData, forKey: "divingData")
-//      }
-//    }
-////    group.leave()
-//  }
-//
-//  func getTempData(didGet tempData: [Temperature]) {
-//    DispatchQueue.global().async {
-//      if let encodedTempData = try? JSONEncoder().encode(tempData) {
-//        UserDefaults.standard.set(encodedTempData, forKey: "tempData")
-//      }
-//    }
-////    temps = tempData
-//  }
-// }
 
 extension TabBarController: DivingSiteDelegate {
 

@@ -15,7 +15,7 @@ import UIKit
 struct TideView: View {
 
   // MARK: Internal
-  @StateObject var seaLevelModel = SeaLevelModel()
+  @StateObject var seaLevelModel = SeaLevelModel(networkRequest: AlamofireNetwork.shared)
   @StateObject var weatherDataModel = WeatherDataModel()
   @StateObject var favorites = Favorites()
   @State var seaLevel: [SeaLevel]
@@ -396,7 +396,7 @@ struct TideView: View {
 
 struct TideView_Previews: PreviewProvider {
   static var previews: some View {
-    let seaLevelModel = SeaLevelModel()
+    let seaLevelModel = SeaLevelModel(networkRequest: AlamofireNetwork.shared)
     let tideData = seaLevelModel.decodeJSON()
     let location = Location(name: "小大福漁港", latitude: 22.3348440, longitude: 120.3776006)
     TideView(seaLevel: tideData.data, weatherData: [], location: location)

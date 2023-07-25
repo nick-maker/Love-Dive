@@ -107,7 +107,7 @@ class HomeViewController: UIViewController, DiveCellDelegate {
   // MARK: Private
 
   private var maxTemps: [Temperature] = []
-  private let seaLevelModel = SeaLevelModel()
+  private let seaLevelModel = SeaLevelModel(networkRequest: AlamofireNetwork.shared)
   private var favorites = Favorites()
   private let divingSiteManager = DivingSiteManager()
   private var allLocations: [Location] = []
@@ -125,7 +125,6 @@ class HomeViewController: UIViewController, DiveCellDelegate {
     }
   }
 
-  //  private let healthKitManager = HealthKitManger()
   private var divingLogs: [DivingLog] = [] {
     didSet {
       DispatchQueue.main.async {
