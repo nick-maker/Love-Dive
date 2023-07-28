@@ -20,8 +20,10 @@
 - Plan better with on-map weather info for dive sites. 
 - Animated breathe timer with live activities and dynamic island support.
 
-![image](https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/CleanShot%202023-07-28%20at%2022.24.11.gif)
-
+<div align="center">
+<video src="https://github.com/nick-maker/Love-Dive/assets/53485928/cb38f54e-f2bc-4a1a-83d1-938f0253aaf0"></video>
+<div>
+  
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="1080" height=""/>
 
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1360.png" width="1080" height=""/>
