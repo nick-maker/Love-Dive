@@ -21,9 +21,10 @@
 - Animated breathe timer with live activities and dynamic island support.
 
 <div align="center">
-<video src="https://github.com/nick-maker/Love-Dive/assets/53485928/cb38f54e-f2bc-4a1a-83d1-938f0253aaf0"></video>
+<video src="https://github.com/nick-maker/Love-Dive/assets/53485928/83b7cdde-f33f-4f67-afde-8b9d125a063d"></video>
 <div>
-  
+
+
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="1080" height=""/>
 
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1360.png" width="1080" height=""/>
