@@ -16,86 +16,50 @@
 ## Features
 
 ### Hightlights
-- Real-time data synchronization in the pet group 
-- Record food/medical information of the pet
-- Send messages to members of the pet group for a quick sync
-- Take a todo list for a member in the pet groups
+- Apple Watch Ultra free diving log with chart support
+- Plan better with on-map weather info for dive sites. 
+- Animated breathe timer with live activities and dynamic island support.
 
-### Pet Group
-#### Create a pet group
-- Create a new pet group by filling in some pet information
+<img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="1080" height=""/>
 
-<img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="540" height=""/>
-
-
-#### Invite member/Join into the pet group
-- Show QRCode to be scanned
-
-<img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="540" height=""/>
-
-
-- Scan the QRCode of the member to invite him/her to the specific group 
-
-<img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1360.png" width="540" height=""/>
-
-### Records
-#### Food/Medical records
-- Record food/medical notes of the pet with members, and view the history records
-
-<img src="https://github.com/dolores0105/toPether/blob/main/screenshots/TakeRecord.png" width="540" height=""/>
-
-
-### Messages
-- Text a message to the members for the instant information sync
-
-<img src="https://github.com/dolores0105/toPether/blob/main/screenshots/Message.png" width="540" height=""/>
-
-### Todos
-- Make a todo list for reminding a member of something that needs to do for the pet
-
-<img src="https://github.com/dolores0105/toPether/blob/main/screenshots/TakeTodo.png" width="540" height=""/>
-
+<img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1360.png" width="1080" height=""/>
 
 ## Technical Highlights
-- Developed readable and maintainable codes in Swift using **OOP** and **MVC** architecture.
-- Implemented **Auto Layout programmatically** to make the app compatible with all the iPhones.
-- **Customized and reused UI components** to optimize maintainability and brevity of codes.
-- Utilized **AVFoundation** for QRCode scanner for inviting members into the pet group with more convenience.
-- Implemented **Firestore Snapshot Listener** to perform real-time data synchronization and interactions **across Collections**.
-- Completed account system via **Sign in with Apple**, and integrated **Firebase Auth** and **Firestore** database. 
-- Applied **User Notifications** for reminding users of their to-do lists.
-- Used **Singleton** to access the single instance centralizing data management.
-- Transformed image into **Base64 encoded string** to increase uploading efficiency.
+- Set up an algorithm for extracting diving data from **HealthKit**, with subsequent sorting and seamless integration into **SwiftUI charts** for improved data visualization and interpretation.
+- Integrated **MapKit** and a **RESTful API** in order to synchronously display diving sites and weather data on **MapView**.
+- Engineered a dual-layer cache mechanism for weather data, utilizing **UserDefaults** and **Firestore** to mitigate API usage constraints, thereby optimizing data retrieval performance while maintaining service availability for all users.
+- Incorporated a variety of filters in **CIFilterBuiltins** for enriched color processing of photos in diving logs.
+- Implemented an animated timer through **ActivityKit** and **WidgetKit**, enhancing user interaction and visual appeal.
+- Applied **dependency injection** for unit testing, ensuring testability, reusability, and maintainability.
 
 
 ## Libraries
 - [Firestore](https://firebase.google.com/products/firestore?gclid=Cj0KCQiA-qGNBhD3ARIsAO_o7ynVqh2xVTgG6WIKFSfdCN4x9lHJrit2kdCT99IfZPNxPPbbtPHr6qsaAv4lEALw_wcB&gclsrc=aw.ds)
 - [lottie-ios](https://github.com/airbnb/lottie-ios)
-- [IQKeyboardManagerSwift](https://github.com/hackiftekhar/IQKeyboardManager)
+- [Alamofire](https://github.com/Alamofire/Alamofire)
 - [SwiftLint](https://github.com/realm/SwiftLint)
 - [Crashlytics](https://firebase.google.com/products/crashlytics?hl=en)
 
 
 ## Version
-1.0.1
+1.0.0
 
 
 ## Requirement
-- Xcode 13.0 or later
-- iOS 14.0 or later
+- Xcode 14.0 or later
+- iOS 16.2 or later
 
 
 ## Release Notes
 | Version | Date | Description                                                                                     |
 | :-------| :----|:------------------------------------------------------------------------------------------------|
-| 1.0.1   | 2021.12.03 | General improvement |
-| 1.0.0   | 2021.11.20 | Launched in App Store|
+| 1.0.0   | 2023.07.19 | Launched in App Store|
 
 
 ## Contact
 
-Dolores Lin 林宜萱
-[yihsuanlin.dolores@gmail.com](yihsuanlin.dolores@gmail.com)
+Nick Liu
+[hybrida666@gmail.com](hybrida666@gmail.com)
 
 ## License
 
