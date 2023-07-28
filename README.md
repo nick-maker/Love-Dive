@@ -20,6 +20,8 @@
 - Plan better with on-map weather info for dive sites. 
 - Animated breathe timer with live activities and dynamic island support.
 
+![image](https://share.cleanshot.com/WJtSywhg)
+
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1359.png" width="1080" height=""/>
 
 <img src="https://github.com/nick-maker/Love-Dive/blob/main/Screenshots/1360.png" width="1080" height=""/>
@@ -60,6 +62,8 @@
 
 Nick Liu
 [hybrida666@gmail.com](hybrida666@gmail.com)
+[Twitter](https://twitter.com/nick_liu_)
+[LinkedIn](https://www.linkedin.com/in/lkangting/)
 
 ## License
 
