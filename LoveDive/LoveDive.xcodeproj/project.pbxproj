@@ -346,6 +346,7 @@
 				064F76632A4B42A1003DC830 /* LocationManager.swift */,
 				0681DC702A3F770E00BCC367 /* HealthKitManager.swift */,
 				064948502A5BD17B0094DB5A /* Favorites.swift */,
+				063BA8F52A42F91F00711932 /* AppLayouts.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -440,7 +441,6 @@
 		0681DC5D2A3CA4F500BCC367 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				063BA8F52A42F91F00711932 /* AppLayouts.swift */,
 				0603F4F12A5AB5AB0072C0C3 /* TideModel */,
 				0603F4F22A5AB5CC0072C0C3 /* ActivitiesModel */,
 			);

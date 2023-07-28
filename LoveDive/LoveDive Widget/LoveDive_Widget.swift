@@ -99,8 +99,8 @@ struct WidgetEntrySmallView: View {
         .font(.system(size: 40))
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
       VStack(alignment: .leading) {
-        Text("PB")
-          .font(.largeTitle)
+        Text("Personal Best")
+          .font(.title3)
           .fontDesign(.rounded)
           .bold()
           .foregroundColor(.pacificBlue)
@@ -129,7 +129,7 @@ struct WidgetEntryMediumView: View {
       HStack {
         VStack(alignment: .leading) {
           Text("Personal Best")
-            .font(.title2)
+            .font(.title3)
             .fontDesign(.rounded)
             .bold()
             .foregroundColor(.pacificBlue)
@@ -139,35 +139,49 @@ struct WidgetEntryMediumView: View {
             .bold()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .padding(16)
+        .padding(.top, 14)
+        .padding(.leading, 16)
 
         VStack {
           Image(systemName: "trophy.circle")
             .foregroundColor(.pacificBlue)
-            .font(.system(size: 40))
+            .font(.system(size: 30))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .frame(width: 60)
         }
         .padding(14)
       }
       if let divingLog = entry.divingLog {
+        
         Chart(divingLog.session) { divingEntry in
           AreaMark(
             x: .value("time", divingEntry.start),
             yStart: .value("minValue", -divingEntry.depth),
             yEnd: .value("depth", -divingLog.maxDepth - 15))
-            .foregroundStyle(WidgetEntryMediumView.gradient)
-            .interpolationMethod(.monotone)
+          .foregroundStyle(WidgetEntryMediumView.gradient)
+          .interpolationMethod(.monotone)
 
           LineMark(
             x: .value("time", divingEntry.start),
             y: .value("depth", -divingEntry.depth))
-            .interpolationMethod(.monotone)
-            .lineStyle(.init(lineWidth: 2))
-            .foregroundStyle(Color.pacificBlue.gradient)
+          .interpolationMethod(.monotone)
+          .lineStyle(.init(lineWidth: 2))
+          .foregroundStyle(Color.pacificBlue.gradient)
         }
         .chartXAxis { }
-        .chartYAxis { }
+        .chartYAxis {
+          AxisMarks(values: .automatic(desiredCount: 3)) {
+            AxisGridLine()
+            let value = $0.as(Int.self)!
+              AxisValueLabel {
+                Text("\(-value)")
+              }
+          }
+        }
+        .chartYScale(domain: -divingLog.maxDepth - 15...0)
+        .padding(.leading, 14)
+        .padding(.trailing, 12)
+        .padding(.bottom, 14)
         .frame(height: 90)
       }
     }
@@ -178,7 +192,7 @@ struct WidgetEntryMediumView: View {
   static private var gradient: Gradient {
     var colors = [Color.pacificBlue.opacity(0.5)]
 
-    colors.append(Color.pacificBlue.opacity(0.2))
+    colors.append(Color.pacificBlue.opacity(0))
 
     return Gradient(colors: colors)
   }
@@ -352,7 +366,7 @@ struct Widget_Previews: PreviewProvider {
 
   static var previews: some View {
     WidgetView(entry: PersonalBestEntry(date: Date(), divingLog: divingLog))
-      .previewContext(WidgetPreviewContext(family: .systemMedium))
+      .previewContext(WidgetPreviewContext(family: .systemSmall))
   }
 
 }
