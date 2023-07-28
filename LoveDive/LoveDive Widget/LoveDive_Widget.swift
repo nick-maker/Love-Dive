@@ -179,7 +179,7 @@ struct WidgetEntryMediumView: View {
           }
         }
         .chartYScale(domain: -divingLog.maxDepth - 15...0)
-        .padding(.leading, 14)
+        .padding(.leading, 16)
         .padding(.trailing, 12)
         .padding(.bottom, 14)
         .frame(height: 90)
@@ -366,7 +366,7 @@ struct Widget_Previews: PreviewProvider {
 
   static var previews: some View {
     WidgetView(entry: PersonalBestEntry(date: Date(), divingLog: divingLog))
-      .previewContext(WidgetPreviewContext(family: .systemSmall))
+      .previewContext(WidgetPreviewContext(family: .systemMedium))
   }
 
 }
