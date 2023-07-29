@@ -100,13 +100,11 @@ struct WidgetEntrySmallView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
       VStack(alignment: .leading) {
         Text("Personal Best")
-          .font(.title3)
-          .fontDesign(.rounded)
+          .font(.system(.title3, design: .rounded, weight: .regular))
           .bold()
           .foregroundColor(.pacificBlue)
         Text(String(format: "%.2f m", entry.divingLog?.maxDepth ?? 0))
-          .font(.title)
-          .fontDesign(.rounded)
+          .font(.system(.title, design: .rounded, weight: .regular))
           .bold()
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
@@ -129,13 +127,11 @@ struct WidgetEntryMediumView: View {
       HStack {
         VStack(alignment: .leading) {
           Text("Personal Best")
-            .font(.title3)
-            .fontDesign(.rounded)
+            .font(.system(.title3, design: .rounded, weight: .regular))
             .bold()
             .foregroundColor(.pacificBlue)
           Text(String(format: "%.2f m", entry.divingLog?.maxDepth ?? 0))
-            .font(.title3)
-            .fontDesign(.rounded)
+            .font(.system(.title3, design: .rounded, weight: .regular))
             .bold()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -178,7 +174,7 @@ struct WidgetEntryMediumView: View {
           }
         }
         .chartYScale(domain: -divingLog.maxDepth - 15...0)
-        .padding(.leading, 16)
+        .padding(.leading, 18)
         .padding(.trailing, 12)
         .padding(.bottom, 14)
         .frame(height: 90)

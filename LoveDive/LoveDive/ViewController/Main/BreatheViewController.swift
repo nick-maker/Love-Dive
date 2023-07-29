@@ -18,8 +18,8 @@ class BreatheViewController: UIViewController {
     let audioModel = AudioModel()
 
     // Create an instance of BreatheView and add BreatheModel to the environment
-    let swiftUIView = BreatheView().environmentObject(breatheModel)
-      .environmentObject(audioModel)
+      let swiftUIView = BreatheView().environmentObject(breatheModel)
+        .environmentObject(audioModel)
     let hostingController = UIHostingController(rootView: swiftUIView)
 
     // Make sure the hosting controller view is resizable and fits the parent view.

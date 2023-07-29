@@ -176,8 +176,7 @@ struct TideView: View {
             if let date {
               Text(date.formatted(date: .abbreviated, time: .omitted))
                 .foregroundColor(.white)
-                .font(.title)
-                .fontDesign(.rounded)
+                .font(.system(.title, design: .rounded, weight: .regular))
             }
           }
         }
@@ -190,8 +189,7 @@ struct TideView: View {
           .padding(.top, -10)
         Text("Wave Height")
           .foregroundColor(.white)
-          .font(.title3)
-          .fontDesign(.rounded)
+          .font(.system(.title3, design: .rounded, weight: .regular))
           .frame(width: 200, height: 20)
       }
       .frame(width: viewSize / 2, height: viewHeight / 3.4, alignment: .center)
