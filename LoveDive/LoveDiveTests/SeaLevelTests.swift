@@ -5,9 +5,12 @@
 //  Created by Nick Liu on 2023/7/21.
 //
 
+import Alamofire
 import XCTest
 @testable import LoveDive
-import Alamofire
+
+// MARK: - SeaLevelTests
+
 // swiftlint:disable implicitly_unwrapped_optional
 final class SeaLevelTests: XCTestCase {
 
@@ -32,9 +35,9 @@ final class SeaLevelTests: XCTestCase {
       let isSuccess: Bool
 
       switch result {
-      case .success(_):
+      case .success:
         isSuccess = true
-      case .failure(_):
+      case .failure:
         isSuccess = false
       }
       XCTAssertEqual(isSuccess, true)
@@ -45,11 +48,11 @@ final class SeaLevelTests: XCTestCase {
 
 }
 
+// MARK: - MockNetworkService
+
 class MockNetworkService: NetworkProtocol {
 
-  func request(_ url: URLConvertible, method: HTTPMethod, parameters: Parameters?, headers: HTTPHeaders?, completion: @escaping (Result<LoveDive.TideData, Error>) -> Void) {
-    completion(mockResponse)
-  }
+  var mockResponse: Result<TideData, Error> = .success(decodeJSON())
 
   static func decodeJSON() -> TideData {
     guard let url = Bundle.main.url(forResource: "SeaLevel", withExtension: "json") else {
@@ -65,6 +68,14 @@ class MockNetworkService: NetworkProtocol {
     }
   }
 
-  var mockResponse: Result<TideData, Error> = .success(decodeJSON())
+  func request(
+    _: URLConvertible,
+    method _: HTTPMethod,
+    parameters _: Parameters?,
+    headers _: HTTPHeaders?,
+    completion: @escaping (Result<LoveDive.TideData, Error>) -> Void)
+  {
+    completion(mockResponse)
+  }
 
 }

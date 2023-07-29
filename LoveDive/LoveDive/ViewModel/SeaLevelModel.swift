@@ -10,15 +10,19 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import SwiftUI
 
+// MARK: - SeaLevelModel
+
 class SeaLevelModel: ObservableObject {
 
-  @Published var seaLevel: [SeaLevel] = []
-
-  private let networkRequest: NetworkProtocol
+  // MARK: Lifecycle
 
   init(networkRequest: NetworkProtocol) {
     self.networkRequest = networkRequest
   }
+
+  // MARK: Internal
+
+  @Published var seaLevel: [SeaLevel] = []
 
   let UTCFormatter = ISO8601DateFormatter()
   let calendar = Calendar.current
@@ -70,23 +74,28 @@ class SeaLevelModel: ObservableObject {
       "Authorization": Config.weatherAPIKey,
     ]
 
-    networkRequest.request("https://api.stormglass.io/v2/tide/sea-level/point", method: .get, parameters: params, headers: headers) { result in
-        switch result {
-        case .success(let value):
-          if !value.data.isEmpty {
-            self.seaLevel = value.data
-            self.saveToUserDefault(value: value, key: key)
-            Task {
-              do {
-                try await self.saveToFirebase(lat: lat, lng: lng, data: value)
-              }
+    networkRequest.request(
+      "https://api.stormglass.io/v2/tide/sea-level/point",
+      method: .get,
+      parameters: params,
+      headers: headers)
+    { result in
+      switch result {
+      case .success(let value):
+        if !value.data.isEmpty {
+          self.seaLevel = value.data
+          self.saveToUserDefault(value: value, key: key)
+          Task {
+            do {
+              try await self.saveToFirebase(lat: lat, lng: lng, data: value)
             }
           }
-          completion(Result.success(value)) //for testing
-        case .failure(let error):
-          completion(Result.failure(error))
         }
+        completion(Result.success(value)) // for testing
+      case .failure(let error):
+        completion(Result.failure(error))
       }
+    }
   }
 
   func saveToUserDefault(value: TideData, key: String) {
@@ -115,22 +124,37 @@ class SeaLevelModel: ObservableObject {
       return TideData(data: [])
     }
   }
+
+  // MARK: Private
+
+  private let networkRequest: NetworkProtocol
+
 }
 
+// MARK: - NetworkProtocol
+
 protocol NetworkProtocol {
-    func request(
-        _ url: URLConvertible,
-        method: HTTPMethod,
-        parameters: Parameters?,
-        headers: HTTPHeaders?,
-        completion: @escaping (Result<TideData, Error>) -> Void)
+  func request(
+    _ url: URLConvertible,
+    method: HTTPMethod,
+    parameters: Parameters?,
+    headers: HTTPHeaders?,
+    completion: @escaping (Result<TideData, Error>) -> Void)
 }
+
+// MARK: - AlamofireNetwork
 
 class AlamofireNetwork: NetworkProtocol {
 
   static let shared = AlamofireNetwork()
 
-  func request(_ url: URLConvertible, method: HTTPMethod, parameters: Parameters?, headers: HTTPHeaders?, completion: @escaping (Result<TideData, Error>) -> Void) {
+  func request(
+    _ url: URLConvertible,
+    method: HTTPMethod,
+    parameters: Parameters?,
+    headers: HTTPHeaders?,
+    completion: @escaping (Result<TideData, Error>) -> Void)
+  {
     AF.request(url, method: method, parameters: parameters, headers: headers)
       .validate()
       .responseDecodable(of: TideData.self) { response in

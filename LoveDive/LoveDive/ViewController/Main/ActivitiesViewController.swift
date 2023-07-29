@@ -104,31 +104,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     collectionView.reloadData()
   }
 
-  func filterDivingLogs(forMonth month: Date) {
-    let calendar = Calendar.current
-    let targetMonth = calendar.component(.month, from: month)
-    let targetYear = calendar.component(.year, from: month)
-
-    // Filter divingLogs for the selected month and year.
-    filteredDivingLogs = divingLogs.filter {
-      let monthComponent = calendar.component(.month, from: $0.startTime)
-      let yearComponent = calendar.component(.year, from: $0.startTime)
-      return monthComponent == targetMonth && yearComponent == targetYear
-    }
-
-    filteredTemps = temps.filter {
-      let monthComponent = calendar.component(.month, from: $0.start)
-      let yearComponent = calendar.component(.year, from: $0.start)
-      return monthComponent == targetMonth && yearComponent == targetYear
-    }
-
-    // Reload the collectionView with filteredDivingLogs.
-    DispatchQueue.main.async {
-      let sectionsToReload: IndexSet = [1, 2]
-      self.collectionView.reloadSections(sectionsToReload)
-    }
-  }
-
   func setupCollectionView() {
     view.addSubview(collectionView)
     collectionView.backgroundColor = nil
@@ -157,6 +132,33 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
   private var selectedDateComponents: DateComponents?
   private var divingLogsSubscription: AnyCancellable?
   private var tempsSubscription: AnyCancellable?
+
+  private func filterDivingLogs(forMonth month: Date) {
+    let calendar = Calendar.current
+    let targetDay = calendar.component(.day, from: month)
+    let targetMonth = calendar.component(.month, from: month)
+    let targetYear = calendar.component(.year, from: month)
+
+    // Filter divingLogs for the selected month and year.
+    filteredDivingLogs = divingLogs.filter {
+      let monthComponent = calendar.component(.month, from: $0.startTime)
+      let yearComponent = calendar.component(.year, from: $0.startTime)
+      return monthComponent == targetMonth && yearComponent == targetYear
+    }
+
+    filteredTemps = temps.filter {
+      let dayComponent = calendar.component(.day, from: $0.start)
+      let monthComponent = calendar.component(.month, from: $0.start)
+      let yearComponent = calendar.component(.year, from: $0.start)
+      return monthComponent == targetMonth && yearComponent == targetYear
+    }
+
+    // Reload the collectionView with filteredDivingLogs.
+    DispatchQueue.main.async {
+      let sectionsToReload: IndexSet = [1, 2]
+      self.collectionView.reloadSections(sectionsToReload)
+    }
+  }
 
   private func filterDivingLogs(forDay day: Date) {
     let calendar = Calendar.current
@@ -350,8 +352,11 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
     if indexPath.section == 2 {
       generateHapticFeedback(for: HapticFeedback.selection)
       let selectedData = filteredDivingLogs[indexPath.row]
-      let selectedTemp = filteredTemps[indexPath.row]
-      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
+      let selectedTemps = filteredTemps.filter { temp in
+        temp.start == selectedData.startTime
+      }
+      guard let selectedTemp = selectedTemps.first?.temp else { return }
+      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp)
       let hostingController = UIHostingController(rootView: chartView)
       hostingController.title = "Diving Log"
       navigationController?.navigationBar.tintColor = .pacificBlue

@@ -68,9 +68,9 @@ class HealthKitManager {
     DispatchQueue.global().async { [weak self] in
       guard let self else { return }
       readUnderwaterDepths(healthStore: healthStore) { diveQuery in
-        let sortedDives = diveQuery.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
+//        let sortedDives = diveQuery.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
         DispatchQueue.main.async {
-          self.divingLogs = sortedDives
+          self.divingLogs = diveQuery
           self.divingLogsSubject.send(self.divingLogs)
         }
       }

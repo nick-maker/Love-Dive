@@ -314,8 +314,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       navigationController?.pushViewController(hostingController, animated: true)
     } else if indexPath.section == 1 {
       let selectedData = maxDivingLogs[indexPath.row]
-      let selectedTemp = maxTemps[indexPath.row]
-      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp.temp)
+      let selectedTemps = maxTemps.filter { temp in
+        temp.start == selectedData.startTime
+      }
+      guard let selectedTemp = selectedTemps.first?.temp else { return }
+      let chartView = ChartView(data: selectedData.session, maxDepth: selectedData.maxDepth, temp: selectedTemp)
       let hostingController = UIHostingController(rootView: chartView)
       hostingController.title = "Diving Log"
       navigationController?.navigationBar.tintColor = .pacificBlue

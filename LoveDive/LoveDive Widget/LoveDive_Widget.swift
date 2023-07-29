@@ -152,30 +152,29 @@ struct WidgetEntryMediumView: View {
         .padding(14)
       }
       if let divingLog = entry.divingLog {
-        
         Chart(divingLog.session) { divingEntry in
           AreaMark(
             x: .value("time", divingEntry.start),
             yStart: .value("minValue", -divingEntry.depth),
             yEnd: .value("depth", -divingLog.maxDepth - 15))
-          .foregroundStyle(WidgetEntryMediumView.gradient)
-          .interpolationMethod(.monotone)
+            .foregroundStyle(WidgetEntryMediumView.gradient)
+            .interpolationMethod(.monotone)
 
           LineMark(
             x: .value("time", divingEntry.start),
             y: .value("depth", -divingEntry.depth))
-          .interpolationMethod(.monotone)
-          .lineStyle(.init(lineWidth: 2))
-          .foregroundStyle(Color.pacificBlue.gradient)
+            .interpolationMethod(.monotone)
+            .lineStyle(.init(lineWidth: 2))
+            .foregroundStyle(Color.pacificBlue.gradient)
         }
         .chartXAxis { }
         .chartYAxis {
           AxisMarks(values: .automatic(desiredCount: 3)) {
             AxisGridLine()
             let value = $0.as(Int.self)!
-              AxisValueLabel {
-                Text("\(-value)")
-              }
+            AxisValueLabel {
+              Text("\(-value)")
+            }
           }
         }
         .chartYScale(domain: -divingLog.maxDepth - 15...0)
