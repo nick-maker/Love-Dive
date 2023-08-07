@@ -104,15 +104,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   func mapView(_ mapView: MKMapView, regionDidChangeAnimated _: Bool) {
     let visibleMapRect = mapView.visibleMapRect
-    let visibleRegion = MKCoordinateRegion(visibleMapRect)
-
-    currentRegion = visibleRegion.span
-    let _: [String: Any] = [
-      "southWestLat": visibleRegion.center.latitude - visibleRegion.span.latitudeDelta / 2,
-      "northEastLat": visibleRegion.center.latitude + visibleRegion.span.latitudeDelta / 2,
-      "southWestLng": visibleRegion.center.longitude - visibleRegion.span.longitudeDelta / 2,
-      "northEastLng": visibleRegion.center.longitude + visibleRegion.span.longitudeDelta / 2,
-    ]
     let visibleAnnotations = mapView.annotations(in: mapView.visibleMapRect)
     annotations = visibleAnnotations.compactMap { $0 as? MKPointAnnotation }
     visibleLocations = locations.filter { location in
@@ -123,13 +114,8 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       }
       return false
     }
-    // Reload the collection view data
     DispatchQueue.main.async {
-//      Task {
-//        do {
       self.updateWeatherDataForVisibleAnnotations()
-//        }
-//      }
       self.collectionView.reloadData()
       guard let selectedLocation = self.selectedAnnotation?.coordinate else { return }
       guard
@@ -149,7 +135,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
 
   private let saveKey = "favorites"
 
-//  private let divingSiteManager = DivingSiteManager()
   private let networkManager = NetworkManager()
   private let seaLevelModel = SeaLevelModel(networkRequest: AlamofireNetwork.shared)
   private let locationManager = LocationManager()
@@ -162,10 +147,8 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   private var containerDownOffset = CGFloat()
   private var containerUp = CGPoint.zero
   private var containerDown = CGPoint.zero
-  private var currentRegion = MKCoordinateSpan()
   private var favorites = Favorites()
 
-//  private var currentPage: Int? = nil
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
 
 }

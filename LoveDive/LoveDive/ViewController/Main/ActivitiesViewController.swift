@@ -135,7 +135,7 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
 
   private func filterDivingLogs(forMonth month: Date) {
     let calendar = Calendar.current
-    let targetDay = calendar.component(.day, from: month)
+//    let targetDay = calendar.component(.day, from: month)
     let targetMonth = calendar.component(.month, from: month)
     let targetYear = calendar.component(.year, from: month)
 
@@ -147,7 +147,7 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     }
 
     filteredTemps = temps.filter {
-      let dayComponent = calendar.component(.day, from: $0.start)
+//      let dayComponent = calendar.component(.day, from: $0.start)
       let monthComponent = calendar.component(.month, from: $0.start)
       let yearComponent = calendar.component(.year, from: $0.start)
       return monthComponent == targetMonth && yearComponent == targetYear

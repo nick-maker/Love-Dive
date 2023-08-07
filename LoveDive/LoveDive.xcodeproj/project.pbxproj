@@ -48,7 +48,6 @@
 		0673D77F2A59747E00194930 /* Logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673D77E2A59747E00194930 /* Logo.json */; };
 		0673D7822A5A8C9A00194930 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7812A5A8C9A00194930 /* HomeViewController.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
-		067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BE2A39D8B5000642F2 /* SceneDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
 		067833C42A39D8B5000642F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C22A39D8B5000642F2 /* Main.storyboard */; };
 		067833C62A39D8B6000642F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067833C52A39D8B6000642F2 /* Assets.xcassets */; };
@@ -162,7 +161,6 @@
 		0673D7812A5A8C9A00194930 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		067833BE2A39D8B5000642F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		067833C02A39D8B5000642F2 /* TideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideViewController.swift; sourceTree = "<group>"; };
 		067833C32A39D8B5000642F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		067833C52A39D8B6000642F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -395,7 +393,6 @@
 			children = (
 				067833D02A39D9FD000642F2 /* LoveDive.entitlements */,
 				067833BC2A39D8B5000642F2 /* AppDelegate.swift */,
-				067833BE2A39D8B5000642F2 /* SceneDelegate.swift */,
 				06AFC04F2A4F4579007CB1E6 /* Helper */,
 				0681DC5E2A3CA51200BCC367 /* Extension */,
 				064F76452A49743B003DC830 /* ViewModel */,
@@ -725,7 +722,6 @@
 				060146452A3AF43A003001EE /* NetworkManager.swift in Sources */,
 				0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */,
 				064F76572A4AB862003DC830 /* AudioModel.swift in Sources */,
-				067833BF2A39D8B5000642F2 /* SceneDelegate.swift in Sources */,
 				0601463E2A3AEA79003001EE /* Extension+UIColor.swift in Sources */,
 				0681DC662A3DD1B800BCC367 /* DivingLog.swift in Sources */,
 				064948582A5C62250094DB5A /* ToastPresentationController.swift in Sources */,
@@ -1034,7 +1030,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1063,7 +1059,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "lkangting.com.LoveDive.LoveDive-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

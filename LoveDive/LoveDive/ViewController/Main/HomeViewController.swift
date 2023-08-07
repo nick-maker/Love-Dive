@@ -34,7 +34,6 @@ class HomeViewController: UIViewController, DiveCellDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     divingLogsSubscription = HealthKitManager.shared.divingLogsPublisher
       .receive(on: DispatchQueue.global())
       .sink { [weak self] divingLogs in
@@ -127,7 +126,7 @@ class HomeViewController: UIViewController, DiveCellDelegate {
 
   private var divingLogs: [DivingLog] = [] {
     didSet {
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { //blocking main thread if getting data from healthKit is in home view controller
         self.maxDivingLogs = Array(self.divingLogs.sorted(by: { $0.maxDepth > $1.maxDepth }).prefix(5))
       }
     }

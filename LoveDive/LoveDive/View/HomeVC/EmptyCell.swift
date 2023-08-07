@@ -72,7 +72,6 @@ class EmptyCell: UICollectionViewCell {
       messageLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
       messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
       messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-      messageLabel.widthAnchor.constraint(equalToConstant: 40),
       messageLabel.heightAnchor.constraint(equalToConstant: 50),
 
       exploreButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 16),
