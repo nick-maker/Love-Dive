@@ -22,7 +22,6 @@ struct WeatherCache: Codable {
 
 // MARK: - WeatherHour
 
-// Structure for each hour of data
 struct WeatherHour: Codable, Identifiable, Equatable {
 
   var id = UUID().uuidString
@@ -43,7 +42,6 @@ struct WeatherHour: Codable, Identifiable, Equatable {
 
 // MARK: - TemperatureData
 
-// Structure for temperature data
 struct TemperatureData: Codable, Equatable {
   let noaa: Double?
   let sg: Double?
@@ -59,7 +57,6 @@ struct TemperatureData: Codable, Equatable {
 
 // MARK: - WaveHeightData
 
-// Structure for wave height data
 struct WaveHeightData: Codable, Equatable {
   let icon: Double?
   let meteo: Double?
@@ -76,7 +73,7 @@ struct WaveHeightData: Codable, Equatable {
 
 // MARK: - WindSpeedData
 
-// Structure for wind speed data
+
 struct WindSpeedData: Codable, Equatable {
   let icon: Double?
   let noaa: Double?

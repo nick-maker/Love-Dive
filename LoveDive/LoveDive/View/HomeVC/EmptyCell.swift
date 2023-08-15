@@ -34,7 +34,6 @@ class EmptyCell: UICollectionViewCell {
 
   // MARK: Private
 
-  // Configure your label and button
   private let titleLabel = UILabel()
   private let messageLabel = UILabel()
 

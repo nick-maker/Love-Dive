@@ -14,7 +14,6 @@ import MapKit
 
 class NetworkManager {
 
-  let UTCFormatter = ISO8601DateFormatter()
   let calendar = Calendar.current
   let currentTime = Date()
   weak var currentDelegate: CurrentDelegate?
@@ -26,7 +25,7 @@ class NetworkManager {
     if
       let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
       let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
-      currentTime.timeIntervalSince(UTCFormatter.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
+      currentTime.timeIntervalSince(Formatter.utc.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
       !weatherCache.weather.isEmpty
     {
       // if yes then call delegate
@@ -69,8 +68,8 @@ class NetworkManager {
       "lat": lat,
       "lng": lng,
       "params": parameters.joined(separator: ","),
-      "start": UTCFormatter.string(from: startTime),
-      "end": UTCFormatter.string(from: endTime),
+      "start": Formatter.utc.string(from: startTime),
+      "end": Formatter.utc.string(from: endTime),
       "source": ["icon", "meteo", "noaa", "sg"],
     ]
     let headers: HTTPHeaders = [

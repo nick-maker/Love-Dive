@@ -7,14 +7,7 @@
 
 import Foundation
 
-struct Location: Codable, Identifiable, Equatable {
-
-  static func == (lhs: Location, rhs: Location) -> Bool {
-    lhs.id == rhs.id
-      && lhs.name == rhs.name
-      && lhs.latitude == rhs.latitude
-      && lhs.longitude == rhs.longitude
-  }
+struct Location: Codable, Identifiable {
 
   var id: String { "\(latitude)," + "\(longitude)" }
   let name: String

@@ -20,12 +20,12 @@ class BestSectionHeader: UICollectionReusableView {
     addSubview(captionLabel)
 
     NSLayoutConstraint.activate([
-      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant),
+      label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -constant),
       label.topAnchor.constraint(equalTo: topAnchor),
 
-      captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+      captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant),
+      captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -constant),
       captionLabel.topAnchor.constraint(equalTo: label.bottomAnchor),
       captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
     ])
@@ -39,7 +39,25 @@ class BestSectionHeader: UICollectionReusableView {
 
   static let reuseIdentifier = "\(BestSectionHeader.self)"
 
-  let label = UILabel()
-  let captionLabel = UILabel()
+  var label = {
+    var label = UILabel()
+    label.text = "Personal Best Dives"
+    label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    return label
+  }()
 
+  func config(text: String) {
+    captionLabel.text = text
+  }
+
+  // MARK: Private
+
+  private let captionLabel = {
+    var caption = UILabel()
+    caption.textColor = .secondaryLabel
+    caption.font = UIFont.systemFont(ofSize: 12)
+    return caption
+  }()
+
+  private let constant = 20.0
 }

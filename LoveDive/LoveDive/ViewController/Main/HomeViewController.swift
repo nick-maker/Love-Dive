@@ -126,7 +126,7 @@ class HomeViewController: UIViewController, DiveCellDelegate {
 
   private var divingLogs: [DivingLog] = [] {
     didSet {
-      DispatchQueue.main.async { //blocking main thread if getting data from healthKit is in home view controller
+      DispatchQueue.main.async { // blocking main thread if getting data from healthKit is in home view controller
         self.maxDivingLogs = Array(self.divingLogs.sorted(by: { $0.maxDepth > $1.maxDepth }).prefix(5))
       }
     }
@@ -204,10 +204,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       else { fatalError("Cannot Down casting") }
       let divingLog = maxDivingLogs[indexPath.row]
       let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
-      let attributedText = NSMutableAttributedString(string: text)
-      attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
-      cell.waterDepthLabel.attributedText = attributedText
-      cell.dateLabel.text = divingLog.startTime.formatted()
+      cell.config(maxDepth: text, date: divingLog.startTime.formatted())
       cell.delegate = self // to enable didselect
       return cell
     }
@@ -268,18 +265,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
           fatalError("Cannot downcast to SectionHeader")
         }
         if maxDivingLogs.isEmpty {
-          headerView.label.text = "Personal Best Dives"
-          headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-          headerView.captionLabel.text = "YOU DON'T HAVE DIVING ACTIVITIES YET"
-          headerView.captionLabel.textColor = .secondaryLabel
-          headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
+          headerView.config(text: "YOU DON'T HAVE DIVING ACTIVITIES YET")
           return headerView
         } else {
-          headerView.label.text = "Personal Best Dives"
-          headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-          headerView.captionLabel.text = "LAST 5 BEST ACTIVITIES"
-          headerView.captionLabel.textColor = .secondaryLabel
-          headerView.captionLabel.font = UIFont.systemFont(ofSize: 12)
+          headerView.config(text: "LAST 5 BEST ACTIVITIES")
           return headerView
         }
       }

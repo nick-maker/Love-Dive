@@ -29,22 +29,7 @@ struct TideView: View {
   @State var scrollSpot = ""
   @State private var tabBarHeight: CGFloat = 0.0
 
-  let dateFormatter = ISO8601DateFormatter()
   var chartColor: Color = .pacificBlue.opacity(0.3)
-
-  let titleFormatter: DateFormatter = {
-    let titleFormatter = DateFormatter()
-    titleFormatter.dateFormat = "MMM dd"
-    titleFormatter.locale = Locale.current
-    return titleFormatter
-  }()
-
-  let timeFormatter: DateFormatter = {
-    let timeFormatter = DateFormatter()
-    timeFormatter.dateFormat = "MMM dd, ha"
-    timeFormatter.locale = Locale.current
-    return timeFormatter
-  }()
 
   var body: some View {
     GeometryReader { proxy in
@@ -172,7 +157,7 @@ struct TideView: View {
       VStack {
         VStack {
           if let currentElement {
-            let date = dateFormatter.date(from: currentElement.time)
+            let date = Formatter.dateFormatter.date(from: currentElement.time)
             if let date {
               Text(date.formatted(date: .abbreviated, time: .omitted))
                 .foregroundColor(.white)
@@ -231,7 +216,11 @@ struct TideView: View {
             endPoint: .trailing))
         .interpolationMethod(.cardinal)
 
-      if let selectedElement, selectedElement.id == tideHour.id {
+      if
+        let selectedElement,
+        let selectedDate = Formatter.dateFormatter.date(from: selectedElement.time),
+        selectedElement.id == tideHour.id
+      {
         BarMark(
           x: .value("time", selectedElement.time),
           yStart: .value("seaLevel", selectedElement.sg),
@@ -246,7 +235,7 @@ struct TideView: View {
                 .bold()
                 .foregroundColor(.pacificBlue)
 
-              Text(timeFormatter.string(from: dateFormatter.date(from: selectedElement.time)!))
+              Text(Formatter.dateFormatter.string(from: selectedDate))
                 .font(.footnote)
                 .foregroundColor(.white)
             }
@@ -333,8 +322,8 @@ struct TideView: View {
     if
       let currentItem = seaLevel.first(where: { tideHour in
 
-        ISO8601DateFormatter().date(from: tideHour.time) == Date()
-          .startOfHour() // "2023-07-04T16:00:00+00:00" //Date().ISO8601Format()
+        Formatter.utc.date(from: tideHour.time) == Date()
+          .startOfHour()
       })
     {
       currentElement = currentItem

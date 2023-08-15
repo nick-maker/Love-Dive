@@ -14,7 +14,6 @@ class WeatherDataModel: ObservableObject {
 
   @Published var weatherData: [WeatherHour] = []
 
-  let UTCFormatter = ISO8601DateFormatter()
   let calendar = Calendar.current
   let currentTime = Date()
   let tenDaysWeather = Firestore.firestore().collection("tenDaysWeather")
@@ -24,7 +23,7 @@ class WeatherDataModel: ObservableObject {
     if
       let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
       let weatherCache = try? JSONDecoder().decode(WeatherCache.self, from: cachedData),
-      currentTime.timeIntervalSince(UTCFormatter.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
+      currentTime.timeIntervalSince(Formatter.utc.date(from: weatherCache.timestamp) ?? Date()) < 3600 * 24,
       !weatherCache.weather.isEmpty
     {
       weatherData = weatherCache.weather

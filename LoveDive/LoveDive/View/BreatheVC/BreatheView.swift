@@ -24,25 +24,6 @@ struct BreatheView: View {
       GeometryReader { proxy in
         VStack(spacing: 25) {
           ZStack {
-//            Circle()
-//              .fill(.blue.opacity(0.03))
-//              .padding(-50)
-//            Circle()
-//              .trim(from: 0, to: breatheModel.progress)
-//              .stroke(Color.blue.opacity(0.03), lineWidth: 80)
-//              .blur(radius: 15)
-            // Mark: Shadow
-//            Circle()
-//              .stroke(Color.pacificBlue.opacity(0.3), lineWidth: 25)
-//              .blur(radius: 55)
-//              .padding(-10)
-//            Circle()
-//              .stroke(Color.darkBlue, lineWidth: 15)
-//              .blur(radius: 55)
-//              .padding(-10)
-//            Circle()
-//              .fill(colorScheme == .dark ? Color.black : Color.white)
-//              .padding(10)
             if breatheModel.isStarted {
               LottieView()
             }
@@ -63,22 +44,6 @@ struct BreatheView: View {
                   lineCap: .round))
               .padding(10)
 
-            // Mark: Knob
-//            GeometryReader { proxy in
-//              let size = proxy.size
-//
-//              Circle()
-//                .fill(Color.pacificBlue)
-//                .frame(width: 30, height: 30)
-//                .overlay(content: {
-//                  Circle()
-//                    .fill(.white)
-//                    .padding(5)
-//                })
-//                .frame(width: size.width, height: size.height, alignment: .center)
-//                .offset(x: size.height / 2)
-//                .rotationEffect(.init(degrees: Double(breatheModel.progress * 360)))
-//            }
             Text(breatheModel.timerStringValue)
               .font(.system(size: 45, design: .rounded))
               .foregroundColor(breatheModel.isStarted ? .white : colorScheme == .dark ? Color.white : .black)
@@ -88,7 +53,6 @@ struct BreatheView: View {
           .padding(30)
           .frame(height: proxy.size.width)
           .rotationEffect(.init(degrees: -90))
-//          .animation(.linear, value: breatheModel.progress)
           .animation(.easeInOut, value: breatheModel.progress)
           .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
@@ -103,7 +67,6 @@ struct BreatheView: View {
               isPresentingNewTimerView = true
             }
           } label: {
-//            Image(systemName: !breatheModel.isStarted ? "circle.and.line.horizontal" : "stop.fill")
             Text(!breatheModel.isStarted ? "Start" : "Stop")
               .font(.title2)
               .fontDesign(.rounded)
@@ -114,13 +77,9 @@ struct BreatheView: View {
                 Circle()
                   .fill(!breatheModel.isStarted ? Color.pacificBlue : Color.pacificBlue.opacity(0.3))
               }
-//              .shadow(color: .pacificBlue, radius: 20, x: 0, y: 0)
           }
           .padding(.bottom, 50)
         }
-//        .onTapGesture {
-        //          breatheModel.progress = 0.5
-//        }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
       }
     }
@@ -139,31 +98,6 @@ struct BreatheView: View {
       }
     }
     .padding()
-//    .background {
-//      (Color.white)
-//        .ignoresSafeArea()
-//    }
-//    .overlay(content: {
-//      ZStack {
-//        Color.black
-//          .opacity(breatheModel.addNewTimer ? 0.25 : 0)
-//          .onTapGesture {
-//            breatheModel.minute = 0
-//            breatheModel.seconds = 0
-//            breatheModel.addNewTimer = false
-//          }
-//          .ignoresSafeArea()
-//
-    //        NewTimerView()
-    //          .frame(maxHeight: .infinity, alignment: .bottom)
-    //          .offset(y: breatheModel.addNewTimer ? 0 : 500)
-    //        if breatheModel.addNewTimer {
-    //          NewTimerView()
-    //            .transition(.move(edge: .bottom))
-    //        }
-//      }
-//      .animation(.easeInOut, value: breatheModel.addNewTimer)
-//    })
     .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
       if breatheModel.isStarted {
         breatheModel.updateTimer()

@@ -57,8 +57,6 @@ class HealthKitManager {
 
   // MARK: Private
 
-//  private var divingLogs: [DivingLog] = []
-//  private var temps: [Temperature] = []
   private let healthStore = HKHealthStore()
 
   private var divingLogsSubject = CurrentValueSubject<[DivingLog], Never>([])
@@ -68,15 +66,10 @@ class HealthKitManager {
     DispatchQueue.global().async { [weak self] in
       guard let self else { return }
       readUnderwaterDepths(healthStore: healthStore) { diveQuery in
-//        let sortedDives = diveQuery.sorted(by: { $0.startTime.compare($1.startTime) == .orderedDescending })
-//        DispatchQueue.main.async {
-          self.divingLogsSubject.send(diveQuery)
-//        }
+        self.divingLogsSubject.send(diveQuery)
       }
       readWaterTemps(healthStore: healthStore) { tempSamples in
-//        DispatchQueue.main.async {
-          self.tempsSubject.send(tempSamples)
-//        }
+        self.tempsSubject.send(tempSamples)
       }
     }
   }

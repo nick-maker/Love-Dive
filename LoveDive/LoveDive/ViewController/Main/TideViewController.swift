@@ -98,7 +98,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
       annotation.title = location.name
       mapView.addAnnotation(annotation)
       annotations.append(annotation)
-      //      networkManager.getCurrentWeatherData(lat: annotation.coordinate.latitude, lng: annotation.coordinate.longitude, forAnnotation: annotation)
     }
   }
 
@@ -126,7 +125,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
         return
       }
       let indexPath = IndexPath(item: index, section: 0)
-
       self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
   }
@@ -304,15 +302,13 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
     cell.favoriteButton.tintColor = favorites.contains(location) ? .systemRed : .lightGray
     cell.locationLabel.text = location.name
     if let weather = location.weather?.first {
-      cell.airTemptText.text = weather.airTemperature.average
-      cell.waterTemptText.text = weather.waterTemperature.average
-      cell.windSpeedText.text = weather.windSpeed.average
-      cell.waveHeightText.text = weather.waveHeight.average
+      cell.config(
+        air: weather.airTemperature.average,
+        water: weather.waterTemperature.average,
+        wind: weather.windSpeed.average,
+        wave: weather.waveHeight.average)
     } else {
-      cell.airTemptText.text = "-"
-      cell.waterTemptText.text = "-"
-      cell.windSpeedText.text = "-"
-      cell.waveHeightText.text = "-"
+      cell.config(air: "-", water: "-", wind: "-", wave: "-")
     }
     cell.favoriteButton.removeTarget(self, action: nil, for: .allEvents)
     cell.favoriteButton.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
@@ -383,22 +379,20 @@ extension TideViewController: CurrentDelegate {
       return
     }
     visibleLocations[index].weather = weatherData.filter { weatherHour in
-      ISO8601DateFormatter().date(from: weatherHour.time) == Calendar.current.date(bySetting: .minute, value: 0, of: Date())
+      Formatter.utc.date(from: weatherHour.time) == Calendar.current.date(bySetting: .minute, value: 0, of: Date())
     }
 
     DispatchQueue.main.async {
       if let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? TideCell {
         let location = self.visibleLocations[index]
         if let weather = location.weather?.first {
-          cell.airTemptText.text = weather.airTemperature.average
-          cell.waterTemptText.text = weather.waterTemperature.average
-          cell.windSpeedText.text = weather.windSpeed.average
-          cell.waveHeightText.text = weather.waveHeight.average
+          cell.config(
+            air: weather.airTemperature.average,
+            water: weather.waterTemperature.average,
+            wind: weather.windSpeed.average,
+            wave: weather.waveHeight.average)
         } else {
-          cell.airTemptText.text = "-"
-          cell.waterTemptText.text = "-"
-          cell.windSpeedText.text = "-"
-          cell.waveHeightText.text = "-"
+          cell.config(air: "-", water: "-", wind: "-", wave: "-")
         }
       }
     }

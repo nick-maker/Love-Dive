@@ -24,7 +24,6 @@ class SeaLevelModel: ObservableObject {
 
   @Published var seaLevel: [SeaLevel] = []
 
-  let UTCFormatter = ISO8601DateFormatter()
   let calendar = Calendar.current
   let currentTime = Date()
   let tenDaysSeaLevel = Firestore.firestore().collection("tenDaysSeaLevel")
@@ -34,7 +33,7 @@ class SeaLevelModel: ObservableObject {
     if
       let cachedData = UserDefaults.standard.object(forKey: key) as? Data,
       let tideCache = try? JSONDecoder().decode(TideCache.self, from: cachedData),
-      currentTime.timeIntervalSince(UTCFormatter.date(from: tideCache.timestamp) ?? Date()) < 3600 * 24,
+      currentTime.timeIntervalSince(Formatter.utc.date(from: tideCache.timestamp) ?? Date()) < 3600 * 24,
       !tideCache.seaLevel.isEmpty
     {
       seaLevel = tideCache.seaLevel

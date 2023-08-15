@@ -47,6 +47,7 @@
 		0673D7792A596F5E00194930 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7782A596F5E00194930 /* LaunchViewController.swift */; };
 		0673D77F2A59747E00194930 /* Logo.json in Resources */ = {isa = PBXBuildFile; fileRef = 0673D77E2A59747E00194930 /* Logo.json */; };
 		0673D7822A5A8C9A00194930 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673D7812A5A8C9A00194930 /* HomeViewController.swift */; };
+		06742B3E2A8A82B20083FA27 /* Extension+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06742B3D2A8A82B20083FA27 /* Extension+DateFormatter.swift */; };
 		067833BD2A39D8B5000642F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833BC2A39D8B5000642F2 /* AppDelegate.swift */; };
 		067833C12A39D8B5000642F2 /* TideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067833C02A39D8B5000642F2 /* TideViewController.swift */; };
 		067833C42A39D8B5000642F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067833C22A39D8B5000642F2 /* Main.storyboard */; };
@@ -159,6 +160,7 @@
 		0673D7782A596F5E00194930 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		0673D77E2A59747E00194930 /* Logo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Logo.json; sourceTree = "<group>"; };
 		0673D7812A5A8C9A00194930 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		06742B3D2A8A82B20083FA27 /* Extension+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+DateFormatter.swift"; sourceTree = "<group>"; };
 		067833B92A39D8B5000642F2 /* LoveDive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoveDive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067833BC2A39D8B5000642F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		067833C02A39D8B5000642F2 /* TideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				0601463D2A3AEA79003001EE /* Extension+UIColor.swift */,
 				06AD89BA2A44554600E6C409 /* Extension+Double.swift */,
 				067B6E4C2A57FA2000CE748F /* Extension+Date.swift */,
+				06742B3D2A8A82B20083FA27 /* Extension+DateFormatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				064948512A5BD17B0094DB5A /* Favorites.swift in Sources */,
 				067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */,
 				067B6E4D2A57FA2000CE748F /* Extension+Date.swift in Sources */,
+				06742B3E2A8A82B20083FA27 /* Extension+DateFormatter.swift in Sources */,
 				06D69F092A6559B7003CBB90 /* WeatherDataModel.swift in Sources */,
 				060E59172A6287A60095C61F /* ShimmerView.swift in Sources */,
 				064F76622A4B10D4003DC830 /* DivingSiteManager.swift in Sources */,

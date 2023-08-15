@@ -26,17 +26,6 @@ class TideCell: ShadowCollectionViewCell {
   static let reuseIdentifier = "\(TideCell.self)"
 
   let locationLabel = UILabel()
-  let airTemptImage = UIImage(systemName: "cloud.sun")
-  let airTemptText = UILabel()
-  let waterTemptImage = UIImage(systemName: "thermometer.and.liquid.waves")
-  let waterTemptText = UILabel()
-  let waveHeightImage = UIImage(systemName: "water.waves")
-  let waveHeightText = UILabel()
-  let windSpeedImage = UIImage(systemName: "wind")
-  let windSpeedText = UILabel()
-
-  let stackView = UIStackView()
-
   var favoriteButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +38,28 @@ class TideCell: ShadowCollectionViewCell {
     return button
   }()
 
-  func setupUI() {
+  func config(air: String, water: String, wind: String, wave: String) {
+    airTemptText.text = air
+    waterTemptText.text = water
+    windSpeedText.text = wind
+    waveHeightText.text = wave
+  }
+
+  // MARK: Private
+
+  private let airTemptImage = UIImage(systemName: "cloud.sun")
+  private let airTemptText = UILabel()
+  private let waterTemptImage = UIImage(systemName: "thermometer.and.liquid.waves")
+  private let waterTemptText = UILabel()
+  private let waveHeightImage = UIImage(systemName: "water.waves")
+  private let waveHeightText = UILabel()
+  private let windSpeedImage = UIImage(systemName: "wind")
+  private let windSpeedText = UILabel()
+
+  private let stackView = UIStackView()
+  private let constant = 16.0
+
+  private func setupUI() {
     // Setup location label
     locationLabel.translatesAutoresizingMaskIntoConstraints = false
     locationLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
@@ -81,18 +91,18 @@ class TideCell: ShadowCollectionViewCell {
     // Setup constraints
     NSLayoutConstraint.activate([
       locationLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      locationLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+      locationLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant),
 
-      stackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 16),
-      stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      stackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: constant),
+      stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: constant),
+      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant),
 
-      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant),
+      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant),
     ])
   }
 
-  func createStackView(imageView: UIImageView, label: UILabel) -> UIStackView {
+  private func createStackView(imageView: UIImageView, label: UILabel) -> UIStackView {
     let innerStackView = UIStackView()
     label.font = UIFont.systemFont(ofSize: 14)
     label.textColor = .secondaryLabel

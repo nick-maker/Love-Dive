@@ -19,11 +19,10 @@ class FavSectionHeader: UICollectionReusableView {
     addSubview(label)
 
     NSLayoutConstraint.activate([
-      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-      label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+      label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant),
+      label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -constant),
       label.topAnchor.constraint(equalTo: topAnchor),
       label.bottomAnchor.constraint(equalTo: bottomAnchor),
-
     ])
   }
 
@@ -37,4 +36,7 @@ class FavSectionHeader: UICollectionReusableView {
 
   let label = UILabel()
 
+  // MARK: Private
+
+  private let constant = 20.0
 }

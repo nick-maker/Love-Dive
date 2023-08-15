@@ -27,30 +27,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     return collectionView
   }()
 
-  var filteredDivingLogs: [DivingLog] = [] {
-    didSet {
-      filteredMaxDepth = filteredDivingLogs.max(by: { $0.maxDepth < $1.maxDepth })?.maxDepth ?? 0.0
-      filteredDuration = filteredDivingLogs.reduce(0.0) { $0 + $1.duration }
-    }
-  }
-
-  var filteredTemps: [Temperature] = [] {
-    didSet {
-      let sum = filteredTemps.reduce(0.0) { $0 + $1.temp }
-      averageTemp = sum / Double(filteredTemps.count)
-    }
-  }
-
-  var currentDateComponents: DateComponents? {
-    didSet {
-      if selectedDateComponents?.month == currentDateComponents?.month {
-        filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
-      } else {
-        filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
-      }
-    }
-  }
-
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.navigationBar.sizeToFit() // fix initially not large title
@@ -83,41 +59,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
   }
 
-  func setupNavigation() {
-    navigationItem.title = "Activities"
-    navigationController?.navigationBar.tintColor = .pacificBlue
-    navigationItem.backButtonTitle = ""
-    navigationController?.navigationBar.prefersLargeTitles = true
-    let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToday))
-
-    navigationItem.rightBarButtonItem = todayButton
-    goToday()
-  }
-
-  @objc
-  func goToday() {
-    isGoToday = true
-    let todayDate = Date()
-    let todayDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: todayDate)
-    selectedDateComponents = todayDateComponent
-    filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
-    collectionView.reloadData()
-  }
-
-  func setupCollectionView() {
-    view.addSubview(collectionView)
-    collectionView.backgroundColor = nil
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-    ])
-  }
-
   // MARK: Private
 
   private var divingLogs: [DivingLog] = []
@@ -133,9 +74,67 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
   private var divingLogsSubscription: AnyCancellable?
   private var tempsSubscription: AnyCancellable?
 
+  private var filteredDivingLogs: [DivingLog] = [] {
+    didSet {
+      filteredMaxDepth = filteredDivingLogs.max(by: { $0.maxDepth < $1.maxDepth })?.maxDepth ?? 0.0
+      filteredDuration = filteredDivingLogs.reduce(0.0) { $0 + $1.duration }
+    }
+  }
+
+  private var filteredTemps: [Temperature] = [] {
+    didSet {
+      let sum = filteredTemps.reduce(0.0) { $0 + $1.temp }
+      averageTemp = sum / Double(filteredTemps.count)
+    }
+  }
+
+  private var currentDateComponents: DateComponents? {
+    didSet {
+      if selectedDateComponents?.month == currentDateComponents?.month {
+        filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
+      } else {
+        filterDivingLogs(forMonth: currentDateComponents?.date ?? Date())
+      }
+    }
+  }
+
+  @objc
+  private func goToday() {
+    isGoToday = true
+    let todayDate = Date()
+    let todayDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: todayDate)
+    selectedDateComponents = todayDateComponent
+    filterDivingLogs(forDay: selectedDateComponents?.date ?? Date())
+    collectionView.reloadData()
+  }
+
+  private func setupNavigation() {
+    navigationItem.title = "Activities"
+    navigationController?.navigationBar.tintColor = .pacificBlue
+    navigationItem.backButtonTitle = ""
+    navigationController?.navigationBar.prefersLargeTitles = true
+    let todayButton = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToday))
+
+    navigationItem.rightBarButtonItem = todayButton
+    goToday()
+  }
+
+  private func setupCollectionView() {
+    view.addSubview(collectionView)
+    collectionView.backgroundColor = nil
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    NSLayoutConstraint.activate([
+      collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+    ])
+  }
+
   private func filterDivingLogs(forMonth month: Date) {
     let calendar = Calendar.current
-//    let targetDay = calendar.component(.day, from: month)
     let targetMonth = calendar.component(.month, from: month)
     let targetYear = calendar.component(.year, from: month)
 
@@ -147,7 +146,6 @@ class ActivitiesViewController: UIViewController, DiveCellDelegate {
     }
 
     filteredTemps = temps.filter {
-//      let dayComponent = calendar.component(.day, from: $0.start)
       let monthComponent = calendar.component(.month, from: $0.start)
       let yearComponent = calendar.component(.year, from: $0.start)
       return monthComponent == targetMonth && yearComponent == targetYear
@@ -304,11 +302,7 @@ extension ActivitiesViewController: UICollectionViewDataSource, UICollectionView
       else { fatalError("Cannot Down casting") }
       let divingLog = filteredDivingLogs[indexPath.row]
       let text = "\(String(format: "%.2f m", divingLog.maxDepth)) Free Diving"
-      let attributedText = NSMutableAttributedString(string: text)
-      attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
-
-      cell.waterDepthLabel.attributedText = attributedText
-      cell.dateLabel.text = divingLog.startTime.formatted()
+      cell.config(maxDepth: text, date: divingLog.startTime.formatted())
       cell.delegate = self
       return cell
     }

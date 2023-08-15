@@ -61,18 +61,18 @@ class HomeCell: ShadowCollectionViewCell {
 
     // Setup constraints
     NSLayoutConstraint.activate([
-      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+      favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant),
+      favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant),
 
       mapSnapshot.topAnchor.constraint(equalTo: contentView.topAnchor),
       mapSnapshot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
       mapSnapshot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       mapSnapshot.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75),
 
-      locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      locationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-      locationLabel.topAnchor.constraint(equalTo: mapSnapshot.bottomAnchor, constant: 16),
-      locationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+      locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: constant),
+      locationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -constant),
+      locationLabel.topAnchor.constraint(equalTo: mapSnapshot.bottomAnchor, constant: constant),
+      locationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -constant),
     ])
   }
 
@@ -87,7 +87,6 @@ class HomeCell: ShadowCollectionViewCell {
     let option = MKMapSnapshotter.Options()
     let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
     option.region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
-//    option.size = mapSnapshot.bounds.size
     option.scale = UIScreen.main.scale
     option.mapType = .mutedStandard
 
@@ -103,8 +102,7 @@ class HomeCell: ShadowCollectionViewCell {
         let point = snapshot.point(for: coordinate)
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        let annotationView = MKUserLocationView(annotation: annotation, reuseIdentifier: nil)
-//        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        let annotationView = MKUserLocationView(annotation: annotation, reuseIdentifier: nil) // choose the pin style
         annotationView.tintColor = UIColor.pacificBlue
         annotationView.drawHierarchy(
           in: CGRect(x: point.x, y: point.y, width: annotationView.bounds.width, height: annotationView.bounds.height),
@@ -122,7 +120,7 @@ class HomeCell: ShadowCollectionViewCell {
   // MARK: Private
 
   private var location: (lat: Double, lng: Double)?
-
+  private let constant = 16.0
   private let cache = NSCache<NSString, UIImage>()
 
 }

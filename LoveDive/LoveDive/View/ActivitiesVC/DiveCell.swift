@@ -28,17 +28,25 @@ class DiveCell: ShadowCollectionViewCell, UIGestureRecognizerDelegate {
   static let reuseIdentifier = "\(DiveCell.self)"
 
   weak var delegate: DiveCellDelegate?
-  var isGestureCancelled = false
 
-  var waterDepthLabel = UILabel()
-  var dateLabel = UILabel()
-  var arrowImage = UIImageView()
+  func config(maxDepth: String, date: String) {
+    let attributedText = NSMutableAttributedString(string: maxDepth)
+    attributedText.addAttributes([.font: UIFont.boldSystemFont(ofSize: 18)], range: NSRange(location: 0, length: 7))
+    waterDepthLabel.attributedText = attributedText
+    dateLabel.text = date
+  }
 
   func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
     true
   }
 
   // MARK: Private
+
+  private var isGestureCancelled = false
+
+  private var waterDepthLabel = UILabel()
+  private var dateLabel = UILabel()
+  private var arrowImage = UIImageView()
 
   private func setupUI() {
     contentView.layer.cornerRadius = 20

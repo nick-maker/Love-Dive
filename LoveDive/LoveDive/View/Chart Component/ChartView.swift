@@ -13,20 +13,6 @@ import SwiftUI
 
 struct ChartView: View {
 
-  static var timeFormatter: DateFormatter = {
-    let timeFormatter = DateFormatter()
-    timeFormatter.dateFormat = "hh:mm:ss a"
-    timeFormatter.locale = Locale.current
-    return timeFormatter
-  }()
-
-  static var yearFormatter: DateFormatter = {
-    let yearFormatter = DateFormatter()
-    yearFormatter.dateFormat = "YYYY/MM/DD"
-    yearFormatter.locale = Locale.current
-    return yearFormatter
-  }()
-
   @StateObject var photosModel: PhotosPickerModel = .init()
   @State var data: [DivingEntry]
   @State private var selectedElement: DivingEntry?
@@ -113,11 +99,11 @@ struct ChartView: View {
       titleFigureView
         .padding(.horizontal)
       HStack {
-        Text("\(data[0].start, formatter: ChartView.timeFormatter)")
+        Text("\(data[0].start, formatter: Formatter.timeFormatter)")
           .font(.system(size: 14))
         Spacer()
         if let lastDate = data.last?.start {
-          Text("\(lastDate, formatter: ChartView.timeFormatter)")
+          Text("\(lastDate, formatter: Formatter.timeFormatter)")
             .font(.system(size: 14))
         }
       }
@@ -143,7 +129,7 @@ struct ChartView: View {
 
     return VStack(alignment: .leading) {
       HStack {
-        Text("\(data[0].start, formatter: ChartView.yearFormatter)")
+        Text("\(data[0].start, formatter: Formatter.yearFormatter)")
           .font(.system(size: 30, design: .rounded))
           .bold()
           .foregroundColor(.pacificBlue)

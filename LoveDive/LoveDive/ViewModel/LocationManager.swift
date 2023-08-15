@@ -40,10 +40,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
   }
 
-  func locationManager(_: CLLocationManager, didFailWithError _: Error) {
-    // Handle any errors that `CLLocationManager` returns.
-  }
-
   // MARK: Private
 
   private func displayLocationServicesDeniedAlert() {
