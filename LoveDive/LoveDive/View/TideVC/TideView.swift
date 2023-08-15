@@ -157,7 +157,7 @@ struct TideView: View {
       VStack {
         VStack {
           if let currentElement {
-            let date = Formatter.dateFormatter.date(from: currentElement.time)
+            let date = Formatter.utc.date(from: currentElement.time)
             if let date {
               Text(date.formatted(date: .abbreviated, time: .omitted))
                 .foregroundColor(.white)
