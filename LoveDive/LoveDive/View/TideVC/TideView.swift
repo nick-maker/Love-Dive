@@ -218,7 +218,7 @@ struct TideView: View {
 
       if
         let selectedElement,
-        let selectedDate = Formatter.dateFormatter.date(from: selectedElement.time),
+        let selectedDate = Formatter.utc.date(from: selectedElement.time),
         selectedElement.id == tideHour.id
       {
         BarMark(
