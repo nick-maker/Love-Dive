@@ -96,7 +96,7 @@ class HomeCell: ShadowCollectionViewCell {
       guard error == nil, let snapshot else { return }
 
       DispatchQueue.main.async {
-        UIGraphicsBeginImageContextWithOptions(snapshot.image.size, true, snapshot.image.scale)
+        UIGraphicsBeginImageContextWithOptions(snapshot.image.size, false, snapshot.image.scale)
         snapshot.image.draw(at: .zero)
 
         let point = snapshot.point(for: coordinate)
