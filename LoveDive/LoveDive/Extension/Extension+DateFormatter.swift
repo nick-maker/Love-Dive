@@ -18,7 +18,7 @@ extension Formatter {
 
   static let yearFormatter: DateFormatter = {
     let yearFormatter = DateFormatter()
-    yearFormatter.dateFormat = "YYYY/MM/DD"
+    yearFormatter.dateFormat = "yyyy/MM/DD"
     yearFormatter.locale = Locale.current
     return yearFormatter
   }()

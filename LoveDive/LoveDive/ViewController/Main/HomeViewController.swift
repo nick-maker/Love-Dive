@@ -251,8 +251,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         {
           fatalError("Cannot downcast to SectionHeader")
         }
-        headerView.label.text = "Favorites"
-        headerView.label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return headerView
       }
       else if indexPath.section == 1 {

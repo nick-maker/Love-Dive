@@ -175,7 +175,7 @@ struct BreatheView: View {
     .frame(maxWidth: .infinity)
     .background {
       RoundedRectangle(cornerRadius: 20, style: .continuous)
-        .fill(colorScheme == .dark ? Color(red: 0.06, green: 0.06, blue: 0.06) : Color.white)
+        .fill(colorScheme == .dark ? Color(red: 28 / 255, green: 28 / 255, blue: 30 / 255) : Color.white)
         .ignoresSafeArea()
     }
     .frame(maxHeight: .infinity, alignment: .bottom)

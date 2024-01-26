@@ -34,7 +34,12 @@ class FavSectionHeader: UICollectionReusableView {
 
   static let reuseIdentifier = "\(FavSectionHeader.self)"
 
-  let label = UILabel()
+  let label: UILabel = {
+    let label = UILabel()
+    label.text = "Favorites"
+    label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    return label
+  }()
 
   // MARK: Private
 

@@ -72,15 +72,17 @@ struct PersonalBestEntry: TimelineEntry {
 struct WidgetView: View {
 
   @Environment(\.widgetFamily) var family: WidgetFamily
+  
   var entry: Provider.Entry
 
-  @ViewBuilder
   var body: some View {
     switch family {
     case .systemSmall:
       WidgetEntrySmallView(entry: entry)
+        .widgetBackground(Color.clear)
     case .systemMedium:
       WidgetEntryMediumView(entry: entry)
+        .widgetBackground(Color.clear)
     default:
       EmptyView()
     }
@@ -180,6 +182,7 @@ struct WidgetEntryMediumView: View {
         .frame(height: 90)
       }
     }
+
   }
 
   // MARK: Private
@@ -207,6 +210,7 @@ struct LoveDive_Widget: Widget {
     .configurationDisplayName("Personal Best Record")
     .supportedFamilies([.systemSmall, .systemMedium])
     .description("Show your personal best dive log.")
+    .contentMarginsDisabled()
   }
 }
 

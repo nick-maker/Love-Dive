@@ -415,14 +415,17 @@ struct ChartView: View {
     return Gradient(colors: colors)
   }
 
+  @MainActor
   @ViewBuilder
   private var content: some View {
     if showingPlaceholder {
       VStack {
-        ZStack {
-          ShimmerView()
-            .opacity((savedImage != nil) ? 0 : 1)
-          pictureView
+        VStack {
+          if savedImage == nil {
+            ShimmerView()
+          } else {
+            pictureView
+          }
         }
         .padding(.top)
         chartListView

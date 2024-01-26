@@ -22,10 +22,16 @@ class AppLayouts {
     section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 30)
     section.orthogonalScrollingBehavior = .groupPaging
 
-    // PLay with some animation and scrollOffest
+    // PLay with some animation and scrollOffset
     section.visibleItemsInvalidationHandler = { items, offset, environment in
 
       items.forEach { item in
+
+        if item.representedElementKind == UICollectionView.elementKindSectionHeader {
+          // Skip scaling transformation for the header
+          return
+        }
+
         let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
         let minScale: CGFloat = 0.8
         let maxScale: CGFloat = 1.0
@@ -49,7 +55,7 @@ class AppLayouts {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(415))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(425))
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
     let section = NSCollectionLayoutSection(group: group)

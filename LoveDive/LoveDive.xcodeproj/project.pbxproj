@@ -21,6 +21,8 @@
 		060E59472A64E9D40095C61F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 060E59462A64E9D40095C61F /* GoogleService-Info.plist */; };
 		060E594A2A64EFD00095C61F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 060E59492A64EFD00095C61F /* FirebaseCrashlytics */; };
 		060E594C2A64EFD00095C61F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 060E594B2A64EFD00095C61F /* FirebaseFirestoreSwift */; };
+		061431222B5E8A3B0006394C /* Extension + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061431212B5E8A3B0006394C /* Extension + View.swift */; };
+		061431232B5E8F060006394C /* Extension + View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061431212B5E8A3B0006394C /* Extension + View.swift */; };
 		06356B442A544A2500C786B0 /* SeaLevel.json in Resources */ = {isa = PBXBuildFile; fileRef = 06356B432A544A2500C786B0 /* SeaLevel.json */; };
 		063BA8F22A42F03A00711932 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F12A42F03A00711932 /* CalendarCell.swift */; };
 		063BA8F62A42F91F00711932 /* AppLayouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063BA8F52A42F91F00711932 /* AppLayouts.swift */; };
@@ -133,6 +135,7 @@
 		060E591C2A63D7BD0095C61F /* PictureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDetailView.swift; sourceTree = "<group>"; };
 		060E591E2A63D9D90095C61F /* PictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureView.swift; sourceTree = "<group>"; };
 		060E59462A64E9D40095C61F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		061431212B5E8A3B0006394C /* Extension + View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + View.swift"; sourceTree = "<group>"; };
 		06356B432A544A2500C786B0 /* SeaLevel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SeaLevel.json; sourceTree = "<group>"; };
 		063BA8F12A42F03A00711932 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		063BA8F52A42F91F00711932 /* AppLayouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayouts.swift; sourceTree = "<group>"; };
@@ -453,6 +456,7 @@
 				06AD89BA2A44554600E6C409 /* Extension+Double.swift */,
 				067B6E4C2A57FA2000CE748F /* Extension+Date.swift */,
 				06742B3D2A8A82B20083FA27 /* Extension+DateFormatter.swift */,
+				061431212B5E8A3B0006394C /* Extension + View.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -689,6 +693,7 @@
 				064F76552A49CC6E003DC830 /* RoundedNavigationController.swift in Sources */,
 				06E5AA702A66DC020096C72A /* LoveDive_Widget.swift in Sources */,
 				06AD89BB2A44554600E6C409 /* Extension+Double.swift in Sources */,
+				061431222B5E8A3B0006394C /* Extension + View.swift in Sources */,
 				064948512A5BD17B0094DB5A /* Favorites.swift in Sources */,
 				067B6E4B2A57BA7F00CE748F /* SeaLevelModel.swift in Sources */,
 				067B6E4D2A57FA2000CE748F /* Extension+Date.swift in Sources */,
@@ -739,6 +744,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061431232B5E8F060006394C /* Extension + View.swift in Sources */,
 				0680342C2A4DCA4B004DF9C3 /* LoveDive_Widget.swift in Sources */,
 				06E5AA652A66B1140096C72A /* DivingLog.swift in Sources */,
 				068034282A4DCA4B004DF9C3 /* LoveDive_WidgetBundle.swift in Sources */,
