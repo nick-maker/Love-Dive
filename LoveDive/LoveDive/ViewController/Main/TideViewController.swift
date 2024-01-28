@@ -18,7 +18,9 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   var mapView = MKMapView()
   let containerView = UIView()
   lazy var collectionView: UICollectionView = {
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let flowLayout = UICollectionViewFlowLayout()
+    flowLayout.scrollDirection = .horizontal
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     collectionView.register(TideCell.self, forCellWithReuseIdentifier: TideCell.reuseIdentifier)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.isPagingEnabled = true
@@ -34,7 +36,6 @@ class TideViewController: UIViewController, MKMapViewDelegate {
     getCurrentLocation()
     getDivingSite()
     setupCollectionView()
-    configureCompositionalLayout()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -148,60 +149,13 @@ class TideViewController: UIViewController, MKMapViewDelegate {
   private var favorites = Favorites()
 
   private var lastScaleFactor = CGFloat() // to determine if the scroll has ended
+  private var currentPage = CGFloat.zero
 
 }
 
 // MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension TideViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-  func configureCompositionalLayout() {
-    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
-    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
-
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .absolute(130))
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-    let section = NSCollectionLayoutSection(group: group)
-    section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 10, bottom: 0, trailing: 0)
-    section.orthogonalScrollingBehavior = .groupPagingCentered
-
-    section.visibleItemsInvalidationHandler = { [weak self] items, offset, environment in
-      guard let self else { return }
-
-      let pageWidth: CGFloat = environment.container.contentSize.width * 0.75
-
-      let centerOffsetX = offset.x + environment.container.contentSize.width / 2.0
-      let currentPage = Int(centerOffsetX / pageWidth)
-
-      // PLay with some animation and scrollOffest
-      items.forEach { item in
-        let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-        let minScale: CGFloat = 0.8
-        let maxScale: CGFloat = 1.0
-        let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-        item.transform = CGAffineTransform(scaleX: scale, y: scale)
-
-        if scale == 0.8, self.lastScaleFactor > 0.99 {
-          // Scrolling has reached a stable state with the target item centered
-          // Perform scrolling completion actions here
-          let indexPath = IndexPath(row: currentPage, section: 0)
-          guard let cell = self.collectionView.cellForItem(at: indexPath) as? TideCell else { return }
-
-          // Get the corresponding annotation title
-          let annotationTitle = cell.locationLabel.text
-
-          // Find the annotation that matches the title
-          guard let annotation = self.mapView.annotations.first(where: { $0.title == annotationTitle }) else { return }
-
-          self.mapView.selectAnnotation(annotation, animated: true)
-        }
-        self.lastScaleFactor = scale
-      }
-    }
-    collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: section)
-  }
 
   func setupCollectionView() {
     let handleView = UIView()
@@ -343,11 +297,34 @@ extension TideViewController: UICollectionViewDataSource, UICollectionViewDelega
   }
 
   func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-    CGSize(width: 120, height: 100)
+    CGSize(width: UIScreen.main.bounds.width * 0.75, height: 140)
   }
 
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    scrollView.contentOffset.y = 0
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    minimumLineSpacingForSectionAt section: Int)
+    -> CGFloat
+  {
+    UIScreen.main.bounds.width * 0.25
+  }
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int)
+    -> UIEdgeInsets
+  {
+    UIEdgeInsets(top: 40, left: UIScreen.main.bounds.width * 0.25 / 2, bottom: 0, right: UIScreen.main.bounds.width * 0.25 / 2)
+  }
+
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    currentPage = scrollView.contentOffset.x / view.bounds.width
+    let indexPath = IndexPath(row: Int(currentPage), section: 0)
+    guard let cell = collectionView.cellForItem(at: indexPath) as? TideCell else { return }
+    let annotationTitle = cell.locationLabel.text
+    guard let annotation = mapView.annotations.first(where: { $0.title == annotationTitle }) else { return }
+    mapView.selectAnnotation(annotation, animated: true)
   }
 
 }
@@ -363,15 +340,15 @@ extension TideViewController: CurrentDelegate {
     guard
       let index = visibleLocations
         .firstIndex(where: {
-          $0.id == "\(annotation.coordinate.latitude.description)," + "\(annotation.coordinate.longitude.description)"
-        }) else
-    {
+          $0.id == "\(annotation.coordinate.latitude)," + "\(annotation.coordinate.longitude)"
+        })
+    else {
       return
     }
     selectedAnnotation = annotation
     let indexPath = IndexPath(item: index, section: 0)
     // if set true, would fire section.visibleItemsInvalidationHandler
-    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
   }
 
   func manager(didGet weatherData: [WeatherHour], forKey: String) {
