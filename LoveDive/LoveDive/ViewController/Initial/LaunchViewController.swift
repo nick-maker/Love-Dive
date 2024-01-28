@@ -16,26 +16,25 @@ class LaunchViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = UIColor.darkBlue
     view.addSubview(animationView)
-    HealthKitManager.shared.requestHealthKitPermissions()
-
+    let group = DispatchGroup()
+    group.enter()
+    HealthKitManager.shared.requestHealthKitPermissions {
+      group.leave()
+    }
     animationView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
     animationView.center = view.center
     animationView.alpha = 1
 
+    group.enter()
     animationView.play { _ in
       UIView.animate(withDuration: 0.5) {
         self.animationView.alpha = 0
       } completion: { _ in
-        self.animationView.isHidden = true
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-          windowScene.windows.first?.rootViewController = tabBarController
-          windowScene.windows.first?.makeKeyAndVisible()
-        }
+        group.leave()
       }
+    }
+    group.notify(queue: .main) {
+      self.goToTabBar()
     }
   }
 
@@ -46,4 +45,15 @@ class LaunchViewController: UIViewController {
     lottieAnimationView.backgroundColor = UIColor.darkBlue
     return lottieAnimationView
   }()
+
+  private func goToTabBar() {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+
+    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+      windowScene.windows.first?.rootViewController = tabBarController
+      windowScene.windows.first?.makeKeyAndVisible()
+    }
+  }
+
 }

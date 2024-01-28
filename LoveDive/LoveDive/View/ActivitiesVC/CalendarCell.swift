@@ -32,7 +32,7 @@ class CalendarCell: UICollectionViewCell {
     calendarView.layer.cornerRadius = 20
     calendarView.calendar = .current
     calendarView.fontDesign = .rounded
-    calendarView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+    calendarView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     calendarView.backgroundColor = .systemBackground
 
     let fromDateComponents = DateComponents(calendar: .current, year: 2022, month: 9, day: 7)
@@ -47,8 +47,8 @@ class CalendarCell: UICollectionViewCell {
     calendarView.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint.activate([
-      calendarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-      calendarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+      calendarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      calendarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       calendarView.topAnchor.constraint(equalTo: contentView.topAnchor),
       calendarView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
     ])
